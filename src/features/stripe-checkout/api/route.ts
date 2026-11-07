@@ -1,12 +1,19 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getTranslations } from "next-intl/server";
 
+import { clientKey, createRateLimiter } from "@/shared/lib/rate-limit";
+
 import { buildSessionParams, isSessionRequest } from "./build-session";
 import { getStripeTestClient } from "./stripe.server";
+
+const limiter = createRateLimiter(20, 60_000);
 
 export async function POST(request: NextRequest) {
   const stripe = getStripeTestClient();
   if (!stripe) return NextResponse.json({ status: "disabled" }, { status: 503 });
+  if (!limiter.take(clientKey(request.headers))) {
+    return NextResponse.json({ status: "limited" }, { status: 429 });
+  }
 
   const body: unknown = await request.json().catch(() => null);
   if (!isSessionRequest(body)) return NextResponse.json({ status: "invalid" }, { status: 400 });

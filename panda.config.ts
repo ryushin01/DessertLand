@@ -87,6 +87,14 @@ export default defineConfig({
           to: { transform: "translateX(0)" },
         },
         curtainFallback: { to: { visibility: "hidden" } },
+        advisorRise: {
+          from: { opacity: 0, transform: "translateY(16px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
+        advisorPulse: {
+          "0%, 100%": { opacity: 0.45 },
+          "50%": { opacity: 0.9 },
+        },
         bob: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(6px)" },
