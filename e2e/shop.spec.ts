@@ -187,6 +187,29 @@ test("결제 실패와 취소에도 입력과 장바구니를 유지합니다", 
   await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
 });
 
+test("결제창을 연 채 뒤로 가도 다음 페이지가 스크롤됩니다", async ({ page, isMobile }) => {
+  test.skip(isMobile, "부드러운 스크롤 상태는 데스크톱에서 확인합니다");
+  await page.goto("/ko/shop/baklava");
+  await page.getByRole("link", { name: "바로 구매" }).click();
+  await expect(page).toHaveURL(/checkout/);
+  await fillCheckout(page);
+  await page.getByRole("button", { name: /결제하기$/ }).click();
+  await expect(page.getByRole("dialog", { name: "테스트 결제창" })).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL(/shop\/baklava$/);
+  await expect(page.locator("html")).not.toHaveClass(/lenis-stopped/);
+  await page.mouse.move(600, 400);
+  await page.mouse.wheel(0, 800);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
+});
+
+test("상품 공유 미리보기에 상품 정보가 나옵니다", async ({ page }) => {
+  await page.goto("/en/shop/baklava");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Baklava | Dessert Land");
+  await page.goto("/en/shop");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Desserts | Dessert Land");
+});
+
 test("승인 요청이 끝나기 전에는 다시 결제할 수 없습니다", async ({ page }) => {
   let calls = 0;
   await page.route("**/api/payments", async (route) => {
