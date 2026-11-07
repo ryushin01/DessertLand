@@ -138,14 +138,18 @@
     "amountChanged": "Tutar değiştiği için ödeme yapılmadı. Lütfen siparişinizi kontrol edin.",
     "paidAmount": "Ödenen tutar: {amount}",
     "paidMethod": "Ödeme yöntemi: {method}",
-    "buyNowNotice": "Bu bir hemen satın alma siparişidir. Sepetiniz değişmez."
+    "buyNowNotice": "Bu bir hemen satın alma siparişidir. Sepetiniz değişmez.",
+    "stripeNotice": "Stripe test modu: Herhangi bir ücret alınmaz. Ödeme sayfasında 4242 4242 4242 4242 test kartını, ileri bir son kullanma tarihini ve herhangi bir CVC’yi kullanın. Gerçek kart numarası girmeyin. Girilen bilgiler Stripe’a iletilir.",
+    "stripePay": "Stripe ile {amount} öde",
+    "stripeRedirecting": "Ödeme sayfasına gidiliyor",
+    "unverified": "Bu ödeme doğrulanamadı. Stripe test panelinden kontrol edilebilir."
   },
   "credits": {
     "metaTitle": "Kaynaklar",
     "title": "Fotoğraf ve simge kaynakları",
     "photos": "Fotoğraflar: Unsplash",
     "icons": "Simgeler: Flaticon",
-    "hero": "Ana sayfa portresi",
+    "hero": "Ana sayfa fotoğrafı",
     "by": "Fotoğraf: {name}"
   },
   "footer": {

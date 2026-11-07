@@ -9,6 +9,7 @@ import { cartLinesAtom, type CartLine } from "@/entities/cart";
 import { formatMoney } from "@/entities/product";
 import { summarizeCart, useCartSummary } from "@/features/cart-summary";
 import { CheckoutForm, type PaidOrder } from "@/features/checkout-form";
+import { StripeCheckoutButton } from "@/features/stripe-checkout";
 import { Link } from "@/shared/i18n";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
@@ -54,7 +55,9 @@ const total = css({
 
 const METHOD_LABELS = { card: "methodCard", wallet: "methodWallet", bank: "methodBank" } as const;
 
-export function CheckoutView({ buyNow }: { buyNow?: CartLine }) {
+type CheckoutViewProps = { buyNow?: CartLine; stripeEnabled: boolean; canceled: boolean };
+
+export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewProps) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
   const tProducts = useTranslations("products");
@@ -66,6 +69,7 @@ export function CheckoutView({ buyNow }: { buyNow?: CartLine }) {
     [buyNow, locale],
   );
   const summary = buyNowSummary ?? cartSummary;
+  const items = summary.lines.map(({ product, quantity }) => ({ slug: product.slug, quantity }));
   const [order, setOrder] = useState<PaidOrder | null>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
 
@@ -101,7 +105,7 @@ export function CheckoutView({ buyNow }: { buyNow?: CartLine }) {
   return (
     <div className={page}>
       <h1 className={title}>{t("title")}</h1>
-      <p className={demo}>{t("demo")}</p>
+      <p className={demo}>{stripeEnabled ? t("stripeNotice") : t("demo")}</p>
       {buyNow ? <p className={buyNowNote}>{t("buyNowNotice")}</p> : null}
       {summary.lines.length === 0 ? (
         <>
@@ -113,11 +117,16 @@ export function CheckoutView({ buyNow }: { buyNow?: CartLine }) {
         </>
       ) : (
         <div className={columns}>
-          <CheckoutForm
-            items={summary.lines.map(({ product, quantity }) => ({ slug: product.slug, quantity }))}
-            total={summary.total}
-            onPaid={onPaid}
-          />
+          {stripeEnabled ? (
+            <StripeCheckoutButton
+              items={items}
+              total={summary.total}
+              source={buyNow ? "buy" : "cart"}
+              canceled={canceled}
+            />
+          ) : (
+            <CheckoutForm items={items} total={summary.total} onPaid={onPaid} />
+          )}
           <section aria-labelledby="summary-title">
             <h2 id="summary-title" className={summaryTitle}>
               {t("summary")}
