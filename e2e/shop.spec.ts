@@ -20,7 +20,7 @@ test.describe("언어", () => {
     test(`${locale} 홈은 언어 속성과 소개 문구를 제공합니다`, async ({ page }) => {
       await page.goto(`/${locale}`);
       await expect(page.locator("html")).toHaveAttribute("lang", locale);
-      await expect(page.getByRole("heading", { level: 1, name: "Dessert World" })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1, name: "Dessert Market" })).toBeVisible();
       await expect(page.locator("main")).toContainText("10");
       await expectNoHorizontalOverflow(page);
     });

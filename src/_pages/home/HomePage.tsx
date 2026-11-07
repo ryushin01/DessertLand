@@ -14,7 +14,7 @@ type HomePageProps = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: `Dessert World — ${t("title")}`, description: t("description") };
+  return { title: `Dessert Market — ${t("title")}`, description: t("description") };
 }
 
 export default async function HomePage({ params }: HomePageProps) {

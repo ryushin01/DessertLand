@@ -5,7 +5,7 @@ import { css } from "styled-system/css";
 
 import { gsap } from "@/shared/lib/motion";
 
-const SEEN_KEY = "dessert-world.intro-seen";
+const SEEN_KEY = "dessert-market.intro-seen";
 
 const curtain = css({
   position: "fixed",
@@ -32,7 +32,7 @@ function shouldSkip(): boolean {
   try {
     return (
       sessionStorage.getItem(SEEN_KEY) === "1" ||
-      localStorage.getItem("dessert-world.motion-paused") === "true"
+      localStorage.getItem("dessert-market.motion-paused") === "true"
     );
   } catch {
     return false;
