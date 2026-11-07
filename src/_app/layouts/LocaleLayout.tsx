@@ -88,7 +88,14 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   return {
     title: `Dessert Land — ${t("title")}`,
     description: t("description"),
-    icons: { icon: "/favicon.svg" },
+    icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.png" },
+    applicationName: "Dessert Land",
+    openGraph: {
+      type: "website",
+      siteName: "Dessert Land",
+      title: `Dessert Land — ${t("title")}`,
+      description: t("description"),
+    },
   };
 }
 

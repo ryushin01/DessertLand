@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Desserts from around the world",
-    "description": "A global shop introducing and selling desserts from around the world, available in 10 languages."
+    "title": "A sweet land of desserts from around the world",
+    "description": "Dessert Land is a global shop introducing and selling desserts from around the world, available in 10 languages."
   },
   "nav": {
     "skip": "Skip to content",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "World desserts · 10 languages",
-    "tagline": "We introduce and sell desserts from every corner of the world, in 10 languages.",
+    "tagline": "A sweet land where desserts from every corner of the world gather, introduced and sold in 10 languages.",
     "cta": "Explore desserts",
     "scroll": "Scroll down"
   },
@@ -60,7 +60,8 @@
     "increase": "Increase quantity",
     "add": "Add to cart",
     "related": "You may also like",
-    "notice": "Product details and prices are demo examples."
+    "notice": "Product details and prices are demo examples.",
+    "buyNow": "Buy now"
   },
   "allergens": {
     "milk": "Milk",
@@ -115,13 +116,29 @@
     "required": "This field is required.",
     "emailInvalid": "Enter an email like name@example.com.",
     "errorSummary": "Please check your details.",
-    "submit": "Place demo order",
-    "submitting": "Placing order",
     "summary": "Order summary",
     "empty": "There is nothing to check out.",
     "successTitle": "Your order is complete",
     "successBody": "Demo order number: {orderNo}. No real payment or delivery takes place.",
-    "continue": "Keep browsing"
+    "continue": "Keep browsing",
+    "paymentLegend": "Payment method",
+    "methodCard": "Credit or debit card",
+    "methodWallet": "Digital wallet",
+    "methodBank": "Bank transfer",
+    "pay": "Pay {amount}",
+    "paying": "Processing payment",
+    "testTitle": "Test payment",
+    "testBody": "This is a test, not a real payment. The amount is {amount}. Choose an outcome.",
+    "testApprove": "Approve payment",
+    "testDecline": "Decline payment",
+    "testCancel": "Cancel payment",
+    "declined": "The payment was declined. Choose another method or try again.",
+    "canceled": "Payment canceled. You were not charged.",
+    "paymentError": "We couldn’t process the payment. Please try again shortly.",
+    "amountChanged": "The amount changed, so no payment was made. Please review your order.",
+    "paidAmount": "Amount paid: {amount}",
+    "paidMethod": "Payment method: {method}",
+    "buyNowNotice": "This is a Buy now order. Your cart stays as it is."
   },
   "credits": {
     "metaTitle": "Credits",
@@ -132,7 +149,7 @@
     "by": "Photo by {name}"
   },
   "footer": {
-    "tagline": "A demo shop presenting the world’s desserts in 10 languages.",
+    "tagline": "Dessert Land is a demo shop presenting the world’s desserts in 10 languages.",
     "credits": "Photo and icon credits"
   },
   "notFound": {

@@ -9,10 +9,3 @@ export function validateCheckout(data: CheckoutData): CheckoutErrors {
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.email = "emailInvalid";
   return errors;
 }
-
-/** 데모 주문입니다. 입력값은 어디에도 전송하지 않습니다. */
-export async function placeDemoOrder(data: CheckoutData): Promise<string> {
-  void data;
-  await new Promise((resolve) => setTimeout(resolve, 600));
-  return `DW-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-}

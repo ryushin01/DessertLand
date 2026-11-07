@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Desserts aus aller Welt",
-    "description": "Ein globaler Shop, der Desserts aus aller Welt vorstellt und verkauft – in 10 Sprachen."
+    "title": "Das süße Land der Desserts aus aller Welt",
+    "description": "Dessert Land ist ein globaler Shop, der Desserts aus aller Welt vorstellt und verkauft – in 10 Sprachen."
   },
   "nav": {
     "skip": "Zum Inhalt springen",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Desserts der Welt · 10 Sprachen",
-    "tagline": "Wir stellen Desserts aus aller Welt vor und verkaufen sie – in 10 Sprachen.",
+    "tagline": "Ein süßes Land, in dem sich Desserts aus aller Welt treffen – vorgestellt und verkauft in 10 Sprachen.",
     "cta": "Desserts entdecken",
     "scroll": "Nach unten scrollen"
   },
@@ -60,7 +60,8 @@
     "increase": "Menge erhöhen",
     "add": "In den Warenkorb",
     "related": "Das könnte Ihnen auch gefallen",
-    "notice": "Produktangaben und Preise sind Demo-Beispiele."
+    "notice": "Produktangaben und Preise sind Demo-Beispiele.",
+    "buyNow": "Jetzt kaufen"
   },
   "allergens": {
     "milk": "Milch",
@@ -115,13 +116,29 @@
     "required": "Dieses Feld ist erforderlich.",
     "emailInvalid": "Geben Sie eine E-Mail wie name@example.com ein.",
     "errorSummary": "Bitte prüfen Sie Ihre Angaben.",
-    "submit": "Demo-Bestellung abschicken",
-    "submitting": "Bestellung läuft",
     "summary": "Bestellübersicht",
     "empty": "Keine Desserts zum Bestellen.",
     "successTitle": "Ihre Bestellung ist abgeschlossen",
     "successBody": "Demo-Bestellnummer: {orderNo}. Es findet keine Zahlung oder Lieferung statt.",
-    "continue": "Weiter stöbern"
+    "continue": "Weiter stöbern",
+    "paymentLegend": "Zahlungsart",
+    "methodCard": "Kredit- oder Debitkarte",
+    "methodWallet": "Digitale Geldbörse",
+    "methodBank": "Banküberweisung",
+    "pay": "{amount} bezahlen",
+    "paying": "Zahlung wird verarbeitet",
+    "testTitle": "Testzahlung",
+    "testBody": "Dies ist ein Test, keine echte Zahlung. Der Betrag ist {amount}. Wählen Sie ein Ergebnis.",
+    "testApprove": "Zahlung genehmigen",
+    "testDecline": "Zahlung ablehnen",
+    "testCancel": "Zahlung abbrechen",
+    "declined": "Die Zahlung wurde abgelehnt. Wählen Sie eine andere Zahlungsart oder versuchen Sie es erneut.",
+    "canceled": "Zahlung abgebrochen. Es wurde nichts berechnet.",
+    "paymentError": "Die Zahlung konnte nicht verarbeitet werden. Bitte versuchen Sie es gleich noch einmal.",
+    "amountChanged": "Der Betrag hat sich geändert, daher wurde nichts bezahlt. Bitte prüfen Sie Ihre Bestellung.",
+    "paidAmount": "Bezahlter Betrag: {amount}",
+    "paidMethod": "Zahlungsart: {method}",
+    "buyNowNotice": "Dies ist eine Sofortbestellung. Ihr Warenkorb bleibt unverändert."
   },
   "credits": {
     "metaTitle": "Quellen",
@@ -132,7 +149,7 @@
     "by": "Foto von {name}"
   },
   "footer": {
-    "tagline": "Ein Demo-Shop mit Desserts der Welt in 10 Sprachen.",
+    "tagline": "Dessert Land ist ein Demo-Shop mit Desserts der Welt in 10 Sprachen.",
     "credits": "Foto- und Icon-Quellen"
   },
   "notFound": {
