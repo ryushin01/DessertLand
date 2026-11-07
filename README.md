@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.3.1-ff6484)
+![version](https://img.shields.io/badge/version-0.3.2-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -46,6 +46,7 @@
 | 첫 화면 인터랙션 | 마우스 위치에 따라 가운데 손과 밀가루가 움직이고 빛이 바뀌는 WebGL 2.5D 시차 |
 | 커서 | 따라오는 링, 흩날리는 스프링클, 끌어당기는 버튼, 지나간 자리에 피어나는 사진 |
 | 스크롤 | 원형으로 열리는 장면 전환, 글자 마스크 줌, 가로 스크롤 여행, 단어별 밝아짐, 패럴랙스 |
+| 성능 | Web Vitals 수집, 페이지별 전송량 예산(E2E), 언어별 글꼴과 필요한 코드만 로드 |
 | 접근성 | 모션 멈춤 버튼, `prefers-reduced-motion` 대응, 키보드 초점 시 장면 이동, 본문 바로가기 |
 
 ## 기술 스택
@@ -60,7 +61,7 @@
 | 다국어 | next-intl |
 | 결제 | Stripe Checkout(테스트 모드) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
-| 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe |
+| 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe, Vercel Speed Insights |
 | 구조 | Feature-Sliced Design |
 
 ## 시작하기
@@ -81,6 +82,7 @@ Stripe 테스트 결제를 쓰려면 `.env.example`을 `.env.local`로 복사해
 | `pnpm typecheck` / `pnpm lint` | 타입 검사와 린트 |
 | `pnpm test` | 단위 테스트 |
 | `pnpm e2e` | 프로덕션 빌드 기준 E2E와 접근성 검사(`pnpm build` 후 실행) |
+| `pnpm analyze` | 번들 분석 화면 |
 | `pnpm storybook` | 컴포넌트 문서 |
 
 ## 프로젝트 구조

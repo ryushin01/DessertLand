@@ -7,14 +7,15 @@ import { css, cx } from "styled-system/css";
 
 import { getProduct } from "@/entities/product";
 import { Link } from "@/shared/i18n";
-import { gsap, useGsap, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
 import type { BakerRenderer } from "./baker-renderer";
 
 const CUTOUT = "/images/hero/baker-cutout.webp";
 const DEPTH = "/images/hero/baker-depth.webp";
-const CUTOUT_RATIO = 1800 / 2250;
+const CUTOUT_RATIO = 1000 / 1250;
 
 const FLOATS = [
   { slug: "freakshake", top: "13%", left: "6%", width: "13vw", depth: 0.9, front: false, wide: false },

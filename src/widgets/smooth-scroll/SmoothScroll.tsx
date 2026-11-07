@@ -1,19 +1,14 @@
 "use client";
 
 import Lenis from "lenis";
-import { useAtomValue } from "jotai";
 import { useEffect } from "react";
 
-import { gsap, motionPausedAtom, ScrollTrigger, setLenis, useMotionEnabled } from "@/shared/lib/motion";
+import { setLenis, useMotionEnabled } from "@/shared/lib/motion";
+import { ScrollTrigger, gsap } from "@/shared/lib/motion/gsap";
 
-/** Lenis와 ScrollTrigger를 한 박자로 맞추고, 움직임 상태를 html에 표시합니다. */
+/** Lenis와 ScrollTrigger를 한 박자로 맞춥니다. */
 export function SmoothScroll() {
   const enabled = useMotionEnabled();
-  const paused = useAtomValue(motionPausedAtom);
-
-  useEffect(() => {
-    document.documentElement.dataset.motion = enabled ? "on" : "off";
-  }, [enabled, paused]);
 
   useEffect(() => {
     if (!enabled) return;
