@@ -30,10 +30,18 @@ async function loadAssets(
   }
   return Promise.all(
     Array.from(urls, async (url) => {
-      const body = await (await request.get(url)).body();
+      const response = await request.get(url);
+      expect(response.ok(), `${url} 응답 ${response.status()}`).toBe(true);
+      const body = await response.body();
       return { size: gzipSync(body).length, body: body.toString("utf8") };
     }),
   );
+}
+
+async function loadHtml(request: APIRequestContext, path: string): Promise<string> {
+  const response = await request.get(path);
+  expect(response.ok(), `${path} 응답 ${response.status()}`).toBe(true);
+  return response.text();
 }
 
 const toKb = (assets: Asset[]) =>
@@ -41,7 +49,7 @@ const toKb = (assets: Asset[]) =>
 
 for (const [path, budget] of Object.entries(JS_BUDGET_KB)) {
   test(`${path} 첫 화면이 전송량 예산을 지킵니다`, async ({ request }) => {
-    const html = await (await request.get(path)).text();
+    const html = await loadHtml(request, path);
     const scripts = await loadAssets(request, html, /<script[^>]*\bsrc="([^"]+\.js[^"]*)"[^>]*>/g);
     const styles = await loadAssets(
       request,
@@ -52,6 +60,9 @@ for (const [path, budget] of Object.entries(JS_BUDGET_KB)) {
       type: "size",
       description: `js ${toKb(scripts)}KB, css ${toKb(styles)}KB`,
     });
+    // 찾은 파일이 없으면 0KB로 통과해 버리므로, 측정이 실제로 됐는지 먼저 확인합니다.
+    expect(scripts.length).toBeGreaterThan(0);
+    expect(styles.length).toBeGreaterThan(0);
     expect(toKb(scripts)).toBeLessThanOrEqual(budget);
     expect(toKb(styles)).toBeLessThanOrEqual(CSS_BUDGET_KB);
   });
@@ -59,7 +70,7 @@ for (const [path, budget] of Object.entries(JS_BUDGET_KB)) {
 
 test("모션이 없는 페이지의 첫 화면에는 GSAP이 없습니다", async ({ request }) => {
   for (const path of ["/ko/credits", "/ko/checkout"]) {
-    const html = await (await request.get(path)).text();
+    const html = await loadHtml(request, path);
     const scripts = await loadAssets(request, html, /<script[^>]*\bsrc="([^"]+\.js[^"]*)"[^>]*>/g);
     expect(scripts.length).toBeGreaterThan(0);
     expect(scripts.some(({ body }) => body.includes("GreenSock"))).toBe(false);
@@ -76,7 +87,12 @@ test("움직임 코드는 필요한 기기에서만 동작합니다", async ({ p
     await expect(page.locator("[data-baker] canvas")).toHaveCount(0);
     await expect(page.locator("html")).not.toHaveClass(/lenis/);
   } else {
-    await expect(page.locator("[data-baker] canvas")).toHaveCount(1);
+    // WebGL을 못 쓰는 환경에서는 컷아웃 이미지가 대신 보이는 것이 정상입니다.
+    const hasWebgl = await page.evaluate(
+      () => document.createElement("canvas").getContext("webgl") !== null,
+    );
+    if (hasWebgl) await expect(page.locator("[data-baker] canvas")).toHaveCount(1);
+    else await expect(page.locator("[data-baker] img")).toBeVisible();
     await expect(page.locator("html")).toHaveClass(/lenis/);
     await expect(page.locator("html")).toHaveAttribute("data-custom-cursor", "on");
   }
