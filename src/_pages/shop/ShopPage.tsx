@@ -45,7 +45,7 @@ const filter = css({
 export async function generateMetadata({ params }: ShopPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "shop" });
-  return { title: `${t("metaTitle")} | Dessert World` };
+  return { title: `${t("metaTitle")} | Dessert Market` };
 }
 
 export default async function ShopPage({ params, searchParams }: ShopPageProps) {

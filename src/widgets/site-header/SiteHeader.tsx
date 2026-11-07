@@ -82,7 +82,7 @@ export function SiteHeader() {
           Dessert
         </span>
         <span className={brandMain} lang="en">
-          World
+          Market
         </span>
       </Link>
       <nav aria-label={t("main")} className={nav}>
