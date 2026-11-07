@@ -44,6 +44,9 @@ export function TestPaymentDialog({ amount, onResolve }: TestPaymentDialogProps)
     }
   }, [open]);
 
+  // 뒤로 가기처럼 열린 채로 사라지면 close 이벤트가 없으므로, 여기서 스크롤을 되살립니다.
+  useEffect(() => () => void getLenis()?.start(), []);
+
   return (
     <dialog
       ref={ref}

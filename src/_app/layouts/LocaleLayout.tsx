@@ -90,12 +90,8 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
     description: t("description"),
     icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.png" },
     applicationName: "Dessert Land",
-    openGraph: {
-      type: "website",
-      siteName: "Dessert Land",
-      title: `Dessert Land — ${t("title")}`,
-      description: t("description"),
-    },
+    // 제목과 설명을 여기 두면 하위 페이지의 공유 미리보기에도 사이트 소개가 나옵니다.
+    openGraph: { type: "website", siteName: "Dessert Land" },
   };
 }
 
