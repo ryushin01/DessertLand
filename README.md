@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.3.3-ff6484)
+![version](https://img.shields.io/badge/version-0.4.0-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -41,6 +41,7 @@
 | 전 세계 디저트 | 밀크셰이크, 치즈케이크, 머핀, 팬케이크, 생크림 케이크, 세계의 명작 등 13개 나라의 16종 |
 | 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시 |
 | 쇼핑 | 카테고리 필터, 상품 상세, 장바구니(저장 유지) |
+| AI 추천 | 입맛을 적으면 Claude가 카탈로그 안에서 디저트를 추천(스트리밍). 키가 없으면 규칙 기반 추천 |
 | 구매 | 장바구니 구매, 바로 구매(장바구니 유지), 배송 정보 입력과 오류 안내 |
 | 결제 | Stripe Checkout 테스트 모드(키가 없으면 내장 테스트 결제창), 서버 금액 검증, 중복 결제 방지 |
 | 첫 화면 인터랙션 | 마우스 위치에 따라 가운데 손과 밀가루가 움직이고 빛이 바뀌는 WebGL 2.5D 시차 |
@@ -60,6 +61,7 @@
 | 상태 | jotai |
 | 다국어 | next-intl |
 | 결제 | Stripe Checkout(테스트 모드) |
+| AI | Claude API (`@anthropic-ai/sdk`) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
 | 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe, Vercel Speed Insights |
 | 구조 | Feature-Sliced Design |
@@ -74,7 +76,7 @@ pnpm install
 pnpm dev    # http://localhost:3000
 ```
 
-Stripe 테스트 결제를 쓰려면 `.env.example`을 `.env.local`로 복사해 테스트 키를 넣습니다.
+Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`로 복사해 키를 넣습니다.
 
 | 명령 | 설명 |
 |---|---|
@@ -94,7 +96,7 @@ src/
 ├─ _app/           # 레이아웃, 프로바이더, 전역 스타일
 ├─ _pages/         # 홈, 목록, 상세, 주문, 출처
 ├─ widgets/        # 히어로, 쇼케이스, 커서, 장바구니 등
-├─ features/       # 담기, 바로 구매, 결제, 주문 폼, 언어 변경, 모션 멈춤
+├─ features/       # 담기, 바로 구매, 결제, 주문 폼, AI 추천, 언어 변경, 모션 멈춤
 ├─ entities/       # 상품 카탈로그, 장바구니
 └─ shared/         # 다국어, 모션, UI
 ```

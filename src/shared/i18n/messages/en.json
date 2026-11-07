@@ -225,5 +225,34 @@
       "name": "Cantonese egg tart",
       "description": "A snack raised alongside Cantonese tea culture, known for its silky egg custard."
     }
+  },
+  "advisor": {
+    "title": "Which dessert is for you?",
+    "lede": "Tell us your mood or taste, and we’ll pick from desserts around the world.",
+    "label": "Describe what you’d like",
+    "placeholder": "e.g. Something not too sweet to go with coffee",
+    "hint": "Up to {max} characters.",
+    "chipsLabel": "Pick your tastes (optional)",
+    "submit": "Get recommendations",
+    "loading": "Choosing desserts",
+    "empty": "Describe what you’d like or pick at least one taste.",
+    "error": "We couldn’t load recommendations. Please try again.",
+    "limited": "Too many requests. Please try again in a minute.",
+    "resultCount": "Found {count} recommended desserts.",
+    "sourceAi": "Recommended by Claude AI",
+    "sourceBasic": "Basic picks (no AI)",
+    "basicIntro": "Here’s what matches your choices.",
+    "add": "Add",
+    "notice": "Recommendations are for reference only. If you have allergies, always check the product’s allergen information. Your text is sent to an AI service to make recommendations, so please don’t include personal information.",
+    "shopLink": "Get recommendations for your taste",
+    "chips": {
+      "fruity": "Fresh & fruity",
+      "chocolate": "Rich chocolate",
+      "coffee": "Coffee",
+      "nutty": "Nutty",
+      "creamy": "Creamy",
+      "light": "Light",
+      "nutFree": "No nuts"
+    }
   }
 }
