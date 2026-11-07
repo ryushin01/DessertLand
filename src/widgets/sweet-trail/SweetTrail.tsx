@@ -7,8 +7,10 @@ import { css } from "styled-system/css";
 
 import { PRODUCTS } from "@/entities/product";
 import { Link } from "@/shared/i18n";
-import { gsap, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
-import { Icon, RevealText, buttonRecipe } from "@/shared/ui";
+import { gsap } from "@/shared/lib/motion/gsap";
+import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { Icon, buttonRecipe } from "@/shared/ui";
+import { RevealText } from "@/shared/ui/reveal-text";
 
 const section = css({
   position: "relative",

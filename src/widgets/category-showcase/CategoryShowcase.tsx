@@ -7,7 +7,8 @@ import { css } from "styled-system/css";
 
 import { CATEGORIES, CATEGORY_COVERS, PRODUCTS, getProduct, type Category } from "@/entities/product";
 import { Link } from "@/shared/i18n";
-import { gsap, scrollToY, useGsap, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { scrollToY, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
 const wrapper = css({

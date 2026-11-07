@@ -64,7 +64,14 @@ export function SiteFooter() {
         <ul className={list}>
           {LOCALES.map((code) => (
             <li key={code}>
-              <Link href="/" locale={code} lang={code} hrefLang={code} className={link}>
+              <Link
+                href="/"
+                locale={code}
+                lang={code}
+                hrefLang={code}
+                className={link}
+                prefetch={false}
+              >
                 {LOCALE_LABELS[code]}
               </Link>
             </li>
