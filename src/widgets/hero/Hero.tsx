@@ -65,6 +65,11 @@ const title = css({
   userSelect: "none",
 });
 const titleLine = css({ display: "block", willChange: "transform" });
+// 가운데 인물에 가리지 않도록 LAND의 글자를 인물 양옆으로 벌립니다.
+const titleLineWide = css({
+  letterSpacing: { base: "0.04em", md: "0.2em" },
+  marginInlineEnd: { base: "-0.04em", md: "-0.2em" },
+});
 const float = css({
   position: "absolute",
   display: { base: "none", md: "block" },
@@ -281,15 +286,15 @@ export function Hero() {
     <div ref={rootRef} className={wrapper}>
       <div className={stage}>
         <div data-glow aria-hidden="true" className={glow} />
-        <h1 className={title} lang="en" aria-label="Dessert Market">
+        <h1 className={title} lang="en" aria-label="Dessert Land">
           <span aria-hidden="true" className={css({ overflow: "clip" })}>
             <span data-line className={titleLine}>
               Dessert
             </span>
           </span>
           <span aria-hidden="true" className={css({ overflow: "clip" })}>
-            <span data-line className={titleLine}>
-              Market
+            <span data-line className={cx(titleLine, titleLineWide)}>
+              Land
             </span>
           </span>
         </h1>
