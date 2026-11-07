@@ -8,6 +8,7 @@ import {
   shippingInCurrency,
 } from "@/entities/product";
 import { summarizeCart } from "@/features/cart-summary";
+import { SITE_NAME } from "@/shared/config";
 import { LOCALES } from "@/shared/i18n/routing";
 
 import { toMinorUnits } from "./minor-units";
@@ -96,6 +97,8 @@ export function buildSessionParams({
     // 안내한 테스트 카드로만 결제하고, 사이트에 표시한 통화와 금액을 그대로 청구합니다.
     allowed_payment_method_types: ["card"],
     adaptive_pricing: { enabled: false },
+    // 샌드박스를 다른 프로젝트와 함께 쓰므로, 결제 화면 이름은 계정 설정이 아니라 여기서 정합니다.
+    branding_settings: { display_name: SITE_NAME },
     locale: STRIPE_LOCALES[locale as keyof typeof STRIPE_LOCALES],
     line_items: [...lines, lineItem(shippingName, shippingInCurrency(currency), 1)],
     shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },

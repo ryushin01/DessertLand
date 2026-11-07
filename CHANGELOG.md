@@ -1,5 +1,9 @@
 # 변경 기록
 
+## 0.3.3 - 2026-11-07
+
+- Stripe 결제 화면에 Dessert Land 이름 표시
+
 ## 0.3.2 - 2026-11-07
 
 - Vercel Speed Insights로 Web Vitals 수집
