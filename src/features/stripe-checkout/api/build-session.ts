@@ -93,6 +93,9 @@ export function buildSessionParams({
     source === "buy" && first ? `buy=${first.slug}&qty=${first.quantity}&canceled=1` : "canceled=1";
   return {
     mode: "payment",
+    // 안내한 테스트 카드로만 결제하고, 사이트에 표시한 통화와 금액을 그대로 청구합니다.
+    allowed_payment_method_types: ["card"],
+    adaptive_pricing: { enabled: false },
     locale: STRIPE_LOCALES[locale as keyof typeof STRIPE_LOCALES],
     line_items: [...lines, lineItem(shippingName, shippingInCurrency(currency), 1)],
     shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },

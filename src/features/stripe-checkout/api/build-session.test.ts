@@ -41,6 +41,8 @@ describe("buildSessionParams", () => {
       },
     ]);
     expect(params?.metadata).toEqual({ source: "cart" });
+    expect(params?.allowed_payment_method_types).toEqual(["card"]);
+    expect(params?.adaptive_pricing).toEqual({ enabled: false });
     expect(params?.success_url).toContain("/en/checkout/complete?session_id={CHECKOUT_SESSION_ID}");
   });
 
