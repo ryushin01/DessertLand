@@ -78,6 +78,14 @@ export function LocaleSwitcher() {
     <details
       ref={ref}
       className={root}
+      // 초점이 밖으로 나가면 닫아, 다시 열 때 항상 현재 주소를 읽게 합니다.
+      // 일부 브라우저는 링크를 클릭할 때 relatedTarget이 비어 있으므로 그때는 닫지 않습니다.
+      onBlur={(event) => {
+        const next = event.relatedTarget;
+        if (next instanceof Node && !event.currentTarget.contains(next)) {
+          event.currentTarget.open = false;
+        }
+      }}
       onToggle={(event) => {
         if (!event.currentTarget.open) return;
         const params = new URLSearchParams(window.location.search);

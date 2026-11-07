@@ -108,6 +108,23 @@ test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", as
   await expect(page.getByRole("region", { name: "Order summary" })).toContainText("Baklava × 2");
 });
 
+test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소를 씁니다", async ({ page, isMobile }) => {
+  test.skip(isMobile, "키보드 초점 이동은 데스크톱에서 확인합니다");
+  await page.goto("/ko/shop");
+  const summary = page.getByText("KO", { exact: true });
+  await summary.click();
+  const english = page.getByRole("banner").getByRole("link", { name: "English" });
+  await expect(english).toBeVisible();
+  await english.focus();
+  const muffin = page.getByRole("navigation", { name: "카테고리 선택" }).getByRole("link", { name: "머핀" });
+  await muffin.focus();
+  await expect(english).toBeHidden();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/category=muffin/);
+  await summary.click();
+  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=muffin$/);
+});
+
 test.describe("좁은 화면 메뉴", () => {
   test.use({ viewport: { width: 320, height: 640 } });
 
