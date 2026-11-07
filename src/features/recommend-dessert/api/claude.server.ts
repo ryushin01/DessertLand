@@ -7,7 +7,8 @@ import { requiredExclusions, sanitizeRecommendation } from "../lib/recommend";
 import type { RawRecommendation, RecommendRequest, Recommendation } from "../model/types";
 import { RECOMMENDATION_SCHEMA, buildUserMessage } from "./prompt";
 
-const MODEL = process.env.ANTHROPIC_MODEL ?? "claude-opus-5-5";
+// .env.example을 복사하면 빈 문자열이 들어오므로 ??가 아니라 ||로 기본값을 씁니다.
+const MODEL = process.env.ANTHROPIC_MODEL?.trim() || "claude-opus-5-5";
 
 export function isClaudeEnabled(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
