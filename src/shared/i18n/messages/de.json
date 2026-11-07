@@ -225,5 +225,34 @@
       "name": "Kantonesisches Eiertörtchen",
       "description": "Mit der kantonesischen Teekultur gewachsen, bekannt für seine seidige Eiercreme."
     }
+  },
+  "advisor": {
+    "title": "Welches Dessert passt zu Ihnen?",
+    "lede": "Beschreiben Sie Ihre Stimmung oder Ihren Geschmack, und wir wählen aus Desserts der Welt.",
+    "label": "Beschreiben Sie Ihren Wunsch",
+    "placeholder": "z. B. nicht zu süß, passend zum Kaffee",
+    "hint": "Bis zu {max} Zeichen.",
+    "chipsLabel": "Geschmack wählen (optional)",
+    "submit": "Empfehlungen erhalten",
+    "loading": "Desserts werden ausgewählt",
+    "empty": "Beschreiben Sie Ihren Wunsch oder wählen Sie mindestens einen Geschmack.",
+    "error": "Empfehlungen konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "limited": "Zu viele Anfragen. Bitte versuchen Sie es in einer Minute erneut.",
+    "resultCount": "{count} empfohlene Desserts gefunden.",
+    "sourceAi": "Empfohlen von Claude AI",
+    "sourceBasic": "Basisauswahl (ohne KI)",
+    "basicIntro": "Das passt zu Ihrer Auswahl.",
+    "add": "Hinzufügen",
+    "notice": "Empfehlungen dienen nur zur Orientierung. Prüfen Sie bei Allergien immer die Allergene des Produkts. Ihr Text wird an einen KI-Dienst gesendet, geben Sie daher keine persönlichen Daten an.",
+    "shopLink": "Empfehlungen nach Ihrem Geschmack",
+    "chips": {
+      "fruity": "Frisch & fruchtig",
+      "chocolate": "Kräftige Schokolade",
+      "coffee": "Kaffee",
+      "nutty": "Nussig",
+      "creamy": "Cremig",
+      "light": "Leicht",
+      "nutFree": "Ohne Nüsse"
+    }
   }
 }

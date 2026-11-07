@@ -225,5 +225,34 @@
       "name": "Tartelette cantonaise",
       "description": "Née avec la culture du thé cantonaise, cette douceur se distingue par sa crème soyeuse."
     }
+  },
+  "advisor": {
+    "title": "Quel dessert vous tente ?",
+    "lede": "Décrivez votre humeur ou vos goûts : nous choisirons parmi les desserts du monde.",
+    "label": "Décrivez ce que vous aimeriez",
+    "placeholder": "ex. : pas trop sucré, pour accompagner un café",
+    "hint": "{max} caractères maximum.",
+    "chipsLabel": "Choisissez vos goûts (facultatif)",
+    "submit": "Obtenir des suggestions",
+    "loading": "Sélection en cours",
+    "empty": "Décrivez votre envie ou choisissez au moins un goût.",
+    "error": "Impossible de charger les suggestions. Veuillez réessayer.",
+    "limited": "Trop de demandes. Réessayez dans une minute.",
+    "resultCount": "{count} desserts suggérés.",
+    "sourceAi": "Suggestions de Claude AI",
+    "sourceBasic": "Sélection de base (sans IA)",
+    "basicIntro": "Voici ce qui correspond à vos choix.",
+    "add": "Ajouter",
+    "notice": "Ces suggestions sont données à titre indicatif. En cas d’allergie, vérifiez toujours les allergènes du produit. Votre texte est envoyé à un service d’IA : n’y mettez pas d’informations personnelles.",
+    "shopLink": "Obtenir des suggestions selon vos goûts",
+    "chips": {
+      "fruity": "Frais et fruité",
+      "chocolate": "Chocolat intense",
+      "coffee": "Café",
+      "nutty": "Fruits à coque",
+      "creamy": "Crémeux",
+      "light": "Léger",
+      "nutFree": "Sans fruits à coque"
+    }
   }
 }

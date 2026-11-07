@@ -225,5 +225,34 @@
       "name": "Tartelletta cantonese",
       "description": "Nata con la cultura cantonese del tè, si distingue per la crema vellutata."
     }
+  },
+  "advisor": {
+    "title": "Quale dolce fa per te?",
+    "lede": "Raccontaci il tuo umore o i tuoi gusti: sceglieremo tra i dolci del mondo.",
+    "label": "Descrivi cosa desideri",
+    "placeholder": "es. qualcosa di poco dolce da gustare con il caffè",
+    "hint": "Massimo {max} caratteri.",
+    "chipsLabel": "Scegli i tuoi gusti (facoltativo)",
+    "submit": "Ricevi consigli",
+    "loading": "Stiamo scegliendo",
+    "empty": "Descrivi cosa desideri o scegli almeno un gusto.",
+    "error": "Impossibile caricare i consigli. Riprova.",
+    "limited": "Troppe richieste. Riprova tra un minuto.",
+    "resultCount": "Trovati {count} dolci consigliati.",
+    "sourceAi": "Consigli di Claude AI",
+    "sourceBasic": "Scelta di base (senza IA)",
+    "basicIntro": "Ecco cosa si abbina alle tue scelte.",
+    "add": "Aggiungi",
+    "notice": "I consigli sono solo indicativi. In caso di allergie, controlla sempre gli allergeni del prodotto. Il testo viene inviato a un servizio di IA: non inserire dati personali.",
+    "shopLink": "Ricevi consigli secondo i tuoi gusti",
+    "chips": {
+      "fruity": "Fresco e fruttato",
+      "chocolate": "Cioccolato intenso",
+      "coffee": "Caffè",
+      "nutty": "Frutta secca",
+      "creamy": "Cremoso",
+      "light": "Leggero",
+      "nutFree": "Senza frutta a guscio"
+    }
   }
 }
