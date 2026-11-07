@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
 import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
-import { Link } from "@/shared/i18n";
+import { Link, localeAlternates, siteOpenGraph } from "@/shared/i18n";
 import { RevealText } from "@/shared/ui";
 import { ProductScroller } from "@/widgets/product-scroller";
 
@@ -45,7 +45,8 @@ const filter = css({
 export async function generateMetadata({ params }: ShopPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "shop" });
-  return { title: `${t("metaTitle")} | Dessert Land` };
+  const title = `${t("metaTitle")} | Dessert Land`;
+  return { title, alternates: localeAlternates(locale, "/shop"), openGraph: siteOpenGraph(title) };
 }
 
 export default async function ShopPage({ params, searchParams }: ShopPageProps) {

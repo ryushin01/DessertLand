@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 import { LOCALES, LOCALE_LABELS, Link, usePathname, type Locale } from "@/shared/i18n";
@@ -51,6 +51,8 @@ export function LocaleSwitcher() {
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const ref = useRef<HTMLDetailsElement>(null);
+  // useSearchParams는 정적 페이지 전체를 동적으로 바꾸므로, 메뉴를 열 때 주소에서 읽습니다.
+  const [query, setQuery] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const close = (event: Event) => {
@@ -73,7 +75,24 @@ export function LocaleSwitcher() {
   }, []);
 
   return (
-    <details ref={ref} className={root}>
+    <details
+      ref={ref}
+      className={root}
+      // 초점이 밖으로 나가면 닫아, 다시 열 때 항상 현재 주소를 읽게 합니다.
+      // 일부 브라우저는 링크를 클릭할 때 relatedTarget이 비어 있으므로 그때는 닫지 않습니다.
+      onBlur={(event) => {
+        const next = event.relatedTarget;
+        if (next instanceof Node && !event.currentTarget.contains(next)) {
+          event.currentTarget.open = false;
+        }
+      }}
+      onToggle={(event) => {
+        if (!event.currentTarget.open) return;
+        const params = new URLSearchParams(window.location.search);
+        params.delete("canceled");
+        setQuery(Object.fromEntries(params));
+      }}
+    >
       <summary className={summary} aria-label={`${t("language")}: ${LOCALE_LABELS[locale]}`}>
         <Icon name="globe" />
         <span aria-hidden="true">{locale.toUpperCase()}</span>
@@ -82,7 +101,7 @@ export function LocaleSwitcher() {
         {LOCALES.map((code) => (
           <li key={code}>
             <Link
-              href={pathname}
+              href={{ pathname, query }}
               locale={code}
               lang={code}
               hrefLang={code}

@@ -31,12 +31,17 @@ const brand = css({
   minHeight: "44px",
   justifySelf: "start",
 });
-const brandText = css({ display: "inline-flex", flexDirection: "column" });
+// 아주 좁은 화면에서는 로고만 남겨 메뉴 자리를 확보합니다. 링크 이름은 aria-label로 유지됩니다.
+const brandText = css({
+  display: "inline-flex",
+  flexDirection: "column",
+  "@media (max-width: 379px)": { display: "none" },
+});
 const brandTop = css({ fontSize: "0.72rem", letterSpacing: "0.02em" });
 const brandMain = css({ fontFamily: "display", fontSize: "1.45rem" });
 const nav = css({ display: "flex", alignItems: "center", gap: { base: "2px", md: "10px" } });
 const navLink = css({
-  display: { base: "none", sm: "inline-flex" },
+  display: "inline-flex",
   alignItems: "center",
   minHeight: "44px",
   paddingInline: "0.8em",

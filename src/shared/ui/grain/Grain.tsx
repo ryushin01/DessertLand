@@ -4,6 +4,9 @@ const NOISE =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
 const grain = css({
+  // 화면 전체 합성은 비용이 커서 정밀 포인터 기기에서만 켭니다.
+  display: "none",
+  _fineHover: { display: "block" },
   position: "fixed",
   inset: "-10%",
   zIndex: 90,

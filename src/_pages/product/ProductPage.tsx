@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
 import { PRODUCTS, formatProductPrice, getProduct, type Product } from "@/entities/product";
-import { Link, LOCALES } from "@/shared/i18n";
+import { Link, LOCALES, localeAlternates, siteOpenGraph } from "@/shared/i18n";
 import { ProductDetail } from "@/widgets/product-detail";
 
 type ProductPageProps = { params: Promise<{ locale: string; slug: string }> };
@@ -46,7 +46,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title,
     description,
-    openGraph: { type: "website", siteName: "Dessert Land", title, description },
+    alternates: localeAlternates(locale, `/shop/${slug}`),
+    openGraph: siteOpenGraph(title, description),
   };
 }
 
