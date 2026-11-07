@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 import type { CartLine } from "@/entities/cart";
@@ -39,6 +39,17 @@ export function StripeCheckoutButton({
   const [notice, setNotice] = useState<Notice | null>(canceled ? "canceled" : null);
   const [pending, setPending] = useState(false);
   const pendingRef = useRef(false);
+
+  // Stripe 화면에서 브라우저 뒤로 가기로 돌아오면 이전 상태가 복원되므로 버튼을 다시 켭니다.
+  useEffect(() => {
+    const reset = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      pendingRef.current = false;
+      setPending(false);
+    };
+    window.addEventListener("pageshow", reset);
+    return () => window.removeEventListener("pageshow", reset);
+  }, []);
 
   const start = async () => {
     if (pendingRef.current) return;
