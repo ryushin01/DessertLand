@@ -33,26 +33,23 @@ export function TestPaymentDialog({ amount, onResolve }: TestPaymentDialogProps)
   const ref = useRef<HTMLDialogElement>(null);
   const open = amount !== null;
 
+  // 열려 있는 동안만 스크롤을 멈춥니다. 뒤로 가기로 사라질 때도 이 정리 함수가 스크롤을 되살립니다.
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
-    if (open && !element.open) {
-      element.showModal();
-      getLenis()?.stop();
-    } else if (!open && element.open) {
+    if (!open || !element) return;
+    element.showModal();
+    getLenis()?.stop();
+    return () => {
       element.close();
-    }
+      getLenis()?.start();
+    };
   }, [open]);
-
-  // 뒤로 가기처럼 열린 채로 사라지면 close 이벤트가 없으므로, 여기서 스크롤을 되살립니다.
-  useEffect(() => () => void getLenis()?.start(), []);
 
   return (
     <dialog
       ref={ref}
       className={dialog}
       aria-labelledby="test-payment-title"
-      onClose={() => getLenis()?.start()}
       onCancel={(event) => {
         event.preventDefault();
         onResolve("cancel");
