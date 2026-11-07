@@ -10,8 +10,10 @@ import { countryName, formatProductPrice, type Product } from "@/entities/produc
 import { AddToCartButton } from "@/features/add-to-cart";
 import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
-import { gsap, useGsap, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
-import { Icon, QuantityStepper, RevealText } from "@/shared/ui";
+import { gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { Icon, QuantityStepper } from "@/shared/ui";
+import { RevealText } from "@/shared/ui/reveal-text";
 
 const root = css({ position: "relative", overflow: "clip", minHeight: "100svh" });
 const backdrop = css({

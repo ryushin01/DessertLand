@@ -3,7 +3,8 @@
 import { useRef, type ElementType } from "react";
 import { css } from "styled-system/css";
 
-import { gsap, useGsap, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { useMotionEnabled } from "@/shared/lib/motion";
 
 const clip = css({ display: "inline-block", overflow: "clip", verticalAlign: "bottom" });
 const char = css({ display: "inline-block", willChange: "transform" });

@@ -1,5 +1,6 @@
 import "@/_app/styles/global.css";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -9,14 +10,14 @@ import type { CSSProperties, ReactNode } from "react";
 import { css } from "styled-system/css";
 
 import { AppProviders } from "@/_app/providers/AppProviders";
+import { DeferredMotion } from "@/_app/providers/DeferredMotion";
+import { MotionAttribute } from "@/_app/providers/MotionAttribute";
 import { SITE_NAME, SITE_URL } from "@/shared/config";
 import { LOCALES, routing } from "@/shared/i18n";
 import { Grain } from "@/shared/ui";
 import { CartDrawer } from "@/widgets/cart-drawer";
-import { CustomCursor } from "@/widgets/custom-cursor";
 import { SiteFooter } from "@/widgets/site-footer";
 import { SiteHeader } from "@/widgets/site-header";
-import { SmoothScroll } from "@/widgets/smooth-scroll";
 
 const display = Instrument_Serif({
   subsets: ["latin", "latin-ext"],
@@ -109,15 +110,16 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             <a href="#main" className={skipLink}>
               {t("skip")}
             </a>
-            <SmoothScroll />
+            <MotionAttribute />
+            <DeferredMotion />
             <SiteHeader />
             <main id="main" tabIndex={-1}>
               {children}
             </main>
             <SiteFooter />
             <CartDrawer />
-            <CustomCursor />
             <Grain />
+            <SpeedInsights />
           </AppProviders>
         </NextIntlClientProvider>
       </body>

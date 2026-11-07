@@ -6,7 +6,8 @@ import { useRef } from "react";
 import { css } from "styled-system/css";
 
 import { getProduct } from "@/entities/product";
-import { gsap, useGsap, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { useMotionEnabled } from "@/shared/lib/motion";
 
 const wrapper = css({ position: "relative", height: "320vh", zIndex: 2, background: "cocoa.950" });
 const stage = css({ position: "sticky", insetBlockStart: 0, height: "100svh", overflow: "clip" });

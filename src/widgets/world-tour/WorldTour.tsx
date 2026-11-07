@@ -7,14 +7,8 @@ import { css } from "styled-system/css";
 
 import { PRODUCTS, countryName, formatProductPrice } from "@/entities/product";
 import { Link } from "@/shared/i18n";
-import {
-  ScrollTrigger,
-  gsap,
-  scrollToY,
-  useGsap,
-  useMediaQuery,
-  useMotionEnabled,
-} from "@/shared/lib/motion";
+import { ScrollTrigger, gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { scrollToY, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 
 const STOPS = PRODUCTS.filter(
   (product, index) => PRODUCTS.findIndex((item) => item.country === product.country) === index,

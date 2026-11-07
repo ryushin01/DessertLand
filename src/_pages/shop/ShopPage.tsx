@@ -5,7 +5,7 @@ import { css } from "styled-system/css";
 
 import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
 import { Link, localeAlternates, siteOpenGraph } from "@/shared/i18n";
-import { RevealText } from "@/shared/ui";
+import { RevealText } from "@/shared/ui/reveal-text";
 import { ProductScroller } from "@/widgets/product-scroller";
 
 type ShopPageProps = {

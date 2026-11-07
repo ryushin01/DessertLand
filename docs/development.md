@@ -27,6 +27,22 @@
 
 `widgets/hero/baker-renderer.ts`가 컷아웃과 깊이 지도로 시차를 그립니다. WebGL을 쓸 수 없거나 모션이 꺼져 있으면 컷아웃 이미지를 그대로 보여 줍니다. 컷아웃은 macOS Vision의 인물 분할과 밝기 기반 알파(밀가루)를 합쳐 만들었습니다. 얼굴이 나오지 않는 사진을 써서 초상권 부담을 줄였습니다.
 
+## 성능 측정
+
+- **Web Vitals:** `<SpeedInsights />`가 프로덕션의 실사용 수치를 Vercel로 보냅니다. Vercel 프로젝트의 Speed Insights에서 봅니다. 무료 범위는 팀 전체 30일 10,000건이고, 넘으면 수집이 일시 중지됩니다.
+- **번들 분석:** `pnpm analyze`로 어떤 모듈이 어느 경로에 실리는지 봅니다.
+- **전송량 예산:** `e2e/performance-budget.spec.ts`가 첫 화면 HTML이 요구하는 JS의 압축 크기를 검사합니다. 프리페치로 나중에 받는 코드는 세지 않습니다.
+
+| 경로 | 측정값(JS) | 예산 |
+|---|---|---|
+| `/ko` | 226KB | 240KB |
+| `/ko/shop` | 221KB | 235KB |
+| `/ko/shop/baklava` | 221KB | 235KB |
+| `/ko/checkout` | 179KB | 190KB |
+| `/ko/credits` | 175KB | 185KB |
+
+GSAP은 `@/shared/lib/motion/gsap`에서만 가져옵니다. `@/shared/lib/motion`이나 `@/shared/ui`로 다시 내보내면 모든 페이지에 실립니다. `RevealText`도 같은 이유로 `@/shared/ui/reveal-text`에서 가져옵니다.
+
 ## 배포
 
 `main`에 머지하면 Vercel이 프로덕션에 자동 배포합니다. 도메인을 연결하면 `NEXT_PUBLIC_SITE_URL`을 설정합니다. 사이트맵, 대표 주소, 공유 이미지가 이 값을 씁니다.
