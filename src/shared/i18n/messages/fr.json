@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Les desserts du monde entier",
-    "description": "Une boutique internationale qui présente et vend des desserts du monde entier, disponible en 10 langues."
+    "title": "Le pays gourmand des desserts du monde",
+    "description": "Dessert Land est une boutique internationale qui présente et vend des desserts du monde entier, en 10 langues."
   },
   "nav": {
     "skip": "Aller au contenu",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Desserts du monde · 10 langues",
-    "tagline": "Nous présentons et vendons des desserts du monde entier, en 10 langues.",
+    "tagline": "Un pays gourmand où se retrouvent les desserts du monde entier, présentés et vendus en 10 langues.",
     "cta": "Découvrir les desserts",
     "scroll": "Faites défiler"
   },
@@ -60,7 +60,8 @@
     "increase": "Augmenter la quantité",
     "add": "Ajouter au panier",
     "related": "Vous aimerez aussi",
-    "notice": "Les informations et les prix sont des exemples de démonstration."
+    "notice": "Les informations et les prix sont des exemples de démonstration.",
+    "buyNow": "Acheter maintenant"
   },
   "allergens": {
     "milk": "Lait",
@@ -115,13 +116,29 @@
     "required": "Ce champ est obligatoire.",
     "emailInvalid": "Saisissez un e-mail comme name@example.com.",
     "errorSummary": "Veuillez vérifier vos informations.",
-    "submit": "Valider la commande de démo",
-    "submitting": "Commande en cours",
     "summary": "Récapitulatif",
     "empty": "Aucun dessert à commander.",
     "successTitle": "Votre commande est confirmée",
     "successBody": "Numéro de commande de démo : {orderNo}. Aucun paiement ni livraison réels.",
-    "continue": "Continuer"
+    "continue": "Continuer",
+    "paymentLegend": "Mode de paiement",
+    "methodCard": "Carte bancaire",
+    "methodWallet": "Portefeuille numérique",
+    "methodBank": "Virement bancaire",
+    "pay": "Payer {amount}",
+    "paying": "Paiement en cours",
+    "testTitle": "Paiement de test",
+    "testBody": "Ceci est un test, pas un vrai paiement. Le montant est de {amount}. Choisissez un résultat.",
+    "testApprove": "Approuver le paiement",
+    "testDecline": "Refuser le paiement",
+    "testCancel": "Annuler le paiement",
+    "declined": "Le paiement a été refusé. Choisissez un autre mode ou réessayez.",
+    "canceled": "Paiement annulé. Aucun montant n’a été débité.",
+    "paymentError": "Le paiement n’a pas pu être traité. Réessayez dans un instant.",
+    "amountChanged": "Le montant a changé : aucun paiement n’a été effectué. Vérifiez votre commande.",
+    "paidAmount": "Montant payé : {amount}",
+    "paidMethod": "Mode de paiement : {method}",
+    "buyNowNotice": "Ceci est un achat immédiat. Votre panier reste inchangé."
   },
   "credits": {
     "metaTitle": "Crédits",
@@ -132,7 +149,7 @@
     "by": "Photo : {name}"
   },
   "footer": {
-    "tagline": "Une boutique de démonstration présentant les desserts du monde en 10 langues.",
+    "tagline": "Dessert Land est une boutique de démonstration présentant les desserts du monde en 10 langues.",
     "credits": "Crédits photos et icônes"
   },
   "notFound": {

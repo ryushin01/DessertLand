@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "世界のデザートに出会う場所",
-    "description": "世界のデザートを紹介・販売するグローバルショップ。10言語でご利用いただけます。"
+    "title": "世界のデザートが集まる甘い国",
+    "description": "Dessert Landは世界のデザートを紹介・販売するグローバルショップです。10言語でご利用いただけます。"
   },
   "nav": {
     "skip": "本文へ移動",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "世界のデザート · 10言語",
-    "tagline": "世界各地のデザートを紹介・販売しています。日本語を含む10言語でどうぞ。",
+    "tagline": "世界各地のデザートが集まる甘い国。日本語を含む10言語で紹介・販売しています。",
     "cta": "デザートを見る",
     "scroll": "下へスクロール"
   },
@@ -60,7 +60,8 @@
     "increase": "数量を増やす",
     "add": "カートに追加",
     "related": "こちらもおすすめ",
-    "notice": "商品情報と価格はデモ用の例です。"
+    "notice": "商品情報と価格はデモ用の例です。",
+    "buyNow": "今すぐ購入"
   },
   "allergens": {
     "milk": "乳",
@@ -115,13 +116,29 @@
     "required": "必須項目です。",
     "emailInvalid": "name@example.com の形式で入力してください。",
     "errorSummary": "入力内容をご確認ください。",
-    "submit": "デモ注文を確定",
-    "submitting": "注文処理中",
     "summary": "ご注文内容",
     "empty": "ご注文いただくデザートがありません。",
     "successTitle": "ご注文が完了しました",
     "successBody": "デモ注文番号は {orderNo} です。実際の決済や配送は行われません。",
-    "continue": "デザートをもっと見る"
+    "continue": "デザートをもっと見る",
+    "paymentLegend": "お支払い方法",
+    "methodCard": "クレジット・デビットカード",
+    "methodWallet": "電子決済",
+    "methodBank": "銀行振込",
+    "pay": "{amount}を支払う",
+    "paying": "決済処理中",
+    "testTitle": "テスト決済",
+    "testBody": "実際の決済ではなくテストです。決済金額は{amount}です。結果を選んでください。",
+    "testApprove": "決済を承認",
+    "testDecline": "決済を失敗させる",
+    "testCancel": "決済をキャンセル",
+    "declined": "決済に失敗しました。別のお支払い方法を選ぶか、もう一度お試しください。",
+    "canceled": "決済をキャンセルしました。請求はありません。",
+    "paymentError": "決済を処理できませんでした。しばらくしてからもう一度お試しください。",
+    "amountChanged": "金額が変わったため決済していません。ご注文内容をご確認ください。",
+    "paidAmount": "決済金額: {amount}",
+    "paidMethod": "お支払い方法: {method}",
+    "buyNowNotice": "今すぐ購入のご注文です。カートの中身はそのままです。"
   },
   "credits": {
     "metaTitle": "クレジット",
@@ -132,7 +149,7 @@
     "by": "撮影: {name}"
   },
   "footer": {
-    "tagline": "世界のデザートを10言語で紹介するデモショップです。",
+    "tagline": "Dessert Landは世界のデザートを10言語で紹介するデモショップです。",
     "credits": "写真とアイコンのクレジット"
   },
   "notFound": {

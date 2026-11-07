@@ -1,10 +1,11 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, Ref } from "react";
 
 import { buttonRecipe } from "./button-recipe";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   tone?: "solid" | "outline";
   size?: "md" | "sm";
+  ref?: Ref<HTMLButtonElement>;
 };
 
 export function Button({ tone, size, className, type = "button", ...rest }: ButtonProps) {

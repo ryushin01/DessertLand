@@ -8,7 +8,7 @@ import { cartCountAtom, cartOpenAtom } from "@/entities/cart";
 import { LocaleSwitcher } from "@/features/change-locale";
 import { MotionToggle } from "@/features/toggle-motion";
 import { Link } from "@/shared/i18n";
-import { Icon } from "@/shared/ui";
+import { Icon, Logo } from "@/shared/ui";
 
 const header = css({
   position: "fixed",
@@ -25,11 +25,13 @@ const header = css({
 });
 const brand = css({
   display: "inline-flex",
-  flexDirection: "column",
+  alignItems: "center",
+  gap: "10px",
   lineHeight: "1.05",
   minHeight: "44px",
-  justifyContent: "center",
+  justifySelf: "start",
 });
+const brandText = css({ display: "inline-flex", flexDirection: "column" });
 const brandTop = css({ fontSize: "0.72rem", letterSpacing: "0.02em" });
 const brandMain = css({ fontFamily: "display", fontSize: "1.45rem" });
 const nav = css({ display: "flex", alignItems: "center", gap: { base: "2px", md: "10px" } });
@@ -78,11 +80,14 @@ export function SiteHeader() {
   return (
     <header className={header}>
       <Link href="/" className={brand} aria-label={t("home")} data-cursor="">
-        <span className={brandTop} lang="en">
-          Dessert
-        </span>
-        <span className={brandMain} lang="en">
-          Land
+        <Logo />
+        <span className={brandText}>
+          <span className={brandTop} lang="en">
+            Dessert
+          </span>
+          <span className={brandMain} lang="en">
+            Land
+          </span>
         </span>
       </Link>
       <nav aria-label={t("main")} className={nav}>
