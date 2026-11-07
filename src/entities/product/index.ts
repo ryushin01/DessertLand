@@ -8,6 +8,7 @@ export {
   isCategory,
 } from "./model/catalog";
 export type { Allergen, Category, PhotoCredit, Product } from "./model/catalog";
+export type { Currency } from "./lib/price";
 export {
   countryName,
   currencyForLocale,

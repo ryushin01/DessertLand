@@ -212,9 +212,9 @@ export const PRODUCTS: Product[] = [
 ];
 
 export const HERO_CREDIT: PhotoCredit = {
-  name: "Zayed Ahmed Zadu",
-  username: "zayed_ahmed_zadu",
-  photoUrl: u("a-chef-in-a-white-uniform-and-hat-v2uSGD98qRo"),
+  name: "Mae Mu",
+  username: "picoftasty",
+  photoUrl: u("person-pouring-flour-on-table-beside-eggs-and-whisk-rgRbqFweGF0"),
 };
 
 /** 카테고리별 대표 상품(홈 쇼케이스). */

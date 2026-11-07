@@ -27,8 +27,8 @@ vec4 sampleColor(vec2 uv) {
 }
 
 void main() {
-  // 가장자리가 잘리지 않도록 좌우와 위에 여백을 둡니다. 아래는 화면 밖으로 이어집니다.
-  vec2 uv = vec2((vUv.x - 0.5) * OVERSCAN + 0.5, vUv.y * OVERSCAN);
+  // 시차로 가장자리가 잘리지 않도록 좌우와 아래에 여백을 둡니다. 팔은 화면 위에서 내려옵니다.
+  vec2 uv = vec2((vUv.x - 0.5) * OVERSCAN + 0.5, 1.0 - (1.0 - vUv.y) * OVERSCAN);
   float depth = texture2D(uDepth, clamp(uv, 0.0, 1.0)).r;
 
   vec2 sway = vec2(sin(uTime * 0.5), cos(uTime * 0.37)) * 0.05;
@@ -51,9 +51,9 @@ void main() {
   float diffuse = max(dot(normal, lightDir), 0.0);
   float rim = pow(1.0 - clamp(depth * 1.6, 0.0, 1.0), 1.5);
 
-  color *= mix(0.42, 1.12, diffuse);
+  color *= mix(0.78, 1.12, diffuse);
   vec3 warm = mix(vec3(1.0, 0.39, 0.52), vec3(0.95, 0.70, 0.40), pointer.x * 0.5 + 0.5);
-  color += warm * rim * diffuse * 0.5;
+  color += warm * rim * diffuse * 0.22;
 
   // 등장: 아래에서 위로 드러납니다.
   float reveal = smoothstep(uIntro * 1.3 - 0.3, uIntro * 1.3, 1.0 - uv.y + 0.0);
@@ -82,15 +82,15 @@ function loadTexture(renderer: Renderer, src: string): Promise<Texture> {
   });
 }
 
-export type ChefRenderer = {
+export type BakerRenderer = {
   canvas: HTMLCanvasElement;
   render: (input: { pointerX: number; pointerY: number; time: number; intro: number }) => void;
   resize: (width: number, height: number) => void;
   destroy: () => void;
 };
 
-/** 인물 컷아웃과 깊이 지도로 2.5D 시차를 그리는 WebGL 렌더러입니다. WebGL이 없으면 예외를 던집니다. */
-export async function createChefRenderer(colorSrc: string, depthSrc: string): Promise<ChefRenderer> {
+/** 손과 밀가루 컷아웃, 깊이 지도로 2.5D 시차를 그리는 WebGL 렌더러입니다. WebGL이 없으면 예외를 던집니다. */
+export async function createBakerRenderer(colorSrc: string, depthSrc: string): Promise<BakerRenderer> {
   const renderer = new Renderer({
     alpha: true,
     premultipliedAlpha: true,

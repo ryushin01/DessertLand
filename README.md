@@ -1,12 +1,14 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.2.0-ff6484)
+![version](https://img.shields.io/badge/version-0.3.0-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
 
-> **프로젝트 상태:** 별도 백엔드 없이 동작하는 **데모 프로젝트**입니다. 상품 정보와 가격은 예시 값이고, 환율은 고정값이며, 결제는 **실제 청구가 없는 테스트 결제**이며 배송도 이루어지지 않습니다. 이름, 이메일, 주소는 어디에도 전송되지 않고 카드 정보는 입력받지 않습니다.
+**[데모 바로 보기](https://dessert-land-three.vercel.app)** · 실제 청구는 없습니다.
+
+> **프로젝트 상태:** 별도 백엔드 없이 동작하는 **데모 프로젝트**입니다. 상품 정보와 가격은 예시 값이고, 환율은 고정값이며, 결제는 **실제 청구가 없는 Stripe 테스트 모드**이며 배송도 이루어지지 않습니다. 운영 키는 코드에서 거부하고, 카드 정보는 Stripe 화면에서만 입력합니다.
 
 ## 화면
 
@@ -14,7 +16,7 @@
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
-| ![로고와 DESSERT LAND 글자 앞에 요리사가 서 있고 주변에 디저트 사진이 떠 있는 첫 화면](docs/images/home-hero.jpg) | ![흐린 팬케이크 사진을 배경으로 선명한 사진과 팬케이크 제목이 놓인 화면](docs/images/home-category.jpg) |
+| ![DESSERT LAND 글자 위로 두 손이 밀가루를 뿌리고 주변에 디저트 사진이 떠 있는 첫 화면](docs/images/home-hero.jpg) | ![흐린 팬케이크 사진을 배경으로 선명한 사진과 팬케이크 제목이 놓인 화면](docs/images/home-category.jpg) |
 
 | 글자 마스크 줌 | 세계 디저트 여행 |
 |---|---|
@@ -30,7 +32,7 @@
 
 | 주문 완료 | 모바일 |
 |---|---|
-| ![주문 번호와 결제 금액, 결제 수단을 보여 주는 주문 완료 화면](docs/images/order-complete.jpg) | <img src="docs/images/mobile-hero.jpg" alt="모바일 첫 화면의 제목과 요리사, 소개 문구" width="240"> |
+| ![주문 번호와 결제 금액, 결제 수단을 보여 주는 주문 완료 화면](docs/images/order-complete.jpg) | <img src="docs/images/mobile-hero.jpg" alt="모바일 첫 화면의 손과 밀가루, 제목, 소개 문구" width="240"> |
 
 ## 주요 기능
 
@@ -40,8 +42,8 @@
 | 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시 |
 | 쇼핑 | 카테고리 필터, 상품 상세, 장바구니(저장 유지) |
 | 구매 | 장바구니 구매, 바로 구매(장바구니 유지), 배송 정보 입력과 오류 안내 |
-| 결제 | 결제 수단 선택, 테스트 결제창(승인, 실패, 취소), 서버 금액 검증, 중복 결제 방지 |
-| 인물 인터랙션 | 마우스 위치에 따라 가운데 요리사가 돌아보고 빛이 바뀌는 WebGL 2.5D 시차 |
+| 결제 | Stripe Checkout 테스트 모드(키가 없으면 내장 테스트 결제창), 서버 금액 검증, 중복 결제 방지 |
+| 첫 화면 인터랙션 | 마우스 위치에 따라 가운데 손과 밀가루가 움직이고 빛이 바뀌는 WebGL 2.5D 시차 |
 | 커서 | 따라오는 링, 흩날리는 스프링클, 끌어당기는 버튼, 지나간 자리에 피어나는 사진 |
 | 스크롤 | 원형으로 열리는 장면 전환, 글자 마스크 줌, 가로 스크롤 여행, 단어별 밝아짐, 패럴랙스 |
 | 접근성 | 모션 멈춤 버튼, `prefers-reduced-motion` 대응, 키보드 초점 시 장면 이동, 본문 바로가기 |
@@ -56,6 +58,7 @@
 | 스타일 | Panda CSS |
 | 상태 | jotai |
 | 다국어 | next-intl |
+| 결제 | Stripe Checkout(테스트 모드) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
 | 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe |
 | 구조 | Feature-Sliced Design |
@@ -69,6 +72,8 @@ corepack enable pnpm
 pnpm install
 pnpm dev    # http://localhost:3000
 ```
+
+Stripe 테스트 결제를 쓰려면 `.env.example`을 `.env.local`로 복사해 테스트 키를 넣습니다.
 
 | 명령 | 설명 |
 |---|---|

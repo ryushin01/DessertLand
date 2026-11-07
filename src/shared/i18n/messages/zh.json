@@ -138,14 +138,18 @@
     "amountChanged": "金额已变更,未进行付款。请检查订单。",
     "paidAmount": "付款金额:{amount}",
     "paidMethod": "支付方式:{method}",
-    "buyNowNotice": "这是立即购买订单,购物车保持不变。"
+    "buyNowNotice": "这是立即购买订单,购物车保持不变。",
+    "stripeNotice": "这是 Stripe 测试模式,不会产生实际扣款。请在付款页面输入测试卡 4242 4242 4242 4242、任意未来有效期和任意 CVC。请勿输入真实卡号。在付款页面输入的信息将发送给 Stripe。",
+    "stripePay": "通过 Stripe 支付 {amount}",
+    "stripeRedirecting": "正在前往付款页面",
+    "unverified": "无法确认此付款。可在 Stripe 测试控制台中查看。"
   },
   "credits": {
     "metaTitle": "版权信息",
     "title": "图片与图标来源",
     "photos": "图片:Unsplash",
     "icons": "图标:Flaticon",
-    "hero": "首屏人物照片",
+    "hero": "首屏图片",
     "by": "摄影:{name}"
   },
   "footer": {

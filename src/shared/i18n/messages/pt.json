@@ -138,14 +138,18 @@
     "amountChanged": "O valor mudou e o pagamento não foi feito. Verifique a sua encomenda.",
     "paidAmount": "Valor pago: {amount}",
     "paidMethod": "Método de pagamento: {method}",
-    "buyNowNotice": "Esta é uma compra imediata. O seu carrinho mantém-se igual."
+    "buyNowNotice": "Esta é uma compra imediata. O seu carrinho mantém-se igual.",
+    "stripeNotice": "Modo de teste da Stripe: não será cobrado nenhum valor. Na página de pagamento, use o cartão de teste 4242 4242 4242 4242, uma validade futura e qualquer CVC. Não introduza um número de cartão real. Os dados introduzidos são enviados à Stripe.",
+    "stripePay": "Pagar {amount} com a Stripe",
+    "stripeRedirecting": "A ir para a página de pagamento",
+    "unverified": "Não foi possível confirmar o pagamento. Pode verificá-lo no painel de teste da Stripe."
   },
   "credits": {
     "metaTitle": "Créditos",
     "title": "Créditos de fotos e ícones",
     "photos": "Fotos: Unsplash",
     "icons": "Ícones: Flaticon",
-    "hero": "Retrato inicial",
+    "hero": "Foto inicial",
     "by": "Foto de {name}"
   },
   "footer": {

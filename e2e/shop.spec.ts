@@ -278,6 +278,22 @@ test("서버 오류가 나면 안내하고 다시 시도할 수 있습니다", a
   await expect(page.getByRole("button", { name: /결제하기$/ })).toBeEnabled();
 });
 
+test.describe("Stripe 결제 경로", () => {
+  test("키가 없으면 세션을 만들지 않습니다", async ({ request }) => {
+    const response = await request.post("/api/checkout-session", {
+      data: { items: [{ slug: "baklava", quantity: 1 }], locale: "en", expectedTotal: 15, source: "cart" },
+    });
+    expect(response.status()).toBe(503);
+    expect(await response.json()).toEqual({ status: "disabled" });
+  });
+
+  test("확인되지 않은 세션은 주문 완료로 보여 주지 않습니다", async ({ page }) => {
+    await page.goto("/ko/checkout/complete?session_id=cs_test_forged");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("결제를 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.");
+    await expect(page.locator("main")).not.toContainText("주문이 완료되었습니다");
+  });
+});
+
 test.describe("결제 API", () => {
   const body = {
     items: [{ slug: "baklava", quantity: 1 }],
@@ -324,11 +340,11 @@ test("키보드로 본문 바로가기와 장바구니를 쓸 수 있습니다",
 test.describe("데스크톱 모션", () => {
   test.skip(({ isMobile }) => isMobile, "정밀 포인터 전용 연출입니다");
 
-  test("마우스 위치에 따라 가운데 인물이 움직이고 커서가 따라옵니다", async ({ page }) => {
+  test("마우스 위치에 따라 가운데 손이 움직이고 커서가 따라옵니다", async ({ page }) => {
     await page.goto("/ko");
     await page.waitForTimeout(3200);
     const transform = () =>
-      page.locator("[data-chef]").evaluate((element) => getComputedStyle(element).transform);
+      page.locator("[data-baker]").evaluate((element) => getComputedStyle(element).transform);
     await page.mouse.move(120, 200, { steps: 6 });
     await page.waitForTimeout(1300);
     const left = await transform();

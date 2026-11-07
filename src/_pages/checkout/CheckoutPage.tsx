@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { parseBuyNow } from "@/features/buy-now";
+import { isStripeEnabled } from "@/features/stripe-checkout/index.server";
 
 import { CheckoutView } from "./CheckoutView";
 
 type CheckoutPageProps = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ buy?: string | string[]; qty?: string | string[] }>;
+  searchParams: Promise<{
+    buy?: string | string[];
+    qty?: string | string[];
+    canceled?: string | string[];
+  }>;
 };
 
 export async function generateMetadata({ params }: CheckoutPageProps): Promise<Metadata> {
@@ -19,6 +24,12 @@ export async function generateMetadata({ params }: CheckoutPageProps): Promise<M
 export default async function CheckoutPage({ params, searchParams }: CheckoutPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const { buy, qty } = await searchParams;
-  return <CheckoutView buyNow={parseBuyNow(buy, qty)} />;
+  const { buy, qty, canceled } = await searchParams;
+  return (
+    <CheckoutView
+      buyNow={parseBuyNow(buy, qty)}
+      stripeEnabled={isStripeEnabled()}
+      canceled={canceled === "1"}
+    />
+  );
 }
