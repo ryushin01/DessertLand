@@ -4,7 +4,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRef } from "react";
 import { css } from "styled-system/css";
 
-import { gsap, useGsap, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap, useGsap } from "@/shared/lib/motion/gsap";
+import { useMotionEnabled } from "@/shared/lib/motion";
 
 const section = css({
   minHeight: "100svh",

@@ -105,6 +105,7 @@ export function LocaleSwitcher() {
               locale={code}
               lang={code}
               hrefLang={code}
+              prefetch={false}
               className={item}
               aria-current={code === locale ? "true" : undefined}
             >

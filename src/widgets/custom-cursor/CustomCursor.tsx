@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
 
-import { gsap, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap } from "@/shared/lib/motion/gsap";
+import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 
 const canvas = css({
   position: "fixed",

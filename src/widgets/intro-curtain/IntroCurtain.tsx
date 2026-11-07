@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
-import { gsap } from "@/shared/lib/motion";
+import { gsap } from "@/shared/lib/motion/gsap";
 
 const SEEN_KEY = "dessert-land.intro-seen";
 
