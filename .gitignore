@@ -8,7 +8,10 @@ playwright-report/
 test-results/
 coverage/
 .env*
+!.env.example
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
 .idea/
+.vercel/
+.vercel

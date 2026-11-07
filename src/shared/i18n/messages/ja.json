@@ -138,14 +138,18 @@
     "amountChanged": "金額が変わったため決済していません。ご注文内容をご確認ください。",
     "paidAmount": "決済金額: {amount}",
     "paidMethod": "お支払い方法: {method}",
-    "buyNowNotice": "今すぐ購入のご注文です。カートの中身はそのままです。"
+    "buyNowNotice": "今すぐ購入のご注文です。カートの中身はそのままです。",
+    "stripeNotice": "Stripeのテストモードです。実際には請求されません。決済画面でテストカード 4242 4242 4242 4242、将来の有効期限、任意のCVCを入力してください。実際のカード番号は入力しないでください。決済画面の入力内容はStripeに送信されます。",
+    "stripePay": "Stripeで{amount}を支払う",
+    "stripeRedirecting": "決済画面へ移動中",
+    "unverified": "決済を確認できませんでした。Stripeのテストダッシュボードで確認できます。"
   },
   "credits": {
     "metaTitle": "クレジット",
     "title": "写真とアイコンのクレジット",
     "photos": "写真: Unsplash",
     "icons": "アイコン: Flaticon",
-    "hero": "トップ画面の人物写真",
+    "hero": "トップ画面の写真",
     "by": "撮影: {name}"
   },
   "footer": {

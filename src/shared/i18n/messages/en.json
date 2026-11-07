@@ -138,14 +138,18 @@
     "amountChanged": "The amount changed, so no payment was made. Please review your order.",
     "paidAmount": "Amount paid: {amount}",
     "paidMethod": "Payment method: {method}",
-    "buyNowNotice": "This is a Buy now order. Your cart stays as it is."
+    "buyNowNotice": "This is a Buy now order. Your cart stays as it is.",
+    "stripeNotice": "Stripe test mode: you will not be charged. On the payment page, use test card 4242 4242 4242 4242, any future expiry date and any CVC. Do not enter a real card number. Details entered there go to Stripe.",
+    "stripePay": "Pay {amount} with Stripe",
+    "stripeRedirecting": "Going to the payment page",
+    "unverified": "We couldn’t confirm this payment. It can be checked in the Stripe test dashboard."
   },
   "credits": {
     "metaTitle": "Credits",
     "title": "Photo and icon credits",
     "photos": "Photos: Unsplash",
     "icons": "Icons: Flaticon",
-    "hero": "Hero portrait",
+    "hero": "Hero photo",
     "by": "Photo by {name}"
   },
   "footer": {
