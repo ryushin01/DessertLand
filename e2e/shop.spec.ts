@@ -203,6 +203,46 @@ test("결제창을 연 채 뒤로 가도 다음 페이지가 스크롤됩니다"
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
 });
 
+test.describe("낮은 화면의 모달", () => {
+  test.skip(({ isMobile }) => isMobile, "휠 스크롤은 데스크톱에서 확인합니다");
+  test.use({ viewport: { width: 1000, height: 420 } });
+
+  test("장바구니 목록을 휠로 내릴 수 있고 뒤 페이지는 움직이지 않습니다", async ({ page }) => {
+    const slugs = ["baklava", "tiramisu", "fraisier", "egg-tart", "freakshake", "vanilla-malt"];
+    await page.addInitScript((items) => {
+      localStorage.setItem(
+        "dessert-land.cart",
+        JSON.stringify(items.map((slug) => ({ slug, quantity: 1 }))),
+      );
+    }, slugs);
+    await page.goto("/ko/credits");
+    await page.getByRole("button", { name: "장바구니, 6개 담김" }).click();
+    const dialog = page.getByRole("dialog", { name: "장바구니" });
+    await expect(dialog).toBeVisible();
+    await page.waitForTimeout(600);
+    const list = dialog.locator("[data-lenis-prevent]");
+    await list.hover();
+    await page.mouse.wheel(0, 300);
+    await expect.poll(() => list.evaluate((element) => element.scrollTop)).toBeGreaterThan(50);
+    expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  });
+
+  test("결제창이 화면보다 길어도 끝까지 내려 취소할 수 있습니다", async ({ page }) => {
+    await page.setViewportSize({ width: 1000, height: 300 });
+    await page.goto("/ko/checkout?buy=baklava&qty=1");
+    await fillCheckout(page);
+    await page.getByRole("button", { name: /결제하기$/ }).click();
+    const dialog = page.getByRole("dialog", { name: "테스트 결제창" });
+    await expect(dialog).toBeVisible();
+    await page.waitForTimeout(300);
+    const content = dialog.locator("[data-lenis-prevent]");
+    await content.hover();
+    await page.mouse.wheel(0, 400);
+    await expect.poll(() => content.evaluate((element) => element.scrollTop)).toBeGreaterThan(50);
+    await expect(dialog.getByRole("button", { name: "결제 취소" })).toBeInViewport();
+  });
+});
+
 test("상품 공유 미리보기에 상품 정보가 나옵니다", async ({ page }) => {
   await page.goto("/en/shop/baklava");
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Baklava | Dessert Land");

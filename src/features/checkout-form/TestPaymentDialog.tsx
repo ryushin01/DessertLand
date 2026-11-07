@@ -11,12 +11,18 @@ import { Button } from "@/shared/ui";
 const dialog = css({
   margin: "auto",
   width: "min(460px, calc(100vw - 32px))",
-  padding: "28px",
+  overflow: "hidden",
   borderRadius: "20px",
   background: "cocoa.900",
   color: "cream",
   border: "1px solid {colors.cocoa.700}",
   "&::backdrop": { background: "rgba(10, 6, 5, 0.72)", backdropFilter: "blur(6px)" },
+});
+const content = css({
+  maxHeight: "calc(100dvh - 32px)",
+  overflowY: "auto",
+  overscrollBehavior: "contain",
+  padding: "28px",
 });
 const title = css({ fontFamily: "display", fontSize: "2rem", marginBlockEnd: "12px" });
 const body = css({ lineHeight: "1.55", marginBlockEnd: "22px" });
@@ -55,18 +61,20 @@ export function TestPaymentDialog({ amount, onResolve }: TestPaymentDialogProps)
         onResolve("cancel");
       }}
     >
-      <h2 id="test-payment-title" className={title}>
-        {t("testTitle")}
-      </h2>
-      <p className={body}>{amount ? t("testBody", { amount }) : null}</p>
-      <div className={actions}>
-        <Button onClick={() => onResolve("approve")}>{t("testApprove")}</Button>
-        <Button tone="outline" onClick={() => onResolve("decline")}>
-          {t("testDecline")}
-        </Button>
-        <Button tone="outline" onClick={() => onResolve("cancel")}>
-          {t("testCancel")}
-        </Button>
+      <div className={content} data-lenis-prevent>
+        <h2 id="test-payment-title" className={title}>
+          {t("testTitle")}
+        </h2>
+        <p className={body}>{amount ? t("testBody", { amount }) : null}</p>
+        <div className={actions}>
+          <Button onClick={() => onResolve("approve")}>{t("testApprove")}</Button>
+          <Button tone="outline" onClick={() => onResolve("decline")}>
+            {t("testDecline")}
+          </Button>
+          <Button tone="outline" onClick={() => onResolve("cancel")}>
+            {t("testCancel")}
+          </Button>
+        </div>
       </div>
     </dialog>
   );
