@@ -1,23 +1,15 @@
 import "@/_app/styles/global.css";
 
 import type { Metadata, Viewport } from "next";
-import {
-  Instrument_Sans,
-  Instrument_Serif,
-  Noto_Sans_JP,
-  Noto_Sans_KR,
-  Noto_Sans_SC,
-  Noto_Serif_JP,
-  Noto_Serif_KR,
-  Noto_Serif_SC,
-} from "next/font/google";
+import { Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { css } from "styled-system/css";
 
 import { AppProviders } from "@/_app/providers/AppProviders";
+import { SITE_NAME, SITE_URL } from "@/shared/config";
 import { LOCALES, routing } from "@/shared/i18n";
 import { Grain } from "@/shared/ui";
 import { CartDrawer } from "@/widgets/cart-drawer";
@@ -33,33 +25,17 @@ const display = Instrument_Serif({
 });
 const body = Instrument_Sans({ subsets: ["latin", "latin-ext"], variable: "--font-body" });
 
-const koSans = Noto_Sans_KR({ subsets: ["latin"], preload: false, variable: "--font-cjk-sans" });
-const koSerif = Noto_Serif_KR({
-  subsets: ["latin"],
-  weight: "500",
-  preload: false,
-  variable: "--font-cjk-serif",
-});
-const jaSans = Noto_Sans_JP({ subsets: ["latin"], preload: false, variable: "--font-cjk-sans" });
-const jaSerif = Noto_Serif_JP({
-  subsets: ["latin"],
-  weight: "500",
-  preload: false,
-  variable: "--font-cjk-serif",
-});
-const zhSans = Noto_Sans_SC({ subsets: ["latin"], preload: false, variable: "--font-cjk-sans" });
-const zhSerif = Noto_Serif_SC({
-  subsets: ["latin"],
-  weight: "500",
-  preload: false,
-  variable: "--font-cjk-serif",
-});
-
-const CJK_FONTS: Record<string, string> = {
-  ko: `${koSans.variable} ${koSerif.variable}`,
-  ja: `${jaSans.variable} ${jaSerif.variable}`,
-  zh: `${zhSans.variable} ${zhSerif.variable}`,
+// next/font로 함께 선언하면 모든 언어에 CSS가 붙어 렌더링을 막으므로, 그 언어의 글꼴만 따로 받습니다.
+const CJK_FONTS: Record<string, { sans: string; serif: string }> = {
+  ko: { sans: "Noto Sans KR", serif: "Noto Serif KR" },
+  ja: { sans: "Noto Sans JP", serif: "Noto Serif JP" },
+  zh: { sans: "Noto Sans SC", serif: "Noto Serif SC" },
 };
+
+function cjkStylesheet({ sans, serif }: { sans: string; serif: string }): string {
+  const family = (name: string, axis: string) => `family=${name.replaceAll(" ", "+")}:wght@${axis}`;
+  return `https://fonts.googleapis.com/css2?${family(sans, "400;500;700")}&${family(serif, "500")}&display=swap`;
+}
 
 const skipLink = css({
   position: "fixed",
@@ -90,8 +66,10 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
     description: t("description"),
     icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.png" },
     applicationName: "Dessert Land",
+    metadataBase: new URL(SITE_URL),
     // 제목과 설명을 여기 두면 하위 페이지의 공유 미리보기에도 사이트 소개가 나옵니다.
-    openGraph: { type: "website", siteName: "Dessert Land" },
+    openGraph: { type: "website", siteName: SITE_NAME, images: ["/og-image.jpg"] },
+    twitter: { card: "summary_large_image" },
   };
 }
 
@@ -100,13 +78,31 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "nav" });
+  const cjk = CJK_FONTS[locale];
 
   return (
     <html
       lang={locale}
       data-motion="on"
-      className={`${display.variable} ${body.variable} ${CJK_FONTS[locale] ?? ""}`}
+      className={`${display.variable} ${body.variable}`}
+      style={
+        cjk
+          ? ({
+              "--font-cjk-sans": `"${cjk.sans}"`,
+              "--font-cjk-serif": `"${cjk.serif}"`,
+            } as CSSProperties)
+          : undefined
+      }
     >
+      <head>
+        {cjk ? (
+          <>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+            <link rel="stylesheet" href={cjkStylesheet(cjk)} />
+          </>
+        ) : null}
+      </head>
       <body>
         <NextIntlClientProvider>
           <AppProviders>

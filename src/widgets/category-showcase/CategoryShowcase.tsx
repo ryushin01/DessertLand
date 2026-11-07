@@ -169,7 +169,7 @@ function Chapter({ category, index, first }: { category: Category; index: number
     >
       <div data-stage className={stage}>
         <div data-backdrop aria-hidden="true" className={backdrop}>
-          <Image src={cover.image.src} alt="" fill sizes="50vw" className={backdropImage} />
+          <Image src={cover.image.src} alt="" fill sizes="20vw" quality={40} className={backdropImage} />
         </div>
         <div className={layout}>
           <div className={sharp}>

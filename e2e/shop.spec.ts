@@ -95,6 +95,76 @@ test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) =>
   await expect(page.getByRole("heading", { level: 1, name: "Tiramisù" })).toBeVisible();
 });
 
+test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", async ({ page }) => {
+  await page.goto("/ko/shop?category=muffin");
+  await page.getByText("KO", { exact: true }).click();
+  await page.getByRole("banner").getByRole("link", { name: "Deutsch" }).click();
+  await expect(page).toHaveURL(/\/de\/shop\?category=muffin$/);
+
+  await page.goto("/ko/checkout?buy=baklava&qty=2&canceled=1");
+  await page.getByText("KO", { exact: true }).click();
+  await page.getByRole("banner").getByRole("link", { name: "English" }).click();
+  await expect(page).toHaveURL(/\/en\/checkout\?buy=baklava&qty=2$/);
+  await expect(page.getByRole("region", { name: "Order summary" })).toContainText("Baklava × 2");
+});
+
+test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소를 씁니다", async ({ page, isMobile }) => {
+  test.skip(isMobile, "키보드 초점 이동은 데스크톱에서 확인합니다");
+  await page.goto("/ko/shop");
+  const summary = page.getByText("KO", { exact: true });
+  await summary.click();
+  const english = page.getByRole("banner").getByRole("link", { name: "English" });
+  await expect(english).toBeVisible();
+  await english.focus();
+  const muffin = page.getByRole("navigation", { name: "카테고리 선택" }).getByRole("link", { name: "머핀" });
+  await muffin.focus();
+  await expect(english).toBeHidden();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/category=muffin/);
+  await summary.click();
+  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=muffin$/);
+});
+
+test.describe("좁은 화면 메뉴", () => {
+  test.use({ viewport: { width: 320, height: 640 } });
+
+  test("메뉴로 디저트에 갈 수 있고 넘치지 않습니다", async ({ page }) => {
+    await page.goto("/de/credits");
+    const link = page.getByRole("banner").getByRole("link", { name: "Desserts", exact: true });
+    await expect(link).toBeVisible();
+    await expectNoHorizontalOverflow(page);
+    await link.click();
+    await expect(page).toHaveURL(/\/de\/shop$/);
+  });
+});
+
+test("검색 엔진과 보안 정보를 제공합니다", async ({ page, request }) => {
+  const home = await request.get("/ko");
+  expect(home.headers()["x-content-type-options"]).toBe("nosniff");
+  expect(home.headers()["x-frame-options"]).toBe("DENY");
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("/tr/shop/baklava");
+  expect(sitemap).not.toContain("checkout");
+  expect(await (await request.get("/robots.txt")).text()).toContain("Disallow: /api/");
+
+  await page.goto("/ja/shop/baklava");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/ja\/shop\/baklava$/);
+  await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(11);
+  await expect(page.locator('meta[property="og:image"]').first()).toHaveAttribute("content", /og-image\.jpg/);
+  expect((await request.get("/og-image.jpg")).status()).toBe(200);
+});
+
+test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
+  await page.goto("/de");
+  await expect(page.locator('link[href*="fonts.googleapis.com/css2"]')).toHaveCount(0);
+  await page.goto("/ko");
+  const korean = page.locator('link[rel="stylesheet"][href*="fonts.googleapis.com/css2"]');
+  await expect(korean).toHaveAttribute("href", /Noto\+Serif\+KR/);
+  await expect(korean).not.toHaveAttribute("href", /JP|SC/);
+  await expect(page.locator("html")).toHaveAttribute("style", /Noto Sans KR/);
+});
+
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await page.goto("/ko/shop");
   await page.getByRole("navigation", { name: "카테고리 선택" }).getByRole("link", { name: "머핀" }).click();
