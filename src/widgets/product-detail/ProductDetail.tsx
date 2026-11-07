@@ -8,6 +8,7 @@ import { css } from "styled-system/css";
 import { MAX_QUANTITY } from "@/entities/cart";
 import { countryName, formatProductPrice, type Product } from "@/entities/product";
 import { AddToCartButton } from "@/features/add-to-cart";
+import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, QuantityStepper, RevealText } from "@/shared/ui";
@@ -172,6 +173,9 @@ export function ProductDetail({ product }: { product: Product }) {
             <AddToCartButton slug={product.slug} quantity={quantity}>
               {t("add")}
             </AddToCartButton>
+            <BuyNowLink slug={product.slug} quantity={quantity}>
+              {t("buyNow")}
+            </BuyNowLink>
           </div>
           <p className={notice} data-rise>
             {t("notice")}

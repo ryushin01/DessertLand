@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "전 세계 디저트를 만나는 곳",
-    "description": "전 세계의 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 10개 언어로 만나 보세요."
+    "title": "전 세계 디저트가 모인 달콤한 나라",
+    "description": "디저트 랜드는 전 세계의 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 10개 언어로 만나 보세요."
   },
   "nav": {
     "skip": "본문 바로가기",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "전 세계 디저트 · 10개 언어",
-    "tagline": "세계 곳곳의 디저트를 소개하고 판매합니다. 한국어를 비롯한 10개 언어로 만나 보세요.",
+    "tagline": "세계 곳곳의 디저트가 모인 달콤한 나라입니다. 한국어를 비롯한 10개 언어로 소개하고 판매합니다.",
     "cta": "디저트 둘러보기",
     "scroll": "아래로 스크롤"
   },
@@ -60,7 +60,8 @@
     "increase": "수량 늘리기",
     "add": "장바구니에 담기",
     "related": "함께 보면 좋은 디저트",
-    "notice": "상품 정보와 가격은 데모용 예시입니다."
+    "notice": "상품 정보와 가격은 데모용 예시입니다.",
+    "buyNow": "바로 구매"
   },
   "allergens": {
     "milk": "우유",
@@ -115,13 +116,29 @@
     "required": "필수 입력 항목입니다.",
     "emailInvalid": "이메일 형식으로 입력해 주세요. 예: name@example.com",
     "errorSummary": "입력 내용을 확인해 주세요.",
-    "submit": "데모 주문 완료하기",
-    "submitting": "주문 처리 중",
     "summary": "주문 내역",
     "empty": "주문할 디저트가 없습니다.",
     "successTitle": "주문이 완료되었습니다",
     "successBody": "데모 주문 번호는 {orderNo}입니다. 실제 결제와 배송은 이루어지지 않습니다.",
-    "continue": "디저트 더 보기"
+    "continue": "디저트 더 보기",
+    "paymentLegend": "결제 수단",
+    "methodCard": "신용·체크카드",
+    "methodWallet": "간편결제",
+    "methodBank": "계좌이체",
+    "pay": "{amount} 결제하기",
+    "paying": "결제 처리 중",
+    "testTitle": "테스트 결제창",
+    "testBody": "실제 결제가 아닌 테스트입니다. 결제 금액은 {amount}입니다. 결과를 선택해 주세요.",
+    "testApprove": "결제 승인",
+    "testDecline": "결제 실패",
+    "testCancel": "결제 취소",
+    "declined": "결제에 실패했습니다. 다른 결제 수단을 선택하거나 다시 시도해 주세요.",
+    "canceled": "결제를 취소했습니다. 청구된 금액은 없습니다.",
+    "paymentError": "결제를 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    "amountChanged": "금액이 달라져 결제하지 않았습니다. 주문 내역을 확인해 주세요.",
+    "paidAmount": "결제 금액: {amount}",
+    "paidMethod": "결제 수단: {method}",
+    "buyNowNotice": "바로 구매 주문입니다. 장바구니는 그대로 유지됩니다."
   },
   "credits": {
     "metaTitle": "출처",
@@ -132,7 +149,7 @@
     "by": "{name} 촬영"
   },
   "footer": {
-    "tagline": "전 세계 디저트를 10개 언어로 소개하는 데모 쇼핑몰입니다.",
+    "tagline": "디저트 랜드는 전 세계 디저트를 10개 언어로 소개하는 데모 쇼핑몰입니다.",
     "credits": "사진과 아이콘 출처"
   },
   "notFound": {

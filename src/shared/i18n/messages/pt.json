@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Sobremesas de todo o mundo",
-    "description": "Uma loja global que apresenta e vende sobremesas de todo o mundo, disponível em 10 idiomas."
+    "title": "A doce terra das sobremesas do mundo",
+    "description": "A Dessert Land é uma loja global que apresenta e vende sobremesas de todo o mundo, em 10 idiomas."
   },
   "nav": {
     "skip": "Ir para o conteúdo",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Sobremesas do mundo · 10 idiomas",
-    "tagline": "Apresentamos e vendemos sobremesas de todo o mundo, em 10 idiomas.",
+    "tagline": "Uma doce terra onde se reúnem sobremesas de todo o mundo, apresentadas e vendidas em 10 idiomas.",
     "cta": "Explorar sobremesas",
     "scroll": "Role para baixo"
   },
@@ -60,7 +60,8 @@
     "increase": "Aumentar quantidade",
     "add": "Adicionar ao carrinho",
     "related": "Também pode gostar",
-    "notice": "As informações e os preços são exemplos de demonstração."
+    "notice": "As informações e os preços são exemplos de demonstração.",
+    "buyNow": "Comprar agora"
   },
   "allergens": {
     "milk": "Leite",
@@ -115,13 +116,29 @@
     "required": "Este campo é obrigatório.",
     "emailInvalid": "Introduza um e-mail como name@example.com.",
     "errorSummary": "Verifique os seus dados.",
-    "submit": "Fazer encomenda de demonstração",
-    "submitting": "A processar encomenda",
     "summary": "Resumo da encomenda",
     "empty": "Não há sobremesas para encomendar.",
     "successTitle": "A sua encomenda está concluída",
     "successBody": "Número da encomenda de demonstração: {orderNo}. Não há pagamento nem entrega reais.",
-    "continue": "Continuar a ver"
+    "continue": "Continuar a ver",
+    "paymentLegend": "Método de pagamento",
+    "methodCard": "Cartão de crédito ou débito",
+    "methodWallet": "Carteira digital",
+    "methodBank": "Transferência bancária",
+    "pay": "Pagar {amount}",
+    "paying": "A processar o pagamento",
+    "testTitle": "Pagamento de teste",
+    "testBody": "Isto é um teste, não um pagamento real. O valor é {amount}. Escolha um resultado.",
+    "testApprove": "Aprovar pagamento",
+    "testDecline": "Recusar pagamento",
+    "testCancel": "Cancelar pagamento",
+    "declined": "O pagamento foi recusado. Escolha outro método ou tente novamente.",
+    "canceled": "Pagamento cancelado. Não foi cobrado nenhum valor.",
+    "paymentError": "Não foi possível processar o pagamento. Tente novamente em breve.",
+    "amountChanged": "O valor mudou e o pagamento não foi feito. Verifique a sua encomenda.",
+    "paidAmount": "Valor pago: {amount}",
+    "paidMethod": "Método de pagamento: {method}",
+    "buyNowNotice": "Esta é uma compra imediata. O seu carrinho mantém-se igual."
   },
   "credits": {
     "metaTitle": "Créditos",
@@ -132,7 +149,7 @@
     "by": "Foto de {name}"
   },
   "footer": {
-    "tagline": "Uma loja de demonstração com sobremesas do mundo em 10 idiomas.",
+    "tagline": "A Dessert Land é uma loja de demonstração com sobremesas do mundo em 10 idiomas.",
     "credits": "Créditos de fotos e ícones"
   },
   "notFound": {

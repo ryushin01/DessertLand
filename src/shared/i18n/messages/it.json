@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "I dolci di tutto il mondo",
-    "description": "Un negozio globale che presenta e vende dolci da tutto il mondo, disponibile in 10 lingue."
+    "title": "La terra golosa dei dolci del mondo",
+    "description": "Dessert Land è un negozio globale che presenta e vende dolci da tutto il mondo, in 10 lingue."
   },
   "nav": {
     "skip": "Vai al contenuto",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Dolci dal mondo · 10 lingue",
-    "tagline": "Presentiamo e vendiamo dolci da ogni angolo del mondo, in 10 lingue.",
+    "tagline": "Una terra golosa dove si incontrano i dolci di tutto il mondo, presentati e venduti in 10 lingue.",
     "cta": "Scopri i dolci",
     "scroll": "Scorri in basso"
   },
@@ -60,7 +60,8 @@
     "increase": "Aumenta la quantità",
     "add": "Aggiungi al carrello",
     "related": "Potrebbe piacerti anche",
-    "notice": "Informazioni e prezzi sono esempi dimostrativi."
+    "notice": "Informazioni e prezzi sono esempi dimostrativi.",
+    "buyNow": "Acquista ora"
   },
   "allergens": {
     "milk": "Latte",
@@ -115,13 +116,29 @@
     "required": "Questo campo è obbligatorio.",
     "emailInvalid": "Inserisci un’e-mail come name@example.com.",
     "errorSummary": "Controlla i dati inseriti.",
-    "submit": "Conferma l’ordine demo",
-    "submitting": "Ordine in corso",
     "summary": "Riepilogo ordine",
     "empty": "Nessun dolce da ordinare.",
     "successTitle": "Il tuo ordine è completato",
     "successBody": "Numero d’ordine demo: {orderNo}. Nessun pagamento o consegna reale.",
-    "continue": "Continua a sfogliare"
+    "continue": "Continua a sfogliare",
+    "paymentLegend": "Metodo di pagamento",
+    "methodCard": "Carta di credito o debito",
+    "methodWallet": "Portafoglio digitale",
+    "methodBank": "Bonifico bancario",
+    "pay": "Paga {amount}",
+    "paying": "Pagamento in corso",
+    "testTitle": "Pagamento di prova",
+    "testBody": "Questa è una prova, non un pagamento reale. L’importo è {amount}. Scegli un esito.",
+    "testApprove": "Approva il pagamento",
+    "testDecline": "Rifiuta il pagamento",
+    "testCancel": "Annulla il pagamento",
+    "declined": "Il pagamento è stato rifiutato. Scegli un altro metodo o riprova.",
+    "canceled": "Pagamento annullato. Nessun addebito effettuato.",
+    "paymentError": "Impossibile elaborare il pagamento. Riprova tra poco.",
+    "amountChanged": "L’importo è cambiato, quindi non è stato effettuato alcun pagamento. Controlla l’ordine.",
+    "paidAmount": "Importo pagato: {amount}",
+    "paidMethod": "Metodo di pagamento: {method}",
+    "buyNowNotice": "Questo è un acquisto immediato. Il carrello resta invariato."
   },
   "credits": {
     "metaTitle": "Crediti",
@@ -132,7 +149,7 @@
     "by": "Foto di {name}"
   },
   "footer": {
-    "tagline": "Un negozio dimostrativo che presenta i dolci del mondo in 10 lingue.",
+    "tagline": "Dessert Land è un negozio dimostrativo che presenta i dolci del mondo in 10 lingue.",
     "credits": "Crediti di foto e icone"
   },
   "notFound": {

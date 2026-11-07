@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "汇聚全球甜点",
-    "description": "介绍并销售全球甜点的国际商店,支持 10 种语言。"
+    "title": "汇聚全球甜点的甜蜜国度",
+    "description": "Dessert Land 是介绍并销售全球甜点的国际商店,支持 10 种语言。"
   },
   "nav": {
     "skip": "跳到正文",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "全球甜点 · 10 种语言",
-    "tagline": "我们介绍并销售来自世界各地的甜点,提供包括中文在内的 10 种语言。",
+    "tagline": "世界各地甜点汇聚的甜蜜国度,以包括中文在内的 10 种语言介绍并销售。",
     "cta": "浏览甜点",
     "scroll": "向下滚动"
   },
@@ -60,7 +60,8 @@
     "increase": "增加数量",
     "add": "加入购物车",
     "related": "您可能还喜欢",
-    "notice": "商品信息和价格仅为演示示例。"
+    "notice": "商品信息和价格仅为演示示例。",
+    "buyNow": "立即购买"
   },
   "allergens": {
     "milk": "牛奶",
@@ -115,13 +116,29 @@
     "required": "此项为必填项。",
     "emailInvalid": "请按 name@example.com 的格式输入。",
     "errorSummary": "请检查您输入的信息。",
-    "submit": "提交演示订单",
-    "submitting": "正在提交",
     "summary": "订单摘要",
     "empty": "没有可结算的甜点。",
     "successTitle": "订单已完成",
     "successBody": "演示订单号:{orderNo}。不会产生真实付款或配送。",
-    "continue": "继续浏览"
+    "continue": "继续浏览",
+    "paymentLegend": "支付方式",
+    "methodCard": "信用卡或借记卡",
+    "methodWallet": "电子钱包",
+    "methodBank": "银行转账",
+    "pay": "支付 {amount}",
+    "paying": "正在处理付款",
+    "testTitle": "测试付款",
+    "testBody": "这是测试,不是真实付款。金额为 {amount}。请选择结果。",
+    "testApprove": "批准付款",
+    "testDecline": "拒绝付款",
+    "testCancel": "取消付款",
+    "declined": "付款失败。请选择其他支付方式或重试。",
+    "canceled": "已取消付款,未产生任何费用。",
+    "paymentError": "无法处理付款,请稍后重试。",
+    "amountChanged": "金额已变更,未进行付款。请检查订单。",
+    "paidAmount": "付款金额:{amount}",
+    "paidMethod": "支付方式:{method}",
+    "buyNowNotice": "这是立即购买订单,购物车保持不变。"
   },
   "credits": {
     "metaTitle": "版权信息",
@@ -132,7 +149,7 @@
     "by": "摄影:{name}"
   },
   "footer": {
-    "tagline": "以 10 种语言介绍全球甜点的演示商店。",
+    "tagline": "Dessert Land 是以 10 种语言介绍全球甜点的演示商店。",
     "credits": "图片与图标来源"
   },
   "notFound": {

@@ -1,12 +1,14 @@
 "use client";
 
+import { useSetAtom } from "jotai";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
+import { cartLinesAtom, type CartLine } from "@/entities/cart";
 import { formatMoney } from "@/entities/product";
-import { useCartSummary } from "@/features/cart-summary";
-import { CheckoutForm } from "@/features/checkout-form";
+import { summarizeCart, useCartSummary } from "@/features/cart-summary";
+import { CheckoutForm, type PaidOrder } from "@/features/checkout-form";
 import { Link } from "@/shared/i18n";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
@@ -31,6 +33,7 @@ const demo = css({
   marginBlockEnd: "32px",
   lineHeight: "1.5",
 });
+const buyNowNote = css({ marginBlockEnd: "24px", color: "caramel" });
 const columns = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", md: "minmax(0, 3fr) minmax(0, 2fr)" },
@@ -49,26 +52,44 @@ const total = css({
   fontWeight: "600",
 });
 
-export function CheckoutView() {
+const METHOD_LABELS = { card: "methodCard", wallet: "methodWallet", bank: "methodBank" } as const;
+
+export function CheckoutView({ buyNow }: { buyNow?: CartLine }) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
   const tProducts = useTranslations("products");
   const locale = useLocale();
-  const summary = useCartSummary();
-  const [orderNo, setOrderNo] = useState<string | null>(null);
+  const cartSummary = useCartSummary();
+  const setCart = useSetAtom(cartLinesAtom);
+  const buyNowSummary = useMemo(
+    () => (buyNow ? summarizeCart([buyNow], locale) : null),
+    [buyNow, locale],
+  );
+  const summary = buyNowSummary ?? cartSummary;
+  const [order, setOrder] = useState<PaidOrder | null>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (orderNo) successRef.current?.focus();
-  }, [orderNo]);
+    if (order) successRef.current?.focus();
+  }, [order]);
 
-  if (orderNo) {
+  const onPaid = (paid: PaidOrder) => {
+    setOrder(paid);
+    // 바로 구매는 장바구니를 건드리지 않습니다.
+    if (!buyNow) setCart([]);
+  };
+
+  if (order) {
     return (
       <div className={page}>
         <h1 ref={successRef} tabIndex={-1} className={title}>
           {t("successTitle")}
         </h1>
-        <p className={demo}>{t("successBody", { orderNo })}</p>
+        <div className={demo}>
+          <p>{t("successBody", { orderNo: order.orderNo })}</p>
+          <p>{t("paidAmount", { amount: formatMoney(order.total, locale) })}</p>
+          <p>{t("paidMethod", { method: t(METHOD_LABELS[order.method]) })}</p>
+        </div>
         <Link href="/shop" className={buttonRecipe()}>
           {t("continue")}
           <Icon name="arrow-right" />
@@ -81,6 +102,7 @@ export function CheckoutView() {
     <div className={page}>
       <h1 className={title}>{t("title")}</h1>
       <p className={demo}>{t("demo")}</p>
+      {buyNow ? <p className={buyNowNote}>{t("buyNowNotice")}</p> : null}
       {summary.lines.length === 0 ? (
         <>
           <p className={css({ marginBlockEnd: "20px" })}>{t("empty")}</p>
@@ -91,7 +113,11 @@ export function CheckoutView() {
         </>
       ) : (
         <div className={columns}>
-          <CheckoutForm onComplete={setOrderNo} />
+          <CheckoutForm
+            items={summary.lines.map(({ product, quantity }) => ({ slug: product.slug, quantity }))}
+            total={summary.total}
+            onPaid={onPaid}
+          />
           <section aria-labelledby="summary-title">
             <h2 id="summary-title" className={summaryTitle}>
               {t("summary")}

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Postres de todo el mundo",
-    "description": "Una tienda global que presenta y vende postres de todo el mundo, disponible en 10 idiomas."
+    "title": "La dulce tierra de los postres del mundo",
+    "description": "Dessert Land es una tienda global que presenta y vende postres de todo el mundo, en 10 idiomas."
   },
   "nav": {
     "skip": "Saltar al contenido",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Postres del mundo · 10 idiomas",
-    "tagline": "Presentamos y vendemos postres de todos los rincones del mundo, en 10 idiomas.",
+    "tagline": "Una dulce tierra donde se reúnen postres de todo el mundo, presentados y vendidos en 10 idiomas.",
     "cta": "Explorar postres",
     "scroll": "Desplázate"
   },
@@ -60,7 +60,8 @@
     "increase": "Aumentar cantidad",
     "add": "Añadir a la cesta",
     "related": "También te puede gustar",
-    "notice": "La información y los precios son ejemplos de demostración."
+    "notice": "La información y los precios son ejemplos de demostración.",
+    "buyNow": "Comprar ahora"
   },
   "allergens": {
     "milk": "Leche",
@@ -115,13 +116,29 @@
     "required": "Este campo es obligatorio.",
     "emailInvalid": "Introduce un correo como name@example.com.",
     "errorSummary": "Revisa tus datos.",
-    "submit": "Realizar pedido de prueba",
-    "submitting": "Procesando pedido",
     "summary": "Resumen del pedido",
     "empty": "No hay postres para pedir.",
     "successTitle": "Tu pedido se ha completado",
     "successBody": "Número de pedido de prueba: {orderNo}. No hay pago ni entrega reales.",
-    "continue": "Seguir viendo"
+    "continue": "Seguir viendo",
+    "paymentLegend": "Método de pago",
+    "methodCard": "Tarjeta de crédito o débito",
+    "methodWallet": "Monedero digital",
+    "methodBank": "Transferencia bancaria",
+    "pay": "Pagar {amount}",
+    "paying": "Procesando el pago",
+    "testTitle": "Pago de prueba",
+    "testBody": "Es una prueba, no un pago real. El importe es {amount}. Elige un resultado.",
+    "testApprove": "Aprobar el pago",
+    "testDecline": "Rechazar el pago",
+    "testCancel": "Cancelar el pago",
+    "declined": "El pago se ha rechazado. Elige otro método o inténtalo de nuevo.",
+    "canceled": "Pago cancelado. No se ha realizado ningún cargo.",
+    "paymentError": "No se ha podido procesar el pago. Inténtalo de nuevo en breve.",
+    "amountChanged": "El importe ha cambiado y no se ha realizado el pago. Revisa tu pedido.",
+    "paidAmount": "Importe pagado: {amount}",
+    "paidMethod": "Método de pago: {method}",
+    "buyNowNotice": "Es una compra inmediata. Tu cesta no cambia."
   },
   "credits": {
     "metaTitle": "Créditos",
@@ -132,7 +149,7 @@
     "by": "Foto de {name}"
   },
   "footer": {
-    "tagline": "Una tienda de demostración con postres del mundo en 10 idiomas.",
+    "tagline": "Dessert Land es una tienda de demostración con postres del mundo en 10 idiomas.",
     "credits": "Créditos de fotos e iconos"
   },
   "notFound": {

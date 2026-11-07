@@ -102,7 +102,13 @@ test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await expect(page.getByRole("status").filter({ hasText: "2개의 디저트" })).toBeVisible();
 });
 
-test("장바구니에 담고 주문을 마칩니다", async ({ page }) => {
+async function fillCheckout(page: Page) {
+  await page.getByLabel("받는 분 이름").fill("홍길동");
+  await page.getByLabel("이메일").fill("demo@example.com");
+  await page.getByLabel("배송 주소").fill("서울시 가상구 예시로 1");
+}
+
+test("장바구니에 담아 결제까지 마치면 장바구니가 비워집니다", async ({ page }) => {
   await page.goto("/ko/shop/baklava");
   await page.getByRole("button", { name: "수량 늘리기" }).click();
   await page.getByRole("button", { name: "장바구니에 담기" }).click();
@@ -115,18 +121,128 @@ test("장바구니에 담고 주문을 마칩니다", async ({ page }) => {
   await dialog.getByRole("link", { name: "주문하기" }).click();
   await expect(page).toHaveURL(/\/ko\/checkout$/);
 
-  await page.getByRole("button", { name: "데모 주문 완료하기" }).click();
+  const pay = page.getByRole("button", { name: /결제하기$/ });
+  await expect(pay).toContainText("23,100");
+  await pay.click();
   await expect(page.getByText("입력 내용을 확인해 주세요.")).toBeVisible();
   await expect(page.getByLabel("받는 분 이름")).toBeFocused();
   await scan(page);
 
-  await page.getByLabel("받는 분 이름").fill("홍길동");
-  await page.getByLabel("이메일").fill("demo@example.com");
-  await page.getByLabel("배송 주소").fill("서울시 가상구 예시로 1");
-  await page.getByRole("button", { name: "데모 주문 완료하기" }).click();
+  await fillCheckout(page);
+  await page.getByRole("radio", { name: "간편결제" }).check();
+  await pay.click();
+  const paymentDialog = page.getByRole("dialog", { name: "테스트 결제창" });
+  await expect(paymentDialog).toContainText("23,100");
+  await scan(page);
+  await paymentDialog.getByRole("button", { name: "결제 승인" }).click();
 
   await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeFocused();
+  await expect(page.locator("main")).toContainText("결제 금액: ₩23,100");
+  await expect(page.locator("main")).toContainText("결제 수단: 간편결제");
   await expect(page.getByRole("button", { name: "장바구니", exact: true })).toBeVisible();
+});
+
+test("바로 구매는 그 상품만 결제하고 장바구니를 유지합니다", async ({ page }) => {
+  await page.goto("/ko/shop/tiramisu");
+  await page.getByRole("button", { name: "장바구니에 담기" }).click();
+  await page.getByRole("button", { name: "장바구니 닫기" }).click();
+
+  await page.goto("/ko/shop/baklava");
+  await page.getByRole("button", { name: "수량 늘리기" }).click();
+  await page.getByRole("link", { name: "바로 구매" }).click();
+  await expect(page).toHaveURL(/\/ko\/checkout\?buy=baklava&qty=2$/);
+  await expect(page.getByText("바로 구매 주문입니다.")).toBeVisible();
+  const summary = page.getByRole("region", { name: "주문 내역" });
+  await expect(summary).toContainText("바클라바 × 2");
+  await expect(summary).not.toContainText("티라미수");
+
+  await fillCheckout(page);
+  await page.getByRole("button", { name: /결제하기$/ }).click();
+  await page.getByRole("button", { name: "결제 승인" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
+});
+
+test("결제 실패와 취소에도 입력과 장바구니를 유지합니다", async ({ page }) => {
+  await page.goto("/ko/shop/baklava");
+  await page.getByRole("button", { name: "장바구니에 담기" }).click();
+  await page.getByRole("link", { name: "주문하기" }).click();
+  await fillCheckout(page);
+  const pay = page.getByRole("button", { name: /결제하기$/ });
+
+  await pay.click();
+  await page.getByRole("button", { name: "결제 실패" }).click();
+  await expect(page.getByText("결제에 실패했습니다.")).toBeVisible();
+  await expect(pay).toBeFocused();
+
+  await pay.click();
+  await page.getByRole("button", { name: "결제 취소" }).click();
+  await expect(page.getByText("결제를 취소했습니다.")).toBeVisible();
+
+  await pay.click();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog", { name: "테스트 결제창" })).toBeHidden();
+
+  await expect(page.getByLabel("받는 분 이름")).toHaveValue("홍길동");
+  await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
+});
+
+test("승인 요청이 끝나기 전에는 다시 결제할 수 없습니다", async ({ page }) => {
+  let calls = 0;
+  await page.route("**/api/payments", async (route) => {
+    calls += 1;
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await route.continue();
+  });
+  await page.goto("/ko/shop/baklava");
+  await page.getByRole("link", { name: "바로 구매" }).click();
+  await fillCheckout(page);
+  await page.getByRole("button", { name: /결제하기$/ }).click();
+  await page.getByRole("button", { name: "결제 승인" }).click();
+  await expect(page.getByRole("button", { name: "결제 처리 중" })).toBeDisabled();
+  await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeVisible();
+  expect(calls).toBe(1);
+});
+
+test("서버 오류가 나면 안내하고 다시 시도할 수 있습니다", async ({ page }) => {
+  await page.route("**/api/payments", (route) => route.abort());
+  await page.goto("/ko/shop/baklava");
+  await page.getByRole("link", { name: "바로 구매" }).click();
+  await fillCheckout(page);
+  await page.getByRole("button", { name: /결제하기$/ }).click();
+  await page.getByRole("button", { name: "결제 승인" }).click();
+  await expect(page.getByText("결제를 처리하지 못했습니다.")).toBeVisible();
+  await expect(page.getByRole("button", { name: /결제하기$/ })).toBeEnabled();
+});
+
+test.describe("결제 API", () => {
+  const body = {
+    items: [{ slug: "baklava", quantity: 1 }],
+    method: "card",
+    locale: "en",
+    expectedTotal: 15,
+    outcome: "approve",
+  };
+
+  test("서버가 계산한 금액으로 승인합니다", async ({ request }) => {
+    const response = await request.post("/api/payments", { data: body });
+    expect(response.status()).toBe(200);
+    expect(await response.json()).toMatchObject({ status: "approved", total: 15 });
+  });
+
+  test("조작한 금액은 승인하지 않습니다", async ({ request }) => {
+    const response = await request.post("/api/payments", { data: { ...body, expectedTotal: 1 } });
+    expect(response.status()).toBe(409);
+    expect(await response.json()).toEqual({ status: "amount_mismatch", total: 15 });
+  });
+
+  test("잘못된 본문은 거절합니다", async ({ request }) => {
+    const response = await request.post("/api/payments", {
+      headers: { "content-type": "application/json" },
+      data: "not json",
+    });
+    expect(response.status()).toBe(400);
+  });
 });
 
 test("키보드로 본문 바로가기와 장바구니를 쓸 수 있습니다", async ({ page }) => {
