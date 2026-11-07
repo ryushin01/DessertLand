@@ -225,5 +225,34 @@
       "name": "广式蛋挞",
       "description": "伴随广东茶文化成长的点心,以丝滑蛋奶馅著称。"
     }
+  },
+  "advisor": {
+    "title": "哪款甜点适合您?",
+    "lede": "告诉我们您的心情或口味,我们将从世界各地的甜点中为您挑选。",
+    "label": "描述您想要的甜点",
+    "placeholder": "例如:配咖啡、不太甜的甜点",
+    "hint": "最多可输入 {max} 个字符。",
+    "chipsLabel": "选择口味(可选)",
+    "submit": "获取推荐",
+    "loading": "正在挑选甜点",
+    "empty": "请描述您想要的甜点,或至少选择一种口味。",
+    "error": "无法加载推荐,请重试。",
+    "limited": "请求过多,请一分钟后重试。",
+    "resultCount": "找到 {count} 款推荐甜点。",
+    "sourceAi": "Claude AI 推荐",
+    "sourceBasic": "基础推荐(未使用 AI)",
+    "basicIntro": "根据您选择的口味挑选。",
+    "add": "加入",
+    "notice": "推荐仅供参考。如有过敏,请务必查看商品的过敏原信息。您输入的内容将发送至 AI 服务以生成推荐,请勿填写个人信息。",
+    "shopLink": "获取符合口味的推荐",
+    "chips": {
+      "fruity": "清新果香",
+      "chocolate": "浓郁巧克力",
+      "coffee": "咖啡风味",
+      "nutty": "香脆坚果",
+      "creamy": "柔滑奶油",
+      "light": "口感轻盈",
+      "nutFree": "不含坚果"
+    }
   }
 }

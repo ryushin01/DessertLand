@@ -225,5 +225,34 @@
       "name": "Tartaleta cantonesa",
       "description": "Nacida con la cultura cantonesa del té, destaca por su crema sedosa."
     }
+  },
+  "advisor": {
+    "title": "¿Qué postre te apetece?",
+    "lede": "Cuéntanos tu estado de ánimo o tus gustos y elegiremos entre postres de todo el mundo.",
+    "label": "Describe lo que te gustaría",
+    "placeholder": "p. ej.: algo no muy dulce para tomar con café",
+    "hint": "Hasta {max} caracteres.",
+    "chipsLabel": "Elige tus gustos (opcional)",
+    "submit": "Ver recomendaciones",
+    "loading": "Eligiendo postres",
+    "empty": "Describe lo que te gustaría o elige al menos un gusto.",
+    "error": "No se han podido cargar las recomendaciones. Inténtalo de nuevo.",
+    "limited": "Demasiadas solicitudes. Inténtalo de nuevo en un minuto.",
+    "resultCount": "Se han encontrado {count} postres recomendados.",
+    "sourceAi": "Recomendado por Claude AI",
+    "sourceBasic": "Selección básica (sin IA)",
+    "basicIntro": "Esto es lo que encaja con tu selección.",
+    "add": "Añadir",
+    "notice": "Las recomendaciones son orientativas. Si tienes alergias, comprueba siempre los alérgenos del producto. Tu texto se envía a un servicio de IA, así que no incluyas datos personales.",
+    "shopLink": "Ver recomendaciones según tus gustos",
+    "chips": {
+      "fruity": "Fresco y afrutado",
+      "chocolate": "Chocolate intenso",
+      "coffee": "Café",
+      "nutty": "Frutos secos",
+      "creamy": "Cremoso",
+      "light": "Ligero",
+      "nutFree": "Sin frutos secos"
+    }
   }
 }

@@ -28,6 +28,13 @@ const title = css({
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
+const advisorLink = css({
+  display: "inline-block",
+  paddingBlock: "8px",
+  textDecoration: "underline",
+  textUnderlineOffset: "4px",
+  _hover: { color: "caramel" },
+});
 const filters = css({ display: "flex", flexWrap: "wrap", gap: "8px" });
 const filter = css({
   display: "inline-flex",
@@ -60,6 +67,7 @@ export default async function ShopPage({ params, searchParams }: ShopPageProps) 
 function ShopContent({ active }: { active?: Category }) {
   const t = useTranslations("shop");
   const tCategories = useTranslations("categories");
+  const tAdvisor = useTranslations("advisor");
   const products = getProductsByCategory(active);
 
   return (
@@ -93,6 +101,11 @@ function ShopContent({ active }: { active?: Category }) {
           </ul>
         </nav>
         <p role="status">{t("results", { count: products.length })}</p>
+        <p>
+          <Link href="/#advisor" className={advisorLink}>
+            {tAdvisor("shopLink")}
+          </Link>
+        </p>
       </div>
       <ProductScroller key={active ?? "all"} products={products} />
     </>

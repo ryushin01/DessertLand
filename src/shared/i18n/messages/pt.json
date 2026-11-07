@@ -225,5 +225,34 @@
       "name": "Tartelete cantonesa",
       "description": "Nascida com a cultura cantonesa do chá, destaca-se pelo creme sedoso."
     }
+  },
+  "advisor": {
+    "title": "Que sobremesa lhe apetece?",
+    "lede": "Diga-nos o seu humor ou gosto, e escolhemos entre sobremesas de todo o mundo.",
+    "label": "Descreva o que gostaria",
+    "placeholder": "ex.: algo pouco doce para acompanhar o café",
+    "hint": "Até {max} caracteres.",
+    "chipsLabel": "Escolha os seus gostos (opcional)",
+    "submit": "Ver recomendações",
+    "loading": "A escolher sobremesas",
+    "empty": "Descreva o que gostaria ou escolha pelo menos um gosto.",
+    "error": "Não foi possível carregar as recomendações. Tente novamente.",
+    "limited": "Demasiados pedidos. Tente novamente dentro de um minuto.",
+    "resultCount": "Encontradas {count} sobremesas recomendadas.",
+    "sourceAi": "Recomendado pela Claude AI",
+    "sourceBasic": "Seleção básica (sem IA)",
+    "basicIntro": "Eis o que corresponde às suas escolhas.",
+    "add": "Adicionar",
+    "notice": "As recomendações são apenas indicativas. Se tiver alergias, confirme sempre os alergénios do produto. O seu texto é enviado para um serviço de IA, por isso não inclua dados pessoais.",
+    "shopLink": "Ver recomendações ao seu gosto",
+    "chips": {
+      "fruity": "Fresco e frutado",
+      "chocolate": "Chocolate intenso",
+      "coffee": "Café",
+      "nutty": "Frutos secos",
+      "creamy": "Cremoso",
+      "light": "Leve",
+      "nutFree": "Sem frutos secos"
+    }
   }
 }

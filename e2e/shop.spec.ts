@@ -11,7 +11,9 @@ async function expectNoHorizontalOverflow(page: Page) {
 }
 
 async function scan(page: Page) {
-  const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
   expect(results.violations.map(({ id, nodes }) => `${id}: ${nodes[0]?.target}`)).toEqual([]);
 }
 
@@ -108,7 +110,10 @@ test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", as
   await expect(page.getByRole("region", { name: "Order summary" })).toContainText("Baklava × 2");
 });
 
-test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소를 씁니다", async ({ page, isMobile }) => {
+test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소를 씁니다", async ({
+  page,
+  isMobile,
+}) => {
   test.skip(isMobile, "키보드 초점 이동은 데스크톱에서 확인합니다");
   await page.goto("/ko/shop");
   const summary = page.getByText("KO", { exact: true });
@@ -116,7 +121,9 @@ test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소
   const english = page.getByRole("banner").getByRole("link", { name: "English" });
   await expect(english).toBeVisible();
   await english.focus();
-  const muffin = page.getByRole("navigation", { name: "카테고리 선택" }).getByRole("link", { name: "머핀" });
+  const muffin = page
+    .getByRole("navigation", { name: "카테고리 선택" })
+    .getByRole("link", { name: "머핀" });
   await muffin.focus();
   await expect(english).toBeHidden();
   await page.keyboard.press("Enter");
@@ -149,9 +156,15 @@ test("검색 엔진과 보안 정보를 제공합니다", async ({ page, request
   expect(await (await request.get("/robots.txt")).text()).toContain("Disallow: /api/");
 
   await page.goto("/ja/shop/baklava");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/ja\/shop\/baklava$/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    /\/ja\/shop\/baklava$/,
+  );
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(11);
-  await expect(page.locator('meta[property="og:image"]').first()).toHaveAttribute("content", /og-image\.jpg/);
+  await expect(page.locator('meta[property="og:image"]').first()).toHaveAttribute(
+    "content",
+    /og-image\.jpg/,
+  );
   expect((await request.get("/og-image.jpg")).status()).toBe(200);
 });
 
@@ -167,7 +180,10 @@ test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
 
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await page.goto("/ko/shop");
-  await page.getByRole("navigation", { name: "카테고리 선택" }).getByRole("link", { name: "머핀" }).click();
+  await page
+    .getByRole("navigation", { name: "카테고리 선택" })
+    .getByRole("link", { name: "머핀" })
+    .click();
   await expect(page).toHaveURL(/category=muffin/);
   await expect(page.getByRole("status").filter({ hasText: "2개의 디저트" })).toBeVisible();
 });
@@ -206,7 +222,9 @@ test("장바구니에 담아 결제까지 마치면 장바구니가 비워집니
   await scan(page);
   await paymentDialog.getByRole("button", { name: "결제 승인" }).click();
 
-  await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeFocused();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" }),
+  ).toBeFocused();
   await expect(page.locator("main")).toContainText("결제 금액: ₩23,100");
   await expect(page.locator("main")).toContainText("결제 수단: 간편결제");
   await expect(page.getByRole("button", { name: "장바구니", exact: true })).toBeVisible();
@@ -229,7 +247,9 @@ test("바로 구매는 그 상품만 결제하고 장바구니를 유지합니�
   await fillCheckout(page);
   await page.getByRole("button", { name: /결제하기$/ }).click();
   await page.getByRole("button", { name: "결제 승인" }).click();
-  await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" }),
+  ).toBeVisible();
   await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
 });
 
@@ -315,9 +335,15 @@ test.describe("낮은 화면의 모달", () => {
 
 test("상품 공유 미리보기에 상품 정보가 나옵니다", async ({ page }) => {
   await page.goto("/en/shop/baklava");
-  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Baklava | Dessert Land");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    "Baklava | Dessert Land",
+  );
   await page.goto("/en/shop");
-  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Desserts | Dessert Land");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    "Desserts | Dessert Land",
+  );
 });
 
 test("승인 요청이 끝나기 전에는 다시 결제할 수 없습니다", async ({ page }) => {
@@ -333,7 +359,9 @@ test("승인 요청이 끝나기 전에는 다시 결제할 수 없습니다", a
   await page.getByRole("button", { name: /결제하기$/ }).click();
   await page.getByRole("button", { name: "결제 승인" }).click();
   await expect(page.getByRole("button", { name: "결제 처리 중" })).toBeDisabled();
-  await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" }),
+  ).toBeVisible();
   expect(calls).toBe(1);
 });
 
@@ -351,7 +379,12 @@ test("서버 오류가 나면 안내하고 다시 시도할 수 있습니다", a
 test.describe("Stripe 결제 경로", () => {
   test("키가 없으면 세션을 만들지 않습니다", async ({ request }) => {
     const response = await request.post("/api/checkout-session", {
-      data: { items: [{ slug: "baklava", quantity: 1 }], locale: "en", expectedTotal: 15, source: "cart" },
+      data: {
+        items: [{ slug: "baklava", quantity: 1 }],
+        locale: "en",
+        expectedTotal: 15,
+        source: "cart",
+      },
     });
     expect(response.status()).toBe(503);
     expect(await response.json()).toEqual({ status: "disabled" });
@@ -359,8 +392,96 @@ test.describe("Stripe 결제 경로", () => {
 
   test("확인되지 않은 세션은 주문 완료로 보여 주지 않습니다", async ({ page }) => {
     await page.goto("/ko/checkout/complete?session_id=cs_test_forged");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("결제를 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      "결제를 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    );
     await expect(page.locator("main")).not.toContainText("주문이 완료되었습니다");
+  });
+});
+
+test.describe("디저트 추천", () => {
+  test("키가 없으면 기본 추천임을 밝히고 조건을 지킵니다", async ({ page }) => {
+    await page.goto("/ko#advisor");
+    const advisor = page.locator("#advisor");
+    await advisor.getByRole("button", { name: "고소한 견과" }).click();
+    await advisor.getByRole("button", { name: "견과류 빼고" }).click();
+    await expect(advisor.getByRole("button", { name: "견과류 빼고" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await advisor.getByRole("button", { name: "추천받기" }).click();
+    const results = page.getByTestId("advisor-results");
+    await expect(results).toContainText("기본 추천 (AI 미사용)");
+    await expect(results.getByRole("listitem")).toHaveCount(3);
+    await expect(results).not.toContainText("바클라바");
+    await expect(page.getByRole("status").filter({ hasText: "3개를 찾았습니다" })).toBeAttached();
+    await scan(page);
+  });
+
+  test("아무것도 입력하지 않으면 안내합니다", async ({ page }) => {
+    await page.goto("/ko#advisor");
+    await page.locator("#advisor").getByRole("button", { name: "추천받기" }).click();
+    await expect(page.getByText("원하는 디저트를 적거나")).toBeVisible();
+  });
+
+  test("추천 결과를 장바구니에 담을 수 있습니다", async ({ page }) => {
+    await page.goto("/en#advisor");
+    const advisor = page.locator("#advisor");
+    await advisor
+      .getByLabel("Describe what you’d like")
+      .fill("I would love a tiramisu with coffee");
+    await advisor.getByRole("button", { name: "Get recommendations" }).click();
+    const results = page.getByTestId("advisor-results");
+    await expect(results.getByRole("link", { name: "Tiramisu" })).toBeVisible();
+    await results.getByRole("button", { name: "Add Tiramisu to cart" }).click();
+    await expect(page.getByRole("dialog", { name: "Your cart" })).toContainText("Tiramisu");
+  });
+
+  test("요청이 많으면 잠시 뒤 다시 시도하라고 안내합니다", async ({ page }) => {
+    await page.route("**/api/recommend", (route) =>
+      route.fulfill({ status: 429, json: { type: "error" } }),
+    );
+    await page.goto("/ko#advisor");
+    const advisor = page.locator("#advisor");
+    await advisor.getByRole("button", { name: "커피 풍미" }).click();
+    await advisor.getByRole("button", { name: "추천받기" }).click();
+    await expect(page.getByText("요청이 너무 많습니다")).toBeVisible();
+    await expect(advisor.getByRole("button", { name: "추천받기" })).toBeEnabled();
+  });
+
+  test("스트리밍 응답을 받으면서 결과를 보여 줍니다", async ({ page }) => {
+    const update = JSON.stringify({ type: "update", intro: "상큼한", picks: [] });
+    const done = JSON.stringify({
+      type: "done",
+      source: "ai",
+      intro: "상큼한 디저트를 골랐어요.",
+      picks: [{ slug: "fraisier", reason: "딸기가 가득합니다." }],
+    });
+    await page.route("**/api/recommend", (route) =>
+      route.fulfill({ contentType: "application/x-ndjson", body: `${update}\n${done}\n` }),
+    );
+    await page.goto("/ko#advisor");
+    const advisor = page.locator("#advisor");
+    await advisor.getByLabel("원하는 디저트 설명").fill("상큼한 것");
+    await advisor.getByRole("button", { name: "추천받기" }).click();
+    const results = page.getByTestId("advisor-results");
+    await expect(results).toContainText("Claude AI 추천");
+    await expect(results).toContainText("딸기가 가득합니다.");
+  });
+
+  test("추천 API는 잘못된 입력을 거절합니다", async ({ request }) => {
+    const empty = await request.post("/api/recommend", {
+      data: { query: " ", chips: [], locale: "ko" },
+    });
+    expect(empty.status()).toBe(400);
+    const long = await request.post("/api/recommend", {
+      data: { query: "가".repeat(201), chips: [], locale: "ko" },
+    });
+    expect(long.status()).toBe(400);
+    const locale = await request.post("/api/recommend", {
+      data: { query: "a", chips: [], locale: "xx" },
+    });
+    expect(locale.status()).toBe(400);
   });
 });
 

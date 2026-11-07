@@ -225,5 +225,34 @@
       "name": "Kanton usulü yumurtalı tart",
       "description": "Kanton çay kültürüyle büyüyen, ipeksi yumurta kremasıyla bilinen atıştırmalık."
     }
+  },
+  "advisor": {
+    "title": "Hangi tatlı size göre?",
+    "lede": "Ruh halinizi ya da damak zevkinizi yazın, dünya tatlıları arasından seçelim.",
+    "label": "İstediğiniz tatlıyı anlatın",
+    "placeholder": "örn. kahvenin yanına çok tatlı olmayan bir şey",
+    "hint": "En fazla {max} karakter.",
+    "chipsLabel": "Tercihlerinizi seçin (isteğe bağlı)",
+    "submit": "Öneri al",
+    "loading": "Tatlılar seçiliyor",
+    "empty": "İstediğinizi yazın ya da en az bir tercih seçin.",
+    "error": "Öneriler yüklenemedi. Lütfen yeniden deneyin.",
+    "limited": "Çok fazla istek var. Lütfen bir dakika sonra yeniden deneyin.",
+    "resultCount": "{count} önerilen tatlı bulundu.",
+    "sourceAi": "Claude AI önerisi",
+    "sourceBasic": "Temel seçim (yapay zekâ yok)",
+    "basicIntro": "Seçimlerinize uygun tatlılar.",
+    "add": "Ekle",
+    "notice": "Öneriler yalnızca bilgi amaçlıdır. Alerjiniz varsa ürünün alerjen bilgilerini mutlaka kontrol edin. Metniniz bir yapay zekâ hizmetine gönderilir, bu yüzden kişisel bilgi yazmayın.",
+    "shopLink": "Damak zevkinize göre öneri alın",
+    "chips": {
+      "fruity": "Taze ve meyveli",
+      "chocolate": "Yoğun çikolata",
+      "coffee": "Kahve",
+      "nutty": "Fındıklı",
+      "creamy": "Kremamsı",
+      "light": "Hafif",
+      "nutFree": "Kuruyemişsiz"
+    }
   }
 }

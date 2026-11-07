@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { localeAlternates, siteOpenGraph } from "@/shared/i18n";
 import { CategoryShowcase } from "@/widgets/category-showcase";
+import { DessertAdvisor } from "@/widgets/dessert-advisor";
 import { Hero } from "@/widgets/hero";
 import { IntroCurtain } from "@/widgets/intro-curtain";
 import { Manifesto } from "@/widgets/manifesto";
@@ -36,6 +37,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <CategoryShowcase />
       <SliceZoom />
       <WorldTour />
+      <DessertAdvisor />
       <SweetTrail />
     </>
   );
