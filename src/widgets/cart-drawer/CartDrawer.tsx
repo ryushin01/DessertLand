@@ -126,7 +126,7 @@ export function CartDrawer() {
             <Icon name="cross" />
           </button>
         </div>
-        <div className={body}>
+        <div className={body} data-lenis-prevent>
           {summary.lines.length === 0 ? (
             <p className={empty}>{t("empty")}</p>
           ) : (

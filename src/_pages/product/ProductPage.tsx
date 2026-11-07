@@ -41,9 +41,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (!product) return {};
   const t = await getTranslations({ locale, namespace: "products" });
   const key = slug as Parameters<typeof t>[0] extends never ? never : string;
+  const title = `${t(`${key}.name` as Parameters<typeof t>[0])} | Dessert Land`;
+  const description = t(`${key}.description` as Parameters<typeof t>[0]);
   return {
-    title: `${t(`${key}.name` as Parameters<typeof t>[0])} | Dessert Land`,
-    description: t(`${key}.description` as Parameters<typeof t>[0]),
+    title,
+    description,
+    openGraph: { type: "website", siteName: "Dessert Land", title, description },
   };
 }
 

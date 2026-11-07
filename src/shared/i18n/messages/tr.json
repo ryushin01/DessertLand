@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Dünyanın dört bir yanından tatlılar",
-    "description": "Dünyanın dört bir yanından tatlıları tanıtan ve satan, 10 dilde hizmet veren küresel mağaza."
+    "title": "Dünya tatlılarının buluştuğu tatlı diyar",
+    "description": "Dessert Land, dünyanın dört bir yanından tatlıları tanıtan ve satan, 10 dilde hizmet veren küresel bir mağazadır."
   },
   "nav": {
     "skip": "İçeriğe geç",
@@ -16,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Dünya tatlıları · 10 dil",
-    "tagline": "Dünyanın her köşesinden tatlıları 10 dilde tanıtıyor ve satıyoruz.",
+    "tagline": "Dünyanın her köşesinden tatlıların buluştuğu tatlı bir diyar; 10 dilde tanıtıyor ve satıyoruz.",
     "cta": "Tatlıları keşfet",
     "scroll": "Aşağı kaydırın"
   },
@@ -60,7 +60,8 @@
     "increase": "Adedi artır",
     "add": "Sepete ekle",
     "related": "Bunları da beğenebilirsiniz",
-    "notice": "Ürün bilgileri ve fiyatlar demo örnekleridir."
+    "notice": "Ürün bilgileri ve fiyatlar demo örnekleridir.",
+    "buyNow": "Hemen satın al"
   },
   "allergens": {
     "milk": "Süt",
@@ -115,13 +116,29 @@
     "required": "Bu alan zorunludur.",
     "emailInvalid": "name@example.com biçiminde bir e-posta girin.",
     "errorSummary": "Lütfen bilgilerinizi kontrol edin.",
-    "submit": "Demo siparişi ver",
-    "submitting": "Sipariş işleniyor",
     "summary": "Sipariş özeti",
     "empty": "Sipariş edilecek tatlı yok.",
     "successTitle": "Siparişiniz tamamlandı",
     "successBody": "Demo sipariş numarası: {orderNo}. Gerçek ödeme veya teslimat yapılmaz.",
-    "continue": "Göz atmaya devam et"
+    "continue": "Göz atmaya devam et",
+    "paymentLegend": "Ödeme yöntemi",
+    "methodCard": "Kredi veya banka kartı",
+    "methodWallet": "Dijital cüzdan",
+    "methodBank": "Banka havalesi",
+    "pay": "{amount} öde",
+    "paying": "Ödeme işleniyor",
+    "testTitle": "Test ödemesi",
+    "testBody": "Bu gerçek bir ödeme değil, testtir. Tutar: {amount}. Bir sonuç seçin.",
+    "testApprove": "Ödemeyi onayla",
+    "testDecline": "Ödemeyi reddet",
+    "testCancel": "Ödemeyi iptal et",
+    "declined": "Ödeme reddedildi. Başka bir yöntem seçin veya yeniden deneyin.",
+    "canceled": "Ödeme iptal edildi. Herhangi bir ücret alınmadı.",
+    "paymentError": "Ödeme işlenemedi. Lütfen kısa süre sonra yeniden deneyin.",
+    "amountChanged": "Tutar değiştiği için ödeme yapılmadı. Lütfen siparişinizi kontrol edin.",
+    "paidAmount": "Ödenen tutar: {amount}",
+    "paidMethod": "Ödeme yöntemi: {method}",
+    "buyNowNotice": "Bu bir hemen satın alma siparişidir. Sepetiniz değişmez."
   },
   "credits": {
     "metaTitle": "Kaynaklar",
@@ -132,7 +149,7 @@
     "by": "Fotoğraf: {name}"
   },
   "footer": {
-    "tagline": "Dünya tatlılarını 10 dilde tanıtan demo mağaza.",
+    "tagline": "Dessert Land, dünya tatlılarını 10 dilde tanıtan bir demo mağazadır.",
     "credits": "Fotoğraf ve simge kaynakları"
   },
   "notFound": {

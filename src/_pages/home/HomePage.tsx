@@ -14,7 +14,13 @@ type HomePageProps = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: `Dessert Land — ${t("title")}`, description: t("description") };
+  const title = `Dessert Land — ${t("title")}`;
+  const description = t("description");
+  return {
+    title,
+    description,
+    openGraph: { type: "website", siteName: "Dessert Land", title, description },
+  };
 }
 
 export default async function HomePage({ params }: HomePageProps) {
