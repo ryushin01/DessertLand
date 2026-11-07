@@ -1,7 +1,7 @@
-# 🍰 Dessert World
+# 🍰 Dessert Market
 
-[![CI](https://github.com/ryushin01/DessertWorld/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertWorld/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.1.0-ff6484)
+[![CI](https://github.com/ryushin01/DessertMarket/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertMarket/actions/workflows/ci.yml)
+![version](https://img.shields.io/badge/version-0.1.1-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 **전 세계의 디저트**를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -14,7 +14,7 @@
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
-| ![DESSERT WORLD 글자 앞에 요리사가 서 있고 주변에 디저트 사진이 떠 있는 첫 화면](docs/images/home-hero.jpg) | ![흐린 팬케이크 사진을 배경으로 선명한 사진과 팬케이크 제목이 놓인 화면](docs/images/home-category.jpg) |
+| ![DESSERT MARKET 글자 앞에 요리사가 서 있고 주변에 디저트 사진이 떠 있는 첫 화면](docs/images/home-hero.jpg) | ![흐린 팬케이크 사진을 배경으로 선명한 사진과 팬케이크 제목이 놓인 화면](docs/images/home-category.jpg) |
 
 | 글자 마스크 줌 | 세계 디저트 여행 |
 |---|---|

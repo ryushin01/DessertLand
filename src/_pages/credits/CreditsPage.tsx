@@ -28,7 +28,7 @@ const link = css({ textDecoration: "underline", textUnderlineOffset: "3px", _hov
 export async function generateMetadata({ params }: CreditsPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "credits" });
-  return { title: `${t("metaTitle")} | Dessert World` };
+  return { title: `${t("metaTitle")} | Dessert Market` };
 }
 
 export default async function CreditsPage({ params }: CreditsPageProps) {
