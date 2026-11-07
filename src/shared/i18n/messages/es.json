@@ -138,14 +138,18 @@
     "amountChanged": "El importe ha cambiado y no se ha realizado el pago. Revisa tu pedido.",
     "paidAmount": "Importe pagado: {amount}",
     "paidMethod": "Método de pago: {method}",
-    "buyNowNotice": "Es una compra inmediata. Tu cesta no cambia."
+    "buyNowNotice": "Es una compra inmediata. Tu cesta no cambia.",
+    "stripeNotice": "Modo de prueba de Stripe: no se realizará ningún cargo. En la página de pago, usa la tarjeta de prueba 4242 4242 4242 4242, una caducidad futura y cualquier CVC. No introduzcas un número de tarjeta real. Los datos introducidos se envían a Stripe.",
+    "stripePay": "Pagar {amount} con Stripe",
+    "stripeRedirecting": "Yendo a la página de pago",
+    "unverified": "No se ha podido confirmar el pago. Puedes comprobarlo en el panel de pruebas de Stripe."
   },
   "credits": {
     "metaTitle": "Créditos",
     "title": "Créditos de fotos e iconos",
     "photos": "Fotos: Unsplash",
     "icons": "Iconos: Flaticon",
-    "hero": "Retrato de portada",
+    "hero": "Foto de portada",
     "by": "Foto de {name}"
   },
   "footer": {

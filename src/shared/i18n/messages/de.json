@@ -138,14 +138,18 @@
     "amountChanged": "Der Betrag hat sich geändert, daher wurde nichts bezahlt. Bitte prüfen Sie Ihre Bestellung.",
     "paidAmount": "Bezahlter Betrag: {amount}",
     "paidMethod": "Zahlungsart: {method}",
-    "buyNowNotice": "Dies ist eine Sofortbestellung. Ihr Warenkorb bleibt unverändert."
+    "buyNowNotice": "Dies ist eine Sofortbestellung. Ihr Warenkorb bleibt unverändert.",
+    "stripeNotice": "Stripe-Testmodus: Es wird nichts berechnet. Verwenden Sie auf der Zahlungsseite die Testkarte 4242 4242 4242 4242, ein zukünftiges Ablaufdatum und einen beliebigen CVC. Geben Sie keine echte Kartennummer ein. Die dort eingegebenen Daten gehen an Stripe.",
+    "stripePay": "{amount} mit Stripe bezahlen",
+    "stripeRedirecting": "Weiterleitung zur Zahlung",
+    "unverified": "Diese Zahlung konnte nicht bestätigt werden. Sie lässt sich im Stripe-Test-Dashboard prüfen."
   },
   "credits": {
     "metaTitle": "Quellen",
     "title": "Foto- und Icon-Quellen",
     "photos": "Fotos: Unsplash",
     "icons": "Icons: Flaticon",
-    "hero": "Porträt auf der Startseite",
+    "hero": "Foto auf der Startseite",
     "by": "Foto von {name}"
   },
   "footer": {

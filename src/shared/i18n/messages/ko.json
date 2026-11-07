@@ -138,14 +138,18 @@
     "amountChanged": "금액이 달라져 결제하지 않았습니다. 주문 내역을 확인해 주세요.",
     "paidAmount": "결제 금액: {amount}",
     "paidMethod": "결제 수단: {method}",
-    "buyNowNotice": "바로 구매 주문입니다. 장바구니는 그대로 유지됩니다."
+    "buyNowNotice": "바로 구매 주문입니다. 장바구니는 그대로 유지됩니다.",
+    "stripeNotice": "Stripe 테스트 모드입니다. 실제로 청구되지 않습니다. 결제 화면에서 테스트 카드 4242 4242 4242 4242와 미래의 만료일, 아무 CVC를 입력해 주세요. 실제 카드 번호는 입력하지 마세요. 결제 화면에 입력한 정보는 Stripe로 전달됩니다.",
+    "stripePay": "Stripe에서 {amount} 결제하기",
+    "stripeRedirecting": "결제 화면으로 이동 중",
+    "unverified": "결제를 확인하지 못했습니다. 청구 여부는 Stripe 테스트 대시보드에서 확인할 수 있습니다."
   },
   "credits": {
     "metaTitle": "출처",
     "title": "사진과 아이콘 출처",
     "photos": "사진: Unsplash",
     "icons": "아이콘: Flaticon",
-    "hero": "첫 화면 인물 사진",
+    "hero": "첫 화면 사진",
     "by": "{name} 촬영"
   },
   "footer": {

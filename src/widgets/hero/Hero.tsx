@@ -10,17 +10,17 @@ import { Link } from "@/shared/i18n";
 import { gsap, useGsap, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
-import { createChefRenderer, type ChefRenderer } from "./chef-renderer";
+import { createBakerRenderer, type BakerRenderer } from "./baker-renderer";
 
-const CUTOUT = "/images/hero/chef-cutout.webp";
-const DEPTH = "/images/hero/chef-depth.webp";
-const CUTOUT_RATIO = 992 / 1167;
+const CUTOUT = "/images/hero/baker-cutout.webp";
+const DEPTH = "/images/hero/baker-depth.webp";
+const CUTOUT_RATIO = 1800 / 2250;
 
 const FLOATS = [
   { slug: "freakshake", top: "13%", left: "6%", width: "13vw", depth: 0.9, front: false, wide: false },
   { slug: "tiramisu", top: "12%", left: "79%", width: "12vw", depth: 0.6, front: false, wide: false },
   { slug: "basque-cheesecake", top: "58%", left: "7%", width: "17vw", depth: 1.5, front: true, wide: true },
-  { slug: "pastel-de-nata", top: "62%", left: "74%", width: "19vw", depth: 1.8, front: true, wide: true },
+  { slug: "pastel-de-nata", top: "60%", left: "76%", width: "19vw", depth: 1.8, front: true, wide: true },
   { slug: "strawberry-shortcake", top: "36%", left: "20%", width: "9vw", depth: 0.4, front: false, wide: false },
   { slug: "blueberry-muffin", top: "34%", left: "69%", width: "9vw", depth: 0.5, front: false, wide: false },
 ] as const;
@@ -53,7 +53,7 @@ const title = css({
   display: "flex",
   flexDirection: "column",
   justifyContent: { base: "flex-start", md: "center" },
-  paddingBlockStart: { base: "84px", md: "0" },
+  paddingBlockStart: { base: "27svh", md: "0" },
   alignItems: "center",
   fontFamily: "display",
   fontSize: "clamp(5rem, 24.5vw, 30rem)",
@@ -65,11 +65,6 @@ const title = css({
   userSelect: "none",
 });
 const titleLine = css({ display: "block", willChange: "transform" });
-// 가운데 인물에 가리지 않도록 LAND의 글자를 인물 양옆으로 벌립니다.
-const titleLineWide = css({
-  letterSpacing: { base: "0.04em", md: "0.2em" },
-  marginInlineEnd: { base: "-0.04em", md: "-0.2em" },
-});
 const float = css({
   position: "absolute",
   display: { base: "none", md: "block" },
@@ -85,20 +80,20 @@ const floatWide = css({
   minWidth: "120px",
 });
 const floatImage = css({ objectFit: "cover" });
-const chef = css({
+const baker = css({
   position: "absolute",
-  insetBlockEnd: "-6vh",
+  insetBlockStart: "-7svh",
   insetInlineStart: "50%",
-  height: { base: "62svh", md: "90svh" },
-  transformOrigin: "50% 100%",
+  height: { base: "82svh", md: "128svh" },
+  transformOrigin: "50% 40%",
   willChange: "transform",
   "& canvas": { display: "block", width: "100% !important", height: "100% !important" },
 });
-const chefFallback = css({
+const bakerFallback = css({
   position: "absolute",
   insetInline: "6.1%",
-  insetBlockStart: "12.3%",
-  insetBlockEnd: 0,
+  insetBlockStart: 0,
+  insetBlockEnd: "12.3%",
   objectFit: "cover",
   objectPosition: "top",
 });
@@ -137,19 +132,19 @@ const scrollCue = css({
 export function Hero() {
   const t = useTranslations("hero");
   const rootRef = useRef<HTMLDivElement>(null);
-  const chefRef = useRef<HTMLDivElement>(null);
+  const bakerRef = useRef<HTMLDivElement>(null);
   const fallbackRef = useRef<HTMLImageElement>(null);
   const enabled = useMotionEnabled();
   const [webglReady, setWebglReady] = useState(false);
 
-  // WebGL 인물. 실패하면 컷아웃 이미지를 그대로 보여 줍니다.
+  // WebGL 손과 밀가루. 실패하면 컷아웃 이미지를 그대로 보여 줍니다.
   useEffect(() => {
-    const host = chefRef.current;
+    const host = bakerRef.current;
     const root = rootRef.current;
     if (!enabled || !host || !root) return;
 
     let disposed = false;
-    let chefRenderer: ChefRenderer | null = null;
+    let bakerRenderer: BakerRenderer | null = null;
     let visible = true;
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const intro = { value: 0 };
@@ -162,24 +157,24 @@ export function Hero() {
     });
     observer.observe(root);
     const tick = (time: number) => {
-      if (!chefRenderer || !visible) return;
+      if (!bakerRenderer || !visible) return;
       pointer.x += (pointer.targetX - pointer.x) * 0.07;
       pointer.y += (pointer.targetY - pointer.y) * 0.07;
-      chefRenderer.render({ pointerX: pointer.x, pointerY: pointer.y, time, intro: intro.value });
+      bakerRenderer.render({ pointerX: pointer.x, pointerY: pointer.y, time, intro: intro.value });
     };
     const resize = () => {
       const rect = host.getBoundingClientRect();
       // 변환 전 크기를 씁니다.
-      chefRenderer?.resize(host.offsetWidth || rect.width, host.offsetHeight || rect.height);
+      bakerRenderer?.resize(host.offsetWidth || rect.width, host.offsetHeight || rect.height);
     };
 
-    createChefRenderer(CUTOUT, DEPTH)
+    createBakerRenderer(CUTOUT, DEPTH)
       .then((created) => {
         if (disposed) {
           created.destroy();
           return;
         }
-        chefRenderer = created;
+        bakerRenderer = created;
         created.canvas.setAttribute("aria-hidden", "true");
         host.appendChild(created.canvas);
         resize();
@@ -198,7 +193,7 @@ export function Hero() {
       gsap.killTweensOf(intro);
       window.removeEventListener("pointermove", onPointer);
       window.removeEventListener("resize", resize);
-      chefRenderer?.destroy();
+      bakerRenderer?.destroy();
       setWebglReady(false);
     };
   }, [enabled]);
@@ -208,15 +203,15 @@ export function Hero() {
     rootRef,
     ({ selector }) => {
       const select = selector ?? (() => []);
-      const chefEl = chefRef.current;
+      const bakerEl = bakerRef.current;
       const floats = select("[data-float]") as HTMLElement[];
       const lines = select("[data-line]") as HTMLElement[];
       const [glowEl] = select("[data-glow]") as HTMLElement[];
 
-      gsap.set(chefEl, { xPercent: -50 });
-      const chefX = gsap.quickTo(chefEl, "x", { duration: 1.1, ease: "power3" });
-      const chefRotY = gsap.quickTo(chefEl, "rotationY", { duration: 1.1, ease: "power3" });
-      const chefRotX = gsap.quickTo(chefEl, "rotationX", { duration: 1.1, ease: "power3" });
+      gsap.set(bakerEl, { xPercent: -50 });
+      const bakerX = gsap.quickTo(bakerEl, "x", { duration: 1.1, ease: "power3" });
+      const bakerRotY = gsap.quickTo(bakerEl, "rotationY", { duration: 1.1, ease: "power3" });
+      const bakerRotX = gsap.quickTo(bakerEl, "rotationX", { duration: 1.1, ease: "power3" });
       const movers = floats.map((element) => ({
         depth: Number(element.dataset.depth),
         x: gsap.quickTo(element, "x", { duration: 1.3, ease: "power3" }),
@@ -234,9 +229,9 @@ export function Hero() {
       const onPointer = (event: PointerEvent) => {
         const nx = event.clientX / window.innerWidth - 0.5;
         const ny = event.clientY / window.innerHeight - 0.5;
-        chefX(nx * 46);
-        chefRotY(nx * 14);
-        chefRotX(-ny * 7);
+        bakerX(nx * 46);
+        bakerRotY(nx * 14);
+        bakerRotX(-ny * 7);
         for (const mover of movers) {
           mover.x(-nx * 90 * mover.depth);
           mover.y(-ny * 70 * mover.depth);
@@ -263,7 +258,7 @@ export function Hero() {
       scroll
         .to(lines[0] ?? {}, { xPercent: -28, opacity: 0.15, ease: "none" }, 0)
         .to(lines[1] ?? {}, { xPercent: 28, opacity: 0.15, ease: "none" }, 0)
-        .to(chefEl, { scale: 1.32, yPercent: 7, ease: "none" }, 0);
+        .to(bakerEl, { scale: 1.28, yPercent: 5, ease: "none" }, 0);
       floats.forEach((element, index) => {
         const side = index % 2 === 0 ? -1 : 1;
         scroll.to(
@@ -293,7 +288,7 @@ export function Hero() {
             </span>
           </span>
           <span aria-hidden="true" className={css({ overflow: "clip" })}>
-            <span data-line className={cx(titleLine, titleLineWide)}>
+            <span data-line className={titleLine}>
               Land
             </span>
           </span>
@@ -302,9 +297,9 @@ export function Hero() {
           <FloatCard key={item.slug} {...item} />
         ))}
         <div
-          ref={chefRef}
-          data-chef
-          className={chef}
+          ref={bakerRef}
+          data-baker
+          className={baker}
           style={{ aspectRatio: `${CUTOUT_RATIO * 1.14}`, transform: "translateX(-50%)" }}
         >
           <Image
@@ -314,7 +309,7 @@ export function Hero() {
             fill
             priority
             sizes="(max-width: 768px) 90vw, 60vw"
-            className={chefFallback}
+            className={bakerFallback}
             style={{ visibility: webglReady ? "hidden" : "visible" }}
           />
         </div>

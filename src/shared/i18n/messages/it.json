@@ -138,14 +138,18 @@
     "amountChanged": "L’importo è cambiato, quindi non è stato effettuato alcun pagamento. Controlla l’ordine.",
     "paidAmount": "Importo pagato: {amount}",
     "paidMethod": "Metodo di pagamento: {method}",
-    "buyNowNotice": "Questo è un acquisto immediato. Il carrello resta invariato."
+    "buyNowNotice": "Questo è un acquisto immediato. Il carrello resta invariato.",
+    "stripeNotice": "Modalità di prova Stripe: non verrà addebitato nulla. Nella pagina di pagamento usa la carta di prova 4242 4242 4242 4242, una scadenza futura e un CVC qualsiasi. Non inserire un numero di carta reale. I dati inseriti vengono inviati a Stripe.",
+    "stripePay": "Paga {amount} con Stripe",
+    "stripeRedirecting": "Reindirizzamento al pagamento",
+    "unverified": "Impossibile confermare il pagamento. Puoi controllarlo nella dashboard di prova di Stripe."
   },
   "credits": {
     "metaTitle": "Crediti",
     "title": "Crediti di foto e icone",
     "photos": "Foto: Unsplash",
     "icons": "Icone: Flaticon",
-    "hero": "Ritratto iniziale",
+    "hero": "Foto iniziale",
     "by": "Foto di {name}"
   },
   "footer": {

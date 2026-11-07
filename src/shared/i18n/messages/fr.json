@@ -138,14 +138,18 @@
     "amountChanged": "Le montant a changé : aucun paiement n’a été effectué. Vérifiez votre commande.",
     "paidAmount": "Montant payé : {amount}",
     "paidMethod": "Mode de paiement : {method}",
-    "buyNowNotice": "Ceci est un achat immédiat. Votre panier reste inchangé."
+    "buyNowNotice": "Ceci est un achat immédiat. Votre panier reste inchangé.",
+    "stripeNotice": "Mode test de Stripe : aucun montant ne sera débité. Sur la page de paiement, utilisez la carte de test 4242 4242 4242 4242, une date d’expiration future et un CVC quelconque. N’entrez pas de vrai numéro de carte. Les informations saisies sont transmises à Stripe.",
+    "stripePay": "Payer {amount} avec Stripe",
+    "stripeRedirecting": "Redirection vers le paiement",
+    "unverified": "Impossible de confirmer ce paiement. Vous pouvez le vérifier dans le tableau de bord de test Stripe."
   },
   "credits": {
     "metaTitle": "Crédits",
     "title": "Crédits photos et icônes",
     "photos": "Photos : Unsplash",
     "icons": "Icônes : Flaticon",
-    "hero": "Portrait d’accueil",
+    "hero": "Photo d’accueil",
     "by": "Photo : {name}"
   },
   "footer": {
