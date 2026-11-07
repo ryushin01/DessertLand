@@ -46,7 +46,7 @@ cp .env.example .env.local                                 # 로컬
 pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 ```
 
-테스트 카드는 `4242 4242 4242 4242`, 미래의 만료일, 아무 CVC입니다. 흐름은 다음과 같습니다.
+테스트 카드는 `4242 4242 4242 4242`, 미래의 만료일, 아무 CVC입니다. 결제 수단은 카드로 제한하고 자동 환율(Adaptive Pricing)은 꺼서, 사이트에 표시한 통화와 금액을 그대로 청구합니다. 흐름은 다음과 같습니다.
 
 1. `POST /api/checkout-session`이 서버 가격으로 Stripe 세션을 만듭니다.
 2. 사용자는 Stripe 화면에서 카드와 배송 정보를 입력합니다.
