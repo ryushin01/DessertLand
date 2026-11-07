@@ -1,6 +1,6 @@
 {
   "name": "dessert-land",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "전 세계 디저트가 모인 달콤한 나라: 10개 언어로 디저트를 소개하고 판매하는 쇼핑몰",
   "private": true,
   "type": "module",
