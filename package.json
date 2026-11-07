@@ -1,6 +1,6 @@
 {
-  "name": "dessert-market",
-  "version": "0.1.1",
+  "name": "dessert-land",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@12.16.1",

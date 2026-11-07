@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const storage = createJSONStorage<boolean>(() => localStorage);
 
 /** KWCAG 6.2.2: 움직임을 사용자가 멈출 수 있게 합니다. */
-export const motionPausedAtom = atomWithStorage("dessert-market.motion-paused", false, storage);
+export const motionPausedAtom = atomWithStorage("dessert-land.motion-paused", false, storage);
 
 export function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);

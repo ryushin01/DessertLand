@@ -281,7 +281,7 @@ export function Hero() {
     <div ref={rootRef} className={wrapper}>
       <div className={stage}>
         <div data-glow aria-hidden="true" className={glow} />
-        <h1 className={title} lang="en" aria-label="Dessert Market">
+        <h1 className={title} lang="en" aria-label="Dessert Land">
           <span aria-hidden="true" className={css({ overflow: "clip" })}>
             <span data-line className={titleLine}>
               Dessert
@@ -289,7 +289,7 @@ export function Hero() {
           </span>
           <span aria-hidden="true" className={css({ overflow: "clip" })}>
             <span data-line className={titleLine}>
-              Market
+              Land
             </span>
           </span>
         </h1>
