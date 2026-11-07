@@ -125,7 +125,7 @@ export function ProductDetail({ product }: { product: Product }) {
   return (
     <section ref={ref} className={root}>
       <div aria-hidden="true" className={backdrop}>
-        <Image src={product.image.src} alt="" fill sizes="50vw" className={cover} />
+        <Image src={product.image.src} alt="" fill sizes="20vw" quality={40} className={cover} />
       </div>
       <div className={layout}>
         <div className={tiltHost}>

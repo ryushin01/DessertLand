@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.3.0-ff6484)
+![version](https://img.shields.io/badge/version-0.3.1-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.

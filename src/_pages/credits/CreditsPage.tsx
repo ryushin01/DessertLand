@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
 import { HERO_CREDIT, PRODUCTS, type PhotoCredit } from "@/entities/product";
+import { localeAlternates, siteOpenGraph } from "@/shared/i18n";
 
 type CreditsPageProps = { params: Promise<{ locale: string }> };
 
@@ -28,7 +29,12 @@ const link = css({ textDecoration: "underline", textUnderlineOffset: "3px", _hov
 export async function generateMetadata({ params }: CreditsPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "credits" });
-  return { title: `${t("metaTitle")} | Dessert Land` };
+  const title = `${t("metaTitle")} | Dessert Land`;
+  return {
+    title,
+    alternates: localeAlternates(locale, "/credits"),
+    openGraph: siteOpenGraph(title),
+  };
 }
 
 export default async function CreditsPage({ params }: CreditsPageProps) {
