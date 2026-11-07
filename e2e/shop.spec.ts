@@ -1,0 +1,183 @@
+import AxeBuilder from "@axe-core/playwright";
+import { expect, test, type Page } from "@playwright/test";
+
+import { LOCALES } from "../src/shared/i18n/routing";
+
+async function expectNoHorizontalOverflow(page: Page) {
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
+}
+
+async function scan(page: Page) {
+  const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
+  expect(results.violations.map(({ id, nodes }) => `${id}: ${nodes[0]?.target}`)).toEqual([]);
+}
+
+test.describe("언어", () => {
+  for (const locale of LOCALES) {
+    test(`${locale} 홈은 언어 속성과 소개 문구를 제공합니다`, async ({ page }) => {
+      await page.goto(`/${locale}`);
+      await expect(page.locator("html")).toHaveAttribute("lang", locale);
+      await expect(page.getByRole("heading", { level: 1, name: "Dessert World" })).toBeVisible();
+      await expect(page.locator("main")).toContainText("10");
+      await expectNoHorizontalOverflow(page);
+    });
+  }
+
+  test.describe("지원하지 않는 언어의 브라우저", () => {
+    test.use({ locale: "ar-EG" });
+
+    test("/ 는 기본 언어인 한국어로 이동합니다", async ({ page }) => {
+      await page.goto("/");
+      await expect(page).toHaveURL(/\/ko$/);
+    });
+  });
+
+  test.describe("지원하는 언어의 브라우저", () => {
+    test.use({ locale: "ja-JP" });
+
+    test("/ 는 브라우저 언어로 이동합니다", async ({ page }) => {
+      await page.goto("/");
+      await expect(page).toHaveURL(/\/ja$/);
+    });
+  });
+});
+
+test.describe("모션 켜짐 접근성", () => {
+  test("홈", async ({ page }) => {
+    await page.goto("/ko");
+    await page.waitForTimeout(3200);
+    await scan(page);
+  });
+
+  test("상품 목록", async ({ page }) => {
+    await page.goto("/ko/shop");
+    await page.waitForTimeout(1500);
+    await scan(page);
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test("상품 상세", async ({ page }) => {
+    await page.goto("/ja/shop/baklava");
+    await page.waitForTimeout(2000);
+    await scan(page);
+    await expectNoHorizontalOverflow(page);
+  });
+});
+
+test.describe("움직임 줄이기", () => {
+  test.use({ reducedMotion: "reduce" });
+
+  test("홈 전체를 스크롤해도 넘치지 않고 접근성 위반이 없습니다", async ({ page }) => {
+    await page.goto("/en");
+    await page.waitForTimeout(500);
+    await scan(page);
+    await expectNoHorizontalOverflow(page);
+    await expect(page.locator("html")).toHaveAttribute("data-motion", "off");
+  });
+});
+
+test("사용자가 움직임을 멈출 수 있습니다", async ({ page }) => {
+  await page.goto("/ko");
+  await page.getByRole("button", { name: "움직임 멈추기" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-motion", "off");
+  await page.reload();
+  await expect(page.getByRole("button", { name: "움직임 재생" })).toBeVisible();
+});
+
+test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) => {
+  await page.goto("/ko/shop/tiramisu");
+  await page.getByText("KO", { exact: true }).click();
+  await page.getByRole("banner").getByRole("link", { name: "Italiano" }).click();
+  await expect(page).toHaveURL(/\/it\/shop\/tiramisu$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Tiramisù" })).toBeVisible();
+});
+
+test("필터로 카테고리를 좁힙니다", async ({ page }) => {
+  await page.goto("/ko/shop");
+  await page.getByRole("navigation", { name: "카테고리 선택" }).getByRole("link", { name: "머핀" }).click();
+  await expect(page).toHaveURL(/category=muffin/);
+  await expect(page.getByRole("status").filter({ hasText: "2개의 디저트" })).toBeVisible();
+});
+
+test("장바구니에 담고 주문을 마칩니다", async ({ page }) => {
+  await page.goto("/ko/shop/baklava");
+  await page.getByRole("button", { name: "수량 늘리기" }).click();
+  await page.getByRole("button", { name: "장바구니에 담기" }).click();
+
+  const dialog = page.getByRole("dialog", { name: "장바구니" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText("바클라바");
+  await scan(page);
+
+  await dialog.getByRole("link", { name: "주문하기" }).click();
+  await expect(page).toHaveURL(/\/ko\/checkout$/);
+
+  await page.getByRole("button", { name: "데모 주문 완료하기" }).click();
+  await expect(page.getByText("입력 내용을 확인해 주세요.")).toBeVisible();
+  await expect(page.getByLabel("받는 분 이름")).toBeFocused();
+  await scan(page);
+
+  await page.getByLabel("받는 분 이름").fill("홍길동");
+  await page.getByLabel("이메일").fill("demo@example.com");
+  await page.getByLabel("배송 주소").fill("서울시 가상구 예시로 1");
+  await page.getByRole("button", { name: "데모 주문 완료하기" }).click();
+
+  await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeFocused();
+  await expect(page.getByRole("button", { name: "장바구니", exact: true })).toBeVisible();
+});
+
+test("키보드로 본문 바로가기와 장바구니를 쓸 수 있습니다", async ({ page }) => {
+  await page.goto("/ko/shop");
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "본문 바로가기" })).toBeFocused();
+  const cartButton = page.getByRole("button", { name: "장바구니", exact: true });
+  await cartButton.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("dialog", { name: "장바구니" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog", { name: "장바구니" })).toBeHidden();
+  await expect(cartButton).toBeFocused();
+});
+
+test.describe("데스크톱 모션", () => {
+  test.skip(({ isMobile }) => isMobile, "정밀 포인터 전용 연출입니다");
+
+  test("마우스 위치에 따라 가운데 인물이 움직이고 커서가 따라옵니다", async ({ page }) => {
+    await page.goto("/ko");
+    await page.waitForTimeout(3200);
+    const transform = () =>
+      page.locator("[data-chef]").evaluate((element) => getComputedStyle(element).transform);
+    await page.mouse.move(120, 200, { steps: 6 });
+    await page.waitForTimeout(1300);
+    const left = await transform();
+    await page.mouse.move(1200, 500, { steps: 6 });
+    await page.waitForTimeout(1300);
+    const right = await transform();
+    expect(left).not.toBe(right);
+    await expect(page.locator("html")).toHaveAttribute("data-custom-cursor", "on");
+  });
+
+  test("키보드로 가려진 카테고리에 들어가면 장면이 펼쳐집니다", async ({ page }) => {
+    await page.goto("/ko");
+    await page.waitForTimeout(3200);
+    const link = page.getByRole("link", { name: "머핀 보기" });
+    await link.focus();
+    await page.waitForTimeout(1500);
+    await expect(link).toBeInViewport();
+    const stage = link.locator("xpath=ancestor::*[@data-stage]");
+    const clip = await stage.evaluate((element) => getComputedStyle(element).clipPath);
+    expect(clip).toMatch(/circle\((1[0-9]{2}|[5-9][0-9])/);
+  });
+
+  test("가로 여행 카드에 초점이 오면 화면 안으로 들어옵니다", async ({ page }) => {
+    await page.goto("/ko");
+    await page.waitForTimeout(3200);
+    const link = page.getByRole("link", { name: /파스텔 드 나타/ }).first();
+    await link.focus();
+    await page.waitForTimeout(1800);
+    await expect(link).toBeInViewport();
+  });
+});

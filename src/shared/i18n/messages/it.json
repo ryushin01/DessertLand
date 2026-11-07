@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "I dolci di tutto il mondo",
+    "description": "Un negozio globale che presenta e vende dolci da tutto il mondo, disponibile in 10 lingue."
+  },
+  "nav": {
+    "skip": "Vai al contenuto",
+    "main": "Menu principale",
+    "home": "Home di Dessert World",
+    "shop": "Dolci",
+    "cart": "Carrello",
+    "cartWithCount": "Carrello, {count} articoli",
+    "language": "Scegli la lingua",
+    "motionPause": "Metti in pausa le animazioni",
+    "motionPlay": "Riproduci le animazioni"
+  },
+  "hero": {
+    "eyebrow": "Dolci dal mondo · 10 lingue",
+    "tagline": "Presentiamo e vendiamo dolci da ogni angolo del mondo, in 10 lingue.",
+    "cta": "Scopri i dolci",
+    "scroll": "Scorri in basso"
+  },
+  "manifesto": {
+    "text": "Dalla dolcezza di un milkshake alla crosta di una cheesecake basca, ogni morso racchiude il tempo di un luogo. Cerchiamo i dolci del mondo e li raccontiamo nella tua lingua."
+  },
+  "showcase": {
+    "label": "Categorie di dolci",
+    "cta": "Vedi: {category}",
+    "count": "{count} varietà"
+  },
+  "zoom": {
+    "title": "Un mondo in ogni fetta",
+    "body": "Più ti avvicini, più storie scopri. Raccontiamo ingredienti, origini e lavorazione."
+  },
+  "world": {
+    "title": "Viaggio tra i dolci del mondo",
+    "lede": "Attraversa la dolcezza di ogni paese."
+  },
+  "trail": {
+    "title": "Segui la dolcezza",
+    "cta": "Vedi tutti i dolci"
+  },
+  "shop": {
+    "metaTitle": "Dolci",
+    "title": "Dolci del mondo",
+    "filter": "Filtra per categoria",
+    "all": "Tutti",
+    "results": "{count} dolci",
+    "add": "Aggiungi {name} al carrello",
+    "addShort": "Aggiungi",
+    "view": "Vedi"
+  },
+  "product": {
+    "back": "Torna ai dolci",
+    "origin": "Origine",
+    "weight": "Peso",
+    "allergens": "Allergeni",
+    "quantity": "Quantità",
+    "decrease": "Diminuisci la quantità",
+    "increase": "Aumenta la quantità",
+    "add": "Aggiungi al carrello",
+    "related": "Potrebbe piacerti anche",
+    "notice": "Informazioni e prezzi sono esempi dimostrativi."
+  },
+  "allergens": {
+    "milk": "Latte",
+    "egg": "Uova",
+    "wheat": "Grano",
+    "nuts": "Frutta a guscio"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Milkshake",
+      "lede": "Fredda, densa, traboccante di gioia."
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "lede": "Densa o bruciata, un momento di formaggio cremoso."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "Il calore del mattino, ben lievitato."
+    },
+    "pancake": {
+      "name": "Pancake",
+      "lede": "Impilati in alto, con lo sciroppo che cola."
+    },
+    "creamcake": {
+      "name": "Torta alla panna",
+      "lede": "Pan di spagna soffice, panna leggera e fragole."
+    },
+    "classic": {
+      "name": "Classici del mondo",
+      "lede": "Dal tiramisù al baklava, il sapore di un paese."
+    }
+  },
+  "cart": {
+    "title": "Il tuo carrello",
+    "close": "Chiudi il carrello",
+    "empty": "Il carrello è vuoto.",
+    "remove": "Rimuovi {name}",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "total": "Totale",
+    "checkout": "Vai al checkout",
+    "added": "{name} aggiunto al carrello."
+  },
+  "checkout": {
+    "metaTitle": "Checkout",
+    "title": "Checkout",
+    "demo": "Questo è un sito dimostrativo. Nessun pagamento o consegna reale e i tuoi dati non vengono inviati.",
+    "name": "Nome del destinatario",
+    "email": "E-mail",
+    "address": "Indirizzo di consegna",
+    "required": "Questo campo è obbligatorio.",
+    "emailInvalid": "Inserisci un’e-mail come name@example.com.",
+    "errorSummary": "Controlla i dati inseriti.",
+    "submit": "Conferma l’ordine demo",
+    "submitting": "Ordine in corso",
+    "summary": "Riepilogo ordine",
+    "empty": "Nessun dolce da ordinare.",
+    "successTitle": "Il tuo ordine è completato",
+    "successBody": "Numero d’ordine demo: {orderNo}. Nessun pagamento o consegna reale.",
+    "continue": "Continua a sfogliare"
+  },
+  "credits": {
+    "metaTitle": "Crediti",
+    "title": "Crediti di foto e icone",
+    "photos": "Foto: Unsplash",
+    "icons": "Icone: Flaticon",
+    "hero": "Ritratto iniziale",
+    "by": "Foto di {name}"
+  },
+  "footer": {
+    "tagline": "Un negozio dimostrativo che presenta i dolci del mondo in 10 lingue.",
+    "credits": "Crediti di foto e icone"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "back": "Torna alla home"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Nato a Canberra: un frullato al cioccolato sormontato da panna e cioccolato."
+    },
+    "vanilla-malt": {
+      "name": "Frappè vaniglia e malto",
+      "description": "Un classico delle soda fountain americane: gelato alla vaniglia, malto e sciroppo di cioccolato."
+    },
+    "new-york-cheesecake": {
+      "name": "New York cheesecake",
+      "description": "Il dolce simbolo di New York: denso, liscio e ricco di formaggio cremoso."
+    },
+    "basque-cheesecake": {
+      "name": "Cheesecake basca",
+      "description": "Da San Sebastián: bruciata fuori ad alta temperatura, cremosa dentro."
+    },
+    "blueberry-muffin": {
+      "name": "Muffin ai mirtilli",
+      "description": "Un muffin americano ricco di mirtilli succosi e spolverato di zucchero a velo."
+    },
+    "bran-muffin": {
+      "name": "Muffin alla crusca",
+      "description": "Un classico della colazione canadese: crusca tostata e dolcezza leggera."
+    },
+    "maple-pancake": {
+      "name": "Pancake allo sciroppo d’acero",
+      "description": "Una pila generosa di pancake con sciroppo d’acero canadese."
+    },
+    "forest-berry-pancake": {
+      "name": "Pancake ai frutti di bosco",
+      "description": "Ispirati ai boschi svedesi d’estate, con frutti di bosco e sciroppo."
+    },
+    "strawberry-shortcake": {
+      "name": "Shortcake giapponese alle fragole",
+      "description": "L’icona delle pasticcerie giapponesi: pan di spagna soffice, panna e fragole."
+    },
+    "saeng-cream-cake": {
+      "name": "Fetta coreana alla panna",
+      "description": "Una delle preferite nei forni coreani: panna poco dolce e pan di spagna morbido."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "Il dolce primaverile della pasticceria francese, cinto da fragole tagliate."
+    },
+    "tiramisu": {
+      "name": "Tiramisù",
+      "description": "Il dolce italiano per eccellenza: savoiardi al caffè, mascarpone e cacao."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de nata",
+      "description": "Il tesoro del Portogallo: sfoglia croccante e crema ricca, ben dorata."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "Il capolavoro turco: strati sottili di pasta, pistacchi e sciroppo."
+    },
+    "black-forest-cake": {
+      "name": "Torta Foresta Nera",
+      "description": "La celebre torta tedesca: pan di spagna al cioccolato, panna e ciliegie."
+    },
+    "egg-tart": {
+      "name": "Tartelletta cantonese",
+      "description": "Nata con la cultura cantonese del tè, si distingue per la crema vellutata."
+    }
+  }
+}

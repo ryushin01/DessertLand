@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Desserts from around the world",
+    "description": "A global shop introducing and selling desserts from around the world, available in 10 languages."
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "main": "Main menu",
+    "home": "Dessert World home",
+    "shop": "Desserts",
+    "cart": "Cart",
+    "cartWithCount": "Cart, {count} items",
+    "language": "Choose language",
+    "motionPause": "Pause motion",
+    "motionPlay": "Play motion"
+  },
+  "hero": {
+    "eyebrow": "World desserts · 10 languages",
+    "tagline": "We introduce and sell desserts from every corner of the world, in 10 languages.",
+    "cta": "Explore desserts",
+    "scroll": "Scroll down"
+  },
+  "manifesto": {
+    "text": "From the sweetness of a milkshake to the char of a Basque cheesecake, every bite holds the time of a place. We seek out the world’s desserts and bring them to you in your own language."
+  },
+  "showcase": {
+    "label": "Dessert categories",
+    "cta": "View {category}",
+    "count": "{count} kinds"
+  },
+  "zoom": {
+    "title": "A world in every slice",
+    "body": "The closer you look, the more stories you see. We share the ingredients, the origins and the craft."
+  },
+  "world": {
+    "title": "A journey through world desserts",
+    "lede": "Travel sideways through the sweetness of each country."
+  },
+  "trail": {
+    "title": "Follow the sweetness",
+    "cta": "View all desserts"
+  },
+  "shop": {
+    "metaTitle": "Desserts",
+    "title": "Desserts of the world",
+    "filter": "Filter by category",
+    "all": "All",
+    "results": "{count} desserts",
+    "add": "Add {name} to cart",
+    "addShort": "Add",
+    "view": "View"
+  },
+  "product": {
+    "back": "Back to desserts",
+    "origin": "Origin",
+    "weight": "Weight",
+    "allergens": "Allergens",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "add": "Add to cart",
+    "related": "You may also like",
+    "notice": "Product details and prices are demo examples."
+  },
+  "allergens": {
+    "milk": "Milk",
+    "egg": "Egg",
+    "wheat": "Wheat",
+    "nuts": "Tree nuts"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Milkshake",
+      "lede": "Cold, thick and overflowing with joy."
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "lede": "Dense or scorched, an hour of rich cream cheese."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "The warmth of morning, risen high."
+    },
+    "pancake": {
+      "name": "Pancake",
+      "lede": "Stacked high, with syrup running down."
+    },
+    "creamcake": {
+      "name": "Fresh cream cake",
+      "lede": "Soft sponge, light cream and strawberries."
+    },
+    "classic": {
+      "name": "World classics",
+      "lede": "From tiramisu to baklava, the taste of a nation."
+    }
+  },
+  "cart": {
+    "title": "Your cart",
+    "close": "Close cart",
+    "empty": "Your cart is empty.",
+    "remove": "Remove {name}",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Checkout",
+    "added": "{name} added to your cart."
+  },
+  "checkout": {
+    "metaTitle": "Checkout",
+    "title": "Checkout",
+    "demo": "This is a demo. No real payment or delivery takes place, and your details are not sent anywhere.",
+    "name": "Recipient name",
+    "email": "Email",
+    "address": "Delivery address",
+    "required": "This field is required.",
+    "emailInvalid": "Enter an email like name@example.com.",
+    "errorSummary": "Please check your details.",
+    "submit": "Place demo order",
+    "submitting": "Placing order",
+    "summary": "Order summary",
+    "empty": "There is nothing to check out.",
+    "successTitle": "Your order is complete",
+    "successBody": "Demo order number: {orderNo}. No real payment or delivery takes place.",
+    "continue": "Keep browsing"
+  },
+  "credits": {
+    "metaTitle": "Credits",
+    "title": "Photo and icon credits",
+    "photos": "Photos: Unsplash",
+    "icons": "Icons: Flaticon",
+    "hero": "Hero portrait",
+    "by": "Photo by {name}"
+  },
+  "footer": {
+    "tagline": "A demo shop presenting the world’s desserts in 10 languages.",
+    "credits": "Photo and icon credits"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Born in Canberra: a chocolate shake piled high with cream and chocolate."
+    },
+    "vanilla-malt": {
+      "name": "Vanilla malt shake",
+      "description": "An American soda-fountain classic: vanilla ice cream, toasty malt and chocolate syrup."
+    },
+    "new-york-cheesecake": {
+      "name": "New York cheesecake",
+      "description": "New York’s signature dessert: dense, smooth and rich with cream cheese."
+    },
+    "basque-cheesecake": {
+      "name": "Basque burnt cheesecake",
+      "description": "From San Sebastián: scorched on the outside by high heat, creamy within."
+    },
+    "blueberry-muffin": {
+      "name": "Blueberry muffin",
+      "description": "An American muffin packed with juicy blueberries and dusted with icing sugar."
+    },
+    "bran-muffin": {
+      "name": "Morning bran muffin",
+      "description": "A Canadian café breakfast staple: nutty bran with gentle sweetness."
+    },
+    "maple-pancake": {
+      "name": "Maple pancakes",
+      "description": "A thick stack of pancakes drenched in Canadian maple syrup."
+    },
+    "forest-berry-pancake": {
+      "name": "Forest berry pancakes",
+      "description": "Inspired by Swedish summer forests, topped with tart berries and syrup."
+    },
+    "strawberry-shortcake": {
+      "name": "Strawberry shortcake",
+      "description": "The icon of Japanese patisseries: fluffy sponge layered with cream and strawberries."
+    },
+    "saeng-cream-cake": {
+      "name": "Korean fresh cream slice",
+      "description": "A favorite of Korean neighborhood bakeries: mildly sweet milk cream and soft sponge."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "A French patisserie spring cake, walled with halved strawberries."
+    },
+    "tiramisu": {
+      "name": "Tiramisu",
+      "description": "Italy’s signature dessert of coffee-soaked biscuits, mascarpone and cocoa."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de nata",
+      "description": "Portugal’s treasure: crisp pastry filled with rich custard, baked until blistered."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "Türkiye’s masterpiece: layers of thin pastry, pistachio and syrup."
+    },
+    "black-forest-cake": {
+      "name": "Black Forest cake",
+      "description": "Germany’s famous cake: layers of chocolate sponge, whipped cream and cherries."
+    },
+    "egg-tart": {
+      "name": "Cantonese egg tart",
+      "description": "A snack raised alongside Cantonese tea culture, known for its silky egg custard."
+    }
+  }
+}

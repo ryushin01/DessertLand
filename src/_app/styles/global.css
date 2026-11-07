@@ -1,0 +1,23 @@
+@layer reset, base, tokens, recipes, utilities;
+
+/* 한국어만 어절 단위로 줄을 바꿉니다. 일본어와 중국어에 쓰면 줄이 넘칩니다. */
+html {
+  --word-break: normal;
+  overflow-wrap: break-word;
+}
+
+html[lang="ko"] {
+  --word-break: keep-all;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html[data-custom-cursor="on"] * {
+    cursor: none !important;
+  }
+  html[data-custom-cursor="on"] dialog[open] * {
+    cursor: auto !important;
+  }
+  html[data-custom-cursor="on"] dialog[open] :is(a, button) {
+    cursor: pointer !important;
+  }
+}

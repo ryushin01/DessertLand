@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Postres de todo el mundo",
+    "description": "Una tienda global que presenta y vende postres de todo el mundo, disponible en 10 idiomas."
+  },
+  "nav": {
+    "skip": "Saltar al contenido",
+    "main": "Menú principal",
+    "home": "Inicio de Dessert World",
+    "shop": "Postres",
+    "cart": "Cesta",
+    "cartWithCount": "Cesta, {count} artículos",
+    "language": "Elegir idioma",
+    "motionPause": "Pausar animaciones",
+    "motionPlay": "Reproducir animaciones"
+  },
+  "hero": {
+    "eyebrow": "Postres del mundo · 10 idiomas",
+    "tagline": "Presentamos y vendemos postres de todos los rincones del mundo, en 10 idiomas.",
+    "cta": "Explorar postres",
+    "scroll": "Desplázate"
+  },
+  "manifesto": {
+    "text": "De la dulzura de un batido al tostado de una tarta de queso vasca, cada bocado guarda el tiempo de un lugar. Buscamos los postres del mundo y te los presentamos en tu idioma."
+  },
+  "showcase": {
+    "label": "Categorías de postres",
+    "cta": "Ver: {category}",
+    "count": "{count} variedades"
+  },
+  "zoom": {
+    "title": "Un mundo en cada porción",
+    "body": "Cuanto más te acercas, más historias descubres. Te contamos sus ingredientes, su origen y su elaboración."
+  },
+  "world": {
+    "title": "Viaje por los postres del mundo",
+    "lede": "Recorre la dulzura de cada país."
+  },
+  "trail": {
+    "title": "Sigue la dulzura",
+    "cta": "Ver todos los postres"
+  },
+  "shop": {
+    "metaTitle": "Postres",
+    "title": "Postres del mundo",
+    "filter": "Filtrar por categoría",
+    "all": "Todos",
+    "results": "{count} postres",
+    "add": "Añadir {name} a la cesta",
+    "addShort": "Añadir",
+    "view": "Ver"
+  },
+  "product": {
+    "back": "Volver a postres",
+    "origin": "Origen",
+    "weight": "Peso",
+    "allergens": "Alérgenos",
+    "quantity": "Cantidad",
+    "decrease": "Reducir cantidad",
+    "increase": "Aumentar cantidad",
+    "add": "Añadir a la cesta",
+    "related": "También te puede gustar",
+    "notice": "La información y los precios son ejemplos de demostración."
+  },
+  "allergens": {
+    "milk": "Leche",
+    "egg": "Huevo",
+    "wheat": "Trigo",
+    "nuts": "Frutos secos"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Batido",
+      "lede": "Frío, espeso y desbordante de alegría."
+    },
+    "cheesecake": {
+      "name": "Tarta de queso",
+      "lede": "Densa o tostada, un momento de queso crema."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "La calidez de la mañana, bien alta."
+    },
+    "pancake": {
+      "name": "Tortitas",
+      "lede": "Bien apiladas, con sirope que resbala."
+    },
+    "creamcake": {
+      "name": "Tarta de nata",
+      "lede": "Bizcocho suave, nata ligera y fresas."
+    },
+    "classic": {
+      "name": "Clásicos del mundo",
+      "lede": "Del tiramisú al baklava, el sabor de un país."
+    }
+  },
+  "cart": {
+    "title": "Tu cesta",
+    "close": "Cerrar la cesta",
+    "empty": "Tu cesta está vacía.",
+    "remove": "Quitar {name}",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "total": "Total",
+    "checkout": "Finalizar compra",
+    "added": "{name} añadido a la cesta."
+  },
+  "checkout": {
+    "metaTitle": "Finalizar compra",
+    "title": "Finalizar compra",
+    "demo": "Esto es una demostración. No hay pago ni entrega reales y tus datos no se envían a ningún sitio.",
+    "name": "Nombre del destinatario",
+    "email": "Correo electrónico",
+    "address": "Dirección de entrega",
+    "required": "Este campo es obligatorio.",
+    "emailInvalid": "Introduce un correo como name@example.com.",
+    "errorSummary": "Revisa tus datos.",
+    "submit": "Realizar pedido de prueba",
+    "submitting": "Procesando pedido",
+    "summary": "Resumen del pedido",
+    "empty": "No hay postres para pedir.",
+    "successTitle": "Tu pedido se ha completado",
+    "successBody": "Número de pedido de prueba: {orderNo}. No hay pago ni entrega reales.",
+    "continue": "Seguir viendo"
+  },
+  "credits": {
+    "metaTitle": "Créditos",
+    "title": "Créditos de fotos e iconos",
+    "photos": "Fotos: Unsplash",
+    "icons": "Iconos: Flaticon",
+    "hero": "Retrato de portada",
+    "by": "Foto de {name}"
+  },
+  "footer": {
+    "tagline": "Una tienda de demostración con postres del mundo en 10 idiomas.",
+    "credits": "Créditos de fotos e iconos"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "back": "Volver al inicio"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Nacido en Canberra: un batido de chocolate coronado con nata y chocolate."
+    },
+    "vanilla-malt": {
+      "name": "Batido de vainilla y malta",
+      "description": "Un clásico de las soda fountains: helado de vainilla, malta y sirope de chocolate."
+    },
+    "new-york-cheesecake": {
+      "name": "Tarta de queso de Nueva York",
+      "description": "El postre emblemático de Nueva York: denso, suave y rico en queso crema."
+    },
+    "basque-cheesecake": {
+      "name": "Tarta de queso vasca",
+      "description": "De San Sebastián: tostada por fuera a fuego fuerte, cremosa por dentro."
+    },
+    "blueberry-muffin": {
+      "name": "Muffin de arándanos",
+      "description": "Un muffin americano lleno de arándanos jugosos y espolvoreado con azúcar glas."
+    },
+    "bran-muffin": {
+      "name": "Muffin de salvado",
+      "description": "Un básico del desayuno canadiense: salvado tostado y un dulzor suave."
+    },
+    "maple-pancake": {
+      "name": "Tortitas con sirope de arce",
+      "description": "Una generosa pila de tortitas bañadas en sirope de arce canadiense."
+    },
+    "forest-berry-pancake": {
+      "name": "Tortitas de frutos del bosque",
+      "description": "Inspiradas en los bosques suecos en verano, con frutos ácidos y sirope."
+    },
+    "strawberry-shortcake": {
+      "name": "Shortcake japonés de fresa",
+      "description": "El icono de las pastelerías japonesas: bizcocho esponjoso, nata y fresas."
+    },
+    "saeng-cream-cake": {
+      "name": "Porción coreana de nata",
+      "description": "Favorita de las panaderías coreanas: nata poco dulce y bizcocho tierno."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "La tarta primaveral de la pastelería francesa, rodeada de fresas partidas."
+    },
+    "tiramisu": {
+      "name": "Tiramisú",
+      "description": "El postre italiano por excelencia: bizcochos con café, mascarpone y cacao."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de nata",
+      "description": "El tesoro de Portugal: hojaldre crujiente y crema intensa, bien tostada."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "La obra maestra de Turquía: capas finas de masa, pistacho y almíbar."
+    },
+    "black-forest-cake": {
+      "name": "Tarta Selva Negra",
+      "description": "La famosa tarta alemana: bizcocho de chocolate, nata y cerezas."
+    },
+    "egg-tart": {
+      "name": "Tartaleta cantonesa",
+      "description": "Nacida con la cultura cantonesa del té, destaca por su crema sedosa."
+    }
+  }
+}

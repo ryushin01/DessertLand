@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Les desserts du monde entier",
+    "description": "Une boutique internationale qui présente et vend des desserts du monde entier, disponible en 10 langues."
+  },
+  "nav": {
+    "skip": "Aller au contenu",
+    "main": "Menu principal",
+    "home": "Accueil Dessert World",
+    "shop": "Desserts",
+    "cart": "Panier",
+    "cartWithCount": "Panier, {count} articles",
+    "language": "Choisir la langue",
+    "motionPause": "Mettre en pause les animations",
+    "motionPlay": "Relancer les animations"
+  },
+  "hero": {
+    "eyebrow": "Desserts du monde · 10 langues",
+    "tagline": "Nous présentons et vendons des desserts du monde entier, en 10 langues.",
+    "cta": "Découvrir les desserts",
+    "scroll": "Faites défiler"
+  },
+  "manifesto": {
+    "text": "De la douceur d’un milkshake au caramélisé d’un cheesecake basque, chaque bouchée porte le temps d’un lieu. Nous cherchons les desserts du monde et vous les présentons dans votre langue."
+  },
+  "showcase": {
+    "label": "Catégories de desserts",
+    "cta": "Voir : {category}",
+    "count": "{count} variétés"
+  },
+  "zoom": {
+    "title": "Un monde dans chaque part",
+    "body": "Plus on regarde de près, plus les histoires apparaissent. Ingrédients, origines, savoir-faire : nous partageons tout."
+  },
+  "world": {
+    "title": "Voyage autour des desserts du monde",
+    "lede": "Parcourez la douceur de chaque pays."
+  },
+  "trail": {
+    "title": "Suivez la douceur",
+    "cta": "Voir tous les desserts"
+  },
+  "shop": {
+    "metaTitle": "Desserts",
+    "title": "Desserts du monde",
+    "filter": "Filtrer par catégorie",
+    "all": "Tous",
+    "results": "{count} desserts",
+    "add": "Ajouter {name} au panier",
+    "addShort": "Ajouter",
+    "view": "Voir"
+  },
+  "product": {
+    "back": "Retour aux desserts",
+    "origin": "Origine",
+    "weight": "Poids",
+    "allergens": "Allergènes",
+    "quantity": "Quantité",
+    "decrease": "Diminuer la quantité",
+    "increase": "Augmenter la quantité",
+    "add": "Ajouter au panier",
+    "related": "Vous aimerez aussi",
+    "notice": "Les informations et les prix sont des exemples de démonstration."
+  },
+  "allergens": {
+    "milk": "Lait",
+    "egg": "Œuf",
+    "wheat": "Blé",
+    "nuts": "Fruits à coque"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Milkshake",
+      "lede": "Froid, onctueux et débordant de plaisir."
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "lede": "Dense ou brûlé, un moment de fromage frais."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "La chaleur du matin, bien levée."
+    },
+    "pancake": {
+      "name": "Pancake",
+      "lede": "Empilés haut, nappés de sirop."
+    },
+    "creamcake": {
+      "name": "Gâteau à la crème",
+      "lede": "Génoise moelleuse, crème légère et fraises."
+    },
+    "classic": {
+      "name": "Classiques du monde",
+      "lede": "Du tiramisu au baklava, le goût d’un pays."
+    }
+  },
+  "cart": {
+    "title": "Votre panier",
+    "close": "Fermer le panier",
+    "empty": "Votre panier est vide.",
+    "remove": "Retirer {name}",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "total": "Total",
+    "checkout": "Commander",
+    "added": "{name} ajouté au panier."
+  },
+  "checkout": {
+    "metaTitle": "Commande",
+    "title": "Commande",
+    "demo": "Ceci est une démo. Aucun paiement ni livraison réels, et vos informations ne sont envoyées nulle part.",
+    "name": "Nom du destinataire",
+    "email": "E-mail",
+    "address": "Adresse de livraison",
+    "required": "Ce champ est obligatoire.",
+    "emailInvalid": "Saisissez un e-mail comme name@example.com.",
+    "errorSummary": "Veuillez vérifier vos informations.",
+    "submit": "Valider la commande de démo",
+    "submitting": "Commande en cours",
+    "summary": "Récapitulatif",
+    "empty": "Aucun dessert à commander.",
+    "successTitle": "Votre commande est confirmée",
+    "successBody": "Numéro de commande de démo : {orderNo}. Aucun paiement ni livraison réels.",
+    "continue": "Continuer"
+  },
+  "credits": {
+    "metaTitle": "Crédits",
+    "title": "Crédits photos et icônes",
+    "photos": "Photos : Unsplash",
+    "icons": "Icônes : Flaticon",
+    "hero": "Portrait d’accueil",
+    "by": "Photo : {name}"
+  },
+  "footer": {
+    "tagline": "Une boutique de démonstration présentant les desserts du monde en 10 langues.",
+    "credits": "Crédits photos et icônes"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "back": "Retour à l’accueil"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Né à Canberra : un shake au chocolat surmonté de crème et de chocolat."
+    },
+    "vanilla-malt": {
+      "name": "Milkshake vanille-malt",
+      "description": "Un classique des soda fountains américains : glace vanille, malt et sirop de chocolat."
+    },
+    "new-york-cheesecake": {
+      "name": "Cheesecake new-yorkais",
+      "description": "Le dessert emblématique de New York : dense, lisse et riche en fromage frais."
+    },
+    "basque-cheesecake": {
+      "name": "Cheesecake basque",
+      "description": "De Saint-Sébastien : brûlé à feu vif à l’extérieur, crémeux à l’intérieur."
+    },
+    "blueberry-muffin": {
+      "name": "Muffin aux myrtilles",
+      "description": "Un muffin américain garni de myrtilles juteuses et saupoudré de sucre glace."
+    },
+    "bran-muffin": {
+      "name": "Muffin au son",
+      "description": "Un incontournable des cafés canadiens : son de blé et douceur légère."
+    },
+    "maple-pancake": {
+      "name": "Pancakes au sirop d’érable",
+      "description": "Une pile généreuse de pancakes nappés de sirop d’érable canadien."
+    },
+    "forest-berry-pancake": {
+      "name": "Pancakes aux fruits des bois",
+      "description": "Inspirés des forêts suédoises en été, avec fruits rouges acidulés et sirop."
+    },
+    "strawberry-shortcake": {
+      "name": "Shortcake japonais aux fraises",
+      "description": "L’icône des pâtisseries japonaises : génoise aérienne, crème et fraises."
+    },
+    "saeng-cream-cake": {
+      "name": "Part de gâteau coréen à la crème",
+      "description": "Un favori des boulangeries coréennes : crème de lait peu sucrée et génoise tendre."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "Le gâteau de printemps de la pâtisserie française, ceint de fraises coupées."
+    },
+    "tiramisu": {
+      "name": "Tiramisu",
+      "description": "Le dessert italien par excellence : biscuits au café, mascarpone et cacao."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de nata",
+      "description": "Le trésor du Portugal : pâte croustillante et crème onctueuse, bien dorée."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "Le chef-d’œuvre turc : fines couches de pâte, pistaches et sirop."
+    },
+    "black-forest-cake": {
+      "name": "Forêt-Noire",
+      "description": "Le célèbre gâteau allemand : génoise au chocolat, crème fouettée et cerises."
+    },
+    "egg-tart": {
+      "name": "Tartelette cantonaise",
+      "description": "Née avec la culture du thé cantonaise, cette douceur se distingue par sa crème soyeuse."
+    }
+  }
+}

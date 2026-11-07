@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Sobremesas de todo o mundo",
+    "description": "Uma loja global que apresenta e vende sobremesas de todo o mundo, disponível em 10 idiomas."
+  },
+  "nav": {
+    "skip": "Ir para o conteúdo",
+    "main": "Menu principal",
+    "home": "Início da Dessert World",
+    "shop": "Sobremesas",
+    "cart": "Carrinho",
+    "cartWithCount": "Carrinho, {count} itens",
+    "language": "Escolher idioma",
+    "motionPause": "Pausar animações",
+    "motionPlay": "Reproduzir animações"
+  },
+  "hero": {
+    "eyebrow": "Sobremesas do mundo · 10 idiomas",
+    "tagline": "Apresentamos e vendemos sobremesas de todo o mundo, em 10 idiomas.",
+    "cta": "Explorar sobremesas",
+    "scroll": "Role para baixo"
+  },
+  "manifesto": {
+    "text": "Da doçura de um batido ao tostado de um cheesecake basco, cada dentada guarda o tempo de um lugar. Procuramos as sobremesas do mundo e apresentamo-las na sua língua."
+  },
+  "showcase": {
+    "label": "Categorias de sobremesas",
+    "cta": "Ver: {category}",
+    "count": "{count} variedades"
+  },
+  "zoom": {
+    "title": "Um mundo em cada fatia",
+    "body": "Quanto mais de perto se olha, mais histórias se veem. Partilhamos os ingredientes, as origens e o ofício."
+  },
+  "world": {
+    "title": "Viagem pelas sobremesas do mundo",
+    "lede": "Percorra a doçura de cada país."
+  },
+  "trail": {
+    "title": "Siga a doçura",
+    "cta": "Ver todas as sobremesas"
+  },
+  "shop": {
+    "metaTitle": "Sobremesas",
+    "title": "Sobremesas do mundo",
+    "filter": "Filtrar por categoria",
+    "all": "Todas",
+    "results": "{count} sobremesas",
+    "add": "Adicionar {name} ao carrinho",
+    "addShort": "Adicionar",
+    "view": "Ver"
+  },
+  "product": {
+    "back": "Voltar às sobremesas",
+    "origin": "Origem",
+    "weight": "Peso",
+    "allergens": "Alergénios",
+    "quantity": "Quantidade",
+    "decrease": "Diminuir quantidade",
+    "increase": "Aumentar quantidade",
+    "add": "Adicionar ao carrinho",
+    "related": "Também pode gostar",
+    "notice": "As informações e os preços são exemplos de demonstração."
+  },
+  "allergens": {
+    "milk": "Leite",
+    "egg": "Ovo",
+    "wheat": "Trigo",
+    "nuts": "Frutos de casca rija"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Batido",
+      "lede": "Frio, espesso e a transbordar de alegria."
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "lede": "Denso ou tostado, um momento de queijo creme."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "O calor da manhã, bem crescido."
+    },
+    "pancake": {
+      "name": "Panqueca",
+      "lede": "Bem empilhadas, com xarope a escorrer."
+    },
+    "creamcake": {
+      "name": "Bolo de natas",
+      "lede": "Pão de ló fofo, natas leves e morangos."
+    },
+    "classic": {
+      "name": "Clássicos do mundo",
+      "lede": "Do tiramisù à baklava, o sabor de um país."
+    }
+  },
+  "cart": {
+    "title": "O seu carrinho",
+    "close": "Fechar carrinho",
+    "empty": "O seu carrinho está vazio.",
+    "remove": "Remover {name}",
+    "subtotal": "Subtotal",
+    "shipping": "Envio",
+    "total": "Total",
+    "checkout": "Finalizar compra",
+    "added": "{name} adicionado ao carrinho."
+  },
+  "checkout": {
+    "metaTitle": "Finalizar compra",
+    "title": "Finalizar compra",
+    "demo": "Isto é uma demonstração. Não há pagamento nem entrega reais, e os seus dados não são enviados.",
+    "name": "Nome do destinatário",
+    "email": "E-mail",
+    "address": "Morada de entrega",
+    "required": "Este campo é obrigatório.",
+    "emailInvalid": "Introduza um e-mail como name@example.com.",
+    "errorSummary": "Verifique os seus dados.",
+    "submit": "Fazer encomenda de demonstração",
+    "submitting": "A processar encomenda",
+    "summary": "Resumo da encomenda",
+    "empty": "Não há sobremesas para encomendar.",
+    "successTitle": "A sua encomenda está concluída",
+    "successBody": "Número da encomenda de demonstração: {orderNo}. Não há pagamento nem entrega reais.",
+    "continue": "Continuar a ver"
+  },
+  "credits": {
+    "metaTitle": "Créditos",
+    "title": "Créditos de fotos e ícones",
+    "photos": "Fotos: Unsplash",
+    "icons": "Ícones: Flaticon",
+    "hero": "Retrato inicial",
+    "by": "Foto de {name}"
+  },
+  "footer": {
+    "tagline": "Uma loja de demonstração com sobremesas do mundo em 10 idiomas.",
+    "credits": "Créditos de fotos e ícones"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "back": "Voltar ao início"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Nascido em Camberra: um batido de chocolate coberto de natas e chocolate."
+    },
+    "vanilla-malt": {
+      "name": "Batido de baunilha e malte",
+      "description": "Um clássico americano: gelado de baunilha, malte e xarope de chocolate."
+    },
+    "new-york-cheesecake": {
+      "name": "Cheesecake de Nova Iorque",
+      "description": "A sobremesa emblemática de Nova Iorque: densa, suave e rica em queijo creme."
+    },
+    "basque-cheesecake": {
+      "name": "Cheesecake basco",
+      "description": "De San Sebastián: tostado por fora em lume forte, cremoso por dentro."
+    },
+    "blueberry-muffin": {
+      "name": "Muffin de mirtilo",
+      "description": "Um muffin americano cheio de mirtilos suculentos e polvilhado com açúcar em pó."
+    },
+    "bran-muffin": {
+      "name": "Muffin de farelo",
+      "description": "Um básico do pequeno-almoço canadiano: farelo tostado e doçura suave."
+    },
+    "maple-pancake": {
+      "name": "Panquecas com ácer",
+      "description": "Uma pilha generosa de panquecas com xarope de ácer canadiano."
+    },
+    "forest-berry-pancake": {
+      "name": "Panquecas de frutos silvestres",
+      "description": "Inspiradas nas florestas suecas de verão, com frutos ácidos e xarope."
+    },
+    "strawberry-shortcake": {
+      "name": "Shortcake japonês de morango",
+      "description": "O ícone das pastelarias japonesas: pão de ló fofo, natas e morangos."
+    },
+    "saeng-cream-cake": {
+      "name": "Fatia coreana de natas",
+      "description": "Favorita das padarias coreanas: natas pouco doces e pão de ló macio."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "O bolo primaveril da pastelaria francesa, rodeado de morangos cortados."
+    },
+    "tiramisu": {
+      "name": "Tiramisù",
+      "description": "A sobremesa italiana por excelência: biscoitos com café, mascarpone e cacau."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de nata",
+      "description": "O tesouro de Portugal: massa estaladiça e creme rico, bem tostado."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "A obra-prima da Turquia: massa fina em camadas, pistácio e calda."
+    },
+    "black-forest-cake": {
+      "name": "Bolo Floresta Negra",
+      "description": "O famoso bolo alemão: pão de ló de chocolate, natas e cerejas."
+    },
+    "egg-tart": {
+      "name": "Tartelete cantonesa",
+      "description": "Nascida com a cultura cantonesa do chá, destaca-se pelo creme sedoso."
+    }
+  }
+}

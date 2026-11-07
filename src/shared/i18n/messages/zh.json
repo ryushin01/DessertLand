@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "汇聚全球甜点",
+    "description": "介绍并销售全球甜点的国际商店,支持 10 种语言。"
+  },
+  "nav": {
+    "skip": "跳到正文",
+    "main": "主菜单",
+    "home": "Dessert World 首页",
+    "shop": "甜点",
+    "cart": "购物车",
+    "cartWithCount": "购物车,{count} 件",
+    "language": "选择语言",
+    "motionPause": "暂停动效",
+    "motionPlay": "播放动效"
+  },
+  "hero": {
+    "eyebrow": "全球甜点 · 10 种语言",
+    "tagline": "我们介绍并销售来自世界各地的甜点,提供包括中文在内的 10 种语言。",
+    "cta": "浏览甜点",
+    "scroll": "向下滚动"
+  },
+  "manifesto": {
+    "text": "从奶昔的香甜到巴斯克芝士蛋糕的焦香,每一口都藏着一个地方的时光。我们寻找世界各地的甜点,并用您的语言呈现。"
+  },
+  "showcase": {
+    "label": "甜点分类",
+    "cta": "查看{category}",
+    "count": "{count} 款"
+  },
+  "zoom": {
+    "title": "一块甜点,一个世界",
+    "body": "看得越近,故事越多。我们为您介绍食材、起源与工艺。"
+  },
+  "world": {
+    "title": "环球甜点之旅",
+    "lede": "横向浏览,品味各国不同的甜蜜。"
+  },
+  "trail": {
+    "title": "追随这份甜蜜",
+    "cta": "查看全部甜点"
+  },
+  "shop": {
+    "metaTitle": "甜点",
+    "title": "世界甜点",
+    "filter": "按分类筛选",
+    "all": "全部",
+    "results": "{count} 款甜点",
+    "add": "将{name}加入购物车",
+    "addShort": "加入",
+    "view": "查看"
+  },
+  "product": {
+    "back": "返回甜点列表",
+    "origin": "起源",
+    "weight": "重量",
+    "allergens": "过敏原",
+    "quantity": "数量",
+    "decrease": "减少数量",
+    "increase": "增加数量",
+    "add": "加入购物车",
+    "related": "您可能还喜欢",
+    "notice": "商品信息和价格仅为演示示例。"
+  },
+  "allergens": {
+    "milk": "牛奶",
+    "egg": "鸡蛋",
+    "wheat": "小麦",
+    "nuts": "坚果"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "奶昔",
+      "lede": "冰凉浓郁,满杯欢愉。"
+    },
+    "cheesecake": {
+      "name": "芝士蛋糕",
+      "lede": "或绵密或焦香,属于奶油芝士的时光。"
+    },
+    "muffin": {
+      "name": "玛芬",
+      "lede": "高高隆起的清晨暖意。"
+    },
+    "pancake": {
+      "name": "松饼",
+      "lede": "层层堆叠,糖浆缓缓流下。"
+    },
+    "creamcake": {
+      "name": "鲜奶油蛋糕",
+      "lede": "松软蛋糕、轻盈奶油与草莓。"
+    },
+    "classic": {
+      "name": "世界经典",
+      "lede": "从提拉米苏到果仁蜜饼,一国之味。"
+    }
+  },
+  "cart": {
+    "title": "购物车",
+    "close": "关闭购物车",
+    "empty": "购物车是空的。",
+    "remove": "删除{name}",
+    "subtotal": "小计",
+    "shipping": "运费",
+    "total": "合计",
+    "checkout": "去结算",
+    "added": "已将{name}加入购物车。"
+  },
+  "checkout": {
+    "metaTitle": "结算",
+    "title": "结算",
+    "demo": "这是演示网站。不会产生真实付款或配送,您输入的信息也不会发送到任何地方。",
+    "name": "收件人姓名",
+    "email": "电子邮箱",
+    "address": "收货地址",
+    "required": "此项为必填项。",
+    "emailInvalid": "请按 name@example.com 的格式输入。",
+    "errorSummary": "请检查您输入的信息。",
+    "submit": "提交演示订单",
+    "submitting": "正在提交",
+    "summary": "订单摘要",
+    "empty": "没有可结算的甜点。",
+    "successTitle": "订单已完成",
+    "successBody": "演示订单号:{orderNo}。不会产生真实付款或配送。",
+    "continue": "继续浏览"
+  },
+  "credits": {
+    "metaTitle": "版权信息",
+    "title": "图片与图标来源",
+    "photos": "图片:Unsplash",
+    "icons": "图标:Flaticon",
+    "hero": "首屏人物照片",
+    "by": "摄影:{name}"
+  },
+  "footer": {
+    "tagline": "以 10 种语言介绍全球甜点的演示商店。",
+    "credits": "图片与图标来源"
+  },
+  "notFound": {
+    "title": "找不到页面",
+    "back": "返回首页"
+  },
+  "products": {
+    "freakshake": {
+      "name": "狂欢奶昔",
+      "description": "诞生于堪培拉:巧克力奶昔上高高堆起奶油与巧克力。"
+    },
+    "vanilla-malt": {
+      "name": "香草麦芽奶昔",
+      "description": "美式冷饮店经典:香草冰淇淋配麦芽与巧克力糖浆。"
+    },
+    "new-york-cheesecake": {
+      "name": "纽约芝士蛋糕",
+      "description": "纽约代表甜点:用大量奶油芝士烤出的绵密顺滑。"
+    },
+    "basque-cheesecake": {
+      "name": "巴斯克芝士蛋糕",
+      "description": "来自圣塞巴斯蒂安:高温烤出焦香外皮,内里绵滑。"
+    },
+    "blueberry-muffin": {
+      "name": "蓝莓玛芬",
+      "description": "美式玛芬,满满多汁蓝莓,再撒上糖粉。"
+    },
+    "bran-muffin": {
+      "name": "晨间麸皮玛芬",
+      "description": "加拿大咖啡馆的早餐常客:麸皮香气与淡淡甜味。"
+    },
+    "maple-pancake": {
+      "name": "枫糖松饼",
+      "description": "厚厚堆叠的松饼,淋满加拿大枫糖浆。"
+    },
+    "forest-berry-pancake": {
+      "name": "森林莓果松饼",
+      "description": "灵感来自瑞典夏日森林,搭配酸甜莓果与糖浆。"
+    },
+    "strawberry-shortcake": {
+      "name": "草莓鲜奶蛋糕",
+      "description": "日本西点店的象征:松软海绵蛋糕夹鲜奶油与草莓。"
+    },
+    "saeng-cream-cake": {
+      "name": "韩式鲜奶油切片蛋糕",
+      "description": "韩国社区面包店人气款:微甜牛奶奶油配柔软蛋糕。"
+    },
+    "fraisier": {
+      "name": "法式草莓蛋糕",
+      "description": "法式甜点店的春日蛋糕,切面草莓环绕一圈。"
+    },
+    "tiramisu": {
+      "name": "提拉米苏",
+      "description": "意大利代表甜点:咖啡浸手指饼、马斯卡彭与可可。"
+    },
+    "pastel-de-nata": {
+      "name": "葡式蛋挞",
+      "description": "葡萄牙名点:酥脆外皮配浓郁蛋奶馅,烤至焦斑。"
+    },
+    "baklava": {
+      "name": "果仁蜜饼",
+      "description": "土耳其名作:层层薄酥皮夹开心果,浸透糖浆。"
+    },
+    "black-forest-cake": {
+      "name": "黑森林蛋糕",
+      "description": "德国名蛋糕:巧克力蛋糕、鲜奶油与樱桃层层相叠。"
+    },
+    "egg-tart": {
+      "name": "广式蛋挞",
+      "description": "伴随广东茶文化成长的点心,以丝滑蛋奶馅著称。"
+    }
+  }
+}

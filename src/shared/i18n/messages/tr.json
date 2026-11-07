@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Dünyanın dört bir yanından tatlılar",
+    "description": "Dünyanın dört bir yanından tatlıları tanıtan ve satan, 10 dilde hizmet veren küresel mağaza."
+  },
+  "nav": {
+    "skip": "İçeriğe geç",
+    "main": "Ana menü",
+    "home": "Dessert World ana sayfa",
+    "shop": "Tatlılar",
+    "cart": "Sepet",
+    "cartWithCount": "Sepet, {count} ürün",
+    "language": "Dil seçin",
+    "motionPause": "Hareketi durdur",
+    "motionPlay": "Hareketi başlat"
+  },
+  "hero": {
+    "eyebrow": "Dünya tatlıları · 10 dil",
+    "tagline": "Dünyanın her köşesinden tatlıları 10 dilde tanıtıyor ve satıyoruz.",
+    "cta": "Tatlıları keşfet",
+    "scroll": "Aşağı kaydırın"
+  },
+  "manifesto": {
+    "text": "Bir milkshake’in tatlılığından Bask cheesecake’inin yanık kabuğuna, her lokma bir yerin zamanını taşır. Dünyanın tatlılarını arıyor, size kendi dilinizde sunuyoruz."
+  },
+  "showcase": {
+    "label": "Tatlı kategorileri",
+    "cta": "{category} görüntüle",
+    "count": "{count} çeşit"
+  },
+  "zoom": {
+    "title": "Her dilimde bir dünya",
+    "body": "Yaklaştıkça daha çok hikâye görünür. Malzemeleri, kökenleri ve yapılışını paylaşıyoruz."
+  },
+  "world": {
+    "title": "Dünya tatlılarında yolculuk",
+    "lede": "Her ülkenin tatlılığını keşfedin."
+  },
+  "trail": {
+    "title": "Tatlılığın peşinden gidin",
+    "cta": "Tüm tatlıları görüntüle"
+  },
+  "shop": {
+    "metaTitle": "Tatlılar",
+    "title": "Dünya tatlıları",
+    "filter": "Kategoriye göre filtrele",
+    "all": "Tümü",
+    "results": "{count} tatlı",
+    "add": "{name} sepete ekle",
+    "addShort": "Ekle",
+    "view": "Gör"
+  },
+  "product": {
+    "back": "Tatlılara dön",
+    "origin": "Köken",
+    "weight": "Ağırlık",
+    "allergens": "Alerjenler",
+    "quantity": "Adet",
+    "decrease": "Adedi azalt",
+    "increase": "Adedi artır",
+    "add": "Sepete ekle",
+    "related": "Bunları da beğenebilirsiniz",
+    "notice": "Ürün bilgileri ve fiyatlar demo örnekleridir."
+  },
+  "allergens": {
+    "milk": "Süt",
+    "egg": "Yumurta",
+    "wheat": "Buğday",
+    "nuts": "Sert kabuklu yemişler"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Milkshake",
+      "lede": "Soğuk, yoğun ve neşe dolu."
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "lede": "Yoğun ya da yanık, krem peynir zamanı."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "Kabarmış bir sabah sıcaklığı."
+    },
+    "pancake": {
+      "name": "Pankek",
+      "lede": "Üst üste dizilmiş, şurubu akan."
+    },
+    "creamcake": {
+      "name": "Kremalı pasta",
+      "lede": "Yumuşak kek, hafif krema ve çilek."
+    },
+    "classic": {
+      "name": "Dünya klasikleri",
+      "lede": "Tiramisudan baklavaya, bir ülkenin tadı."
+    }
+  },
+  "cart": {
+    "title": "Sepetiniz",
+    "close": "Sepeti kapat",
+    "empty": "Sepetiniz boş.",
+    "remove": "{name} kaldır",
+    "subtotal": "Ara toplam",
+    "shipping": "Kargo",
+    "total": "Toplam",
+    "checkout": "Siparişi tamamla",
+    "added": "{name} sepete eklendi."
+  },
+  "checkout": {
+    "metaTitle": "Sipariş",
+    "title": "Sipariş",
+    "demo": "Bu bir demodur. Gerçek ödeme veya teslimat yapılmaz, bilgileriniz hiçbir yere gönderilmez.",
+    "name": "Alıcı adı",
+    "email": "E-posta",
+    "address": "Teslimat adresi",
+    "required": "Bu alan zorunludur.",
+    "emailInvalid": "name@example.com biçiminde bir e-posta girin.",
+    "errorSummary": "Lütfen bilgilerinizi kontrol edin.",
+    "submit": "Demo siparişi ver",
+    "submitting": "Sipariş işleniyor",
+    "summary": "Sipariş özeti",
+    "empty": "Sipariş edilecek tatlı yok.",
+    "successTitle": "Siparişiniz tamamlandı",
+    "successBody": "Demo sipariş numarası: {orderNo}. Gerçek ödeme veya teslimat yapılmaz.",
+    "continue": "Göz atmaya devam et"
+  },
+  "credits": {
+    "metaTitle": "Kaynaklar",
+    "title": "Fotoğraf ve simge kaynakları",
+    "photos": "Fotoğraflar: Unsplash",
+    "icons": "Simgeler: Flaticon",
+    "hero": "Ana sayfa portresi",
+    "by": "Fotoğraf: {name}"
+  },
+  "footer": {
+    "tagline": "Dünya tatlılarını 10 dilde tanıtan demo mağaza.",
+    "credits": "Fotoğraf ve simge kaynakları"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "back": "Ana sayfaya dön"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Canberra doğumlu: krema ve çikolatayla yükselen çikolatalı shake."
+    },
+    "vanilla-malt": {
+      "name": "Vanilyalı malt shake",
+      "description": "Amerikan soda çeşmelerinin klasiği: vanilyalı dondurma, malt ve çikolata şurubu."
+    },
+    "new-york-cheesecake": {
+      "name": "New York cheesecake",
+      "description": "New York’un simge tatlısı: yoğun, pürüzsüz ve krem peynir dolu."
+    },
+    "basque-cheesecake": {
+      "name": "San Sebastián cheesecake",
+      "description": "San Sebastián’dan: yüksek ısıda dışı yanık, içi kremamsı."
+    },
+    "blueberry-muffin": {
+      "name": "Yaban mersinli muffin",
+      "description": "Sulu yaban mersinleriyle dolu, pudra şekerli Amerikan muffini."
+    },
+    "bran-muffin": {
+      "name": "Kepekli muffin",
+      "description": "Kanada kafelerinin kahvaltı klasiği: kepek ve hafif tatlılık."
+    },
+    "maple-pancake": {
+      "name": "Akçaağaç şuruplu pankek",
+      "description": "Kanada akçaağaç şurubuyla kaplı kalın pankek yığını."
+    },
+    "forest-berry-pancake": {
+      "name": "Orman meyveli pankek",
+      "description": "İsveç’in yaz ormanlarından esinlenen, ekşi meyveli ve şuruplu pankek."
+    },
+    "strawberry-shortcake": {
+      "name": "Japon çilekli shortcake",
+      "description": "Japon pastanelerinin simgesi: pufuduk kek, krema ve çilek."
+    },
+    "saeng-cream-cake": {
+      "name": "Kore usulü kremalı dilim",
+      "description": "Kore mahalle fırınlarının gözdesi: az tatlı süt kreması ve yumuşak kek."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "Kesik çileklerle çevrili, Fransız pastanelerinin bahar pastası."
+    },
+    "tiramisu": {
+      "name": "Tiramisu",
+      "description": "İtalya’nın simge tatlısı: kahveli bisküvi, mascarpone ve kakao."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de nata",
+      "description": "Portekiz’in hazinesi: çıtır hamur, yoğun krema ve kızarmış yüzey."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "Türkiye’nin başyapıtı: ince yufka katları, antep fıstığı ve şerbet."
+    },
+    "black-forest-cake": {
+      "name": "Kara Orman pastası",
+      "description": "Almanya’nın ünlü pastası: çikolatalı kek, krema ve kiraz."
+    },
+    "egg-tart": {
+      "name": "Kanton usulü yumurtalı tart",
+      "description": "Kanton çay kültürüyle büyüyen, ipeksi yumurta kremasıyla bilinen atıştırmalık."
+    }
+  }
+}

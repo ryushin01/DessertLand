@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+styled-system/
+styled-system-studio/
+storybook-static/
+playwright-report/
+test-results/
+coverage/
+.env*
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.idea/

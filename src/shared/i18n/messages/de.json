@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Desserts aus aller Welt",
+    "description": "Ein globaler Shop, der Desserts aus aller Welt vorstellt und verkauft – in 10 Sprachen."
+  },
+  "nav": {
+    "skip": "Zum Inhalt springen",
+    "main": "Hauptmenü",
+    "home": "Dessert World Startseite",
+    "shop": "Desserts",
+    "cart": "Warenkorb",
+    "cartWithCount": "Warenkorb, {count} Artikel",
+    "language": "Sprache wählen",
+    "motionPause": "Animationen pausieren",
+    "motionPlay": "Animationen abspielen"
+  },
+  "hero": {
+    "eyebrow": "Desserts der Welt · 10 Sprachen",
+    "tagline": "Wir stellen Desserts aus aller Welt vor und verkaufen sie – in 10 Sprachen.",
+    "cta": "Desserts entdecken",
+    "scroll": "Nach unten scrollen"
+  },
+  "manifesto": {
+    "text": "Von der Süße eines Milkshakes bis zur dunklen Kruste eines baskischen Käsekuchens: Jeder Bissen trägt die Zeit eines Ortes in sich. Wir suchen die Desserts der Welt und bringen sie in Ihrer Sprache zu Ihnen."
+  },
+  "showcase": {
+    "label": "Dessert-Kategorien",
+    "cta": "{category} ansehen",
+    "count": "{count} Sorten"
+  },
+  "zoom": {
+    "title": "Eine Welt in jedem Stück",
+    "body": "Je näher man hinsieht, desto mehr Geschichten zeigen sich. Wir erzählen von Zutaten, Herkunft und Handwerk."
+  },
+  "world": {
+    "title": "Eine Reise durch die Desserts der Welt",
+    "lede": "Entdecken Sie die Süße jedes Landes."
+  },
+  "trail": {
+    "title": "Folgen Sie der Süße",
+    "cta": "Alle Desserts ansehen"
+  },
+  "shop": {
+    "metaTitle": "Desserts",
+    "title": "Desserts der Welt",
+    "filter": "Nach Kategorie filtern",
+    "all": "Alle",
+    "results": "{count} Desserts",
+    "add": "{name} in den Warenkorb",
+    "addShort": "Hinzufügen",
+    "view": "Ansehen"
+  },
+  "product": {
+    "back": "Zurück zu den Desserts",
+    "origin": "Herkunft",
+    "weight": "Gewicht",
+    "allergens": "Allergene",
+    "quantity": "Menge",
+    "decrease": "Menge verringern",
+    "increase": "Menge erhöhen",
+    "add": "In den Warenkorb",
+    "related": "Das könnte Ihnen auch gefallen",
+    "notice": "Produktangaben und Preise sind Demo-Beispiele."
+  },
+  "allergens": {
+    "milk": "Milch",
+    "egg": "Ei",
+    "wheat": "Weizen",
+    "nuts": "Schalenfrüchte"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "Milkshake",
+      "lede": "Kalt, cremig und voller Freude."
+    },
+    "cheesecake": {
+      "name": "Käsekuchen",
+      "lede": "Dicht oder karamellisiert: reine Frischkäse-Zeit."
+    },
+    "muffin": {
+      "name": "Muffin",
+      "lede": "Die Wärme des Morgens, hoch aufgegangen."
+    },
+    "pancake": {
+      "name": "Pancake",
+      "lede": "Hoch gestapelt, mit fließendem Sirup."
+    },
+    "creamcake": {
+      "name": "Sahnetorte",
+      "lede": "Weicher Biskuit, leichte Sahne und Erdbeeren."
+    },
+    "classic": {
+      "name": "Klassiker der Welt",
+      "lede": "Von Tiramisu bis Baklava: der Geschmack eines Landes."
+    }
+  },
+  "cart": {
+    "title": "Ihr Warenkorb",
+    "close": "Warenkorb schließen",
+    "empty": "Ihr Warenkorb ist leer.",
+    "remove": "{name} entfernen",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "added": "{name} wurde in den Warenkorb gelegt."
+  },
+  "checkout": {
+    "metaTitle": "Kasse",
+    "title": "Kasse",
+    "demo": "Dies ist eine Demo. Es finden weder Zahlung noch Lieferung statt, und Ihre Angaben werden nirgendwohin gesendet.",
+    "name": "Name des Empfängers",
+    "email": "E-Mail",
+    "address": "Lieferadresse",
+    "required": "Dieses Feld ist erforderlich.",
+    "emailInvalid": "Geben Sie eine E-Mail wie name@example.com ein.",
+    "errorSummary": "Bitte prüfen Sie Ihre Angaben.",
+    "submit": "Demo-Bestellung abschicken",
+    "submitting": "Bestellung läuft",
+    "summary": "Bestellübersicht",
+    "empty": "Keine Desserts zum Bestellen.",
+    "successTitle": "Ihre Bestellung ist abgeschlossen",
+    "successBody": "Demo-Bestellnummer: {orderNo}. Es findet keine Zahlung oder Lieferung statt.",
+    "continue": "Weiter stöbern"
+  },
+  "credits": {
+    "metaTitle": "Quellen",
+    "title": "Foto- und Icon-Quellen",
+    "photos": "Fotos: Unsplash",
+    "icons": "Icons: Flaticon",
+    "hero": "Porträt auf der Startseite",
+    "by": "Foto von {name}"
+  },
+  "footer": {
+    "tagline": "Ein Demo-Shop mit Desserts der Welt in 10 Sprachen.",
+    "credits": "Foto- und Icon-Quellen"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "back": "Zur Startseite"
+  },
+  "products": {
+    "freakshake": {
+      "name": "Freakshake",
+      "description": "Aus Canberra: ein Schokoshake, hoch getürmt mit Sahne und Schokolade."
+    },
+    "vanilla-malt": {
+      "name": "Vanille-Malz-Shake",
+      "description": "Ein Klassiker der amerikanischen Soda Fountains: Vanilleeis, Malz und Schokosirup."
+    },
+    "new-york-cheesecake": {
+      "name": "New York Cheesecake",
+      "description": "New Yorks Klassiker: dicht, glatt und reich an Frischkäse."
+    },
+    "basque-cheesecake": {
+      "name": "Baskischer Käsekuchen",
+      "description": "Aus San Sebastián: außen dunkel gebacken, innen cremig."
+    },
+    "blueberry-muffin": {
+      "name": "Blaubeermuffin",
+      "description": "Ein amerikanischer Muffin voller saftiger Blaubeeren, mit Puderzucker bestäubt."
+    },
+    "bran-muffin": {
+      "name": "Kleiemuffin",
+      "description": "Ein kanadischer Frühstücksklassiker: nussige Kleie, sanfte Süße."
+    },
+    "maple-pancake": {
+      "name": "Ahorn-Pancakes",
+      "description": "Ein dicker Pancake-Stapel mit kanadischem Ahornsirup."
+    },
+    "forest-berry-pancake": {
+      "name": "Waldbeeren-Pancakes",
+      "description": "Inspiriert von schwedischen Sommerwäldern, mit herben Beeren und Sirup."
+    },
+    "strawberry-shortcake": {
+      "name": "Japanischer Erdbeer-Shortcake",
+      "description": "Die Ikone japanischer Konditoreien: luftiger Biskuit, Sahne und Erdbeeren."
+    },
+    "saeng-cream-cake": {
+      "name": "Koreanisches Sahnetortenstück",
+      "description": "Beliebt in koreanischen Bäckereien: milde Milchsahne und weicher Biskuit."
+    },
+    "fraisier": {
+      "name": "Fraisier",
+      "description": "Die französische Frühlingstorte mit einem Rand aus halbierten Erdbeeren."
+    },
+    "tiramisu": {
+      "name": "Tiramisu",
+      "description": "Italiens berühmtes Dessert: Löffelbiskuits mit Kaffee, Mascarpone und Kakao."
+    },
+    "pastel-de-nata": {
+      "name": "Pastel de Nata",
+      "description": "Portugals Schatz: knuspriger Teig, reiche Vanillecreme, dunkel gebacken."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "description": "Das Meisterwerk der Türkei: hauchdünner Teig, Pistazien und Sirup."
+    },
+    "black-forest-cake": {
+      "name": "Schwarzwälder Kirschtorte",
+      "description": "Deutschlands berühmte Torte: Schokobiskuit, Sahne und Kirschen."
+    },
+    "egg-tart": {
+      "name": "Kantonesisches Eiertörtchen",
+      "description": "Mit der kantonesischen Teekultur gewachsen, bekannt für seine seidige Eiercreme."
+    }
+  }
+}

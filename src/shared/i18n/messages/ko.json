@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "전 세계 디저트를 만나는 곳",
+    "description": "전 세계의 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 10개 언어로 만나 보세요."
+  },
+  "nav": {
+    "skip": "본문 바로가기",
+    "main": "주 메뉴",
+    "home": "Dessert World 홈",
+    "shop": "디저트",
+    "cart": "장바구니",
+    "cartWithCount": "장바구니, {count}개 담김",
+    "language": "언어 선택",
+    "motionPause": "움직임 멈추기",
+    "motionPlay": "움직임 재생"
+  },
+  "hero": {
+    "eyebrow": "전 세계 디저트 · 10개 언어",
+    "tagline": "세계 곳곳의 디저트를 소개하고 판매합니다. 한국어를 비롯한 10개 언어로 만나 보세요.",
+    "cta": "디저트 둘러보기",
+    "scroll": "아래로 스크롤"
+  },
+  "manifesto": {
+    "text": "밀크셰이크의 달콤함부터 바스크 치즈케이크의 그을음까지. 한 입마다 한 나라의 시간이 담겨 있습니다. 우리는 세계의 디저트를 찾아 소개하고, 당신의 언어로 전합니다."
+  },
+  "showcase": {
+    "label": "디저트 카테고리",
+    "cta": "{category} 보기",
+    "count": "{count}종"
+  },
+  "zoom": {
+    "title": "한 조각에 담긴 세계",
+    "body": "가까이 들여다볼수록 더 많은 이야기가 보입니다. 재료와 기원, 만드는 방식까지 모두 소개합니다."
+  },
+  "world": {
+    "title": "세계 디저트 여행",
+    "lede": "나라마다 다른 달콤함을 옆으로 넘기며 만나 보세요."
+  },
+  "trail": {
+    "title": "달콤함을 따라 움직여 보세요",
+    "cta": "모든 디저트 보기"
+  },
+  "shop": {
+    "metaTitle": "디저트",
+    "title": "세계의 디저트",
+    "filter": "카테고리 선택",
+    "all": "전체",
+    "results": "{count}개의 디저트",
+    "add": "{name} 장바구니에 담기",
+    "addShort": "담기",
+    "view": "보기"
+  },
+  "product": {
+    "back": "디저트 목록으로",
+    "origin": "기원",
+    "weight": "중량",
+    "allergens": "알레르기 유발 성분",
+    "quantity": "수량",
+    "decrease": "수량 줄이기",
+    "increase": "수량 늘리기",
+    "add": "장바구니에 담기",
+    "related": "함께 보면 좋은 디저트",
+    "notice": "상품 정보와 가격은 데모용 예시입니다."
+  },
+  "allergens": {
+    "milk": "우유",
+    "egg": "달걀",
+    "wheat": "밀",
+    "nuts": "견과류"
+  },
+  "categories": {
+    "milkshake": {
+      "name": "밀크셰이크",
+      "lede": "차갑고 진하게, 잔 위로 넘치는 즐거움."
+    },
+    "cheesecake": {
+      "name": "치즈케이크",
+      "lede": "묵직하거나 그을리거나, 진한 크림치즈의 시간."
+    },
+    "muffin": {
+      "name": "머핀",
+      "lede": "봉긋하게 솟은 아침의 온기."
+    },
+    "pancake": {
+      "name": "팬케이크",
+      "lede": "겹겹이 쌓고 흘러내리는 시럽까지."
+    },
+    "creamcake": {
+      "name": "생크림 케이크",
+      "lede": "폭신한 시트와 가벼운 크림, 그리고 딸기."
+    },
+    "classic": {
+      "name": "세계의 명작",
+      "lede": "티라미수부터 바클라바까지, 나라를 대표하는 맛."
+    }
+  },
+  "cart": {
+    "title": "장바구니",
+    "close": "장바구니 닫기",
+    "empty": "장바구니가 비어 있습니다.",
+    "remove": "{name} 삭제",
+    "subtotal": "상품 금액",
+    "shipping": "배송비",
+    "total": "합계",
+    "checkout": "주문하기",
+    "added": "{name}을(를) 장바구니에 담았습니다."
+  },
+  "checkout": {
+    "metaTitle": "주문",
+    "title": "주문하기",
+    "demo": "데모 사이트입니다. 실제 결제와 배송은 이루어지지 않으며, 입력한 정보는 어디에도 전송되지 않습니다.",
+    "name": "받는 분 이름",
+    "email": "이메일",
+    "address": "배송 주소",
+    "required": "필수 입력 항목입니다.",
+    "emailInvalid": "이메일 형식으로 입력해 주세요. 예: name@example.com",
+    "errorSummary": "입력 내용을 확인해 주세요.",
+    "submit": "데모 주문 완료하기",
+    "submitting": "주문 처리 중",
+    "summary": "주문 내역",
+    "empty": "주문할 디저트가 없습니다.",
+    "successTitle": "주문이 완료되었습니다",
+    "successBody": "데모 주문 번호는 {orderNo}입니다. 실제 결제와 배송은 이루어지지 않습니다.",
+    "continue": "디저트 더 보기"
+  },
+  "credits": {
+    "metaTitle": "출처",
+    "title": "사진과 아이콘 출처",
+    "photos": "사진: Unsplash",
+    "icons": "아이콘: Flaticon",
+    "hero": "첫 화면 인물 사진",
+    "by": "{name} 촬영"
+  },
+  "footer": {
+    "tagline": "전 세계 디저트를 10개 언어로 소개하는 데모 쇼핑몰입니다.",
+    "credits": "사진과 아이콘 출처"
+  },
+  "notFound": {
+    "title": "페이지를 찾을 수 없습니다",
+    "back": "홈으로 돌아가기"
+  },
+  "products": {
+    "freakshake": {
+      "name": "프릭셰이크",
+      "description": "캔버라에서 시작된 과장의 미학. 초콜릿 셰이크 위에 크림과 초콜릿을 높이 쌓았습니다."
+    },
+    "vanilla-malt": {
+      "name": "바닐라 몰트 셰이크",
+      "description": "미국 소다 파운틴의 고전. 바닐라 아이스크림에 고소한 몰트와 초콜릿 시럽을 더했습니다."
+    },
+    "new-york-cheesecake": {
+      "name": "뉴욕 치즈케이크",
+      "description": "크림치즈를 듬뿍 넣어 묵직하고 매끄럽게 구운 뉴욕의 대표 디저트입니다."
+    },
+    "basque-cheesecake": {
+      "name": "바스크 치즈케이크",
+      "description": "산세바스티안에서 온 치즈케이크. 강한 불로 겉은 그을리고 속은 크리미합니다."
+    },
+    "blueberry-muffin": {
+      "name": "블루베리 머핀",
+      "description": "과즙이 터지는 블루베리를 가득 넣고 슈거 파우더로 마무리한 미국식 머핀입니다."
+    },
+    "bran-muffin": {
+      "name": "모닝 브랜 머핀",
+      "description": "캐나다 카페의 아침 메뉴. 고소한 밀기울과 은은한 단맛이 어우러집니다."
+    },
+    "maple-pancake": {
+      "name": "메이플 팬케이크",
+      "description": "두툼하게 쌓은 팬케이크 위로 캐나다산 메이플 시럽을 넉넉히 흘려 줍니다."
+    },
+    "forest-berry-pancake": {
+      "name": "숲딸기 팬케이크",
+      "description": "스웨덴의 여름 숲에서 영감을 받아 새콤한 베리와 시럽을 올렸습니다."
+    },
+    "strawberry-shortcake": {
+      "name": "쇼트케이크",
+      "description": "일본 제과점의 상징. 폭신한 스펀지 사이에 생크림과 딸기를 넣었습니다."
+    },
+    "saeng-cream-cake": {
+      "name": "생크림 조각 케이크",
+      "description": "달지 않은 우유 크림과 부드러운 시트로 만든 한국 동네 빵집의 인기 메뉴입니다."
+    },
+    "fraisier": {
+      "name": "프레지에",
+      "description": "딸기 단면을 둘러 세운 프랑스 파티스리의 봄 케이크입니다."
+    },
+    "tiramisu": {
+      "name": "티라미수",
+      "description": "커피에 적신 비스킷과 마스카르포네, 코코아로 완성하는 이탈리아의 대표 디저트입니다."
+    },
+    "pastel-de-nata": {
+      "name": "파스텔 드 나타",
+      "description": "바삭한 페이스트리에 진한 커스터드를 채워 그을리게 구운 포르투갈의 명물입니다."
+    },
+    "baklava": {
+      "name": "바클라바",
+      "description": "얇은 반죽을 겹겹이 쌓아 피스타치오를 넣고 시럽을 적신 튀르키예의 명작입니다."
+    },
+    "black-forest-cake": {
+      "name": "슈바르츠밸더 키르슈토르테",
+      "description": "초콜릿 시트와 생크림, 체리를 겹겹이 쌓은 독일의 대표 케이크입니다."
+    },
+    "egg-tart": {
+      "name": "광둥식 에그타르트",
+      "description": "광둥 지역 차 문화와 함께 자란 간식으로, 매끄러운 달걀 커스터드가 특징입니다."
+    }
+  }
+}
