@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
-    title: `Dessert Market — ${t("title")}`,
+    title: `Dessert Land — ${t("title")}`,
     description: t("description"),
     icons: { icon: "/favicon.svg" },
   };

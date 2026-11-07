@@ -8,7 +8,7 @@ type CheckoutPageProps = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: CheckoutPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "checkout" });
-  return { title: `${t("metaTitle")} | Dessert Market`, robots: { index: false } };
+  return { title: `${t("metaTitle")} | Dessert Land`, robots: { index: false } };
 }
 
 export default async function CheckoutPage({ params }: CheckoutPageProps) {
