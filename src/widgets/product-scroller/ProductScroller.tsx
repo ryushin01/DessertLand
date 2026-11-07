@@ -42,7 +42,13 @@ const preview = css({
   alignItems: "center",
   paddingInline: "28px",
 });
-const previewFrame = css({ position: "relative", width: "100%", height: "58vh", overflow: "hidden", borderRadius: "4px" });
+const previewFrame = css({
+  position: "relative",
+  width: "100%",
+  height: "58vh",
+  overflow: "hidden",
+  borderRadius: "4px",
+});
 const previewImage = css({
   objectFit: "cover",
   opacity: 0,
@@ -100,7 +106,10 @@ export function ProductScroller({ products }: ProductScrollerProps) {
   const locale = useLocale();
   const motion = useMotionEnabled();
   const [activeSlug, setActiveSlug] = useState(products[0]?.slug);
+  // 겹쳐 놓은 사진 16장을 한꺼번에 받지 않도록, 지금 상품과 다음 상품부터 차례로 받습니다.
+  const [loaded, setLoaded] = useState(() => new Set(products.slice(0, 2).map(({ slug }) => slug)));
   const listRef = useRef<HTMLUListElement>(null);
+  const activateRef = useRef<(slug: string | undefined) => void>(() => {});
 
   useEffect(() => {
     const items = listRef.current?.querySelectorAll<HTMLElement>("[data-slug]");
@@ -109,7 +118,7 @@ export function ProductScroller({ products }: ProductScrollerProps) {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setActiveSlug((entry.target as HTMLElement).dataset.slug);
+            activateRef.current((entry.target as HTMLElement).dataset.slug);
           }
         }
       },
@@ -119,6 +128,22 @@ export function ProductScroller({ products }: ProductScrollerProps) {
     return () => observer.disconnect();
   }, [products]);
 
+  const activate = (slug: string | undefined) => {
+    if (!slug) return;
+    setActiveSlug(slug);
+    const index = products.findIndex((product) => product.slug === slug);
+    const next = products[index + 1]?.slug;
+    setLoaded((current) => {
+      if (current.has(slug) && (!next || current.has(next))) return current;
+      const updated = new Set(current).add(slug);
+      return next ? updated.add(next) : updated;
+    });
+  };
+
+  useEffect(() => {
+    activateRef.current = activate;
+  });
+
   const nameOf = (slug: string) =>
     tProducts(`${slug}.name` as Parameters<typeof tProducts>[0]) as string;
 
@@ -126,25 +151,40 @@ export function ProductScroller({ products }: ProductScrollerProps) {
     <div className={root} data-motion-state={motion ? "on" : "off"}>
       <div aria-hidden="true" className={backdrop}>
         {products.map((product) => (
-          <div key={product.slug} className={backdropImage} data-active={product.slug === activeSlug}>
-            <Image src={product.image.src} alt="" fill sizes="40vw" className={cover} />
+          <div
+            key={product.slug}
+            className={backdropImage}
+            data-active={product.slug === activeSlug}
+          >
+            {loaded.has(product.slug) ? (
+              <Image
+                src={product.image.src}
+                alt=""
+                fill
+                sizes="20vw"
+                quality={40}
+                className={cover}
+              />
+            ) : null}
           </div>
         ))}
       </div>
       <div className={columns}>
         <div aria-hidden="true" className={preview}>
           <div className={previewFrame}>
-            {products.map((product) => (
-              <Image
-                key={product.slug}
-                src={product.image.src}
-                alt=""
-                fill
-                sizes="40vw"
-                className={previewImage}
-                data-active={product.slug === activeSlug}
-              />
-            ))}
+            {products
+              .filter((product) => loaded.has(product.slug))
+              .map((product) => (
+                <Image
+                  key={product.slug}
+                  src={product.image.src}
+                  alt=""
+                  fill
+                  sizes="40vw"
+                  className={previewImage}
+                  data-active={product.slug === activeSlug}
+                />
+              ))}
           </div>
         </div>
         <ul ref={listRef} className={list}>
@@ -156,8 +196,8 @@ export function ProductScroller({ products }: ProductScrollerProps) {
                 key={product.slug}
                 data-slug={product.slug}
                 className={row}
-                onPointerEnter={() => setActiveSlug(product.slug)}
-                onFocusCapture={() => setActiveSlug(product.slug)}
+                onPointerEnter={() => activate(product.slug)}
+                onFocusCapture={() => activate(product.slug)}
               >
                 <div>
                   <div className={inlinePhoto}>

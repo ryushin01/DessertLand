@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { localeAlternates, siteOpenGraph } from "@/shared/i18n";
 import { CategoryShowcase } from "@/widgets/category-showcase";
 import { Hero } from "@/widgets/hero";
 import { IntroCurtain } from "@/widgets/intro-curtain";
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   return {
     title,
     description,
-    openGraph: { type: "website", siteName: "Dessert Land", title, description },
+    alternates: localeAlternates(locale),
+    openGraph: siteOpenGraph(title, description),
   };
 }
 

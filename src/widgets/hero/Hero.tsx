@@ -7,10 +7,10 @@ import { css, cx } from "styled-system/css";
 
 import { getProduct } from "@/entities/product";
 import { Link } from "@/shared/i18n";
-import { gsap, useGsap, useMotionEnabled } from "@/shared/lib/motion";
+import { gsap, useGsap, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
-import { createBakerRenderer, type BakerRenderer } from "./baker-renderer";
+import type { BakerRenderer } from "./baker-renderer";
 
 const CUTOUT = "/images/hero/baker-cutout.webp";
 const DEPTH = "/images/hero/baker-depth.webp";
@@ -135,13 +135,15 @@ export function Hero() {
   const bakerRef = useRef<HTMLDivElement>(null);
   const fallbackRef = useRef<HTMLImageElement>(null);
   const enabled = useMotionEnabled();
+  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
   const [webglReady, setWebglReady] = useState(false);
 
   // WebGL 손과 밀가루. 실패하면 컷아웃 이미지를 그대로 보여 줍니다.
   useEffect(() => {
     const host = bakerRef.current;
     const root = rootRef.current;
-    if (!enabled || !host || !root) return;
+    // 터치 기기는 마우스 시차가 없으므로 WebGL과 그 코드를 받지 않아 첫 화면을 가볍게 합니다.
+    if (!enabled || !finePointer || !host || !root) return;
 
     let disposed = false;
     let bakerRenderer: BakerRenderer | null = null;
@@ -168,7 +170,8 @@ export function Hero() {
       bakerRenderer?.resize(host.offsetWidth || rect.width, host.offsetHeight || rect.height);
     };
 
-    createBakerRenderer(CUTOUT, DEPTH)
+    import("./baker-renderer")
+      .then(({ createBakerRenderer }) => createBakerRenderer(CUTOUT, DEPTH))
       .then((created) => {
         if (disposed) {
           created.destroy();
@@ -196,7 +199,7 @@ export function Hero() {
       bakerRenderer?.destroy();
       setWebglReady(false);
     };
-  }, [enabled]);
+  }, [enabled, finePointer]);
 
   // 마우스 시차와 스크롤 연출.
   useGsap(

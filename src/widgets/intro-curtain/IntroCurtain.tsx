@@ -28,7 +28,7 @@ const counter = css({
 });
 
 function shouldSkip(): boolean {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
+  if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return true;
   try {
     return (
       sessionStorage.getItem(SEEN_KEY) === "1" ||
@@ -60,7 +60,7 @@ export function IntroCurtain() {
     timeline
       .to(value, {
         count: 100,
-        duration: 1.5,
+        duration: 1.1,
         ease: "power2.inOut",
         onUpdate: () => {
           if (counterRef.current) {
@@ -70,7 +70,7 @@ export function IntroCurtain() {
       })
       .to(ref.current, {
         clipPath: "inset(0% 0% 100% 0%)",
-        duration: 1,
+        duration: 0.8,
         ease: "expo.inOut",
       });
     return () => {
