@@ -52,7 +52,7 @@
 
 ## 기술 스택
 
-![React, Next.js, TypeScript, pnpm, Vitest, Storybook, Playwright, GitHub Actions](https://skillicons.dev/icons?i=react,nextjs,ts,pnpm,vitest,storybook,githubactions)
+![React, Next.js, TypeScript, pnpm, Vitest, GitHub Actions](https://skillicons.dev/icons?i=react,nextjs,ts,pnpm,vitest,githubactions)
 
 | 구분 | 사용 기술 |
 |---|---|
