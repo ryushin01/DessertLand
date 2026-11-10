@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "STORYBOOK_IN_APP=1 storybook build -o public/storybook --quiet",
+    "build-storybook": "storybook build -o public/storybook --quiet",
     "e2e": "playwright test",
     "analyze": "next experimental-analyze"
   },

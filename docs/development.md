@@ -110,5 +110,5 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 - `/storybook`은 정적 파일 폴더라 `/storybook/index.html`로 보냅니다(`next.config.ts`의 `redirects`). 언어 미들웨어(`src/proxy.ts`)는 이 경로를 건너뜁니다.
 - `/storybook/` 아래만 미리보기 iframe을 위해 `X-Frame-Options: SAMEORIGIN`을 쓰고, 나머지는 `DENY`를 유지합니다.
-- `STORYBOOK_IN_APP=1`로 빌드해 `public`을 복사하지 않습니다. 같은 주소에서 열리므로 이미지는 앱의 것을 씁니다.
+- `pnpm build-storybook`(앱 빌드가 먼저 부르는 스크립트)으로 빌드할 때는 `public`을 복사하지 않습니다. 같은 주소에서 열리므로 이미지는 앱의 것을 씁니다.
 
