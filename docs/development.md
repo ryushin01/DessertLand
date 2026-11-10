@@ -103,3 +103,12 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 - 단위 테스트는 코드 옆의 `*.test.ts(x)`에 둡니다.
 - 잘림, 넘침, 접근성은 `pnpm build` 후 `pnpm e2e`로 확인합니다. axe를 통과해도 KWCAG 준수는 아니므로 새 UI는 항목을 직접 점검합니다.
+
+## 디자인 시스템(Storybook) 배포
+
+`pnpm build`는 Storybook을 먼저 `public/storybook`에 빌드한 뒤 앱을 빌드합니다. 그래서 앱과 같은 주소의 `/storybook`에 함께 배포되고, 바닥글의 **Design system (Storybook)** 링크로 들어갑니다.
+
+- `/storybook`은 정적 파일 폴더라 `/storybook/index.html`로 보냅니다(`next.config.ts`의 `redirects`). 언어 미들웨어(`src/proxy.ts`)는 이 경로를 건너뜁니다.
+- `/storybook/` 아래만 미리보기 iframe을 위해 `X-Frame-Options: SAMEORIGIN`을 쓰고, 나머지는 `DENY`를 유지합니다.
+- `pnpm build-storybook`(앱 빌드가 먼저 부르는 스크립트)으로 빌드할 때는 `public`을 복사하지 않습니다. 같은 주소에서 열리므로 이미지는 앱의 것을 씁니다.
+

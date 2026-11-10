@@ -40,10 +40,21 @@ const link = css({
   _hover: { color: "caramel" },
 });
 const external = "https://www.flaticon.com/uicons";
+/** 앱과 함께 배포한 Storybook. 개발 서버에는 빌드 결과물이 없어 Storybook 개발 서버로 보냅니다. */
+const storybook =
+  process.env.NODE_ENV === "development" ? "http://localhost:6006" : "/storybook/index.html";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
-  const words = ["Milkshake", "Cheesecake", "Muffin", "Pancake", "Cream Cake", "Tiramisù", "Baklava"];
+  const words = [
+    "Milkshake",
+    "Cheesecake",
+    "Muffin",
+    "Pancake",
+    "Cream Cake",
+    "Tiramisù",
+    "Baklava",
+  ];
 
   return (
     <footer className={footer}>
@@ -82,6 +93,11 @@ export function SiteFooter() {
             <Link href="/credits" className={link}>
               {t("credits")}
             </Link>
+          </li>
+          <li>
+            <a href={storybook} className={link} lang="en">
+              Design system (Storybook)
+            </a>
           </li>
           <li>
             <a href={external} className={link} rel="noreferrer" lang="en">

@@ -4,6 +4,8 @@ out/
 styled-system/
 styled-system-studio/
 storybook-static/
+# 빌드할 때 만드는 Storybook (앱과 함께 /storybook에 배포)
+/public/storybook/
 playwright-report/
 test-results/
 coverage/
