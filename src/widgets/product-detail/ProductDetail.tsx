@@ -70,7 +70,12 @@ const title = css({
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
-const description = css({ fontSize: "1.1rem", lineHeight: "1.6", maxWidth: "36rem", wordBreak: "var(--word-break)" });
+const description = css({
+  fontSize: "1.1rem",
+  lineHeight: "1.6",
+  maxWidth: "36rem",
+  wordBreak: "var(--word-break)",
+});
 const specs = css({
   display: "grid",
   gridTemplateColumns: "auto 1fr",
@@ -99,7 +104,14 @@ export function ProductDetail({ product }: { product: Product }) {
       const [frameEl] = select("[data-frame]") as HTMLElement[];
       if (!frameEl) return;
       gsap.from(frameEl, { clipPath: "inset(100% 0 0 0)", duration: 1.4, ease: "expo.out" });
-      gsap.from(select("[data-rise]"), { y: 28, opacity: 0, duration: 1, stagger: 0.07, ease: "expo.out", delay: 0.25 });
+      gsap.from(select("[data-rise]"), {
+        y: 28,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.07,
+        ease: "expo.out",
+        delay: 0.25,
+      });
       if (!fine) return;
       const rotY = gsap.quickTo(frameEl, "rotationY", { duration: 0.8, ease: "power3" });
       const rotX = gsap.quickTo(frameEl, "rotationX", { duration: 0.8, ease: "power3" });
@@ -156,7 +168,11 @@ export function ProductDetail({ product }: { product: Product }) {
             <dt>{t("origin")}</dt>
             <dd>{countryName(product.country, locale)}</dd>
             <dt>{t("weight")}</dt>
-            <dd>{new Intl.NumberFormat(locale, { style: "unit", unit: "gram" }).format(product.weightGrams)}</dd>
+            <dd>
+              {new Intl.NumberFormat(locale, { style: "unit", unit: "gram" }).format(
+                product.weightGrams,
+              )}
+            </dd>
             <dt>{t("allergens")}</dt>
             <dd>{product.allergens.map((item) => tAllergens(item)).join(", ")}</dd>
           </dl>

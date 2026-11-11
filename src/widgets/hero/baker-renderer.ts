@@ -90,7 +90,10 @@ export type BakerRenderer = {
 };
 
 /** 손과 밀가루 컷아웃, 깊이 지도로 2.5D 시차를 그리는 WebGL 렌더러입니다. WebGL이 없으면 예외를 던집니다. */
-export async function createBakerRenderer(colorSrc: string, depthSrc: string): Promise<BakerRenderer> {
+export async function createBakerRenderer(
+  colorSrc: string,
+  depthSrc: string,
+): Promise<BakerRenderer> {
   const renderer = new Renderer({
     alpha: true,
     premultipliedAlpha: true,

@@ -1,1 +1,6 @@
-export { default, generateMetadata, generateStaticParams, viewport } from "@/_app/layouts/LocaleLayout";
+export {
+  default,
+  generateMetadata,
+  generateStaticParams,
+  viewport,
+} from "@/_app/layouts/LocaleLayout";
