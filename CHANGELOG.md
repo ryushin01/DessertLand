@@ -1,5 +1,9 @@
 # 변경 기록
 
+## 0.4.3 - 2026-11-12
+
+- 일본어 글꼴: 한국어판과 같은 파티스리 결로 제목은 장식 명조 Kaisei Decol, 본문은 둥근 Zen Maru Gothic (Noto Serif JP·Noto Sans JP에서 바꿈). 중국어는 장식 서체 파일이 커서 Noto 유지
+
 ## 0.4.2 - 2026-11-11
 
 - 대체 글꼴: 제목은 Didot·Bodoni 72·Georgia, 본문은 Helvetica Neue·Segoe UI, 한중일은 각 운영체제의 명조·고딕으로 이음. 한중일이 아닌 언어에서 뒤의 대체 글꼴이 쓰이지 않던 문제(변수 기본값 serif)를 고침

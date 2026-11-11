@@ -29,13 +29,15 @@ const body = Instrument_Sans({ subsets: ["latin", "latin-ext"], variable: "--fon
 
 // next/font로 함께 선언하면 모든 언어에 CSS가 붙어 렌더링을 막으므로, 그 언어의 글꼴만 따로 받습니다.
 // 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 고운돋움(본문). 두 글꼴은 굵기가 400 하나뿐입니다.
+// 일본어도 같은 결로 장식 명조 Kaisei Decol(제목)과 둥근 Zen Maru Gothic(본문).
+// 중국어는 Google Fonts의 장식 서체가 파일이 커서 Noto를 씁니다.
 type CjkFonts = { sans: string; sansWeights: string; serif: string; serifWeights: string };
 const CJK_FONTS: Record<string, CjkFonts> = {
   ko: { sans: "Gowun Dodum", sansWeights: "400", serif: "Grandiflora One", serifWeights: "400" },
   ja: {
-    sans: "Noto Sans JP",
+    sans: "Zen Maru Gothic",
     sansWeights: "400;500;700",
-    serif: "Noto Serif JP",
+    serif: "Kaisei Decol",
     serifWeights: "500",
   },
   zh: {
