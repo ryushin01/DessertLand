@@ -60,10 +60,11 @@ export default defineConfig({
         fonts: {
           display: {
             value:
-              "var(--font-display), var(--font-cjk-serif, serif), 'Times New Roman', serif",
+              "var(--font-display), var(--font-cjk-serif, serif), 'AppleMyungjo', 'Batang', 'Times New Roman', serif",
           },
           body: {
-            value: "var(--font-body), var(--font-cjk-sans, sans-serif), system-ui, sans-serif",
+            value:
+              "var(--font-body), var(--font-cjk-sans, sans-serif), 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif",
           },
         },
         easings: {
