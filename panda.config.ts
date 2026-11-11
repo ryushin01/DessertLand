@@ -60,11 +60,14 @@ export default defineConfig({
         fonts: {
           display: {
             value:
-              "var(--font-display), var(--font-cjk-serif, serif), 'AppleMyungjo', 'Batang', 'Times New Roman', serif",
+              // 대체 글꼴: 파티스리 간판 같은 디도(맥 Didot·Bodoni 72, 윈도 Georgia), 한중일은 각 운영체제의 명조.
+              // 변수 기본값을 serif로 두면 뒤의 대체 글꼴이 쓰이지 않으므로 기본값도 글꼴 이름으로 둡니다.
+              "var(--font-display), var(--font-cjk-serif, 'Didot'), 'Didot', 'Bodoni 72', Georgia, 'AppleMyungjo', 'Batang', 'Hiragino Mincho ProN', 'Yu Mincho', 'Songti SC', 'SimSun', serif",
           },
           body: {
             value:
-              "var(--font-body), var(--font-cjk-sans, sans-serif), 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif",
+              // 본문은 부드러운 산세리프(Helvetica Neue, Segoe UI), 한중일은 각 운영체제의 고딕.
+              "var(--font-body), var(--font-cjk-sans, 'Helvetica Neue'), 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Hiragino Sans', 'Yu Gothic', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif",
           },
         },
         easings: {
