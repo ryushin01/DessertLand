@@ -42,7 +42,12 @@ const columns = css({
   alignItems: "start",
 });
 const summaryTitle = css({ fontFamily: "display", fontSize: "2rem", marginBlockEnd: "14px" });
-const row = css({ display: "flex", justifyContent: "space-between", gap: "16px", paddingBlock: "8px" });
+const row = css({
+  display: "flex",
+  justifyContent: "space-between",
+  gap: "16px",
+  paddingBlock: "8px",
+});
 const total = css({
   display: "flex",
   justifyContent: "space-between",
@@ -135,8 +140,8 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
               {summary.lines.map(({ product, quantity, lineTotal }) => (
                 <li key={product.slug} className={row}>
                   <span>
-                    {tProducts(`${product.slug}.name` as Parameters<typeof tProducts>[0]) as string} ×{" "}
-                    {quantity}
+                    {tProducts(`${product.slug}.name` as Parameters<typeof tProducts>[0]) as string}{" "}
+                    × {quantity}
                   </span>
                   <span>{formatMoney(lineTotal, locale)}</span>
                 </li>

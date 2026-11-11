@@ -14,7 +14,13 @@ const page = css({
   maxWidth: "960px",
   marginInline: "auto",
 });
-const title = css({ fontFamily: "display", fontSize: "clamp(2.6rem, 7vw, 6rem)", lineHeight: "1", marginBlockEnd: "32px", wordBreak: "var(--word-break)" });
+const title = css({
+  fontFamily: "display",
+  fontSize: "clamp(2.6rem, 7vw, 6rem)",
+  lineHeight: "1",
+  marginBlockEnd: "32px",
+  wordBreak: "var(--word-break)",
+});
 const heading = css({ fontFamily: "display", fontSize: "2rem", marginBlock: "32px 12px" });
 const item = css({
   display: "flex",
@@ -24,7 +30,11 @@ const item = css({
   paddingBlock: "10px",
   borderBlockEnd: "1px solid {colors.cocoa.800}",
 });
-const link = css({ textDecoration: "underline", textUnderlineOffset: "3px", _hover: { color: "caramel" } });
+const link = css({
+  textDecoration: "underline",
+  textUnderlineOffset: "3px",
+  _hover: { color: "caramel" },
+});
 
 export async function generateMetadata({ params }: CreditsPageProps): Promise<Metadata> {
   const { locale } = await params;

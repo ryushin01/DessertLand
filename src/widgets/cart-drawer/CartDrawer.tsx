@@ -33,7 +33,11 @@ const dialog = css({
   background: "cocoa.900",
   color: "cream",
   "&::backdrop": { background: "rgba(10, 6, 5, 0.65)", backdropFilter: "blur(6px)" },
-  "&[open]": { animation: "drawerIn 0.5s {easings.silk}", display: "flex", flexDirection: "column" },
+  "&[open]": {
+    animation: "drawerIn 0.5s {easings.silk}",
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 const head = css({
   display: "flex",
@@ -52,7 +56,12 @@ const iconButton = css({
   cursor: "pointer",
   _hover: { background: "cocoa.800" },
 });
-const body = css({ flex: 1, overflowY: "auto", padding: "8px 20px", overscrollBehavior: "contain" });
+const body = css({
+  flex: 1,
+  overflowY: "auto",
+  padding: "8px 20px",
+  overscrollBehavior: "contain",
+});
 const row = css({
   display: "grid",
   gridTemplateColumns: "76px 1fr auto",
@@ -70,7 +79,12 @@ const foot = css({
   borderBlockStart: "1px solid {colors.cocoa.700}",
 });
 const line = css({ display: "flex", justifyContent: "space-between", fontSize: "0.95rem" });
-const total = css({ display: "flex", justifyContent: "space-between", fontSize: "1.2rem", fontWeight: "600" });
+const total = css({
+  display: "flex",
+  justifyContent: "space-between",
+  fontSize: "1.2rem",
+  fontWeight: "600",
+});
 const empty = css({ paddingBlock: "48px", textAlign: "center", color: "muted" });
 const live = css({ srOnly: true });
 

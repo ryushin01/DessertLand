@@ -12,5 +12,10 @@ export default meta;
 type Story = StoryObj<typeof AddToCartButton>;
 export const Default: Story = {};
 export const SmallOutline: Story = {
-  args: { size: "sm", tone: "outline", children: "담기", accessibleName: "바클라바 장바구니에 담기" },
+  args: {
+    size: "sm",
+    tone: "outline",
+    children: "담기",
+    accessibleName: "바클라바 장바구니에 담기",
+  },
 };

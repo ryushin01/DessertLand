@@ -27,9 +27,21 @@ const grid = css({
   gap: "20px",
 });
 const card = css({ display: "block", _hover: { "& img": { transform: "scale(1.06)" } } });
-const photo = css({ position: "relative", display: "block", aspectRatio: "4 / 3", overflow: "hidden", borderRadius: "6px" });
+const photo = css({
+  position: "relative",
+  display: "block",
+  aspectRatio: "4 / 3",
+  overflow: "hidden",
+  borderRadius: "6px",
+});
 const image = css({ objectFit: "cover", transition: "transform 0.9s {easings.silk}" });
-const name = css({ display: "block", fontFamily: "display", fontSize: "1.6rem", lineHeight: "1.2", marginBlockStart: "10px" });
+const name = css({
+  display: "block",
+  fontFamily: "display",
+  fontSize: "1.6rem",
+  lineHeight: "1.2",
+  marginBlockStart: "10px",
+});
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) => PRODUCTS.map(({ slug }) => ({ locale, slug })));
@@ -83,7 +95,13 @@ function ProductContent({ product }: { product: Product }) {
             <li key={item.slug}>
               <Link href={`/shop/${item.slug}`} className={card}>
                 <span className={photo}>
-                  <Image src={item.image.src} alt="" fill sizes="(max-width: 768px) 50vw, 33vw" className={image} />
+                  <Image
+                    src={item.image.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className={image}
+                  />
                 </span>
                 <span className={name}>
                   {tProducts(`${item.slug}.name` as Parameters<typeof tProducts>[0]) as string}
