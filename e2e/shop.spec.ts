@@ -173,9 +173,9 @@ test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
   await expect(page.locator('link[href*="fonts.googleapis.com/css2"]')).toHaveCount(0);
   await page.goto("/ko");
   const korean = page.locator('link[rel="stylesheet"][href*="fonts.googleapis.com/css2"]');
-  await expect(korean).toHaveAttribute("href", /Noto\+Serif\+KR/);
+  await expect(korean).toHaveAttribute("href", /Grandiflora\+One/);
   await expect(korean).not.toHaveAttribute("href", /JP|SC/);
-  await expect(page.locator("html")).toHaveAttribute("style", /Noto Sans KR/);
+  await expect(page.locator("html")).toHaveAttribute("style", /Gowun Dodum/);
 });
 
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {

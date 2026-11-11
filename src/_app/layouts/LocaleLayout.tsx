@@ -2,7 +2,7 @@ import "@/_app/styles/global.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { Instrument_Sans, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -19,7 +19,8 @@ import { CartDrawer } from "@/widgets/cart-drawer";
 import { SiteFooter } from "@/widgets/site-footer";
 import { SiteHeader } from "@/widgets/site-header";
 
-const display = Instrument_Serif({
+// 영문 상품명은 파티스리 간판 같은 Playfair Display
+const display = Playfair_Display({
   subsets: ["latin", "latin-ext"],
   weight: "400",
   variable: "--font-display",
@@ -27,15 +28,27 @@ const display = Instrument_Serif({
 const body = Instrument_Sans({ subsets: ["latin", "latin-ext"], variable: "--font-body" });
 
 // next/font로 함께 선언하면 모든 언어에 CSS가 붙어 렌더링을 막으므로, 그 언어의 글꼴만 따로 받습니다.
-const CJK_FONTS: Record<string, { sans: string; serif: string }> = {
-  ko: { sans: "Noto Sans KR", serif: "Noto Serif KR" },
-  ja: { sans: "Noto Sans JP", serif: "Noto Serif JP" },
-  zh: { sans: "Noto Sans SC", serif: "Noto Serif SC" },
+// 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 고운돋움(본문). 두 글꼴은 굵기가 400 하나뿐입니다.
+type CjkFonts = { sans: string; sansWeights: string; serif: string; serifWeights: string };
+const CJK_FONTS: Record<string, CjkFonts> = {
+  ko: { sans: "Gowun Dodum", sansWeights: "400", serif: "Grandiflora One", serifWeights: "400" },
+  ja: {
+    sans: "Noto Sans JP",
+    sansWeights: "400;500;700",
+    serif: "Noto Serif JP",
+    serifWeights: "500",
+  },
+  zh: {
+    sans: "Noto Sans SC",
+    sansWeights: "400;500;700",
+    serif: "Noto Serif SC",
+    serifWeights: "500",
+  },
 };
 
-function cjkStylesheet({ sans, serif }: { sans: string; serif: string }): string {
+function cjkStylesheet({ sans, sansWeights, serif, serifWeights }: CjkFonts): string {
   const family = (name: string, axis: string) => `family=${name.replaceAll(" ", "+")}:wght@${axis}`;
-  return `https://fonts.googleapis.com/css2?${family(sans, "400;500;700")}&${family(serif, "500")}&display=swap`;
+  return `https://fonts.googleapis.com/css2?${family(sans, sansWeights)}&${family(serif, serifWeights)}&display=swap`;
 }
 
 const skipLink = css({
