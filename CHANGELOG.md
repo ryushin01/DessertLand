@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 0.4.7 - 2026-11-13
+
+- 버그: AI 추천 스트림에서 오류 이벤트나 형식 오류로 중간에 빠져나와도 스트림을 닫지 않아 연결과 버퍼가 남던 문제. 끝나면 항상 reader를 닫음
+- 버그: 추천 이벤트를 그대로 믿고 그려 형식이 어긋나면 화면이 깨지던 문제. `parseRecommendEvent`로 확인하고 추천은 최대 3개까지만 받음
+- 결제 창 주소는 https일 때만 엶
+- 공통화: 미디어 쿼리 문자열(정밀 포인터 5곳, 동작 줄이기 2곳)을 `MEDIA`, 움직임 멈춤 저장 키(2곳)를 `MOTION_PAUSED_KEY`로 모으고, `usePrefersReducedMotion`은 `useMediaQuery`를 다시 씀
+- 메모리 점검: GSAP 애니메이션은 모두 `gsap.context`(`useGsap`)로 묶여 언마운트 때 되돌려지고, ticker·Lenis·WebGL·옵저버·리스너도 정리됨을 확인
+
 ## 0.4.6 - 2026-11-12
 
 - 접근성 린트: eslint-plugin-jsx-a11y의 recommended 규칙을 모두 켬

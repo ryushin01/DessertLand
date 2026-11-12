@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import type { Pick, RecommendEvent, RecommendRequest } from "../model/types";
+import { parseRecommendEvent } from "../model/parse-event";
+import type { Pick, RecommendRequest } from "../model/types";
 
 export type RecommendStatus = "idle" | "loading" | "done" | "error" | "limited";
 
@@ -43,28 +44,33 @@ export function useRecommendation() {
       const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
       let buffer = "";
       let finished = false;
-      for (;;) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        buffer += value;
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-        for (const line of lines) {
-          if (!line) continue;
-          const event = JSON.parse(line) as RecommendEvent;
-          if (event.type === "error") throw new Error("추천 실패");
-          if (event.type === "update") {
-            setState({ status: "loading", intro: event.intro, picks: event.picks, source: null });
-          } else {
-            finished = true;
-            setState({
-              status: "done",
-              intro: event.intro,
-              picks: event.picks,
-              source: event.source,
-            });
+      try {
+        for (;;) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += value;
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+          for (const line of lines) {
+            if (!line) continue;
+            const event = parseRecommendEvent(line);
+            if (!event || event.type === "error") throw new Error("추천 실패");
+            if (event.type === "update") {
+              setState({ status: "loading", intro: event.intro, picks: event.picks, source: null });
+            } else {
+              finished = true;
+              setState({
+                status: "done",
+                intro: event.intro,
+                picks: event.picks,
+                source: event.source,
+              });
+            }
           }
         }
+      } finally {
+        // 중간에 빠져나와도(오류 이벤트, 형식 오류) 스트림을 닫아 연결과 버퍼를 놓아 줍니다.
+        void reader.cancel().catch(() => undefined);
       }
       if (!finished) throw new Error("응답이 끊겼습니다");
     } catch {

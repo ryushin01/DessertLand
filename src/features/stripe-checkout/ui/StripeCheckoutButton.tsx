@@ -62,8 +62,9 @@ export function StripeCheckoutButton({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ items, locale, expectedTotal: total, source }),
       });
-      const result = (await response.json()) as { status: string; url?: string };
-      if (result.status === "created" && result.url) {
+      const result = (await response.json()) as { status?: unknown; url?: unknown };
+      // 결제 창 주소는 https일 때만 엽니다. 응답이 어긋나도 엉뚱한 곳으로 보내지 않습니다.
+      if (result.status === "created" && typeof result.url === "string" && result.url.startsWith("https://")) {
         window.location.assign(result.url);
         return;
       }
