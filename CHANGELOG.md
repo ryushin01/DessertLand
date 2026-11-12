@@ -1,5 +1,9 @@
 # 변경 기록
 
+## 0.4.2 - 2026-11-11
+
+- 대체 글꼴: 제목은 Didot·Bodoni 72·Georgia, 본문은 Helvetica Neue·Segoe UI, 한중일은 각 운영체제의 명조·고딕으로 이음. 한중일이 아닌 언어에서 뒤의 대체 글꼴이 쓰이지 않던 문제(변수 기본값 serif)를 고침
+
 ## 0.4.1 - 2026-11-11
 
 - 글꼴: 영문 제목을 Playfair Display로, 한국어 제목을 그란디플로라 원(Grandiflora One), 한국어 본문을 고운돋움(Gowun Dodum)으로 바꿈. 일본어·중국어와 영문 본문(Instrument Sans)은 그대로
