@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Chiffonkuchen",
       "description": "Luftiger Kuchen aus Öl und Baiser, in den 1920ern in Los Angeles erfunden."
+    },
+    "simon-cupcake": {
+      "name": "Simon-Cupcake",
+      "description": "Nostalgischer koreanischer Bäckerei-Cupcake, castellaweich im Papierförmchen gebacken."
     }
   },
   "advisor": {

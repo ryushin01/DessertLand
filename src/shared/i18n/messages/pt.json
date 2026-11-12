@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Bolo chiffon",
       "description": "Bolo arejado de óleo e merengue nascido em Los Angeles nos anos 20."
+    },
+    "simon-cupcake": {
+      "name": "Cupcake Simon",
+      "description": "Cupcake nostálgico das padarias coreanas, fofo como castella, assado em forminha de papel."
     }
   },
   "advisor": {

@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Chiffon cake",
       "description": "Torta ariosa con olio e meringa, nata a Los Angeles negli anni '20."
+    },
+    "simon-cupcake": {
+      "name": "Cupcake Simon",
+      "description": "Cupcake nostalgico delle panetterie coreane, soffice come una castella, cotto nel pirottino."
     }
   },
   "advisor": {

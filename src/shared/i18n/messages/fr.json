@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Gâteau chiffon",
       "description": "Gâteau aérien à l'huile et à la meringue, né à Los Angeles dans les années 1920."
+    },
+    "simon-cupcake": {
+      "name": "Cupcake Simon",
+      "description": "Cupcake nostalgique des boulangeries coréennes, moelleux comme une castella, cuit en caissette."
     }
   },
   "advisor": {

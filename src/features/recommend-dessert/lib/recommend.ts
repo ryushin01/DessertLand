@@ -186,6 +186,7 @@ const TASTES: Record<string, TasteChip[]> = {
   "yugwa": ["light"],
   "speculoos": ["light"],
   "chiffon-cake": ["fruity", "light"],
+  "simon-cupcake": ["light"],
 };
 
 export function isRecommendRequest(body: unknown): body is RecommendRequest {

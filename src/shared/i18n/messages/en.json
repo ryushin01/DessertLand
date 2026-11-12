@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Chiffon cake",
       "description": "Airy oil-and-meringue cake born in 1920s Los Angeles."
+    },
+    "simon-cupcake": {
+      "name": "Simon cupcake",
+      "description": "Nostalgic Korean bakery cupcake: castella-soft sponge baked in a paper cup."
     }
   },
   "advisor": {

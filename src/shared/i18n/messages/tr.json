@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Şifon kek",
       "description": "1920'lerde Los Angeles'ta doğan, yağ ve bezeyle kabaran hafif kek."
+    },
+    "simon-cupcake": {
+      "name": "Simon kek",
+      "description": "Kağıt kapta castella gibi yumuşak pişen nostaljik Kore fırını keki."
     }
   },
   "advisor": {
