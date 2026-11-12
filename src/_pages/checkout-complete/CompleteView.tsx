@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
 
-import { cartLinesAtom } from "@/entities/cart";
+import { cartLinesAtom, removePurchased } from "@/entities/cart";
 import { formatMoney } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { Icon, buttonRecipe } from "@/shared/ui";
@@ -33,7 +33,7 @@ const box = css({
 });
 
 type CompleteViewProps = {
-  order: { orderNo: string; total: number; clearCart: boolean } | null;
+  order: { orderNo: string; total: number; purchased: string[] } | null;
 };
 
 export function CompleteView({ order }: CompleteViewProps) {
@@ -41,12 +41,13 @@ export function CompleteView({ order }: CompleteViewProps) {
   const locale = useLocale();
   const setCart = useSetAtom(cartLinesAtom);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const clearCart = order?.clearCart ?? false;
+  // 장바구니에서 고른 상품만 결제했으므로 그 상품만 뺍니다.
+  const purchased = order?.purchased.join(",") ?? "";
 
   useEffect(() => {
     headingRef.current?.focus();
-    if (clearCart) setCart([]);
-  }, [clearCart, setCart]);
+    if (purchased) setCart((lines) => removePurchased(lines, purchased.split(",")));
+  }, [purchased, setCart]);
 
   return (
     <div className={page}>

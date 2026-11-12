@@ -48,7 +48,9 @@
     "results": "{count} postres",
     "add": "Añadir {name} a la cesta",
     "addShort": "Añadir",
-    "view": "Ver"
+    "view": "Ver",
+    "buyNow": "Comprar ahora {name}",
+    "buyNowShort": "Comprar ahora"
   },
   "product": {
     "back": "Volver a postres",
@@ -104,7 +106,12 @@
     "shipping": "Envío",
     "total": "Total",
     "checkout": "Finalizar compra",
-    "added": "{name} añadido a la cesta."
+    "added": "{name} añadido a la cesta.",
+    "select": "Incluir {name} en el pedido",
+    "selectAll": "Seleccionar todo",
+    "selected": "{count} de {total} seleccionados",
+    "checkoutSelected": "Pedir la selección ({count})",
+    "noneSelected": "Elige los productos que quieres pedir."
   },
   "checkout": {
     "metaTitle": "Finalizar compra",

@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
 
-import { MAX_QUANTITY, addLine, countItems, removeLine, setLineQuantity } from "./lines";
+import {
+  MAX_QUANTITY,
+  addLine,
+  countItems,
+  removeLine,
+  removePurchased,
+  selectLines,
+  setLineQuantity,
+} from "./lines";
 
 describe("cart lines", () => {
   it("새 상품을 추가하고 같은 상품은 수량을 더합니다", () => {
@@ -24,5 +32,22 @@ describe("cart lines", () => {
     ];
     expect(removeLine(lines, "a")).toEqual([{ slug: "b", quantity: 3 }]);
     expect(countItems(lines)).toBe(5);
+  });
+
+  it("뺀 상품을 제외한 줄만 주문에 넣습니다", () => {
+    const lines = [
+      { slug: "a", quantity: 1 },
+      { slug: "b", quantity: 2 },
+    ];
+    expect(selectLines(lines, ["a"])).toEqual([{ slug: "b", quantity: 2 }]);
+    expect(selectLines(lines, [])).toEqual(lines);
+  });
+
+  it("결제한 상품만 장바구니에서 빼고 나머지는 남깁니다", () => {
+    const lines = [
+      { slug: "a", quantity: 1 },
+      { slug: "b", quantity: 2 },
+    ];
+    expect(removePurchased(lines, ["b"])).toEqual([{ slug: "a", quantity: 1 }]);
   });
 });

@@ -48,7 +48,9 @@
     "results": "{count}点のデザート",
     "add": "{name}をカートに追加",
     "addShort": "追加",
-    "view": "見る"
+    "view": "見る",
+    "buyNow": "{name}を今すぐ購入",
+    "buyNowShort": "今すぐ購入"
   },
   "product": {
     "back": "デザート一覧へ",
@@ -104,7 +106,12 @@
     "shipping": "送料",
     "total": "合計",
     "checkout": "注文する",
-    "added": "{name}をカートに追加しました。"
+    "added": "{name}をカートに追加しました。",
+    "select": "{name}を注文に含める",
+    "selectAll": "すべて選択",
+    "selected": "{total}点中{count}点を選択",
+    "checkoutSelected": "選択した商品を注文する（{count}）",
+    "noneSelected": "注文する商品を選んでください。"
   },
   "checkout": {
     "metaTitle": "ご注文",

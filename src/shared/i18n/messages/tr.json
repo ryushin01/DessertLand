@@ -48,7 +48,9 @@
     "results": "{count} tatlı",
     "add": "{name} sepete ekle",
     "addShort": "Ekle",
-    "view": "Gör"
+    "view": "Gör",
+    "buyNow": "{name} hemen satın al",
+    "buyNowShort": "Hemen satın al"
   },
   "product": {
     "back": "Tatlılara dön",
@@ -104,7 +106,12 @@
     "shipping": "Kargo",
     "total": "Toplam",
     "checkout": "Siparişi tamamla",
-    "added": "{name} sepete eklendi."
+    "added": "{name} sepete eklendi.",
+    "select": "{name} siparişe dahil et",
+    "selectAll": "Tümünü seç",
+    "selected": "{total} üründen {count} seçili",
+    "checkoutSelected": "Seçilenleri sipariş et ({count})",
+    "noneSelected": "Sipariş vermek istediğiniz ürünleri seçin."
   },
   "checkout": {
     "metaTitle": "Sipariş",

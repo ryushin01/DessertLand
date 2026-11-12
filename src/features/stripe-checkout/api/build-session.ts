@@ -102,7 +102,8 @@ export function buildSessionParams({
     locale: STRIPE_LOCALES[locale as keyof typeof STRIPE_LOCALES],
     line_items: [...lines, lineItem(shippingName, shippingInCurrency(currency), 1)],
     shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },
-    metadata: { source },
+    // 결제 뒤 장바구니에서 산 상품만 빼도록 slug를 남깁니다(상품 16종이라 메타데이터 길이 안에 들어갑니다).
+    metadata: { source, items: items.map((item) => item.slug).join(",") },
     success_url: `${origin}/${locale}/checkout/complete?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/${locale}/checkout?${canceledQuery}`,
   };
