@@ -8,7 +8,7 @@ import { css, cx } from "styled-system/css";
 import { getProduct } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap } from "@/shared/lib/motion/gsap";
-import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
 import type { BakerRenderer } from "./baker-renderer";
@@ -136,7 +136,7 @@ export function Hero() {
   const bakerRef = useRef<HTMLDivElement>(null);
   const fallbackRef = useRef<HTMLImageElement>(null);
   const enabled = useMotionEnabled();
-  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const finePointer = useMediaQuery(MEDIA.finePointer);
   const [webglReady, setWebglReady] = useState(false);
 
   // WebGL 손과 밀가루. 실패하면 컷아웃 이미지를 그대로 보여 줍니다.
