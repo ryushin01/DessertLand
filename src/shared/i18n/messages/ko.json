@@ -69,7 +69,10 @@
     "milk": "우유",
     "egg": "달걀",
     "wheat": "밀",
-    "nuts": "견과류"
+    "nuts": "견과류",
+    "soy": "대두",
+    "sesame": "참깨",
+    "none": "표시할 성분 없음"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "루트비어",
       "description": "사사프라스와 바닐라 향을 낸 북미의 무알코올 탄산음료입니다."
+    },
+    "soboro-ppang": {
+      "name": "소보로빵",
+      "description": "땅콩버터 반죽을 울퉁불퉁하게 올려 구운 한국 빵집의 오랜 단골 빵입니다."
+    },
+    "milk-bread": {
+      "name": "우유 식빵",
+      "description": "우유를 넣어 결결이 찢어지는 부드러운 식빵으로, 일본과 한국 빵집에서 사랑받습니다."
+    },
+    "cream-pan": {
+      "name": "슈크림빵",
+      "description": "부드러운 빵 속에 커스터드 크림을 가득 채운 일본 빵집의 명물입니다."
+    },
+    "chestnut-bread": {
+      "name": "밤식빵",
+      "description": "달콤하게 조린 밤을 듬뿍 넣어 구운 한국 빵집의 식빵입니다."
+    },
+    "glazed-doughnut": {
+      "name": "글레이즈드 도넛",
+      "description": "링 모양으로 튀겨 설탕 글레이즈를 입힌 미국의 도넛입니다."
+    },
+    "kkwabaegi": {
+      "name": "꽈배기",
+      "description": "반죽을 꼬아 튀기고 설탕을 묻힌 한국의 꽈배기 도넛입니다."
+    },
+    "malasada": {
+      "name": "말라사다",
+      "description": "구멍 없는 반죽을 튀겨 설탕을 굴린 도넛으로, 포르투갈에서 하와이로 건너갔습니다."
+    },
+    "beignet": {
+      "name": "베녜",
+      "description": "튀긴 반죽에 슈거파우더를 눈처럼 뿌린, 프랑스에서 뉴올리언스로 이어진 간식입니다."
+    },
+    "cream-puff": {
+      "name": "슈크림",
+      "description": "속이 빈 슈 반죽에 커스터드와 생크림을 채운 프랑스 과자입니다."
+    },
+    "liege-waffle": {
+      "name": "리에주 와플",
+      "description": "펄 슈거가 녹아 캐러멜처럼 바삭한, 벨기에 리에주의 묵직한 와플입니다."
+    },
+    "souffle-pancake": {
+      "name": "수플레 팬케이크",
+      "description": "머랭을 섞어 높이 부풀린, 흔들리듯 폭신한 일본식 팬케이크입니다."
+    },
+    "mille-crepe": {
+      "name": "크레이프 케이크",
+      "description": "얇은 크레이프와 크림을 스무 겹 넘게 쌓은 케이크로, 일본에서 이름을 얻었습니다."
+    },
+    "japanese-cheesecake": {
+      "name": "수플레 치즈케이크",
+      "description": "머랭을 섞어 구름처럼 가볍게 구운 일본식 치즈케이크입니다."
+    },
+    "chocolate-chip-cookie": {
+      "name": "초코칩 쿠키",
+      "description": "버터 반죽에 초콜릿 조각을 넣어 구운, 1930년대 미국 매사추세츠에서 태어난 쿠키입니다."
+    },
+    "shortbread": {
+      "name": "쇼트브레드",
+      "description": "버터, 설탕, 밀가루만으로 바삭하게 구운 스코틀랜드 과자입니다."
+    },
+    "butter-cookie": {
+      "name": "버터 쿠키",
+      "description": "링과 꽈배기 모양으로 짜서 구운, 둥근 틴에 담긴 덴마크식 버터 쿠키입니다."
+    },
+    "senbei": {
+      "name": "센베이",
+      "description": "쌀 반죽을 굽고 간장을 발라 바삭하게 만든 일본의 쌀과자입니다."
+    },
+    "gangjeong": {
+      "name": "땅콩 엿강정",
+      "description": "볶은 땅콩을 조청에 버무려 굳힌 한국의 전통 과자입니다."
+    },
+    "yugwa": {
+      "name": "유과",
+      "description": "찹쌀 반죽을 튀겨 조청을 바르고 튀밥을 묻힌 한국의 명절 과자입니다."
+    },
+    "speculoos": {
+      "name": "스페퀼로스",
+      "description": "계피와 향신료를 넣어 무늬 틀로 찍어 구운, 벨기에와 네덜란드의 과자입니다."
+    },
+    "chiffon-cake": {
+      "name": "시폰 케이크",
+      "description": "식용유와 머랭으로 가볍게 부풀린, 1920년대 로스앤젤레스에서 태어난 케이크입니다."
     }
   },
   "advisor": {

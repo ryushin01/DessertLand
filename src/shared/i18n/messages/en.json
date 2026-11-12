@@ -69,7 +69,10 @@
     "milk": "Milk",
     "egg": "Egg",
     "wheat": "Wheat",
-    "nuts": "Tree nuts"
+    "nuts": "Tree nuts",
+    "soy": "Soy",
+    "sesame": "Sesame",
+    "none": "None listed"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "Root beer",
       "description": "North American soda flavored with sassafras and vanilla, alcohol-free."
+    },
+    "soboro-ppang": {
+      "name": "Soboro bread",
+      "description": "Korean bakery classic with a crumbly peanut-butter streusel crust."
+    },
+    "milk-bread": {
+      "name": "Milk bread",
+      "description": "Soft, pull-apart loaf enriched with milk, loved in Japanese and Korean bakeries."
+    },
+    "cream-pan": {
+      "name": "Custard cream bun",
+      "description": "Soft Japanese bun filled to the edges with custard cream."
+    },
+    "chestnut-bread": {
+      "name": "Chestnut bread",
+      "description": "Korean bakery loaf studded with candied chestnuts."
+    },
+    "glazed-doughnut": {
+      "name": "Glazed doughnut",
+      "description": "American ring doughnut fried and coated in sugar glaze."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Korean twisted doughnut fried and rolled in sugar."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Hole-less sugared doughnut that travelled from Portugal to Hawaii."
+    },
+    "beignet": {
+      "name": "Beignets",
+      "description": "Fried dough under a snowfall of powdered sugar, from France to New Orleans."
+    },
+    "cream-puff": {
+      "name": "Cream puff",
+      "description": "Hollow choux pastry filled with custard and whipped cream."
+    },
+    "liege-waffle": {
+      "name": "Liège waffle",
+      "description": "Dense Belgian waffle studded with pearl sugar that caramelizes as it bakes."
+    },
+    "souffle-pancake": {
+      "name": "Soufflé pancakes",
+      "description": "Tall, wobbly Japanese pancakes lifted with meringue."
+    },
+    "mille-crepe": {
+      "name": "Mille crêpe cake",
+      "description": "Cake of twenty-plus crêpes layered with cream, named in Japan."
+    },
+    "japanese-cheesecake": {
+      "name": "Japanese soufflé cheesecake",
+      "description": "Cloud-light Japanese cheesecake baked with meringue."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Chocolate chip cookie",
+      "description": "Buttery cookie with chocolate chunks, born in 1930s Massachusetts."
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "description": "Crumbly Scottish biscuit of just butter, sugar and flour."
+    },
+    "butter-cookie": {
+      "name": "Danish butter cookies",
+      "description": "Piped Danish butter cookies in rings and pretzels, packed in a round tin."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Crisp Japanese rice crackers brushed with soy sauce."
+    },
+    "gangjeong": {
+      "name": "Peanut gangjeong",
+      "description": "Korean sweet of roasted peanuts bound with rice syrup."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Korean holiday puff of fried rice dough coated in syrup and puffed rice."
+    },
+    "speculoos": {
+      "name": "Speculoos",
+      "description": "Spiced biscuits stamped with patterns, from Belgium and the Netherlands."
+    },
+    "chiffon-cake": {
+      "name": "Chiffon cake",
+      "description": "Airy oil-and-meringue cake born in 1920s Los Angeles."
     }
   },
   "advisor": {

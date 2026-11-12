@@ -69,7 +69,10 @@
     "milk": "Milch",
     "egg": "Ei",
     "wheat": "Weizen",
-    "nuts": "Schalenfrüchte"
+    "nuts": "Schalenfrüchte",
+    "soy": "Soja",
+    "sesame": "Sesam",
+    "none": "Keine anzugeben"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "Root Beer",
       "description": "Alkoholfreie nordamerikanische Limonade mit Sassafras und Vanille."
+    },
+    "soboro-ppang": {
+      "name": "Soboro-Brot",
+      "description": "Koreanischer Bäckereiklassiker mit Erdnussbutter-Streuselkruste."
+    },
+    "milk-bread": {
+      "name": "Milchbrot",
+      "description": "Weiches Kastenbrot mit Milch, das sich in Fasern zupfen lässt."
+    },
+    "cream-pan": {
+      "name": "Puddingbrötchen",
+      "description": "Weiches japanisches Brötchen voller Vanillecreme."
+    },
+    "chestnut-bread": {
+      "name": "Kastanienbrot",
+      "description": "Koreanisches Kastenbrot mit kandierten Kastanien."
+    },
+    "glazed-doughnut": {
+      "name": "Glasierter Donut",
+      "description": "Amerikanischer Ringdonut, frittiert und glasiert."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Koreanischer gedrehter Donut, frittiert und gezuckert."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Gezuckerter Krapfen ohne Loch, von Portugal nach Hawaii gereist."
+    },
+    "beignet": {
+      "name": "Beignets",
+      "description": "Frittierter Teig unter Puderzuckerschnee, von Frankreich bis New Orleans."
+    },
+    "cream-puff": {
+      "name": "Windbeutel",
+      "description": "Hohler Brandteig mit Vanillecreme und Sahne gefüllt."
+    },
+    "liege-waffle": {
+      "name": "Lütticher Waffel",
+      "description": "Dichte Lütticher Waffel mit Hagelzucker, der beim Backen karamellisiert."
+    },
+    "souffle-pancake": {
+      "name": "Soufflé-Pancakes",
+      "description": "Hohe, wackelige japanische Pancakes mit Baiser."
+    },
+    "mille-crepe": {
+      "name": "Crêpe-Torte",
+      "description": "Torte aus über zwanzig Crêpes und Creme, in Japan benannt."
+    },
+    "japanese-cheesecake": {
+      "name": "Japanischer Käsekuchen",
+      "description": "Wolkenleichter japanischer Käsekuchen mit Baiser."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Schokoladenkeks (Cookie)",
+      "description": "Butterkeks mit Schokostücken, in den 1930ern in Massachusetts erfunden."
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "description": "Mürber schottischer Keks aus Butter, Zucker und Mehl."
+    },
+    "butter-cookie": {
+      "name": "Dänische Butterkekse",
+      "description": "Gespritzte dänische Butterkekse in Ringen, in der runden Dose."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Knusprige japanische Reiscracker mit Sojasoße bestrichen."
+    },
+    "gangjeong": {
+      "name": "Erdnuss-Gangjeong",
+      "description": "Koreanisches Konfekt aus gerösteten Erdnüssen in Reissirup."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Koreanisches Festgebäck aus frittiertem Klebreis mit Sirup und Puffreis."
+    },
+    "speculoos": {
+      "name": "Spekulatius",
+      "description": "Gewürzkekse mit Bildmotiven aus Belgien und den Niederlanden."
+    },
+    "chiffon-cake": {
+      "name": "Chiffonkuchen",
+      "description": "Luftiger Kuchen aus Öl und Baiser, in den 1920ern in Los Angeles erfunden."
     }
   },
   "advisor": {

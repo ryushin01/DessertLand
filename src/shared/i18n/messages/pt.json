@@ -69,7 +69,10 @@
     "milk": "Leite",
     "egg": "Ovo",
     "wheat": "Trigo",
-    "nuts": "Frutos de casca rija"
+    "nuts": "Frutos de casca rija",
+    "soy": "Soja",
+    "sesame": "Sésamo",
+    "none": "Nenhum a indicar"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "Root beer",
       "description": "Refrigerante norte-americano sem álcool com sassafrás e baunilha."
+    },
+    "soboro-ppang": {
+      "name": "Pão soboro",
+      "description": "Clássico das padarias coreanas com crosta de crumble de amendoim."
+    },
+    "milk-bread": {
+      "name": "Pão de leite",
+      "description": "Pão de forma macio com leite que se desfia, popular no Japão e na Coreia."
+    },
+    "cream-pan": {
+      "name": "Pão de creme",
+      "description": "Pão japonês macio recheado de creme de pasteleiro."
+    },
+    "chestnut-bread": {
+      "name": "Pão de castanha",
+      "description": "Pão de forma coreano com castanhas cristalizadas."
+    },
+    "glazed-doughnut": {
+      "name": "Donut glaceado",
+      "description": "Donut americano em anel, frito e glaceado."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Donut coreano torcido, frito e passado no açúcar."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Bolinho sem furo açucarado que viajou de Portugal ao Havai."
+    },
+    "beignet": {
+      "name": "Beignets",
+      "description": "Massa frita sob neve de açúcar em pó, de França a Nova Orleães."
+    },
+    "cream-puff": {
+      "name": "Bomba de creme",
+      "description": "Massa choux oca recheada de creme e chantilly."
+    },
+    "liege-waffle": {
+      "name": "Waffle de Liège",
+      "description": "Waffle denso de Liège com açúcar pérola que carameliza."
+    },
+    "souffle-pancake": {
+      "name": "Panquecas suflê",
+      "description": "Panquecas japonesas altas e trêmulas com merengue."
+    },
+    "mille-crepe": {
+      "name": "Bolo de crepes",
+      "description": "Bolo de mais de vinte crepes com creme, batizado no Japão."
+    },
+    "japanese-cheesecake": {
+      "name": "Cheesecake japonês",
+      "description": "Cheesecake japonês leve como nuvem, com merengue."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Cookie com gotas de chocolate",
+      "description": "Bolacha de manteiga com pedaços de chocolate, nascida no Massachusetts nos anos 30."
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "description": "Biscoito escocês de manteiga, açúcar e farinha."
+    },
+    "butter-cookie": {
+      "name": "Biscoitos dinamarqueses",
+      "description": "Biscoitos dinamarqueses de manteiga em anéis, em lata redonda."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Biscoitos de arroz japoneses estaladiços pincelados com molho de soja."
+    },
+    "gangjeong": {
+      "name": "Gangjeong de amendoim",
+      "description": "Doce coreano de amendoim torrado ligado com xarope de arroz."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Doce festivo coreano de arroz glutinoso frito com xarope e arroz tufado."
+    },
+    "speculoos": {
+      "name": "Speculoos",
+      "description": "Biscoitos com especiarias e relevo, da Bélgica e dos Países Baixos."
+    },
+    "chiffon-cake": {
+      "name": "Bolo chiffon",
+      "description": "Bolo arejado de óleo e merengue nascido em Los Angeles nos anos 20."
     }
   },
   "advisor": {
