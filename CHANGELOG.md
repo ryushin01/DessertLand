@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 0.4.6 - 2026-11-12
+
+- 접근성 린트: eslint-plugin-jsx-a11y의 recommended 규칙을 모두 켬
+- 모니터링: `NEXT_PUBLIC_SENTRY_DSN`이 있으면 처리하지 못한 오류와 나쁜 Web Vitals를 Sentry로 보냄. 오류 내용만 보내고, Sentry(약 31 kB gzip)와 web-vitals는 첫 화면 뒤에 따로 받음
+- 성능 예산: CI에서 size-limit(전체 JS 365 kB, CSS 19 kB)과 Lighthouse CI(한국어·영어 첫 화면, 상점, 바클라바 상세가 데스크톱 기준 성능 90·접근성 100·권장 사항 95·SEO 90점, LCP 2.5초·TBT 200ms·CLS 0.1 이하)로 검사
+- Dependabot: npm 매주, GitHub Actions 매월 업데이트 PR
+
 ## 0.4.5 - 2026-11-12
 
 - 장바구니 골라서 구매: 상품마다 체크박스와 전체 선택. 합계와 주문은 고른 상품만 계산하고, 결제가 끝나면 산 상품만 장바구니에서 뺌(내장 테스트 결제와 Stripe 모두). 고른 상태는 브라우저에 저장하고, 다시 담은 상품은 주문에 넣음
