@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "戚风蛋糕",
       "description": "以油和蛋白霜打发、诞生于1920年代洛杉矶的轻盈蛋糕。"
+    },
+    "simon-cupcake": {
+      "name": "西蒙纸杯蛋糕",
+      "description": "纸杯里烤出像长崎蛋糕般松软的韩国街坊面包店怀旧纸杯蛋糕。"
     }
   },
   "advisor": {

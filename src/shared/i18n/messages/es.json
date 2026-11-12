@@ -879,6 +879,10 @@
     "chiffon-cake": {
       "name": "Bizcocho chiffon",
       "description": "Bizcocho aireado de aceite y merengue nacido en Los Ángeles en los años 20."
+    },
+    "simon-cupcake": {
+      "name": "Cupcake Simon",
+      "description": "Cupcake nostálgico de panadería coreana, esponjoso como una castella, horneado en molde de papel."
     }
   },
   "advisor": {

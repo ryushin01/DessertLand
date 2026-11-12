@@ -195,7 +195,7 @@ test("필터로 카테고리를 좁힙니다", async ({ page }) => {
     .getByRole("link", { name: "쿠키·구움과자" })
     .click();
   await expect(page).toHaveURL(/category=baked/);
-  await expect(page.getByRole("status").filter({ hasText: "25개의 디저트" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "26개의 디저트" })).toBeVisible();
 });
 
 async function fillCheckout(page: Page) {

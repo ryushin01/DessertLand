@@ -1765,6 +1765,16 @@ export const PRODUCTS: Product[] = [
     allergens: ["wheat", "egg"],
     image: img("chiffon-cake", 1280, 960),
   },
+  {
+    slug: "simon-cupcake",
+    category: "baked",
+    country: "KR",
+    coordinates: "37.57°N 126.98°E",
+    priceUsd: 2.5,
+    weightGrams: 60,
+    allergens: ["wheat", "egg", "milk"],
+    image: img("simon-cupcake", 1400, 934),
+  },
 ];
 
 /** 카테고리별 대표 상품(홈 쇼케이스). */

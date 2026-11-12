@@ -198,4 +198,5 @@ export const PHOTO_CREDITS: Record<string, PhotoCredit> = {
   "yugwa": commons("abex", "https://commons.wikimedia.org/wiki/File:Korean.desserts-Yugwa-01.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0"),
   "speculoos": commons("Torsten Maue", "https://commons.wikimedia.org/wiki/File:Butterspekulatius_-_Flickr_-_tm-md_(5).jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0"),
   "chiffon-cake": commons("Kimberly Vardeman from Lubbock, TX, USA", "https://commons.wikimedia.org/wiki/File:Lemon_Chiffon_Cake.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0"),
+  "simon-cupcake": commons("W.carter", "https://commons.wikimedia.org/wiki/File:Plain_vanilla_muffin_in_Tuntorp.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0"),
 };
