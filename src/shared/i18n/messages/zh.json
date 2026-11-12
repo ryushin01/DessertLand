@@ -69,7 +69,10 @@
     "milk": "牛奶",
     "egg": "鸡蛋",
     "wheat": "小麦",
-    "nuts": "坚果"
+    "nuts": "坚果",
+    "soy": "大豆",
+    "sesame": "芝麻",
+    "none": "无需标示的成分"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "根汁汽水",
       "description": "带黄樟与香草风味的北美无酒精汽水。"
+    },
+    "soboro-ppang": {
+      "name": "菠萝面包(韩式)",
+      "description": "顶部铺满花生酥粒烘烤的韩国面包店经典面包。"
+    },
+    "milk-bread": {
+      "name": "牛奶吐司",
+      "description": "加牛奶、可撕成丝的柔软吐司，深受日韩面包店喜爱。"
+    },
+    "cream-pan": {
+      "name": "奶油面包",
+      "description": "柔软面包里填满卡仕达奶油的日本面包店名品。"
+    },
+    "chestnut-bread": {
+      "name": "栗子吐司",
+      "description": "加入大量糖渍栗子烘烤的韩国面包店吐司。"
+    },
+    "glazed-doughnut": {
+      "name": "糖霜甜甜圈",
+      "description": "炸成环形、裹上糖霜的美式甜甜圈。"
+    },
+    "kkwabaegi": {
+      "name": "麻花甜甜圈",
+      "description": "面团拧成麻花油炸后裹糖的韩国甜甜圈。"
+    },
+    "malasada": {
+      "name": "马拉萨达",
+      "description": "无孔面团油炸后裹糖的甜甜圈，从葡萄牙传到夏威夷。"
+    },
+    "beignet": {
+      "name": "贝奈特饼",
+      "description": "炸面团撒满雪白糖粉，从法国流传到新奥尔良的小吃。"
+    },
+    "cream-puff": {
+      "name": "泡芙",
+      "description": "空心泡芙皮填入卡仕达和鲜奶油的法式点心。"
+    },
+    "liege-waffle": {
+      "name": "列日华夫饼",
+      "description": "珍珠糖融化成焦糖般酥脆的比利时列日厚华夫。"
+    },
+    "souffle-pancake": {
+      "name": "舒芙蕾松饼",
+      "description": "拌入蛋白霜、高高膨起颤巍巍的日式松饼。"
+    },
+    "mille-crepe": {
+      "name": "千层可丽饼",
+      "description": "二十多层薄可丽饼与奶油叠成的蛋糕，名字源自日本。"
+    },
+    "japanese-cheesecake": {
+      "name": "日式轻乳酪蛋糕",
+      "description": "拌入蛋白霜、烤得像云朵一样轻盈的日式芝士蛋糕。"
+    },
+    "chocolate-chip-cookie": {
+      "name": "巧克力豆曲奇",
+      "description": "黄油面团加巧克力块烘烤，诞生于1930年代美国马萨诸塞的曲奇。"
+    },
+    "shortbread": {
+      "name": "苏格兰黄油酥饼",
+      "description": "只用黄油、糖和面粉烤成的酥脆苏格兰饼干。"
+    },
+    "butter-cookie": {
+      "name": "丹麦黄油曲奇",
+      "description": "挤成圆圈和麻花形烘烤、装在圆罐里的丹麦黄油曲奇。"
+    },
+    "senbei": {
+      "name": "日式米果",
+      "description": "米饼烤后刷酱油、香脆的日本米果。"
+    },
+    "gangjeong": {
+      "name": "花生糖",
+      "description": "炒花生用米糖浆拌匀凝固的韩国传统点心。"
+    },
+    "yugwa": {
+      "name": "油果",
+      "description": "糯米面团油炸、刷米糖浆裹米花的韩国节日点心。"
+    },
+    "speculoos": {
+      "name": "焦糖饼干",
+      "description": "加肉桂香料、用花模压制烘烤的比利时与荷兰饼干。"
+    },
+    "chiffon-cake": {
+      "name": "戚风蛋糕",
+      "description": "以油和蛋白霜打发、诞生于1920年代洛杉矶的轻盈蛋糕。"
     }
   },
   "advisor": {

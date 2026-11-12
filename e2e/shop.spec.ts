@@ -178,6 +178,13 @@ test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("style", /Gowun Dodum/);
 });
 
+test("예전 분류 주소는 새 분류로 보냅니다", async ({ page }) => {
+  await page.goto("/ko/shop?category=muffin");
+  await expect(page).toHaveURL(/\/ko\/shop\?category=baked$/);
+  await page.goto("/ko/shop?category=classic");
+  await expect(page).toHaveURL(/\/ko\/shop$/);
+});
+
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await page.goto("/ko/shop");
   await page
@@ -185,7 +192,7 @@ test("필터로 카테고리를 좁힙니다", async ({ page }) => {
     .getByRole("link", { name: "쿠키·구움과자" })
     .click();
   await expect(page).toHaveURL(/category=baked/);
-  await expect(page.getByRole("status").filter({ hasText: "17개의 디저트" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "25개의 디저트" })).toBeVisible();
 });
 
 async function fillCheckout(page: Page) {
@@ -286,8 +293,11 @@ test("장바구니에서 고른 상품만 주문하고, 고르지 않은 상품�
 });
 
 test("상품 목록에서 바로 구매하면 그 상품 1개로 주문 화면에 갑니다", async ({ page }) => {
-  await page.goto("/ko/shop");
-  await page.getByRole("link", { name: "바클라바 바로 구매" }).click();
+  // 전체 목록은 길어서, 바클라바가 있는 페이스트리 분류에서 누릅니다.
+  await page.goto("/ko/shop?category=pastry");
+  const buyNow = page.getByRole("link", { name: "바클라바 바로 구매" });
+  await buyNow.scrollIntoViewIfNeeded();
+  await buyNow.click();
   await expect(page).toHaveURL(/\/ko\/checkout\?buy=baklava&qty=1$/);
   await expect(page.getByRole("region", { name: "주문 내역" })).toContainText("바클라바 × 1");
 });

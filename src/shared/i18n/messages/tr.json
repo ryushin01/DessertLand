@@ -69,7 +69,10 @@
     "milk": "Süt",
     "egg": "Yumurta",
     "wheat": "Buğday",
-    "nuts": "Sert kabuklu yemişler"
+    "nuts": "Sert kabuklu yemişler",
+    "soy": "Soya",
+    "sesame": "Susam",
+    "none": "Belirtilecek içerik yok"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "Kök birası",
       "description": "Sassafras ve vanilyalı, alkolsüz Kuzey Amerika gazozu."
+    },
+    "soboro-ppang": {
+      "name": "Soboro ekmeği",
+      "description": "Fıstık ezmeli kıtır kabuklu Kore fırını klasiği."
+    },
+    "milk-bread": {
+      "name": "Sütlü tost ekmeği",
+      "description": "Lif lif ayrılan yumuşak sütlü tost ekmeği, Japonya ve Kore'de sevilir."
+    },
+    "cream-pan": {
+      "name": "Kremalı çörek",
+      "description": "İçi muhallebi kremasıyla dolu yumuşak Japon çöreği."
+    },
+    "chestnut-bread": {
+      "name": "Kestaneli ekmek",
+      "description": "Şekerlenmiş kestaneli Kore tost ekmeği."
+    },
+    "glazed-doughnut": {
+      "name": "Şekerli donut",
+      "description": "Halka biçiminde kızartılıp şeker sırlı Amerikan donutu."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Burulup kızartılan şekerli Kore donutu."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Portekiz'den Hawaii'ye geçen deliksiz şekerli pişi."
+    },
+    "beignet": {
+      "name": "Beignet",
+      "description": "Fransa'dan New Orleans'a uzanan, pudra şekerli kızarmış hamur."
+    },
+    "cream-puff": {
+      "name": "Profiterol",
+      "description": "Muhallebi ve krem şantiyle doldurulmuş içi boş choux hamuru."
+    },
+    "liege-waffle": {
+      "name": "Liège waffle'ı",
+      "description": "Pişerken karamelleşen inci şekerli yoğun Liège waffle'ı."
+    },
+    "souffle-pancake": {
+      "name": "Sufle pankek",
+      "description": "Bezeyle kabaran yüksek ve titrek Japon pankekleri."
+    },
+    "mille-crepe": {
+      "name": "Krep pastası",
+      "description": "Yirmiden fazla krep ve kremadan, adını Japonya'da alan pasta."
+    },
+    "japanese-cheesecake": {
+      "name": "Japon cheesecake",
+      "description": "Bezeyle bulut gibi hafif pişen Japon cheesecake'i."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Damla çikolatalı kurabiye",
+      "description": "1930'larda Massachusetts'te doğan çikolata parçalı tereyağlı kurabiye."
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "description": "Yalnızca tereyağı, şeker ve unla yapılan gevrek İskoç bisküvisi."
+    },
+    "butter-cookie": {
+      "name": "Danimarka tereyağlı kurabiyesi",
+      "description": "Yuvarlak kutuda halka biçimli Danimarka tereyağlı kurabiyeleri."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Soya soslu çıtır Japon pirinç krakerleri."
+    },
+    "gangjeong": {
+      "name": "Fıstıklı gangjeong",
+      "description": "Pirinç şurubuyla bağlanmış kavrulmuş fıstıklı Kore tatlısı."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Şuruplu ve patlamış pirinçli kızarmış pirinç hamuru, Kore bayram tatlısı."
+    },
+    "speculoos": {
+      "name": "Spekülos",
+      "description": "Belçika ve Hollanda'nın kalıpla desenlenen baharatlı bisküvisi."
+    },
+    "chiffon-cake": {
+      "name": "Şifon kek",
+      "description": "1920'lerde Los Angeles'ta doğan, yağ ve bezeyle kabaran hafif kek."
     }
   },
   "advisor": {

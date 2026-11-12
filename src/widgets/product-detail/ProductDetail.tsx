@@ -158,7 +158,11 @@ export function ProductDetail({ product }: { product: Product }) {
             <dt>{t("weight")}</dt>
             <dd>{new Intl.NumberFormat(locale, { style: "unit", unit: "gram" }).format(product.weightGrams)}</dd>
             <dt>{t("allergens")}</dt>
-            <dd>{product.allergens.map((item) => tAllergens(item)).join(", ")}</dd>
+            <dd>
+              {product.allergens.length > 0
+                ? product.allergens.map((item) => tAllergens(item)).join(", ")
+                : tAllergens("none")}
+            </dd>
           </dl>
           <p className={price} data-rise>
             {formatProductPrice(product.priceUsd, locale)}

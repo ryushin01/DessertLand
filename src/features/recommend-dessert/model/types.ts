@@ -35,4 +35,4 @@ export type RawRecommendation = {
   picks?: unknown;
 };
 
-export const ALLERGENS: Allergen[] = ["milk", "egg", "wheat", "nuts"];
+export const ALLERGENS: Allergen[] = ["milk", "egg", "wheat", "nuts", "soy", "sesame"];

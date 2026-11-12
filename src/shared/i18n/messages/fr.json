@@ -69,7 +69,10 @@
     "milk": "Lait",
     "egg": "Œuf",
     "wheat": "Blé",
-    "nuts": "Fruits à coque"
+    "nuts": "Fruits à coque",
+    "soy": "Soja",
+    "sesame": "Sésame",
+    "none": "Aucun à signaler"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "Root beer",
       "description": "Soda nord-américain sans alcool parfumé au sassafras et à la vanille."
+    },
+    "soboro-ppang": {
+      "name": "Pain soboro",
+      "description": "Classique des boulangeries coréennes à la croûte de crumble au beurre de cacahuète."
+    },
+    "milk-bread": {
+      "name": "Pain au lait de mie",
+      "description": "Pain de mie moelleux au lait qui se détache en fibres, prisé au Japon et en Corée."
+    },
+    "cream-pan": {
+      "name": "Brioche à la crème pâtissière",
+      "description": "Brioche japonaise moelleuse garnie de crème pâtissière."
+    },
+    "chestnut-bread": {
+      "name": "Pain aux marrons",
+      "description": "Pain de mie coréen garni de marrons confits."
+    },
+    "glazed-doughnut": {
+      "name": "Beignet glacé",
+      "description": "Beignet américain en anneau, frit et nappé de glaçage."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Beignet coréen torsadé, frit et roulé dans le sucre."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Beignet sans trou roulé dans le sucre, venu du Portugal jusqu'à Hawaï."
+    },
+    "beignet": {
+      "name": "Beignets",
+      "description": "Pâte frite sous une neige de sucre glace, de la France à La Nouvelle-Orléans."
+    },
+    "cream-puff": {
+      "name": "Chou à la crème",
+      "description": "Pâte à choux creuse garnie de crème pâtissière et de chantilly."
+    },
+    "liege-waffle": {
+      "name": "Gaufre de Liège",
+      "description": "Gaufre dense de Liège au sucre perlé qui caramélise à la cuisson."
+    },
+    "souffle-pancake": {
+      "name": "Pancakes soufflés",
+      "description": "Pancakes japonais hauts et tremblants, allégés à la meringue."
+    },
+    "mille-crepe": {
+      "name": "Gâteau de crêpes",
+      "description": "Gâteau de plus de vingt crêpes et crème, baptisé au Japon."
+    },
+    "japanese-cheesecake": {
+      "name": "Cheesecake soufflé japonais",
+      "description": "Cheesecake japonais léger comme un nuage, à la meringue."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Cookie aux pépites de chocolat",
+      "description": "Biscuit au beurre et morceaux de chocolat, né au Massachusetts dans les années 1930."
+    },
+    "shortbread": {
+      "name": "Sablé écossais",
+      "description": "Biscuit écossais friable au beurre, sucre et farine."
+    },
+    "butter-cookie": {
+      "name": "Biscuits danois au beurre",
+      "description": "Biscuits danois au beurre poussés en anneaux, dans une boîte ronde."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Galettes de riz japonaises croustillantes, laquées de sauce soja."
+    },
+    "gangjeong": {
+      "name": "Gangjeong aux cacahuètes",
+      "description": "Douceur coréenne de cacahuètes grillées liées au sirop de riz."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Douceur coréenne des fêtes : riz gluant frit, sirop et riz soufflé."
+    },
+    "speculoos": {
+      "name": "Spéculoos",
+      "description": "Biscuits épicés moulés, de Belgique et des Pays-Bas."
+    },
+    "chiffon-cake": {
+      "name": "Gâteau chiffon",
+      "description": "Gâteau aérien à l'huile et à la meringue, né à Los Angeles dans les années 1920."
     }
   },
   "advisor": {

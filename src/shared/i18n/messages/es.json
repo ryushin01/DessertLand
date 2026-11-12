@@ -69,7 +69,10 @@
     "milk": "Leche",
     "egg": "Huevo",
     "wheat": "Trigo",
-    "nuts": "Frutos secos"
+    "nuts": "Frutos secos",
+    "soy": "Soja",
+    "sesame": "Sésamo",
+    "none": "Ninguno que indicar"
   },
   "categories": {
     "cake": {
@@ -792,6 +795,90 @@
     "root-beer": {
       "name": "Root beer",
       "description": "Refresco norteamericano sin alcohol con sasafrás y vainilla."
+    },
+    "soboro-ppang": {
+      "name": "Pan soboro",
+      "description": "Clásico de panadería coreana con costra de crumble de cacahuete."
+    },
+    "milk-bread": {
+      "name": "Pan de leche",
+      "description": "Pan de molde tierno con leche que se deshilacha, popular en Japón y Corea."
+    },
+    "cream-pan": {
+      "name": "Bollo de crema",
+      "description": "Bollo japonés tierno relleno de crema pastelera."
+    },
+    "chestnut-bread": {
+      "name": "Pan de castañas",
+      "description": "Pan de molde coreano con castañas confitadas."
+    },
+    "glazed-doughnut": {
+      "name": "Dona glaseada",
+      "description": "Dona americana frita en anillo y bañada en glaseado."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Rosquilla coreana trenzada, frita y rebozada en azúcar."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Buñuelo sin agujero azucarado que viajó de Portugal a Hawái."
+    },
+    "beignet": {
+      "name": "Buñuelos beignet",
+      "description": "Masa frita bajo una nevada de azúcar glas, de Francia a Nueva Orleans."
+    },
+    "cream-puff": {
+      "name": "Petisú",
+      "description": "Pasta choux hueca rellena de crema pastelera y nata."
+    },
+    "liege-waffle": {
+      "name": "Gofre de Lieja",
+      "description": "Gofre denso de Lieja con azúcar perlado que se carameliza."
+    },
+    "souffle-pancake": {
+      "name": "Tortitas suflé",
+      "description": "Tortitas japonesas altas y temblorosas con merengue."
+    },
+    "mille-crepe": {
+      "name": "Pastel de crepes",
+      "description": "Pastel de más de veinte crepes con crema, bautizado en Japón."
+    },
+    "japanese-cheesecake": {
+      "name": "Tarta de queso japonesa",
+      "description": "Tarta de queso japonesa ligera como una nube, con merengue."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Galleta con chispas de chocolate",
+      "description": "Galleta de mantequilla con chocolate, nacida en Massachusetts en los años 30."
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "description": "Galleta escocesa de mantequilla, azúcar y harina."
+    },
+    "butter-cookie": {
+      "name": "Galletas danesas de mantequilla",
+      "description": "Galletas danesas de mantequilla en anillos y lazos, en lata redonda."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Galletas de arroz japonesas crujientes untadas con salsa de soja."
+    },
+    "gangjeong": {
+      "name": "Gangjeong de cacahuete",
+      "description": "Dulce coreano de cacahuete tostado unido con sirope de arroz."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Dulce festivo coreano de arroz glutinoso frito con sirope y arroz inflado."
+    },
+    "speculoos": {
+      "name": "Speculoos",
+      "description": "Galletas especiadas con relieve, de Bélgica y los Países Bajos."
+    },
+    "chiffon-cake": {
+      "name": "Bizcocho chiffon",
+      "description": "Bizcocho aireado de aceite y merengue nacido en Los Ángeles en los años 20."
     }
   },
   "advisor": {
