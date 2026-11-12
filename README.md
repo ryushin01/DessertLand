@@ -64,7 +64,8 @@
 | 결제 | Stripe Checkout(테스트 모드) |
 | AI | Claude API (`@anthropic-ai/sdk`) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
-| 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe, Vercel Speed Insights |
+| 품질 | ESLint(jsx-a11y), Vitest, Testing Library, Storybook 10, Playwright, axe, size-limit, Lighthouse CI |
+| 모니터링 | Sentry(DSN이 있을 때만), web-vitals, Vercel Speed Insights |
 | 구조 | Feature-Sliced Design |
 
 ## 시작하기
@@ -85,6 +86,7 @@ Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`
 | `pnpm typecheck` / `pnpm lint` | 타입 검사와 린트 |
 | `pnpm test` | 단위 테스트 |
 | `pnpm e2e` | 프로덕션 빌드 기준 E2E와 접근성 검사(`pnpm build` 후 실행) |
+| `pnpm size` / `pnpm lhci` | 번들 크기 예산 / Lighthouse 점수 기준 검사(`pnpm build` 후 실행) |
 | `pnpm analyze` | 번들 분석 화면 |
 | `pnpm storybook` | 컴포넌트 문서 |
 
