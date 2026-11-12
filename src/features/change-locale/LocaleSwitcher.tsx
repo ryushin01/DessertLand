@@ -4,8 +4,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
-import { LOCALES, LOCALE_LABELS, Link, usePathname, type Locale } from "@/shared/i18n";
+import { LOCALES, LOCALE_COUNTRY_NAMES, LOCALE_LABELS, Link, usePathname, type Locale } from "@/shared/i18n";
 import { Icon } from "@/shared/ui";
+
+import { LocaleFlag } from "./LocaleFlag";
 
 const root = css({ position: "relative" });
 const summary = css({
@@ -36,8 +38,7 @@ const menu = css({
 const item = css({
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
-  gap: "1em",
+  gap: "0.75em",
   minHeight: "40px",
   paddingInline: "12px",
   borderRadius: "10px",
@@ -45,6 +46,8 @@ const item = css({
   _hover: { background: "cocoa.800" },
   "&[aria-current=true]": { color: "caramel" },
 });
+
+const label = css({ flex: 1 });
 
 export function LocaleSwitcher() {
   const t = useTranslations("nav");
@@ -108,8 +111,11 @@ export function LocaleSwitcher() {
               prefetch={false}
               className={item}
               aria-current={code === locale ? "true" : undefined}
+              // 보이는 나라 이름 뒤에 언어 이름을 붙여, 화면 낭독기에서도 언어를 바꾸는 링크임을 알립니다(KWCAG 6.5.3: 보이는 글자로 시작).
+              aria-label={`${LOCALE_COUNTRY_NAMES[code]}, ${LOCALE_LABELS[code]}`}
             >
-              {LOCALE_LABELS[code]}
+              <LocaleFlag locale={code} />
+              <span className={label}>{LOCALE_COUNTRY_NAMES[code]}</span>
               {code === locale ? <Icon name="check" /> : null}
             </Link>
           </li>
