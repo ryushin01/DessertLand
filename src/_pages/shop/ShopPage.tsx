@@ -70,7 +70,7 @@ export default async function ShopPage({ params, searchParams }: ShopPageProps) 
   setRequestLocale(locale);
   const { category } = await searchParams;
   // 0.5.0 이전의 분류 주소는 가장 가까운 새 분류로 보냅니다. "세계의 명작"은 맞는 분류가 없어 전체 목록으로 보냅니다.
-  if (typeof category === "string" && category in LEGACY_CATEGORIES) {
+  if (typeof category === "string" && Object.hasOwn(LEGACY_CATEGORIES, category)) {
     const next = LEGACY_CATEGORIES[category];
     redirect({ href: next ? { pathname: "/shop", query: { category: next } } : "/shop", locale });
   }

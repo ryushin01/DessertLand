@@ -183,6 +183,9 @@ test("예전 분류 주소는 새 분류로 보냅니다", async ({ page }) => {
   await expect(page).toHaveURL(/\/ko\/shop\?category=baked$/);
   await page.goto("/ko/shop?category=classic");
   await expect(page).toHaveURL(/\/ko\/shop$/);
+  // 객체 기본 속성 이름은 예전 분류가 아니므로 그대로 전체 목록을 보여 줍니다.
+  await page.goto("/ko/shop?category=toString");
+  await expect(page).toHaveURL(/\/ko\/shop\?category=toString$/);
 });
 
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {
