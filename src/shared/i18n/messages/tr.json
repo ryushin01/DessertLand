@@ -72,29 +72,45 @@
     "nuts": "Sert kabuklu yemişler"
   },
   "categories": {
-    "milkshake": {
-      "name": "Milkshake",
-      "lede": "Soğuk, yoğun ve neşe dolu."
+    "cake": {
+      "name": "Pastalar",
+      "lede": "Yumuşak kek, krema ve kutlamaya bir dilim."
     },
-    "cheesecake": {
-      "name": "Cheesecake",
-      "lede": "Yoğun ya da yanık, krem peynir zamanı."
+    "tart": {
+      "name": "Turtalar ve tartlar",
+      "lede": "Çıtır hamurda meyve ve krema."
     },
-    "muffin": {
-      "name": "Muffin",
-      "lede": "Kabarmış bir sabah sıcaklığı."
+    "pastry": {
+      "name": "Hamur tatlıları",
+      "lede": "Kat kat dağılan tereyağı ve hamur."
     },
-    "pancake": {
-      "name": "Pankek",
-      "lede": "Üst üste dizilmiş, şurubu akan."
+    "baked": {
+      "name": "Kurabiyeler ve fırın tatlıları",
+      "lede": "Fırının sıcaklığı bir lokmada."
     },
-    "creamcake": {
-      "name": "Kremalı pasta",
-      "lede": "Yumuşak kek, hafif krema ve çilek."
+    "frozen": {
+      "name": "Dondurma ve kar buzu",
+      "lede": "Soğuk ve anında eriyen keyif."
     },
-    "classic": {
-      "name": "Dünya klasikleri",
-      "lede": "Tiramisudan baklavaya, bir ülkenin tadı."
+    "pudding": {
+      "name": "Puding ve kremalar",
+      "lede": "Kaşıkla yenen yumuşaklık."
+    },
+    "confection": {
+      "name": "Şekerlemeler ve geleneksel tatlılar",
+      "lede": "Her ülkede elden ele aktarılan tatlar."
+    },
+    "griddle": {
+      "name": "Pankekler ve kızartmalar",
+      "lede": "Tavadan ve kızgın yağdan yeni çıkmış."
+    },
+    "coffee": {
+      "name": "Kahveler",
+      "lede": "Tatlının yanına bir fincan."
+    },
+    "drink": {
+      "name": "İçecekler",
+      "lede": "Çaylar, gazozlar ve milkshake'ler."
     }
   },
   "cart": {
@@ -154,10 +170,11 @@
   "credits": {
     "metaTitle": "Kaynaklar",
     "title": "Fotoğraf ve simge kaynakları",
-    "photos": "Fotoğraflar: Unsplash",
+    "photos": "Fotoğraflar: Unsplash, Wikimedia Commons",
     "icons": "Simgeler: Flaticon",
     "hero": "Ana sayfa fotoğrafı",
-    "by": "Fotoğraf: {name}"
+    "by": "Fotoğraf: {name}",
+    "changes": "Wikimedia Commons fotoğrafları lisanslarına uygun kullanılmış, boyutları ve biçimi (WebP) değiştirilmiştir."
   },
   "footer": {
     "tagline": "Dessert Land, dünya tatlılarını 10 dilde tanıtan bir demo mağazadır.",
@@ -231,6 +248,550 @@
     "egg-tart": {
       "name": "Kanton usulü yumurtalı tart",
       "description": "Kanton çay kültürüyle büyüyen, ipeksi yumurta kremasıyla bilinen atıştırmalık."
+    },
+    "castella": {
+      "name": "Castella",
+      "description": "Portekizli tüccarların getirdiği nemli Nagasaki ballı keki."
+    },
+    "bibingka": {
+      "name": "Bibingka",
+      "description": "Muz yaprağında pişen Filipin Noel pirinç keki."
+    },
+    "spekkoek": {
+      "name": "Spekkoek",
+      "description": "Kat kat pişirilen baharatlı Endonezya tereyağlı keki."
+    },
+    "pandan-cake": {
+      "name": "Pandan şifon kek",
+      "description": "Pandan yaprağıyla renk ve koku verilen Güneydoğu Asya şifon keki."
+    },
+    "basbousa": {
+      "name": "Revani",
+      "description": "Orta Doğu'da sevilen şerbetli irmik keki."
+    },
+    "malva-pudding": {
+      "name": "Malva pudingi",
+      "description": "Sıcak krema soslu Güney Afrika kayısılı keki."
+    },
+    "mont-blanc": {
+      "name": "Mont Blanc",
+      "description": "Beze üstünde karlı dağ gibi sıkılmış kestane kreması."
+    },
+    "panettone": {
+      "name": "Panettone",
+      "description": "Şekerlenmiş meyveli yüksek Milano Noel ekmeği."
+    },
+    "sachertorte": {
+      "name": "Sacher pasta",
+      "description": "Kayısı reçelli ve parlak çikolata kaplı Viyana pastası."
+    },
+    "baumkuchen": {
+      "name": "Baumkuchen",
+      "description": "Şişte kat kat pişirilip ağaç halkası oluşan Alman keki."
+    },
+    "stollen": {
+      "name": "Stollen",
+      "description": "Kuru meyve ve badem ezmeli, pudra şekerli Dresden Noel ekmeği."
+    },
+    "sticky-toffee-pudding": {
+      "name": "Sticky toffee puding",
+      "description": "Sıcak tofi soslu İngiliz hurmalı keki."
+    },
+    "victoria-sponge": {
+      "name": "Victoria keki",
+      "description": "Ahududu reçeli ve kremalı İngiliz çay keki."
+    },
+    "dobos-torte": {
+      "name": "Dobos pastası",
+      "description": "Çikolatalı krema katlı, karamel kapaklı Budapeşte pastası."
+    },
+    "medovik": {
+      "name": "Medovik",
+      "description": "İnce katlı, ekşi kremalı Rus ballı pastası."
+    },
+    "tres-leches": {
+      "name": "Tres leches keki",
+      "description": "Üç sütle ıslatılan, Latin Amerika'nın paylaşamadığı kek."
+    },
+    "red-velvet": {
+      "name": "Red velvet pasta",
+      "description": "Krem peynirli kaplamalı kırmızı kakaolu Amerikan pastası."
+    },
+    "lamington": {
+      "name": "Lamington",
+      "description": "Çikolataya batırılıp hindistancevizine bulanan Avustralya keki."
+    },
+    "pavlova": {
+      "name": "Pavlova",
+      "description": "Avustralya ile Yeni Zelanda'nın paylaşamadığı kremalı meyveli beze."
+    },
+    "tarte-tatin": {
+      "name": "Tarte Tatin",
+      "description": "Tereyağında karamelize elmalı ters Fransız tartı."
+    },
+    "key-lime-pie": {
+      "name": "Key lime turtası",
+      "description": "Key misket limonu ve yoğunlaştırılmış sütlü Florida turtası."
+    },
+    "pecan-pie": {
+      "name": "Pikan cevizli turta",
+      "description": "Şuruplu dolguda pikan cevizli Güney ABD turtası."
+    },
+    "apple-pie": {
+      "name": "Elmalı turta",
+      "description": "Kafes hamur altında pişen tarçınlı elma."
+    },
+    "butter-tart": {
+      "name": "Tereyağlı tart",
+      "description": "Yapışkan tereyağı ve şeker dolgulu küçük Kanada tartı."
+    },
+    "kunefe": {
+      "name": "Künefe",
+      "description": "Peynir üstünde pişen tel kadayıf, şerbet ve fıstıkla."
+    },
+    "mille-feuille": {
+      "name": "Milföy",
+      "description": "Kat kat çıtır milföy hamuru ve pastacı kreması."
+    },
+    "eclair": {
+      "name": "Ekler",
+      "description": "Krema dolgulu, çikolata kaplı uzun choux hamuru."
+    },
+    "kouign-amann": {
+      "name": "Kouign-amann",
+      "description": "Karamelleşene dek pişen tereyağı ve şeker katlı Brötanya hamuru."
+    },
+    "cannoli": {
+      "name": "Cannoli",
+      "description": "Tatlı rikotayla doldurulan çıtır kızarmış Sicilya ruloları."
+    },
+    "sfogliatella": {
+      "name": "Sfogliatella",
+      "description": "Rikota ve irmik dolgulu deniz kabuğu biçimli Napoli hamuru."
+    },
+    "apfelstrudel": {
+      "name": "Elmalı strudel",
+      "description": "Elma, tarçın ve kuru üzüm sarılmış incecik hamur."
+    },
+    "semla": {
+      "name": "Semla",
+      "description": "Badem ezmesi ve kremalı İsveç kakuleli çöreği."
+    },
+    "kurtoskalacs": {
+      "name": "Kürtőskalács",
+      "description": "Közde döndürülerek pişen şekerli Macar baca keki."
+    },
+    "galaktoboureko": {
+      "name": "Galaktoboureko",
+      "description": "Yufkada pişip şerbete batırılan irmik muhallebisi."
+    },
+    "pineapple-bun": {
+      "name": "Ananas çöreği",
+      "description": "Adına rağmen ananas içermeyen çatlak kabuklu Hong Kong çöreği."
+    },
+    "pineapple-cake": {
+      "name": "Ananaslı kek",
+      "description": "Ananas reçelli tereyağlı Tayvan kurabiyesi."
+    },
+    "maamoul": {
+      "name": "Kombe",
+      "description": "Hurma veya cevizle doldurulup kalıpla basılan bayram kurabiyesi."
+    },
+    "macaron": {
+      "name": "Makaron",
+      "description": "Kremayla birleşen iki bademli beze kabuğu."
+    },
+    "madeleine": {
+      "name": "Madlen",
+      "description": "Kabuk biçimli, ortası kabaran Fransız tereyağlı keki."
+    },
+    "canele": {
+      "name": "Kanele",
+      "description": "Karamelize kabuklu, içi yumuşak romlu Bordeaux tatlısı."
+    },
+    "financier": {
+      "name": "Finansiye",
+      "description": "Külçe biçimli, kızarmış tereyağı ve bademli Paris keki."
+    },
+    "biscotti": {
+      "name": "Biskoti",
+      "description": "Batırıp yemek için iki kez pişirilen bademli Toskana bisküvisi."
+    },
+    "stroopwafel": {
+      "name": "Stroopwafel",
+      "description": "Karamel şuruplu iki ince waffle, Gouda'dan."
+    },
+    "scone": {
+      "name": "Skon",
+      "description": "Kaymak ve reçelle yenen hafif İngiliz çöreği."
+    },
+    "alfajor": {
+      "name": "Alfajor",
+      "description": "Dulce de leche dolgulu, çikolata kaplı Arjantin kurabiyesi."
+    },
+    "concha": {
+      "name": "Concha",
+      "description": "Deniz kabuğu desenli çıtır kaplamalı Meksika tatlı çöreği."
+    },
+    "brownie": {
+      "name": "Brownie",
+      "description": "Chicago doğumlu, çıtır kabuklu yoğun çikolatalı kare."
+    },
+    "nanaimo-bar": {
+      "name": "Nanaimo bar",
+      "description": "Hindistancevizi, krema ve çikolatadan üç katlı fırınsız Kanada tatlısı."
+    },
+    "anzac-biscuit": {
+      "name": "Anzak bisküvisi",
+      "description": "Yulaf, hindistancevizi ve altın şuruplu Avustralya–Yeni Zelanda kurabiyesi."
+    },
+    "patbingsu": {
+      "name": "Patbingsu",
+      "description": "Tatlı kırmızı fasulye ve yoğunlaştırılmış sütlü Kore kar buzu."
+    },
+    "kakigori": {
+      "name": "Kakigori",
+      "description": "Matcha şuruplu ve kırmızı fasulyeli Japon kar buzu."
+    },
+    "mochi-ice-cream": {
+      "name": "Mochi dondurma",
+      "description": "İnce yumuşak mochi tabakasına sarılı dondurma."
+    },
+    "halo-halo": {
+      "name": "Halo-halo",
+      "description": "Meyve, jöle ve ube dondurmalı Filipin kar buzu."
+    },
+    "cendol": {
+      "name": "Cendol",
+      "description": "Yeşil pirinç jölesi ve palmiye şekerli buzlu hindistancevizi sütü."
+    },
+    "kulfi": {
+      "name": "Kulfi falooda",
+      "description": "Falooda erişteli yoğun Hint süt dondurması."
+    },
+    "dondurma": {
+      "name": "Maraş dondurması",
+      "description": "Salep ve sakızla koyulaşan uzayan Maraş dondurması."
+    },
+    "gelato": {
+      "name": "Gelato",
+      "description": "Az hava katılmış yoğun ve ipeksi İtalyan dondurması."
+    },
+    "affogato": {
+      "name": "Affogato",
+      "description": "Sıcak espressoya batırılmış vanilyalı gelato."
+    },
+    "banana-split": {
+      "name": "Banana split",
+      "description": "Üç top dondurma, sos, kuruyemiş ve kirazlı ikiye bölünmüş muz."
+    },
+    "vanilla-ice-cream": {
+      "name": "Vanilyalı dondurma",
+      "description": "Vişne reçelli kremamsı vanilyalı dondurma."
+    },
+    "soft-serve": {
+      "name": "Yumuşak dondurma",
+      "description": "Makineden doğrudan külaha sıkılan havadar yumuşak dondurma."
+    },
+    "sundae": {
+      "name": "Sundae",
+      "description": "Sos, krem şanti, kuruyemiş ve kirazlı Amerikan dondurması."
+    },
+    "sorbet": {
+      "name": "Sorbe",
+      "description": "Meyve ve şekerden, süt içermeyen ferahlatıcı dondurma."
+    },
+    "douhua": {
+      "name": "Douhua",
+      "description": "Tatlı zencefil şuruplu ipeksi tofu."
+    },
+    "mango-pomelo-sago": {
+      "name": "Mango pomelo sago",
+      "description": "Pomelo ve sago incili soğuk Hong Kong mango çorbası."
+    },
+    "che-chuoi": {
+      "name": "Chè chuối",
+      "description": "Hindistancevizi sütünde muz ve tapyoka, sıcak Vietnam tatlısı."
+    },
+    "ube-halaya": {
+      "name": "Ube halaya",
+      "description": "Süt ve tereyağıyla pişen Filipin mor yer elması tatlısı."
+    },
+    "kheer": {
+      "name": "Kheer",
+      "description": "Kakule ve kuruyemişli Hint sütlacı."
+    },
+    "gajar-halwa": {
+      "name": "Havuç helvası",
+      "description": "Süt ve sade yağda pişen havuç, Pencap kış tatlısı."
+    },
+    "muhallebi": {
+      "name": "Muhallebi",
+      "description": "Gül suyu kokulu ipeksi Orta Doğu sütlü tatlısı."
+    },
+    "umm-ali": {
+      "name": "Ümmü Ali",
+      "description": "Tatlı sütte kuruyemişle pişen Mısır hamur pudingi."
+    },
+    "creme-brulee": {
+      "name": "Krem brüle",
+      "description": "Çıtır yanık şeker kabuklu vanilyalı muhallebi."
+    },
+    "panna-cotta": {
+      "name": "Panna cotta",
+      "description": "Jelatinle hafifçe tutulan titrek Piyemonte kreması."
+    },
+    "crema-catalana": {
+      "name": "Katalan kreması",
+      "description": "Yanık şeker altında limon ve tarçınlı Katalan kreması."
+    },
+    "eton-mess": {
+      "name": "Eton mess",
+      "description": "Eton Koleji'nden ezilmiş beze, çilek ve krema."
+    },
+    "trifle": {
+      "name": "Trifle",
+      "description": "Cam kasede kat kat kek, meyve jölesi, muhallebi ve krema."
+    },
+    "injeolmi": {
+      "name": "Injeolmi",
+      "description": "Kavrulmuş soya ununa bulanmış çiğnenen Kore pirinç keki."
+    },
+    "songpyeon": {
+      "name": "Songpyeon",
+      "description": "Chuseok için çam iğneleri üstünde buharda pişen hilal pirinç kekleri."
+    },
+    "yakgwa": {
+      "name": "Yakgwa",
+      "description": "Kızartılıp pirinç şurubuna batırılan ballı Kore kurabiyesi."
+    },
+    "daifuku": {
+      "name": "Çilekli daifuku",
+      "description": "Kırmızı fasulye ezmesi ve bütün çileği saran yumuşak mochi."
+    },
+    "dango": {
+      "name": "Mitarashi dango",
+      "description": "Tatlı soya sosuyla sırlanmış şişte pirinç topları."
+    },
+    "yokan": {
+      "name": "Yokan",
+      "description": "Yeşil çayla yenen kırmızı fasulye ve agar jölesi."
+    },
+    "mooncake": {
+      "name": "Ay keki",
+      "description": "Lotus ezmesi ve tuzlu yumurta sarısı dolgulu sonbahar ortası keki."
+    },
+    "tangyuan": {
+      "name": "Tangyuan",
+      "description": "Sıcak tatlı çorbada siyah susamlı pirinç topları."
+    },
+    "tanghulu": {
+      "name": "Tanghulu",
+      "description": "Çıtır şeker kaplı şişte meyve, Pekin klasiği."
+    },
+    "mango-sticky-rice": {
+      "name": "Mangolu yapışkan pirinç",
+      "description": "Olgun mangoyla servilen hindistancevizli yapışkan pirinç."
+    },
+    "gulab-jamun": {
+      "name": "Gulab jamun",
+      "description": "Gül şurubuna batırılmış kızarmış süt topları."
+    },
+    "rasgulla": {
+      "name": "Rasgulla",
+      "description": "Hafif şurupta pişen süngerimsi Bengal peynir topları."
+    },
+    "kaju-katli": {
+      "name": "Kaju katli",
+      "description": "Yenilebilir gümüşle süslü baklava dilimli Hint kaju tatlısı."
+    },
+    "turkish-delight": {
+      "name": "Lokum",
+      "description": "Gül suyu kokulu, pudra şekerine bulanmış nişasta şekerlemesi."
+    },
+    "halva": {
+      "name": "Helva",
+      "description": "Orta Doğu'dan Doğu Avrupa'ya sevilen tahin helvası."
+    },
+    "brigadeiro": {
+      "name": "Brigadeiro",
+      "description": "Yoğunlaştırılmış süt ve kakaolu, granüllü Brezilya trüfü."
+    },
+    "caramel": {
+      "name": "Karamela",
+      "description": "Şeker, tereyağı ve kremanın ağır ağır pişirildiği yumuşak karamela."
+    },
+    "milk-chocolate": {
+      "name": "Sütlü çikolata",
+      "description": "1875'te İsviçre'nin Vevey kentinde doğan yumuşak sütlü çikolata."
+    },
+    "hotteok": {
+      "name": "Hotteok",
+      "description": "Esmer şeker ve kuruyemiş dolgulu Kore sokak tatlısı."
+    },
+    "bungeoppang": {
+      "name": "Bungeoppang",
+      "description": "Kırmızı fasulye dolgulu, balık biçimli Kore keki."
+    },
+    "dorayaki": {
+      "name": "Dorayaki",
+      "description": "Kırmızı fasulye ezmesi sarılmış iki yumuşak ballı pankek."
+    },
+    "taiyaki": {
+      "name": "Taiyaki",
+      "description": "Kırmızı fasulye dolgulu, çipura biçimli çıtır kek."
+    },
+    "jalebi": {
+      "name": "Zülbiye",
+      "description": "Safran şurubuna batırılmış çıtır kızarmış hamur sarmalları."
+    },
+    "chebakia": {
+      "name": "Şebakiye",
+      "description": "Kızartılıp bala batırılan susamlı çiçek biçimli Fas tatlısı."
+    },
+    "crepe": {
+      "name": "Krep",
+      "description": "Çikolata soslu incecik Brötanya krebi."
+    },
+    "churros": {
+      "name": "Çurros",
+      "description": "Koyu sıcak çikolataya batırılan yıldız biçimli kızarmış hamur."
+    },
+    "kaiserschmarrn": {
+      "name": "Kaiserschmarrn",
+      "description": "Pudra şekeri ve kompostolu parçalanmış Avusturya pankeki."
+    },
+    "berliner": {
+      "name": "Berliner",
+      "description": "Reçel dolgulu, şekerli Alman pişisi."
+    },
+    "belgian-waffle": {
+      "name": "Belçika waffle'ı",
+      "description": "Derin ızgaralı hafif çıtır waffle, çilekle."
+    },
+    "syrniki": {
+      "name": "Sırniki",
+      "description": "Reçelle yenen Doğu Avrupa lor peyniri pankekleri."
+    },
+    "loukoumades": {
+      "name": "Lokma",
+      "description": "Bal, tarçın ve cevizli Yunan lokması."
+    },
+    "caramel-macchiato": {
+      "name": "Karamel macchiato",
+      "description": "Espressoyla lekelenmiş, karamel ağlı vanilyalı süt."
+    },
+    "dalgona-coffee": {
+      "name": "Dalgona kahvesi",
+      "description": "Soğuk süt üstüne köpürtülmüş hazır kahve, Kore akımı."
+    },
+    "egg-coffee": {
+      "name": "Yumurtalı kahve",
+      "description": "Çırpılmış yumurta sarısı ve yoğun sütlü Hanoi kahvesi."
+    },
+    "wiener-melange": {
+      "name": "Viyana melanjı",
+      "description": "Espresso, sıcak süt ve köpükten Viyana kahvehane klasiği."
+    },
+    "espresso": {
+      "name": "Espresso",
+      "description": "Basınçla çekilen, kremalı kısa ve yoğun İtalyan kahvesi."
+    },
+    "cappuccino": {
+      "name": "Kapuçino",
+      "description": "Eşit oranda sıcak süt ve bol köpüklü espresso."
+    },
+    "caffe-latte": {
+      "name": "Latte",
+      "description": "Bol sıcak sütlü ve latte sanatlı espresso."
+    },
+    "americano": {
+      "name": "Americano",
+      "description": "Sıcak suyla uzatılmış hafif espresso."
+    },
+    "flat-white": {
+      "name": "Flat white",
+      "description": "İpeksi mikro köpüklü sert espresso, Avustralya ile Yeni Zelanda paylaşamıyor."
+    },
+    "caffe-mocha": {
+      "name": "Mocha",
+      "description": "Çikolata ve sütlü, kakao serpilmiş espresso."
+    },
+    "ca-phe-sua-da": {
+      "name": "Vietnam buzlu kahvesi",
+      "description": "Phin süzgeciyle demlenmiş, yoğun sütlü buzlu kahve."
+    },
+    "frappe": {
+      "name": "Yunan frapesi",
+      "description": "Buz üstünde çalkalanmış hazır kahve köpüğü, Yunan yazı."
+    },
+    "cold-brew": {
+      "name": "Soğuk demleme kahve",
+      "description": "Uzun süre soğuk suda demlenen yumuşak kahve."
+    },
+    "royal-milk-tea": {
+      "name": "Kraliyet sütlü çayı",
+      "description": "Yaprakları doğrudan sütte kaynatılan Japon usulü sütlü çay."
+    },
+    "bubble-tea": {
+      "name": "Baloncuklu çay",
+      "description": "Taichung'daki bir çay evinde doğan tapyoka incili sütlü çay."
+    },
+    "thai-tea": {
+      "name": "Tay buzlu çayı",
+      "description": "Buz üstünde yoğunlaştırılmış sütlü turuncu Tay çayı."
+    },
+    "ramune": {
+      "name": "Ramune",
+      "description": "Cam bilyeyle kapanan şişede Japon yaz gazozu."
+    },
+    "melon-soda-float": {
+      "name": "Dondurmalı kavun gazozu",
+      "description": "Vanilyalı dondurma ve kirazlı yeşil kavun gazozu."
+    },
+    "root-beer-float": {
+      "name": "Kök birası float",
+      "description": "Vanilyalı dondurma üstünde köpüren kök birası."
+    },
+    "sikhye": {
+      "name": "Sikhye",
+      "description": "Üstünde pirinç taneleri yüzen tatlı Kore içeceği."
+    },
+    "sujeonggwa": {
+      "name": "Sujeonggwa",
+      "description": "Kuru Trabzon hurması ve çam fıstıklı soğuk zencefil-tarçın şerbeti."
+    },
+    "kahlua-milk": {
+      "name": "Kahlúa'lı süt",
+      "description": "Kahve likörü ve sütten tatlı kokteyl. Alkol içerir."
+    },
+    "steamed-milk": {
+      "name": "Buharda ısıtılmış süt",
+      "description": "Buharla ısıtılıp yumuşak köpüklenen sıcak süt."
+    },
+    "hot-chocolate": {
+      "name": "Sıcak kakao",
+      "description": "Ilık sütte kakao, üstünde marshmallow."
+    },
+    "cola": {
+      "name": "Kola",
+      "description": "19. yüzyıl sonunda Atlanta'da doğan karamel renkli gazoz."
+    },
+    "ginger-ale": {
+      "name": "Zencefilli gazoz",
+      "description": "Kanada usulü sek tarzıyla bilinen ferah zencefilli gazoz."
+    },
+    "lemonade": {
+      "name": "Limonata",
+      "description": "Limon suyu, şeker ve sudan buzlu serinletici içecek."
+    },
+    "italian-soda": {
+      "name": "İtalyan sodası",
+      "description": "Adına rağmen San Francisco'da doğan meyve şuruplu soda."
+    },
+    "root-beer": {
+      "name": "Kök birası",
+      "description": "Sassafras ve vanilyalı, alkolsüz Kuzey Amerika gazozu."
     }
   },
   "advisor": {

@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.4.5-ff6484)
+![version](https://img.shields.io/badge/version-0.5.0-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -12,7 +12,7 @@
 
 ## 화면
 
-사진은 [Unsplash](https://unsplash.com), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 사이트의 출처 페이지에 있습니다.
+사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)(자유 라이선스), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 사이트의 출처 페이지에 있습니다.
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
@@ -38,7 +38,7 @@
 
 | 구분 | 내용 |
 |---|---|
-| 전 세계 디저트 | 밀크셰이크, 치즈케이크, 머핀, 팬케이크, 생크림 케이크, 세계의 명작 등 13개 나라의 16종 |
+| 전 세계 디저트 | 34개 나라와 기원이 여럿인 "기타"까지 152종. 케이크, 파이·타르트, 페이스트리, 쿠키·구움과자, 아이스크림·빙수, 푸딩·크림, 떡·전통 과자, 팬케이크·튀김, 커피, 음료의 10개 분류 |
 | 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시. 언어 메뉴는 원형 국기와 나라 이름으로 고름 |
 | 쇼핑 | 카테고리 필터, 상품 상세, 장바구니(저장 유지) |
 | AI 추천 | 입맛을 적으면 Claude가 카탈로그 안에서 디저트를 추천(스트리밍). 키가 없으면 규칙 기반 추천 |

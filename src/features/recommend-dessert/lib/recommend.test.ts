@@ -89,7 +89,7 @@ describe("recommendLocally", () => {
   });
 
   it("입력에 카테고리가 있으면 우선합니다", () => {
-    const picks = recommendLocally({ query: "pancake 먹고 싶어요", chips: [] }, words as never);
-    expect(getProduct(picks[0]?.slug ?? "")?.category).toBe("pancake");
+    const picks = recommendLocally({ query: "griddle 먹고 싶어요", chips: [] }, words as never);
+    expect(getProduct(picks[0]?.slug ?? "")?.category).toBe("griddle");
   });
 });

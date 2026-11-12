@@ -3,7 +3,8 @@ import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
-import { HERO_CREDIT, PRODUCTS, type PhotoCredit } from "@/entities/product";
+import { PRODUCTS } from "@/entities/product";
+import { HERO_CREDIT, PHOTO_CREDITS, type PhotoCredit } from "@/entities/product/index.server";
 import { localeAlternates, siteOpenGraph } from "@/shared/i18n";
 
 type CreditsPageProps = { params: Promise<{ locale: string }> };
@@ -24,6 +25,7 @@ const item = css({
   paddingBlock: "10px",
   borderBlockEnd: "1px solid {colors.cocoa.800}",
 });
+const note = css({ marginBlockEnd: "16px", color: "muted", lineHeight: "1.6" });
 const link = css({ textDecoration: "underline", textUnderlineOffset: "3px", _hover: { color: "caramel" } });
 
 export async function generateMetadata({ params }: CreditsPageProps): Promise<Metadata> {
@@ -48,9 +50,19 @@ function CreditItem({ label, credit }: { label: string; credit: PhotoCredit }) {
   return (
     <li className={item}>
       <span>{label}</span>
-      <a className={link} href={credit.photoUrl} rel="noreferrer">
-        {t("by", { name: credit.name })}
-      </a>
+      <span>
+        <a className={link} href={credit.photoUrl} rel="noreferrer">
+          {t("by", { name: credit.name })}
+        </a>
+        {credit.license ? (
+          <>
+            {" · "}
+            <a className={link} href={credit.license.url} rel="noreferrer license" lang="en">
+              {credit.license.name}
+            </a>
+          </>
+        ) : null}
+      </span>
     </li>
   );
 }
@@ -62,13 +74,14 @@ function CreditsContent() {
     <div className={page}>
       <h1 className={title}>{t("title")}</h1>
       <h2 className={heading}>{t("photos")}</h2>
+      <p className={note}>{t("changes")}</p>
       <ul>
         <CreditItem label={t("hero")} credit={HERO_CREDIT} />
         {PRODUCTS.map((product) => (
           <CreditItem
             key={product.slug}
             label={tProducts(`${product.slug}.name` as Parameters<typeof tProducts>[0]) as string}
-            credit={product.credit}
+            credit={PHOTO_CREDITS[product.slug]!}
           />
         ))}
       </ul>

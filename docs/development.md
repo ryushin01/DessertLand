@@ -96,7 +96,8 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 ## 라이선스
 
-- **사진:** [Unsplash License](https://unsplash.com/license)의 무료 사진만 씁니다. Unsplash+ 사진은 쓰지 않습니다. 출처는 `catalog.ts`와 `/credits` 페이지에 있습니다.
+- **사진:** [Unsplash License](https://unsplash.com/license)의 무료 사진(Unsplash+ 제외)과 [Wikimedia Commons](https://commons.wikimedia.org)의 자유 라이선스 사진(CC0, 퍼블릭 도메인, CC BY, CC BY-SA)만 씁니다. 출처는 `src/entities/product/model/credits.ts`(서버 전용, 화면 스크립트에 싣지 않음)와 `/credits` 페이지에 있습니다. Commons 사진은 저작자·라이선스·원본 주소를 밝히고, 크기와 형식(WebP, 1400px 이하)을 바꿨다고 출처 페이지에 적습니다. 단위 테스트가 상품마다 사진 파일과 출처, 허용 라이선스를 확인합니다.
+- **나라:** 기원이 여러 나라에 걸치거나 다툼이 있는 디저트는 나라 코드 `XX`로 두고 "기타"로 표시합니다. 세계 여행 구간에는 넣지 않습니다.
 - **아이콘:** Flaticon UIcons 무료 라이선스는 출처 표기가 필요해 푸터와 `/credits`에 표기합니다. 쓰는 아이콘만 `scripts/build-icons.py`로 추려 냅니다.
 
 ## 테스트
