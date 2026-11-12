@@ -48,7 +48,9 @@
     "results": "{count} desserts",
     "add": "Add {name} to cart",
     "addShort": "Add",
-    "view": "View"
+    "view": "View",
+    "buyNow": "Buy now: {name}",
+    "buyNowShort": "Buy now"
   },
   "product": {
     "back": "Back to desserts",
@@ -104,7 +106,12 @@
     "shipping": "Shipping",
     "total": "Total",
     "checkout": "Checkout",
-    "added": "{name} added to your cart."
+    "added": "{name} added to your cart.",
+    "select": "Include {name} in the order",
+    "selectAll": "Select all",
+    "selected": "{count} of {total} selected",
+    "checkoutSelected": "Checkout selected ({count})",
+    "noneSelected": "Select the items you want to order."
   },
   "checkout": {
     "metaTitle": "Checkout",

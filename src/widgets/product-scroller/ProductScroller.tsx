@@ -7,6 +7,7 @@ import { css, cx } from "styled-system/css";
 
 import { countryName, formatProductPrice, type Product } from "@/entities/product";
 import { AddToCartButton } from "@/features/add-to-cart";
+import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
 import { useMotionEnabled } from "@/shared/lib/motion";
 
@@ -95,6 +96,13 @@ const details = css({
   justifyItems: { md: "end" },
   textAlign: { md: "end" },
   fontSize: "0.9rem",
+});
+
+const actions = css({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "8px",
+  justifyContent: { md: "flex-end" },
 });
 
 type ProductScrollerProps = { products: Product[] };
@@ -215,14 +223,25 @@ export function ProductScroller({ products }: ProductScrollerProps) {
                 <div className={details}>
                   <p>{countryName(product.country, locale)}</p>
                   <p>{formatProductPrice(product.priceUsd, locale)}</p>
-                  <AddToCartButton
-                    slug={product.slug}
-                    size="sm"
-                    tone="outline"
-                    accessibleName={t("add", { name })}
-                  >
-                    {t("addShort")}
-                  </AddToCartButton>
+                  <div className={actions}>
+                    <AddToCartButton
+                      slug={product.slug}
+                      size="sm"
+                      tone="outline"
+                      accessibleName={t("add", { name })}
+                    >
+                      {t("addShort")}
+                    </AddToCartButton>
+                    <BuyNowLink
+                      slug={product.slug}
+                      quantity={1}
+                      size="sm"
+                      tone="solid"
+                      accessibleName={t("buyNow", { name })}
+                    >
+                      {t("buyNowShort")}
+                    </BuyNowLink>
+                  </div>
                 </div>
               </li>
             );

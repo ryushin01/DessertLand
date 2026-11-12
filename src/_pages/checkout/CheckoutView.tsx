@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
-import { cartLinesAtom, type CartLine } from "@/entities/cart";
+import { cartLinesAtom, removePurchased, type CartLine } from "@/entities/cart";
 import { formatMoney } from "@/entities/product";
 import { summarizeCart, useCartSummary } from "@/features/cart-summary";
 import { CheckoutForm, type PaidOrder } from "@/features/checkout-form";
@@ -79,8 +79,8 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
 
   const onPaid = (paid: PaidOrder) => {
     setOrder(paid);
-    // 바로 구매는 장바구니를 건드리지 않습니다.
-    if (!buyNow) setCart([]);
+    // 바로 구매는 장바구니를 건드리지 않고, 장바구니 주문은 고른 상품만 뺍니다.
+    if (!buyNow) setCart((lines) => removePurchased(lines, items.map((item) => item.slug)));
   };
 
   if (order) {
