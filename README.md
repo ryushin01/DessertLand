@@ -106,4 +106,5 @@ src/
 | 문서 | 내용 |
 |---|---|
 | [개발 가이드](docs/development.md) | 언어와 상품 추가, 모션 규칙, 사진과 아이콘 라이선스 |
+| [시퀀스 다이어그램](docs/sequence-diagrams.md) | Stripe 테스트 결제, 내장 테스트 결제, AI 디저트 추천(스트리밍) |
 | [변경 기록](CHANGELOG.md) | 버전별 변경 사항 |
