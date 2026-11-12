@@ -48,7 +48,9 @@
     "results": "{count} 款甜点",
     "add": "将{name}加入购物车",
     "addShort": "加入",
-    "view": "查看"
+    "view": "查看",
+    "buyNow": "立即购买{name}",
+    "buyNowShort": "立即购买"
   },
   "product": {
     "back": "返回甜点列表",
@@ -104,7 +106,12 @@
     "shipping": "运费",
     "total": "合计",
     "checkout": "去结算",
-    "added": "已将{name}加入购物车。"
+    "added": "已将{name}加入购物车。",
+    "select": "将{name}加入订单",
+    "selectAll": "全选",
+    "selected": "已选 {count}/{total}",
+    "checkoutSelected": "结算所选商品（{count}）",
+    "noneSelected": "请选择要购买的商品。"
   },
   "checkout": {
     "metaTitle": "结算",

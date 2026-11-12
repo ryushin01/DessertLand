@@ -40,7 +40,7 @@ describe("buildSessionParams", () => {
         price_data: { currency: "usd", unit_amount: 800, product_data: { name: "Shipping" } },
       },
     ]);
-    expect(params?.metadata).toEqual({ source: "cart" });
+    expect(params?.metadata).toEqual({ source: "cart", items: "baklava" });
     expect(params?.allowed_payment_method_types).toEqual(["card"]);
     expect(params?.adaptive_pricing).toEqual({ enabled: false });
     expect(params?.branding_settings).toEqual({ display_name: "Dessert Land" });

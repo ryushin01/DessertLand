@@ -48,7 +48,9 @@
     "results": "{count} desserts",
     "add": "Ajouter {name} au panier",
     "addShort": "Ajouter",
-    "view": "Voir"
+    "view": "Voir",
+    "buyNow": "Acheter maintenant : {name}",
+    "buyNowShort": "Acheter maintenant"
   },
   "product": {
     "back": "Retour aux desserts",
@@ -104,7 +106,12 @@
     "shipping": "Livraison",
     "total": "Total",
     "checkout": "Commander",
-    "added": "{name} ajouté au panier."
+    "added": "{name} ajouté au panier.",
+    "select": "Inclure {name} dans la commande",
+    "selectAll": "Tout sélectionner",
+    "selected": "{count} sur {total} sélectionné(s)",
+    "checkoutSelected": "Commander la sélection ({count})",
+    "noneSelected": "Sélectionnez les articles à commander."
   },
   "checkout": {
     "metaTitle": "Commande",

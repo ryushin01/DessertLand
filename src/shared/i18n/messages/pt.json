@@ -48,7 +48,9 @@
     "results": "{count} sobremesas",
     "add": "Adicionar {name} ao carrinho",
     "addShort": "Adicionar",
-    "view": "Ver"
+    "view": "Ver",
+    "buyNow": "Comprar agora {name}",
+    "buyNowShort": "Comprar agora"
   },
   "product": {
     "back": "Voltar às sobremesas",
@@ -104,7 +106,12 @@
     "shipping": "Envio",
     "total": "Total",
     "checkout": "Finalizar compra",
-    "added": "{name} adicionado ao carrinho."
+    "added": "{name} adicionado ao carrinho.",
+    "select": "Incluir {name} na encomenda",
+    "selectAll": "Selecionar tudo",
+    "selected": "{count} de {total} selecionados",
+    "checkoutSelected": "Encomendar a seleção ({count})",
+    "noneSelected": "Selecione os artigos que pretende encomendar."
   },
   "checkout": {
     "metaTitle": "Finalizar compra",

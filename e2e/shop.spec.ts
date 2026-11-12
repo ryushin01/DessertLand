@@ -253,6 +253,45 @@ test("바로 구매는 그 상품만 결제하고 장바구니를 유지합니�
   await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
 });
 
+test("장바구니에서 고른 상품만 주문하고, 고르지 않은 상품은 남깁니다", async ({ page }) => {
+  await page.addInitScript(() => {
+    if (sessionStorage.getItem("seeded")) return;
+    sessionStorage.setItem("seeded", "1");
+    localStorage.setItem(
+      "dessert-land.cart",
+      JSON.stringify([
+        { slug: "baklava", quantity: 1 },
+        { slug: "tiramisu", quantity: 1 },
+      ]),
+    );
+  });
+  await page.goto("/ko/credits");
+  await page.getByRole("button", { name: "장바구니, 2개 담김" }).click();
+  const dialog = page.getByRole("dialog", { name: "장바구니" });
+  await dialog.getByRole("checkbox", { name: "티라미수 주문에 넣기" }).uncheck();
+  await expect(dialog).toContainText("1/2개 선택");
+  await scan(page);
+  await dialog.getByRole("link", { name: "선택 상품 주문하기 (1)" }).click();
+
+  const summary = page.getByRole("region", { name: "주문 내역" });
+  await expect(summary).toContainText("바클라바 × 1");
+  await expect(summary).not.toContainText("티라미수");
+  await fillCheckout(page);
+  await page.getByRole("button", { name: /결제하기$/ }).click();
+  await page.getByRole("button", { name: "결제 승인" }).click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
+});
+
+test("상품 목록에서 바로 구매하면 그 상품 1개로 주문 화면에 갑니다", async ({ page }) => {
+  await page.goto("/ko/shop");
+  await page.getByRole("link", { name: "바클라바 바로 구매" }).click();
+  await expect(page).toHaveURL(/\/ko\/checkout\?buy=baklava&qty=1$/);
+  await expect(page.getByRole("region", { name: "주문 내역" })).toContainText("바클라바 × 1");
+});
+
 test("결제 실패와 취소에도 입력과 장바구니를 유지합니다", async ({ page }) => {
   await page.goto("/ko/shop/baklava");
   await page.getByRole("button", { name: "장바구니에 담기" }).click();
@@ -566,4 +605,19 @@ test.describe("데스크톱 모션", () => {
     await page.waitForTimeout(1800);
     await expect(link).toBeInViewport();
   });
+});
+
+test("주요 화면에서 콘텐츠 보안 정책(CSP) 위반이 없습니다", async ({ page }) => {
+  const violations: string[] = [];
+  page.on("console", (message) => {
+    if (/Content Security Policy/i.test(message.text())) violations.push(message.text());
+  });
+  // ja는 한중일 웹 글꼴(Google Fonts)을 받는 화면입니다.
+  for (const path of ["/ko", "/ko/shop", "/ko/shop/baklava", "/ko/checkout?buy=baklava&qty=1", "/ja"]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle");
+  }
+  const response = await page.request.get("/ko");
+  expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+  expect(violations).toEqual([]);
 });
