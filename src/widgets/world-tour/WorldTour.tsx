@@ -5,14 +5,18 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRef, type FocusEvent } from "react";
 import { css } from "styled-system/css";
 
-import { PRODUCTS, countryName, formatProductPrice } from "@/entities/product";
+import { OTHER_COUNTRY, PRODUCTS, countryName, formatProductPrice } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { ScrollTrigger, gsap, useGsap } from "@/shared/lib/motion/gsap";
 import { scrollToY, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 
+/** 가로 여행이 너무 길어지지 않게, 나라마다 첫 상품 하나씩 16곳까지만 들릅니다. 기타(XX)는 들르지 않습니다. */
+const MAX_STOPS = 16;
 const STOPS = PRODUCTS.filter(
-  (product, index) => PRODUCTS.findIndex((item) => item.country === product.country) === index,
-);
+  (product, index) =>
+    product.country !== OTHER_COUNTRY &&
+    PRODUCTS.findIndex((item) => item.country === product.country) === index,
+).slice(0, MAX_STOPS);
 
 const wrapper = css({ position: "relative", zIndex: 2, background: "cocoa.950" });
 const stage = css({

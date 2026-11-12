@@ -72,29 +72,45 @@
     "nuts": "坚果"
   },
   "categories": {
-    "milkshake": {
-      "name": "奶昔",
-      "lede": "冰凉浓郁,满杯欢愉。"
+    "cake": {
+      "name": "蛋糕",
+      "lede": "松软蛋糕与奶油，值得庆祝的一块。"
     },
-    "cheesecake": {
-      "name": "芝士蛋糕",
-      "lede": "或绵密或焦香,属于奶油芝士的时光。"
+    "tart": {
+      "name": "派与挞",
+      "lede": "酥脆外皮盛满水果与卡仕达。"
     },
-    "muffin": {
-      "name": "玛芬",
-      "lede": "高高隆起的清晨暖意。"
+    "pastry": {
+      "name": "酥皮点心",
+      "lede": "层层酥脆的黄油与面皮。"
     },
-    "pancake": {
-      "name": "松饼",
-      "lede": "层层堆叠,糖浆缓缓流下。"
+    "baked": {
+      "name": "饼干与烘焙点心",
+      "lede": "一口就能尝到的烤箱温度。"
     },
-    "creamcake": {
-      "name": "鲜奶油蛋糕",
-      "lede": "松软蛋糕、轻盈奶油与草莓。"
+    "frozen": {
+      "name": "冰淇淋与刨冰",
+      "lede": "冰凉入口，瞬间融化。"
     },
-    "classic": {
-      "name": "世界经典",
-      "lede": "从提拉米苏到果仁蜜饼,一国之味。"
+    "pudding": {
+      "name": "布丁与奶冻",
+      "lede": "用勺子舀起的顺滑。"
+    },
+    "confection": {
+      "name": "糕点与传统甜食",
+      "lede": "各国代代手作相传的甜味。"
+    },
+    "griddle": {
+      "name": "煎饼与油炸点心",
+      "lede": "刚从煎锅油锅出炉的热乎。"
+    },
+    "coffee": {
+      "name": "咖啡",
+      "lede": "配甜点的一杯。"
+    },
+    "drink": {
+      "name": "饮品",
+      "lede": "从茶、汽水到奶昔。"
     }
   },
   "cart": {
@@ -154,10 +170,11 @@
   "credits": {
     "metaTitle": "版权信息",
     "title": "图片与图标来源",
-    "photos": "图片:Unsplash",
+    "photos": "图片:Unsplash、Wikimedia Commons",
     "icons": "图标:Flaticon",
     "hero": "首屏图片",
-    "by": "摄影:{name}"
+    "by": "摄影:{name}",
+    "changes": "Wikimedia Commons 图片依各自许可使用，并调整了尺寸和文件格式(WebP)。"
   },
   "footer": {
     "tagline": "Dessert Land 是以 10 种语言介绍全球甜点的演示商店。",
@@ -231,6 +248,550 @@
     "egg-tart": {
       "name": "广式蛋挞",
       "description": "伴随广东茶文化成长的点心,以丝滑蛋奶馅著称。"
+    },
+    "castella": {
+      "name": "长崎蛋糕",
+      "description": "由葡萄牙传入、在长崎发展的湿润蜂蜜蛋糕。"
+    },
+    "bibingka": {
+      "name": "比宾卡",
+      "description": "铺香蕉叶烘烤的菲律宾圣诞米糕。"
+    },
+    "spekkoek": {
+      "name": "千层糕",
+      "description": "一层层烘烤叠起的印尼香料黄油蛋糕。"
+    },
+    "pandan-cake": {
+      "name": "斑斓戚风蛋糕",
+      "description": "用斑斓叶增香上色的东南亚松软戚风蛋糕。"
+    },
+    "basbousa": {
+      "name": "巴斯布萨",
+      "description": "浸满糖浆的粗面粉蛋糕，流行于中东与北非。"
+    },
+    "malva-pudding": {
+      "name": "马尔瓦布丁",
+      "description": "加杏酱的海绵蛋糕淋上温热奶油酱的南非甜点。"
+    },
+    "mont-blanc": {
+      "name": "蒙布朗",
+      "description": "细挤栗子奶油堆成雪山造型的甜点。"
+    },
+    "panettone": {
+      "name": "潘妮托尼",
+      "description": "加入蜜饯果干、高高膨起的米兰圣诞面包。"
+    },
+    "sachertorte": {
+      "name": "萨赫蛋糕",
+      "description": "涂杏酱的巧克力蛋糕覆上光亮巧克力的维也纳名点。"
+    },
+    "baumkuchen": {
+      "name": "年轮蛋糕",
+      "description": "在转轴上一层层烤出年轮纹的德国蛋糕。"
+    },
+    "stollen": {
+      "name": "史多伦",
+      "description": "包果干与杏仁膏、覆满糖粉的德累斯顿圣诞面包。"
+    },
+    "sticky-toffee-pudding": {
+      "name": "太妃糖布丁",
+      "description": "椰枣海绵蛋糕浇满热太妃酱的英国甜点。"
+    },
+    "victoria-sponge": {
+      "name": "维多利亚海绵蛋糕",
+      "description": "两层海绵蛋糕夹覆盆子酱和奶油的英式下午茶蛋糕。"
+    },
+    "dobos-torte": {
+      "name": "多博什蛋糕",
+      "description": "薄海绵蛋糕与巧克力奶油层叠、顶覆焦糖的布达佩斯蛋糕。"
+    },
+    "medovik": {
+      "name": "俄式蜂蜜蛋糕",
+      "description": "蜂蜜薄饼与酸奶油层层相叠的俄罗斯蜂蜜蛋糕。"
+    },
+    "tres-leches": {
+      "name": "三奶蛋糕",
+      "description": "浸满三种牛奶的海绵蛋糕，拉美多国争相称为发源地。"
+    },
+    "red-velvet": {
+      "name": "红丝绒蛋糕",
+      "description": "红色可可蛋糕涂奶油奶酪霜的美式蛋糕。"
+    },
+    "lamington": {
+      "name": "莱明顿蛋糕",
+      "description": "海绵蛋糕块裹巧克力再滚椰丝的澳洲蛋糕。"
+    },
+    "pavlova": {
+      "name": "帕芙洛娃",
+      "description": "外脆内软的蛋白霜配奶油水果，澳新两国争称发源地。"
+    },
+    "tarte-tatin": {
+      "name": "翻转苹果挞",
+      "description": "焦糖苹果覆上酥皮烤好再倒扣的法式挞。"
+    },
+    "key-lime-pie": {
+      "name": "青柠派",
+      "description": "用小青柠汁和炼乳做成的酸甜佛罗里达派。"
+    },
+    "pecan-pie": {
+      "name": "山核桃派",
+      "description": "满铺山核桃、甜糖浆馅的美国南方派。"
+    },
+    "apple-pie": {
+      "name": "苹果派",
+      "description": "肉桂苹果在格子酥皮下烘烤的派，在许多国家都受欢迎。"
+    },
+    "butter-tart": {
+      "name": "黄油挞",
+      "description": "填入黄油、糖和蛋制成黏稠馅的加拿大小挞。"
+    },
+    "kunefe": {
+      "name": "库纳法",
+      "description": "细丝面皮夹奶酪烘烤，淋糖浆撒开心果的中东甜点。"
+    },
+    "mille-feuille": {
+      "name": "拿破仑酥",
+      "description": "酥脆千层酥皮与卡仕达奶油层层相叠的法式甜点。"
+    },
+    "eclair": {
+      "name": "闪电泡芙",
+      "description": "长条泡芙填满奶油、淋上巧克力的法式点心。"
+    },
+    "kouign-amann": {
+      "name": "焦糖奶油酥",
+      "description": "层层折入黄油和砂糖、烤至焦糖化的布列塔尼酥点。"
+    },
+    "cannoli": {
+      "name": "西西里奶酪卷",
+      "description": "炸脆的圆筒酥皮填入甜里科塔奶酪的西西里点心。"
+    },
+    "sfogliatella": {
+      "name": "贝壳酥",
+      "description": "贝壳形千层酥皮填入里科塔与粗粒面的那不勒斯点心。"
+    },
+    "apfelstrudel": {
+      "name": "苹果卷",
+      "description": "拉得极薄的面皮卷入苹果、肉桂与葡萄干烘烤的奥地利点心。"
+    },
+    "semla": {
+      "name": "瑞典奶油包",
+      "description": "豆蔻面包夹杏仁膏和鲜奶油的瑞典点心。"
+    },
+    "kurtoskalacs": {
+      "name": "烟囱卷",
+      "description": "面团缠在圆筒上炭火烤制、裹糖衣的匈牙利烟囱卷。"
+    },
+    "galaktoboureko": {
+      "name": "希腊奶油派",
+      "description": "粗粒面卡仕达包入薄酥皮烘烤、浸糖浆的希腊甜点。"
+    },
+    "pineapple-bun": {
+      "name": "菠萝包",
+      "description": "酥皮裂纹像菠萝而得名的香港面包，并不含菠萝。"
+    },
+    "pineapple-cake": {
+      "name": "凤梨酥",
+      "description": "酥香奶油外皮包着酸甜凤梨馅的台湾点心。"
+    },
+    "maamoul": {
+      "name": "枣泥酥",
+      "description": "包枣泥或坚果、用木模压花的黎凡特节日饼。"
+    },
+    "macaron": {
+      "name": "马卡龙",
+      "description": "两片杏仁蛋白饼夹奶油馅的法式小点。"
+    },
+    "madeleine": {
+      "name": "玛德琳",
+      "description": "贝壳模具烘烤、中间鼓起的法式黄油小蛋糕。"
+    },
+    "canele": {
+      "name": "可露丽",
+      "description": "铜模烘烤、外焦糖内湿润的波尔多朗姆香草小点。"
+    },
+    "financier": {
+      "name": "费南雪",
+      "description": "焦化黄油与杏仁粉烤成金砖形的巴黎小蛋糕。"
+    },
+    "biscotti": {
+      "name": "意式脆饼",
+      "description": "加杏仁烤两次的硬脆托斯卡纳饼干，适合蘸饮品。"
+    },
+    "stroopwafel": {
+      "name": "荷兰焦糖华夫饼",
+      "description": "两片薄华夫夹焦糖糖浆的荷兰豪达点心。"
+    },
+    "scone": {
+      "name": "司康",
+      "description": "加黄油轻烤、配凝脂奶油和果酱的英式点心。"
+    },
+    "alfajor": {
+      "name": "阿法赫饼",
+      "description": "两片饼干夹牛奶焦糖酱、裹巧克力的阿根廷点心。"
+    },
+    "concha": {
+      "name": "贝壳面包",
+      "description": "顶部覆贝壳纹酥脆糖皮的墨西哥甜面包。"
+    },
+    "brownie": {
+      "name": "布朗尼",
+      "description": "外脆内浓、源自芝加哥的巧克力方块。"
+    },
+    "nanaimo-bar": {
+      "name": "纳奈莫条",
+      "description": "椰子碎底、卡仕达奶油和巧克力三层的免烤加拿大点心。"
+    },
+    "anzac-biscuit": {
+      "name": "澳纽军团饼干",
+      "description": "燕麦、椰丝和金黄糖浆烤成的澳新饼干。"
+    },
+    "patbingsu": {
+      "name": "红豆刨冰",
+      "description": "细腻刨冰上铺满红豆和炼乳的韩国夏日甜品。"
+    },
+    "kakigori": {
+      "name": "日式刨冰",
+      "description": "雪花般的刨冰淋上抹茶糖浆配红豆的日本夏日甜品。"
+    },
+    "mochi-ice-cream": {
+      "name": "麻糬冰淇淋",
+      "description": "薄薄糯米皮包裹冰淇淋的冰凉甜点。"
+    },
+    "halo-halo": {
+      "name": "哈啰哈啰",
+      "description": "刨冰拌入水果、果冻和紫薯冰淇淋的菲律宾甜品。"
+    },
+    "cendol": {
+      "name": "煎蕊",
+      "description": "绿色米冻配椰奶和椰糖浆的东南亚冰品。"
+    },
+    "kulfi": {
+      "name": "库尔菲法鲁达",
+      "description": "浓缩牛奶冰淇淋配法鲁达细面的印度夏日甜品。"
+    },
+    "dondurma": {
+      "name": "土耳其冰淇淋",
+      "description": "用兰茎粉和乳香树脂制成、可拉伸的土耳其冰淇淋。"
+    },
+    "gelato": {
+      "name": "意式冰淇淋",
+      "description": "打入空气少、浓郁绵密的意式冰淇淋。"
+    },
+    "affogato": {
+      "name": "阿芙佳朵",
+      "description": "香草冰淇淋浇上热浓缩咖啡的意式甜品。"
+    },
+    "banana-split": {
+      "name": "香蕉船",
+      "description": "剖开的香蕉上放三球冰淇淋、酱汁和樱桃的美式甜品。"
+    },
+    "vanilla-ice-cream": {
+      "name": "香草冰淇淋",
+      "description": "香滑香草冰淇淋配樱桃酱。"
+    },
+    "soft-serve": {
+      "name": "软冰淇淋",
+      "description": "从机器直接挤到甜筒上、含空气的柔软冰淇淋。"
+    },
+    "sundae": {
+      "name": "圣代",
+      "description": "冰淇淋配酱汁、鲜奶油、坚果和樱桃的美式甜品。"
+    },
+    "sorbet": {
+      "name": "雪葩",
+      "description": "水果与糖冷冻而成、不含乳制品的清爽冰品。"
+    },
+    "douhua": {
+      "name": "豆花",
+      "description": "嫩滑豆腐淋上甜糖水的中式甜品。"
+    },
+    "mango-pomelo-sago": {
+      "name": "杨枝甘露",
+      "description": "芒果泥配西柚和西米的香港冰凉甜品。"
+    },
+    "che-chuoi": {
+      "name": "香蕉椰奶甜汤",
+      "description": "香蕉和西米在椰奶中熬煮的越南热甜品。"
+    },
+    "ube-halaya": {
+      "name": "紫山药酱",
+      "description": "紫山药加牛奶黄油熬制的浓郁菲律宾甜品。"
+    },
+    "kheer": {
+      "name": "印度米布丁",
+      "description": "米在牛奶中慢煮、加豆蔻和坚果的印度米布丁。"
+    },
+    "gajar-halwa": {
+      "name": "胡萝卜哈尔瓦",
+      "description": "胡萝卜用牛奶和酥油慢炒的旁遮普冬季甜品。"
+    },
+    "muhallebi": {
+      "name": "牛奶布丁",
+      "description": "牛奶与米粉熬制、带玫瑰水香的中东滑嫩布丁。"
+    },
+    "umm-ali": {
+      "name": "乌姆阿里",
+      "description": "酥皮配坚果在甜牛奶中烘烤的埃及面包布丁。"
+    },
+    "creme-brulee": {
+      "name": "焦糖布丁",
+      "description": "香草卡仕达表面焦糖化、敲开酥脆糖壳的甜点，起源说法不一。"
+    },
+    "panna-cotta": {
+      "name": "意式奶冻",
+      "description": "奶油用明胶轻凝、颤巍巍的皮埃蒙特甜点。"
+    },
+    "crema-catalana": {
+      "name": "加泰罗尼亚焦糖奶冻",
+      "description": "柠檬肉桂香卡仕达表面焦糖化的加泰罗尼亚甜品。"
+    },
+    "eton-mess": {
+      "name": "伊顿麦斯",
+      "description": "碎蛋白霜、草莓和鲜奶油拌在一起的英国伊顿公学夏日甜点。"
+    },
+    "trifle": {
+      "name": "乳脂松糕",
+      "description": "玻璃碗中层层叠放海绵蛋糕、果冻、卡仕达和奶油的英式甜点。"
+    },
+    "injeolmi": {
+      "name": "打糕",
+      "description": "糯米捶打后裹上香浓黄豆粉的韩国年糕。"
+    },
+    "songpyeon": {
+      "name": "松饼",
+      "description": "包芝麻蜂蜜馅、铺松针蒸制的韩国中秋半月糕。"
+    },
+    "yakgwa": {
+      "name": "药果",
+      "description": "用蜂蜜和香油和面、油炸后浸糖浆的韩国传统点心。"
+    },
+    "daifuku": {
+      "name": "草莓大福",
+      "description": "软糯糯米皮包裹红豆馅和整颗草莓的日式和果子。"
+    },
+    "dango": {
+      "name": "御手洗团子",
+      "description": "串起的米团子淋上甜咸酱油汁的京都小吃。"
+    },
+    "yokan": {
+      "name": "羊羹",
+      "description": "红豆与琼脂熬煮凝固、适合配绿茶的日式点心。"
+    },
+    "mooncake": {
+      "name": "月饼",
+      "description": "包莲蓉和咸蛋黄、中秋节分享的圆形糕点。"
+    },
+    "tangyuan": {
+      "name": "汤圆",
+      "description": "黑芝麻馅糯米团浮在温热甜汤里的中式甜品。"
+    },
+    "tanghulu": {
+      "name": "冰糖葫芦",
+      "description": "竹签串起水果裹上脆糖衣的北京小吃。"
+    },
+    "mango-sticky-rice": {
+      "name": "芒果糯米饭",
+      "description": "吸满椰浆的糯米饭配熟透芒果的泰国甜品。"
+    },
+    "gulab-jamun": {
+      "name": "古拉布贾蒙",
+      "description": "奶团油炸后浸入玫瑰糖浆的印度节庆甜点。"
+    },
+    "rasgulla": {
+      "name": "拉斯古拉",
+      "description": "鲜奶酪球在清糖浆中煮制的孟加拉松软甜点。"
+    },
+    "kaju-katli": {
+      "name": "腰果糖",
+      "description": "腰果糊切成菱形、贴上银箔的印度节日点心。"
+    },
+    "turkish-delight": {
+      "name": "土耳其软糖",
+      "description": "淀粉与糖熬制、玫瑰水增香并裹糖粉的土耳其糖。"
+    },
+    "halva": {
+      "name": "哈尔瓦",
+      "description": "芝麻酱与糖制成、从中东到东欧都流行的酥糖。"
+    },
+    "brigadeiro": {
+      "name": "巴西巧克力球",
+      "description": "炼乳与可可熬制搓圆、裹巧克力碎的巴西甜点。"
+    },
+    "caramel": {
+      "name": "焦糖奶糖",
+      "description": "砂糖、黄油和奶油慢熬凝固的软糯焦糖糖。"
+    },
+    "milk-chocolate": {
+      "name": "牛奶巧克力",
+      "description": "1875年诞生于瑞士沃韦、加入牛奶的顺滑巧克力。"
+    },
+    "hotteok": {
+      "name": "糖饼",
+      "description": "流出红糖坚果馅的韩国冬季街头甜饼。"
+    },
+    "bungeoppang": {
+      "name": "鲫鱼饼",
+      "description": "包着红豆馅、烤成鲫鱼形状的韩国冬日小吃。"
+    },
+    "dorayaki": {
+      "name": "铜锣烧",
+      "description": "两片松软蜂蜜饼夹着红豆馅的日本点心。"
+    },
+    "taiyaki": {
+      "name": "鲷鱼烧",
+      "description": "包红豆馅、烤成鲷鱼形状的酥脆日本点心。"
+    },
+    "jalebi": {
+      "name": "杰莱比",
+      "description": "面糊炸成螺旋状再浸糖浆的西亚与南亚甜点。"
+    },
+    "chebakia": {
+      "name": "摩洛哥蜜花饼",
+      "description": "折成花形油炸、浸蜂蜜撒芝麻的摩洛哥点心。"
+    },
+    "crepe": {
+      "name": "可丽饼",
+      "description": "薄饼淋巧克力酱的布列塔尼可丽饼。"
+    },
+    "churros": {
+      "name": "吉事果",
+      "description": "星形挤出油炸、蘸浓热巧克力吃的西班牙小吃。"
+    },
+    "kaiserschmarrn": {
+      "name": "皇帝煎饼",
+      "description": "撕碎的蓬松煎饼配糖粉与水果蜜饯的奥地利甜点。"
+    },
+    "berliner": {
+      "name": "柏林甜甜圈",
+      "description": "无孔油炸面包填果酱撒糖的德国甜甜圈。"
+    },
+    "belgian-waffle": {
+      "name": "比利时华夫饼",
+      "description": "深格纹、轻盈酥脆的华夫饼配草莓的比利时甜点。"
+    },
+    "syrniki": {
+      "name": "俄式奶酪饼",
+      "description": "煎制的白奶酪小饼配果酱，东欧常见早餐甜点。"
+    },
+    "loukoumades": {
+      "name": "希腊蜂蜜球",
+      "description": "小面球油炸后淋蜂蜜、撒肉桂和核桃的希腊小吃。"
+    },
+    "caramel-macchiato": {
+      "name": "焦糖玛奇朵",
+      "description": "香草牛奶注入浓缩咖啡、淋上网格焦糖酱的咖啡。"
+    },
+    "dalgona-coffee": {
+      "name": "达尔戈纳咖啡",
+      "description": "打发的速溶咖啡铺在冰牛奶上，在韩国流行起来的饮品。"
+    },
+    "egg-coffee": {
+      "name": "越南蛋咖啡",
+      "description": "打发蛋黄与炼乳覆在浓咖啡上的河内咖啡。"
+    },
+    "wiener-melange": {
+      "name": "维也纳混合咖啡",
+      "description": "浓缩咖啡加热牛奶和奶泡的维也纳咖啡馆经典。"
+    },
+    "espresso": {
+      "name": "意式浓缩咖啡",
+      "description": "高压短时萃取、覆有油脂的意式咖啡。"
+    },
+    "cappuccino": {
+      "name": "卡布奇诺",
+      "description": "浓缩咖啡加等量热牛奶与丰盈奶泡。"
+    },
+    "caffe-latte": {
+      "name": "拿铁咖啡",
+      "description": "浓缩咖啡加入大量热牛奶并拉花。"
+    },
+    "americano": {
+      "name": "美式咖啡",
+      "description": "浓缩咖啡加热水调淡的咖啡。"
+    },
+    "flat-white": {
+      "name": "馥芮白",
+      "description": "浓缩咖啡配细腻薄奶泡，澳新两国争称发源地。"
+    },
+    "caffe-mocha": {
+      "name": "摩卡咖啡",
+      "description": "浓缩咖啡加巧克力与牛奶、撒可可粉。"
+    },
+    "ca-phe-sua-da": {
+      "name": "越南冰咖啡",
+      "description": "滴漏壶浓咖啡加炼乳和冰块的越南咖啡。"
+    },
+    "frappe": {
+      "name": "希腊冰沙咖啡",
+      "description": "摇出泡沫的速溶咖啡倒在冰上的希腊夏日咖啡。"
+    },
+    "cold-brew": {
+      "name": "冷萃咖啡",
+      "description": "冷水长时间浸泡、苦味少口感顺滑的咖啡。"
+    },
+    "royal-milk-tea": {
+      "name": "皇家奶茶",
+      "description": "红茶叶直接在牛奶中熬煮的浓郁日式奶茶。"
+    },
+    "bubble-tea": {
+      "name": "珍珠奶茶",
+      "description": "加入Q弹珍珠的奶茶，诞生于台湾台中的茶馆。"
+    },
+    "thai-tea": {
+      "name": "泰式奶茶",
+      "description": "浓红茶加炼乳倒在冰上的橙色泰式奶茶。"
+    },
+    "ramune": {
+      "name": "弹珠汽水",
+      "description": "用玻璃珠封口的瓶装日本夏日汽水。"
+    },
+    "melon-soda-float": {
+      "name": "哈密瓜苏打漂浮",
+      "description": "绿色哈密瓜汽水上漂着香草冰淇淋和樱桃的日式咖啡馆饮品。"
+    },
+    "root-beer-float": {
+      "name": "根汁啤酒漂浮",
+      "description": "根汁汽水上漂着香草冰淇淋、泡沫丰富的美式饮品。"
+    },
+    "sikhye": {
+      "name": "甜米露",
+      "description": "麦芽糖化的米粒漂浮其上的韩国甜米饮。"
+    },
+    "sujeonggwa": {
+      "name": "水正果",
+      "description": "姜与肉桂熬制、漂着柿饼和松子的韩国冰饮。"
+    },
+    "kahlua-milk": {
+      "name": "咖啡利口酒牛奶",
+      "description": "咖啡利口酒加牛奶的甜鸡尾酒，含酒精。"
+    },
+    "steamed-milk": {
+      "name": "热牛奶",
+      "description": "蒸汽加热、覆上柔软奶泡的热牛奶。"
+    },
+    "hot-chocolate": {
+      "name": "热可可",
+      "description": "可可融入热牛奶、漂着棉花糖的饮品。"
+    },
+    "cola": {
+      "name": "可乐",
+      "description": "19世纪末诞生于美国亚特兰大的焦糖色汽水。"
+    },
+    "ginger-ale": {
+      "name": "姜汁汽水",
+      "description": "带姜香的清爽汽水，以加拿大干姜水最为知名。"
+    },
+    "lemonade": {
+      "name": "柠檬水",
+      "description": "柠檬汁、糖和水调成加冰的清凉饮品。"
+    },
+    "italian-soda": {
+      "name": "意大利苏打",
+      "description": "苏打水加水果糖浆，名字虽叫意大利，却诞生于旧金山。"
+    },
+    "root-beer": {
+      "name": "根汁汽水",
+      "description": "带黄樟与香草风味的北美无酒精汽水。"
     }
   },
   "advisor": {

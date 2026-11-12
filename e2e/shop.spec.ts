@@ -98,10 +98,10 @@ test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) =>
 });
 
 test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", async ({ page }) => {
-  await page.goto("/ko/shop?category=muffin");
+  await page.goto("/ko/shop?category=baked");
   await page.getByText("KO", { exact: true }).click();
   await page.getByRole("banner").getByRole("link", { name: "Deutschland, Deutsch" }).click();
-  await expect(page).toHaveURL(/\/de\/shop\?category=muffin$/);
+  await expect(page).toHaveURL(/\/de\/shop\?category=baked$/);
 
   await page.goto("/ko/checkout?buy=baklava&qty=2&canceled=1");
   await page.getByText("KO", { exact: true }).click();
@@ -121,15 +121,15 @@ test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소
   const english = page.getByRole("banner").getByRole("link", { name: "United States, English" });
   await expect(english).toBeVisible();
   await english.focus();
-  const muffin = page
+  const baked = page
     .getByRole("navigation", { name: "카테고리 선택" })
-    .getByRole("link", { name: "머핀" });
-  await muffin.focus();
+    .getByRole("link", { name: "쿠키·구움과자" });
+  await baked.focus();
   await expect(english).toBeHidden();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/category=muffin/);
+  await expect(page).toHaveURL(/category=baked/);
   await summary.click();
-  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=muffin$/);
+  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=baked$/);
 });
 
 test.describe("좁은 화면 메뉴", () => {
@@ -182,10 +182,10 @@ test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await page.goto("/ko/shop");
   await page
     .getByRole("navigation", { name: "카테고리 선택" })
-    .getByRole("link", { name: "머핀" })
+    .getByRole("link", { name: "쿠키·구움과자" })
     .click();
-  await expect(page).toHaveURL(/category=muffin/);
-  await expect(page.getByRole("status").filter({ hasText: "2개의 디저트" })).toBeVisible();
+  await expect(page).toHaveURL(/category=baked/);
+  await expect(page.getByRole("status").filter({ hasText: "17개의 디저트" })).toBeVisible();
 });
 
 async function fillCheckout(page: Page) {
@@ -588,7 +588,7 @@ test.describe("데스크톱 모션", () => {
   test("키보드로 가려진 카테고리에 들어가면 장면이 펼쳐집니다", async ({ page }) => {
     await page.goto("/ko");
     await page.waitForTimeout(3200);
-    const link = page.getByRole("link", { name: "머핀 보기" });
+    const link = page.getByRole("link", { name: "쿠키·구움과자 보기" });
     await link.focus();
     await page.waitForTimeout(1500);
     await expect(link).toBeInViewport();

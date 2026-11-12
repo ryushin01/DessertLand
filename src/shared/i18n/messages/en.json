@@ -72,29 +72,45 @@
     "nuts": "Tree nuts"
   },
   "categories": {
-    "milkshake": {
-      "name": "Milkshake",
-      "lede": "Cold, thick and overflowing with joy."
+    "cake": {
+      "name": "Cakes",
+      "lede": "Soft sponge, cream and a slice to celebrate."
     },
-    "cheesecake": {
-      "name": "Cheesecake",
-      "lede": "Dense or scorched, an hour of rich cream cheese."
+    "tart": {
+      "name": "Pies & tarts",
+      "lede": "Crisp crust filled with fruit and custard."
     },
-    "muffin": {
-      "name": "Muffin",
-      "lede": "The warmth of morning, risen high."
+    "pastry": {
+      "name": "Pastries",
+      "lede": "Butter and dough that shatter in layers."
     },
-    "pancake": {
-      "name": "Pancake",
-      "lede": "Stacked high, with syrup running down."
+    "baked": {
+      "name": "Cookies & bakes",
+      "lede": "The warmth of the oven in one bite."
     },
-    "creamcake": {
-      "name": "Fresh cream cake",
-      "lede": "Soft sponge, light cream and strawberries."
+    "frozen": {
+      "name": "Ice cream & shaved ice",
+      "lede": "Cold, and melting the moment it lands."
     },
-    "classic": {
-      "name": "World classics",
-      "lede": "From tiramisu to baklava, the taste of a nation."
+    "pudding": {
+      "name": "Puddings & creams",
+      "lede": "Silky things to eat with a spoon."
+    },
+    "confection": {
+      "name": "Sweets & confections",
+      "lede": "Sweets handed down by hand in every land."
+    },
+    "griddle": {
+      "name": "Pancakes & fried treats",
+      "lede": "Hot from the griddle and the fryer."
+    },
+    "coffee": {
+      "name": "Coffee",
+      "lede": "A cup to go with dessert."
+    },
+    "drink": {
+      "name": "Drinks",
+      "lede": "Teas, sodas and milkshakes."
     }
   },
   "cart": {
@@ -154,10 +170,11 @@
   "credits": {
     "metaTitle": "Credits",
     "title": "Photo and icon credits",
-    "photos": "Photos: Unsplash",
+    "photos": "Photos: Unsplash, Wikimedia Commons",
     "icons": "Icons: Flaticon",
     "hero": "Hero photo",
-    "by": "Photo by {name}"
+    "by": "Photo by {name}",
+    "changes": "Wikimedia Commons photos are used under their licenses and were resized and converted to WebP."
   },
   "footer": {
     "tagline": "Dessert Land is a demo shop presenting the world’s desserts in 10 languages.",
@@ -231,6 +248,550 @@
     "egg-tart": {
       "name": "Cantonese egg tart",
       "description": "A snack raised alongside Cantonese tea culture, known for its silky egg custard."
+    },
+    "castella": {
+      "name": "Castella",
+      "description": "Moist Nagasaki honey sponge first brought by Portuguese traders."
+    },
+    "bibingka": {
+      "name": "Bibingka",
+      "description": "Filipino Christmas rice cake baked on banana leaves."
+    },
+    "spekkoek": {
+      "name": "Spekkoek",
+      "description": "Indonesian spiced butter cake baked one thin layer at a time."
+    },
+    "pandan-cake": {
+      "name": "Pandan chiffon cake",
+      "description": "Airy Southeast Asian chiffon scented and tinted with pandan leaf."
+    },
+    "basbousa": {
+      "name": "Basbousa",
+      "description": "Syrup-soaked semolina cake loved across the Middle East."
+    },
+    "malva-pudding": {
+      "name": "Malva pudding",
+      "description": "South African apricot sponge drenched in warm cream sauce."
+    },
+    "mont-blanc": {
+      "name": "Mont Blanc",
+      "description": "Chestnut cream piped into a snowy mountain over meringue."
+    },
+    "panettone": {
+      "name": "Panettone",
+      "description": "Tall Milanese Christmas bread studded with candied fruit."
+    },
+    "sachertorte": {
+      "name": "Sachertorte",
+      "description": "Viennese chocolate cake with apricot jam and a glossy chocolate glaze."
+    },
+    "baumkuchen": {
+      "name": "Baumkuchen",
+      "description": "German spit cake baked layer by layer into tree rings."
+    },
+    "stollen": {
+      "name": "Stollen",
+      "description": "Dresden Christmas loaf of dried fruit and marzipan under powdered sugar."
+    },
+    "sticky-toffee-pudding": {
+      "name": "Sticky toffee pudding",
+      "description": "British date sponge drowned in warm toffee sauce."
+    },
+    "victoria-sponge": {
+      "name": "Victoria sponge",
+      "description": "British teatime sponge layered with raspberry jam and cream."
+    },
+    "dobos-torte": {
+      "name": "Dobos torte",
+      "description": "Budapest layer cake of sponge and chocolate buttercream under caramel."
+    },
+    "medovik": {
+      "name": "Medovik",
+      "description": "Russian honey cake of thin layers and sour cream frosting."
+    },
+    "tres-leches": {
+      "name": "Tres leches cake",
+      "description": "Sponge cake soaked in three milks, claimed across Latin America."
+    },
+    "red-velvet": {
+      "name": "Red velvet cake",
+      "description": "American red cocoa layer cake with cream cheese frosting."
+    },
+    "lamington": {
+      "name": "Lamington",
+      "description": "Australian sponge cube dipped in chocolate and rolled in coconut."
+    },
+    "pavlova": {
+      "name": "Pavlova",
+      "description": "Crisp-shelled meringue with cream and fruit, claimed by Australia and New Zealand."
+    },
+    "tarte-tatin": {
+      "name": "Tarte Tatin",
+      "description": "Upside-down French tart of apples caramelized in butter."
+    },
+    "key-lime-pie": {
+      "name": "Key lime pie",
+      "description": "Tangy Florida pie of Key lime juice and condensed milk."
+    },
+    "pecan-pie": {
+      "name": "Pecan pie",
+      "description": "Southern US pie of pecans set in a sweet syrup filling."
+    },
+    "apple-pie": {
+      "name": "Apple pie",
+      "description": "Cinnamon apples baked under a lattice crust, loved in many lands."
+    },
+    "butter-tart": {
+      "name": "Butter tart",
+      "description": "Small Canadian tart with a gooey butter-sugar filling."
+    },
+    "kunefe": {
+      "name": "Kunafa",
+      "description": "Shredded pastry baked over soft cheese, soaked in syrup with pistachio."
+    },
+    "mille-feuille": {
+      "name": "Mille-feuille",
+      "description": "Layers of crisp puff pastry and pastry cream."
+    },
+    "eclair": {
+      "name": "Éclair",
+      "description": "Long choux pastry filled with cream and glazed with chocolate."
+    },
+    "kouign-amann": {
+      "name": "Kouign-amann",
+      "description": "Breton pastry of butter and sugar layers baked to caramel."
+    },
+    "cannoli": {
+      "name": "Cannoli",
+      "description": "Crisp fried Sicilian tubes filled with sweet ricotta."
+    },
+    "sfogliatella": {
+      "name": "Sfogliatella",
+      "description": "Shell-shaped Neapolitan pastry with ricotta and semolina filling."
+    },
+    "apfelstrudel": {
+      "name": "Apple strudel",
+      "description": "Paper-thin dough rolled around apples, cinnamon and raisins."
+    },
+    "semla": {
+      "name": "Semla",
+      "description": "Swedish cardamom bun filled with almond paste and whipped cream."
+    },
+    "kurtoskalacs": {
+      "name": "Kürtőskalács",
+      "description": "Hungarian chimney cake spit-roasted over coals with crackly sugar."
+    },
+    "galaktoboureko": {
+      "name": "Galaktoboureko",
+      "description": "Semolina custard baked in filo and soaked in syrup."
+    },
+    "pineapple-bun": {
+      "name": "Pineapple bun",
+      "description": "Hong Kong bun named for its crackled sugary crust, not its filling."
+    },
+    "pineapple-cake": {
+      "name": "Pineapple cake",
+      "description": "Buttery Taiwanese pastry filled with jammy pineapple."
+    },
+    "maamoul": {
+      "name": "Maamoul",
+      "description": "Levantine holiday cookies filled with dates or nuts and pressed in molds."
+    },
+    "macaron": {
+      "name": "Macaron",
+      "description": "Two almond meringue shells joined by a creamy filling."
+    },
+    "madeleine": {
+      "name": "Madeleine",
+      "description": "Shell-shaped French butter cakes with a signature hump."
+    },
+    "canele": {
+      "name": "Canelé",
+      "description": "Bordeaux pastry with a caramelized crust and custardy rum-vanilla centre."
+    },
+    "financier": {
+      "name": "Financier",
+      "description": "Gold-bar-shaped Parisian cake of brown butter and almond."
+    },
+    "biscotti": {
+      "name": "Biscotti",
+      "description": "Twice-baked Tuscan almond biscuits for dunking."
+    },
+    "stroopwafel": {
+      "name": "Stroopwafel",
+      "description": "Two thin waffles sandwiching caramel syrup, from Gouda."
+    },
+    "scone": {
+      "name": "Scone",
+      "description": "Light British bake served with clotted cream and jam."
+    },
+    "alfajor": {
+      "name": "Alfajor",
+      "description": "Argentine cookie sandwich of dulce de leche coated in chocolate."
+    },
+    "concha": {
+      "name": "Concha",
+      "description": "Mexican sweet bun with a crackly seashell-patterned topping."
+    },
+    "brownie": {
+      "name": "Brownie",
+      "description": "Fudgy Chicago-born chocolate square with a crackly top."
+    },
+    "nanaimo-bar": {
+      "name": "Nanaimo bar",
+      "description": "No-bake Canadian bar of coconut crumb, custard cream and chocolate."
+    },
+    "anzac-biscuit": {
+      "name": "Anzac biscuit",
+      "description": "Oat, coconut and golden syrup cookie of Australia and New Zealand."
+    },
+    "patbingsu": {
+      "name": "Patbingsu",
+      "description": "Korean shaved milk ice piled with sweet red beans and condensed milk."
+    },
+    "kakigori": {
+      "name": "Kakigori",
+      "description": "Snow-fine Japanese shaved ice with matcha syrup and red beans."
+    },
+    "mochi-ice-cream": {
+      "name": "Mochi ice cream",
+      "description": "Ice cream wrapped in a thin layer of soft mochi."
+    },
+    "halo-halo": {
+      "name": "Halo-halo",
+      "description": "Filipino shaved ice mixed with fruit, jellies and ube ice cream."
+    },
+    "cendol": {
+      "name": "Cendol",
+      "description": "Iced coconut milk with green rice jelly and palm sugar syrup."
+    },
+    "kulfi": {
+      "name": "Kulfi falooda",
+      "description": "Dense Indian milk ice cream served with falooda noodles."
+    },
+    "dondurma": {
+      "name": "Dondurma",
+      "description": "Stretchy Turkish ice cream thickened with salep and mastic."
+    },
+    "gelato": {
+      "name": "Gelato",
+      "description": "Dense, silky Italian ice cream churned with little air."
+    },
+    "affogato": {
+      "name": "Affogato",
+      "description": "Vanilla gelato drowned in a shot of hot espresso."
+    },
+    "banana-split": {
+      "name": "Banana split",
+      "description": "Split banana under three scoops, sauces, nuts and cherries."
+    },
+    "vanilla-ice-cream": {
+      "name": "Vanilla ice cream",
+      "description": "Creamy vanilla ice cream served with cherry jam."
+    },
+    "soft-serve": {
+      "name": "Soft serve",
+      "description": "Airy, soft ice cream swirled straight from the machine onto a cone."
+    },
+    "sundae": {
+      "name": "Sundae",
+      "description": "American ice cream topped with sauce, whipped cream, nuts and a cherry."
+    },
+    "sorbet": {
+      "name": "Sorbet",
+      "description": "Dairy-free frozen dessert of fruit and sugar, bright and refreshing."
+    },
+    "douhua": {
+      "name": "Douhua",
+      "description": "Silken soft tofu served with sweet ginger syrup."
+    },
+    "mango-pomelo-sago": {
+      "name": "Mango pomelo sago",
+      "description": "Chilled Hong Kong mango soup with pomelo and sago pearls."
+    },
+    "che-chuoi": {
+      "name": "Chè chuối",
+      "description": "Warm Vietnamese banana and tapioca pudding in coconut milk."
+    },
+    "ube-halaya": {
+      "name": "Ube halaya",
+      "description": "Rich Filipino purple yam jam cooked with milk and butter."
+    },
+    "kheer": {
+      "name": "Kheer",
+      "description": "Indian rice pudding slow-cooked in milk with cardamom and nuts."
+    },
+    "gajar-halwa": {
+      "name": "Gajar halwa",
+      "description": "Carrots slow-cooked in milk and ghee, a Punjabi winter dessert."
+    },
+    "muhallebi": {
+      "name": "Muhallebi",
+      "description": "Silky Middle Eastern milk pudding perfumed with rose water."
+    },
+    "umm-ali": {
+      "name": "Umm Ali",
+      "description": "Egyptian bread pudding of pastry baked in sweet milk with nuts."
+    },
+    "creme-brulee": {
+      "name": "Crème brûlée",
+      "description": "Vanilla custard under a crackling torched-sugar crust."
+    },
+    "panna-cotta": {
+      "name": "Panna cotta",
+      "description": "Wobbly Piedmontese cream set softly with gelatin."
+    },
+    "crema-catalana": {
+      "name": "Crema catalana",
+      "description": "Catalan custard scented with lemon and cinnamon under burnt sugar."
+    },
+    "eton-mess": {
+      "name": "Eton mess",
+      "description": "Crushed meringue, strawberries and cream, from Eton College."
+    },
+    "trifle": {
+      "name": "Trifle",
+      "description": "Layers of sponge, fruit jelly, custard and cream in a glass bowl."
+    },
+    "injeolmi": {
+      "name": "Injeolmi",
+      "description": "Chewy Korean rice cake rolled in toasted soybean powder."
+    },
+    "songpyeon": {
+      "name": "Songpyeon",
+      "description": "Half-moon rice cakes steamed on pine needles for Korean Chuseok."
+    },
+    "yakgwa": {
+      "name": "Yakgwa",
+      "description": "Korean honey cookie fried and soaked in rice syrup."
+    },
+    "daifuku": {
+      "name": "Strawberry daifuku",
+      "description": "Soft mochi wrapped around red bean paste and a whole strawberry."
+    },
+    "dango": {
+      "name": "Mitarashi dango",
+      "description": "Skewered rice dumplings glazed with sweet soy sauce."
+    },
+    "yokan": {
+      "name": "Yokan",
+      "description": "Firm jelly of red bean and agar, made to pair with green tea."
+    },
+    "mooncake": {
+      "name": "Mooncake",
+      "description": "Round Mid-Autumn pastry filled with lotus paste and salted yolk."
+    },
+    "tangyuan": {
+      "name": "Tangyuan",
+      "description": "Glutinous rice balls with black sesame filling in warm sweet soup."
+    },
+    "tanghulu": {
+      "name": "Tanghulu",
+      "description": "Skewered fruit coated in crackling hard sugar, a Beijing classic."
+    },
+    "mango-sticky-rice": {
+      "name": "Mango sticky rice",
+      "description": "Coconut sticky rice served with ripe Thai mango."
+    },
+    "gulab-jamun": {
+      "name": "Gulab jamun",
+      "description": "Fried milk dumplings soaked in rose-scented syrup."
+    },
+    "rasgulla": {
+      "name": "Rasgulla",
+      "description": "Spongy Bengali cheese balls simmered in light syrup."
+    },
+    "kaju-katli": {
+      "name": "Kaju katli",
+      "description": "Diamond-cut Indian cashew fudge topped with edible silver."
+    },
+    "turkish-delight": {
+      "name": "Turkish delight",
+      "description": "Rose-scented starch-and-sugar jelly cubes dusted with powdered sugar."
+    },
+    "halva": {
+      "name": "Halva",
+      "description": "Crumbly sesame confection enjoyed from the Middle East to Eastern Europe."
+    },
+    "brigadeiro": {
+      "name": "Brigadeiro",
+      "description": "Brazilian truffles of condensed milk and cocoa rolled in sprinkles."
+    },
+    "caramel": {
+      "name": "Caramel",
+      "description": "Chewy caramels of sugar, butter and cream cooked slowly."
+    },
+    "milk-chocolate": {
+      "name": "Milk chocolate",
+      "description": "Smooth chocolate made with milk, first created in Vevey, Switzerland, in 1875."
+    },
+    "hotteok": {
+      "name": "Hotteok",
+      "description": "A Korean winter street pancake oozing brown sugar and nuts."
+    },
+    "bungeoppang": {
+      "name": "Bungeoppang",
+      "description": "Fish-shaped Korean waffle cake filled with sweet red bean."
+    },
+    "dorayaki": {
+      "name": "Dorayaki",
+      "description": "Two fluffy honey pancakes sandwiching sweet red bean paste."
+    },
+    "taiyaki": {
+      "name": "Taiyaki",
+      "description": "Crisp sea-bream-shaped cake filled with red bean paste."
+    },
+    "jalebi": {
+      "name": "Jalebi",
+      "description": "Crisp spirals of fried batter dipped in saffron syrup."
+    },
+    "chebakia": {
+      "name": "Chebakia",
+      "description": "Moroccan flower-shaped pastry fried, honey-soaked and sesame-coated."
+    },
+    "crepe": {
+      "name": "Crêpe",
+      "description": "Paper-thin Breton crêpe drizzled with chocolate sauce."
+    },
+    "churros": {
+      "name": "Churros",
+      "description": "Star-piped fried dough dipped in thick Spanish hot chocolate."
+    },
+    "kaiserschmarrn": {
+      "name": "Kaiserschmarrn",
+      "description": "Torn fluffy Austrian pancake with powdered sugar and fruit compote."
+    },
+    "berliner": {
+      "name": "Berliner",
+      "description": "German jam-filled doughnut dusted with sugar."
+    },
+    "belgian-waffle": {
+      "name": "Belgian waffle",
+      "description": "Light, crisp deep-grid waffle served with strawberries."
+    },
+    "syrniki": {
+      "name": "Syrniki",
+      "description": "Fried Eastern European cottage cheese pancakes with jam."
+    },
+    "loukoumades": {
+      "name": "Loukoumades",
+      "description": "Greek fried dough puffs with honey, cinnamon and walnuts."
+    },
+    "caramel-macchiato": {
+      "name": "Caramel macchiato",
+      "description": "Vanilla milk marked with espresso and a lattice of caramel sauce."
+    },
+    "dalgona-coffee": {
+      "name": "Dalgona coffee",
+      "description": "Whipped instant coffee piled on cold milk, a Korean craze."
+    },
+    "egg-coffee": {
+      "name": "Egg coffee",
+      "description": "Hanoi coffee crowned with whipped egg yolk and condensed milk."
+    },
+    "wiener-melange": {
+      "name": "Wiener Melange",
+      "description": "Viennese café classic of espresso with steamed milk and foam."
+    },
+    "espresso": {
+      "name": "Espresso",
+      "description": "Short, intense Italian coffee pulled under pressure, topped with crema."
+    },
+    "cappuccino": {
+      "name": "Cappuccino",
+      "description": "Espresso with equal parts steamed milk and airy foam."
+    },
+    "caffe-latte": {
+      "name": "Caffè latte",
+      "description": "Espresso with plenty of steamed milk and latte art."
+    },
+    "americano": {
+      "name": "Americano",
+      "description": "Espresso lengthened with hot water for a lighter cup."
+    },
+    "flat-white": {
+      "name": "Flat white",
+      "description": "Strong espresso with silky microfoam, claimed by Australia and New Zealand."
+    },
+    "caffe-mocha": {
+      "name": "Caffè mocha",
+      "description": "Espresso with chocolate and milk, dusted with cocoa."
+    },
+    "ca-phe-sua-da": {
+      "name": "Vietnamese iced coffee",
+      "description": "Strong phin-filter coffee over condensed milk and ice."
+    },
+    "frappe": {
+      "name": "Greek frappé",
+      "description": "Shaken instant coffee foam over ice, Greece's summer staple."
+    },
+    "cold-brew": {
+      "name": "Cold brew",
+      "description": "Coffee steeped slowly in cold water for a smooth, low-bitter cup."
+    },
+    "royal-milk-tea": {
+      "name": "Royal milk tea",
+      "description": "Japanese-style milk tea, leaves simmered right in the milk."
+    },
+    "bubble-tea": {
+      "name": "Bubble tea",
+      "description": "Milk tea with chewy tapioca pearls, born in a Taichung teahouse."
+    },
+    "thai-tea": {
+      "name": "Thai iced tea",
+      "description": "Bright orange Thai tea with condensed milk over ice."
+    },
+    "ramune": {
+      "name": "Ramune",
+      "description": "Japanese summer soda in a bottle sealed with a glass marble."
+    },
+    "melon-soda-float": {
+      "name": "Melon soda float",
+      "description": "Green melon soda topped with vanilla ice cream and a cherry."
+    },
+    "root-beer-float": {
+      "name": "Root beer float",
+      "description": "Root beer foaming over a scoop of vanilla ice cream."
+    },
+    "sikhye": {
+      "name": "Sikhye",
+      "description": "Sweet Korean rice drink with grains floating on top."
+    },
+    "sujeonggwa": {
+      "name": "Sujeonggwa",
+      "description": "Chilled Korean ginger-cinnamon punch with dried persimmon and pine nuts."
+    },
+    "kahlua-milk": {
+      "name": "Kahlúa milk",
+      "description": "Sweet cocktail of coffee liqueur and milk. Contains alcohol."
+    },
+    "steamed-milk": {
+      "name": "Steamed milk",
+      "description": "Warm milk heated with steam and topped with soft foam."
+    },
+    "hot-chocolate": {
+      "name": "Hot cocoa",
+      "description": "Cocoa stirred into warm milk and topped with marshmallows."
+    },
+    "cola": {
+      "name": "Cola",
+      "description": "Caramel-colored soda first made in Atlanta in the late 1800s."
+    },
+    "ginger-ale": {
+      "name": "Ginger ale",
+      "description": "Crisp ginger-flavored soda, best known in its dry Canadian style."
+    },
+    "lemonade": {
+      "name": "Lemonade",
+      "description": "Cool drink of lemon juice, sugar and water over ice."
+    },
+    "italian-soda": {
+      "name": "Italian soda",
+      "description": "Fruit syrup and soda water, born in San Francisco despite its name."
+    },
+    "root-beer": {
+      "name": "Root beer",
+      "description": "North American soda flavored with sassafras and vanilla, alcohol-free."
     }
   },
   "advisor": {
