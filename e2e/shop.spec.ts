@@ -92,7 +92,7 @@ test("사용자가 움직임을 멈출 수 있습니다", async ({ page }) => {
 test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) => {
   await page.goto("/ko/shop/tiramisu");
   await page.getByText("KO", { exact: true }).click();
-  await page.getByRole("banner").getByRole("link", { name: "Italiano" }).click();
+  await page.getByRole("banner").getByRole("link", { name: "Italia, Italiano" }).click();
   await expect(page).toHaveURL(/\/it\/shop\/tiramisu$/);
   await expect(page.getByRole("heading", { level: 1, name: "Tiramisù" })).toBeVisible();
 });
@@ -100,12 +100,12 @@ test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) =>
 test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", async ({ page }) => {
   await page.goto("/ko/shop?category=muffin");
   await page.getByText("KO", { exact: true }).click();
-  await page.getByRole("banner").getByRole("link", { name: "Deutsch" }).click();
+  await page.getByRole("banner").getByRole("link", { name: "Deutschland, Deutsch" }).click();
   await expect(page).toHaveURL(/\/de\/shop\?category=muffin$/);
 
   await page.goto("/ko/checkout?buy=baklava&qty=2&canceled=1");
   await page.getByText("KO", { exact: true }).click();
-  await page.getByRole("banner").getByRole("link", { name: "English" }).click();
+  await page.getByRole("banner").getByRole("link", { name: "United States, English" }).click();
   await expect(page).toHaveURL(/\/en\/checkout\?buy=baklava&qty=2$/);
   await expect(page.getByRole("region", { name: "Order summary" })).toContainText("Baklava × 2");
 });
@@ -118,7 +118,7 @@ test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소
   await page.goto("/ko/shop");
   const summary = page.getByText("KO", { exact: true });
   await summary.click();
-  const english = page.getByRole("banner").getByRole("link", { name: "English" });
+  const english = page.getByRole("banner").getByRole("link", { name: "United States, English" });
   await expect(english).toBeVisible();
   await english.focus();
   const muffin = page
