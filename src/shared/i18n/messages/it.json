@@ -48,7 +48,9 @@
     "results": "{count} dolci",
     "add": "Aggiungi {name} al carrello",
     "addShort": "Aggiungi",
-    "view": "Vedi"
+    "view": "Vedi",
+    "buyNow": "Acquista ora {name}",
+    "buyNowShort": "Acquista ora"
   },
   "product": {
     "back": "Torna ai dolci",
@@ -104,7 +106,12 @@
     "shipping": "Spedizione",
     "total": "Totale",
     "checkout": "Vai al checkout",
-    "added": "{name} aggiunto al carrello."
+    "added": "{name} aggiunto al carrello.",
+    "select": "Includi {name} nell'ordine",
+    "selectAll": "Seleziona tutto",
+    "selected": "{count} di {total} selezionati",
+    "checkoutSelected": "Ordina la selezione ({count})",
+    "noneSelected": "Seleziona gli articoli da ordinare."
   },
   "checkout": {
     "metaTitle": "Checkout",
