@@ -1,5 +1,10 @@
 # 변경 기록
 
+## 0.4.8 (2026-11-13)
+
+- 공통화: 결제·결제 완료 화면의 같은 바깥 여백·큰 제목 스타일을 `shared/ui`의 `pageShell`·`pageTitle`로 모음
+- 정리: 슬라이스 밖에서 쓰지 않는 공개 내보내기(장바구니 `countItems`·`selectLines`, `validateCheckout`, i18n `redirect`·`useRouter`·`getPathname`·`DEFAULT_LOCALE`, `ICON_NAMES`, `usePrefersReducedMotion`과 쓰지 않는 타입) 정리
+
 ## 0.4.7 - 2026-11-13
 
 - 버그: AI 추천 스트림에서 오류 이벤트나 형식 오류로 중간에 빠져나와도 스트림을 닫지 않아 연결과 버퍼가 남던 문제. 끝나면 항상 reader를 닫음
