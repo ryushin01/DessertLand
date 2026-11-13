@@ -39,7 +39,7 @@ const link = css({
   textUnderlineOffset: "3px",
   _hover: { color: "caramel" },
 });
-const external = "https://www.flaticon.com/uicons";
+const SOURCES_URL = "https://github.com/ryushin01/DessertLand#출처";
 /** 앱과 함께 배포한 Storybook. 개발 서버에는 빌드 결과물이 없어 Storybook 개발 서버로 보냅니다. */
 const storybook =
   process.env.NODE_ENV === "development" ? "http://localhost:6006" : "/storybook/index.html";
@@ -90,18 +90,14 @@ export function SiteFooter() {
         </ul>
         <ul>
           <li>
-            <Link href="/credits" className={link}>
+            {/* 사진·아이콘·글꼴의 출처는 화면이 아니라 README에 적고, 여기서 그 표로 잇습니다. */}
+            <a href={SOURCES_URL} className={link}>
               {t("credits")}
-            </Link>
+            </a>
           </li>
           <li>
             <a href={storybook} className={link} lang="en">
               Design system (Storybook)
-            </a>
-          </li>
-          <li>
-            <a href={external} className={link} rel="noreferrer" lang="en">
-              Uicons by Flaticon
             </a>
           </li>
           <li>

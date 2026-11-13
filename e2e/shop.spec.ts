@@ -136,13 +136,22 @@ test.describe("좁은 화면 메뉴", () => {
   test.use({ viewport: { width: 320, height: 640 } });
 
   test("메뉴로 디저트에 갈 수 있고 넘치지 않습니다", async ({ page }) => {
-    await page.goto("/de/credits");
+    await page.goto("/de/checkout");
     const link = page.getByRole("banner").getByRole("link", { name: "Desserts", exact: true });
     await expect(link).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await link.click();
     await expect(page).toHaveURL(/\/de\/shop$/);
   });
+});
+
+test("출처는 바닥글 링크로 README에 가고, 예전 출처 페이지 주소도 그곳으로 넘깁니다", async ({ page, request }) => {
+  await page.goto("/ko");
+  const credits = page.getByRole("contentinfo").getByRole("link", { name: "사진과 아이콘 출처" });
+  await expect(credits).toHaveAttribute("href", "https://github.com/ryushin01/DessertLand#출처");
+  const old = await request.get("/en/credits", { maxRedirects: 0 });
+  expect(old.status()).toBe(308);
+  expect(decodeURI(old.headers()["location"] ?? "")).toBe("https://github.com/ryushin01/DessertLand#출처");
 });
 
 test("검색 엔진과 보안 정보를 제공합니다", async ({ page, request }) => {
@@ -265,7 +274,7 @@ test("장바구니에서 고른 상품만 주문하고, 고르지 않은 상품�
       ]),
     );
   });
-  await page.goto("/ko/credits");
+  await page.goto("/ko/shop");
   await page.getByRole("button", { name: "장바구니, 2개 담김" }).click();
   const dialog = page.getByRole("dialog", { name: "장바구니" });
   await dialog.getByRole("checkbox", { name: "티라미수 주문에 넣기" }).uncheck();
@@ -344,7 +353,7 @@ test.describe("낮은 화면의 모달", () => {
         JSON.stringify(items.map((slug) => ({ slug, quantity: 1 }))),
       );
     }, slugs);
-    await page.goto("/ko/credits");
+    await page.goto("/ko/shop");
     await page.getByRole("button", { name: "장바구니, 6개 담김" }).click();
     const dialog = page.getByRole("dialog", { name: "장바구니" });
     await expect(dialog).toBeVisible();

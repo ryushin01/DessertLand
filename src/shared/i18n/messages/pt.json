@@ -151,14 +151,6 @@
     "stripeRedirecting": "A ir para a página de pagamento",
     "unverified": "Não foi possível confirmar o pagamento. Pode verificá-lo no painel de teste da Stripe."
   },
-  "credits": {
-    "metaTitle": "Créditos",
-    "title": "Créditos de fotos e ícones",
-    "photos": "Fotos: Unsplash",
-    "icons": "Ícones: Flaticon",
-    "hero": "Foto inicial",
-    "by": "Foto de {name}"
-  },
   "footer": {
     "tagline": "A Dessert Land é uma loja de demonstração com sobremesas do mundo em 10 idiomas.",
     "credits": "Créditos de fotos e ícones"
