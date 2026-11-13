@@ -20,7 +20,7 @@ export const MOTION_PAUSED_KEY = "dessert-land.motion-paused";
 /** KWCAG 6.2.2: 움직임을 사용자가 멈출 수 있게 합니다. */
 export const motionPausedAtom = atomWithStorage(MOTION_PAUSED_KEY, false, storage);
 
-export function usePrefersReducedMotion(): boolean {
+function usePrefersReducedMotion(): boolean {
   return useMediaQuery(MEDIA.reducedMotion);
 }
 
