@@ -3,7 +3,13 @@
 import { useSetAtom } from "jotai";
 import { useTranslations } from "next-intl";
 
-import { addLine, cartAnnouncementAtom, cartLinesAtom, cartOpenAtom } from "@/entities/cart";
+import {
+  addLine,
+  cartAnnouncementAtom,
+  cartExcludedAtom,
+  cartLinesAtom,
+  cartOpenAtom,
+} from "@/entities/cart";
 import { Button, Icon } from "@/shared/ui";
 
 type AddToCartButtonProps = {
@@ -29,6 +35,7 @@ export function AddToCartButton({
   const tProducts = useTranslations("products");
   const setLines = useSetAtom(cartLinesAtom);
   const setOpen = useSetAtom(cartOpenAtom);
+  const setExcluded = useSetAtom(cartExcludedAtom);
   const announce = useSetAtom(cartAnnouncementAtom);
 
   return (
@@ -39,6 +46,8 @@ export function AddToCartButton({
       data-magnetic
       onClick={() => {
         setLines((lines) => addLine(lines, slug, quantity));
+        // 다시 담은 상품은 주문에 넣습니다.
+        setExcluded((excluded) => excluded.filter((item) => item !== slug));
         announce(
           tCart("added", {
             name: tProducts(`${slug}.name` as Parameters<typeof tProducts>[0]) as string,

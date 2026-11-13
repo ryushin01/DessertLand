@@ -40,7 +40,7 @@ describe("buildSessionParams", () => {
         price_data: { currency: "usd", unit_amount: 800, product_data: { name: "Shipping" } },
       },
     ]);
-    expect(params?.metadata).toEqual({ source: "cart" });
+    expect(params?.metadata).toEqual({ source: "cart", items: "baklava" });
     expect(params?.allowed_payment_method_types).toEqual(["card"]);
     expect(params?.adaptive_pricing).toEqual({ enabled: false });
     expect(params?.branding_settings).toEqual({ display_name: "Dessert Land" });
@@ -72,9 +72,7 @@ describe("isSessionRequest", () => {
     expect(isSessionRequest({ ...request, items: [] })).toBe(false);
     expect(isSessionRequest({ ...request, locale: "xx" })).toBe(false);
     expect(isSessionRequest({ ...request, source: "other" })).toBe(false);
-    expect(isSessionRequest({ ...request, items: [{ slug: "baklava", quantity: 99 }] })).toBe(
-      false,
-    );
+    expect(isSessionRequest({ ...request, items: [{ slug: "baklava", quantity: 99 }] })).toBe(false);
     expect(isSessionRequest({ ...request, items: [{ slug: "nope", quantity: 1 }] })).toBe(false);
   });
 });

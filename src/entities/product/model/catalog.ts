@@ -42,11 +42,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 450,
     allergens: ["milk", "wheat", "nuts"],
     image: img("freakshake", 1500, 2187),
-    credit: {
-      name: "Clarissa Carbungco",
-      username: "clariiidot",
-      photoUrl: u("cream-and-chocolate-filled-mug-uy9DJw9e_vs"),
-    },
+    credit: { name: "Clarissa Carbungco", username: "clariiidot", photoUrl: u("cream-and-chocolate-filled-mug-uy9DJw9e_vs") },
   },
   {
     slug: "vanilla-malt",
@@ -57,11 +53,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 400,
     allergens: ["milk", "wheat"],
     image: img("vanilla-malt", 1500, 2250),
-    credit: {
-      name: "Jonathan Borba",
-      username: "jonathanborba",
-      photoUrl: u("full-filled-cream-glass-on-table-7TeR1A1MUpM"),
-    },
+    credit: { name: "Jonathan Borba", username: "jonathanborba", photoUrl: u("full-filled-cream-glass-on-table-7TeR1A1MUpM") },
   },
   {
     slug: "new-york-cheesecake",
@@ -72,11 +64,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 160,
     allergens: ["milk", "egg", "wheat"],
     image: img("new-york-cheesecake", 1500, 1000),
-    credit: {
-      name: "Tina Guina",
-      username: "kittinskie",
-      photoUrl: u("sliced-of-cake-on-black-plate-s8_7AqkzCWY"),
-    },
+    credit: { name: "Tina Guina", username: "kittinskie", photoUrl: u("sliced-of-cake-on-black-plate-s8_7AqkzCWY") },
   },
   {
     slug: "basque-cheesecake",
@@ -87,11 +75,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 170,
     allergens: ["milk", "egg", "wheat"],
     image: img("basque-cheesecake", 1500, 1053),
-    credit: {
-      name: "mahyar mirghasemi",
-      username: "mahyar_mirghasmi",
-      photoUrl: u("a-piece-of-cheesecake-on-a-green-plate-z35wEXJ8kvA"),
-    },
+    credit: { name: "mahyar mirghasemi", username: "mahyar_mirghasmi", photoUrl: u("a-piece-of-cheesecake-on-a-green-plate-z35wEXJ8kvA") },
   },
   {
     slug: "blueberry-muffin",
@@ -102,11 +86,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 110,
     allergens: ["milk", "egg", "wheat"],
     image: img("blueberry-muffin", 1500, 1875),
-    credit: {
-      name: "Elena Taranukhina",
-      username: "elena_yt",
-      photoUrl: u("a-black-plate-topped-with-three-blueberry-muffins-G8SrS1ewVXM"),
-    },
+    credit: { name: "Elena Taranukhina", username: "elena_yt", photoUrl: u("a-black-plate-topped-with-three-blueberry-muffins-G8SrS1ewVXM") },
   },
   {
     slug: "bran-muffin",
@@ -117,11 +97,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 105,
     allergens: ["milk", "egg", "wheat"],
     image: img("bran-muffin", 1500, 2258),
-    credit: {
-      name: "Alina Karpenko",
-      username: "alinasagirova",
-      photoUrl: u("baked-muffin-on-beige-surface-d8GDJalt_BE"),
-    },
+    credit: { name: "Alina Karpenko", username: "alinasagirova", photoUrl: u("baked-muffin-on-beige-surface-d8GDJalt_BE") },
   },
   {
     slug: "maple-pancake",
@@ -132,11 +108,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 280,
     allergens: ["milk", "egg", "wheat"],
     image: img("maple-pancake", 1500, 1000),
-    credit: {
-      name: "Luke Pennystan",
-      username: "lukepennystan",
-      photoUrl: u("pancakes-on-palte-09FcOqmi8R0"),
-    },
+    credit: { name: "Luke Pennystan", username: "lukepennystan", photoUrl: u("pancakes-on-palte-09FcOqmi8R0") },
   },
   {
     slug: "forest-berry-pancake",
@@ -147,11 +119,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 300,
     allergens: ["milk", "egg", "wheat"],
     image: img("forest-berry-pancake", 1500, 2250),
-    credit: {
-      name: "Stavros Papadimitriou",
-      username: "stevep93",
-      photoUrl: u("a-stack-of-pancakes-with-syrup-and-berries-on-a-plate-UBvMCte4IIo"),
-    },
+    credit: { name: "Stavros Papadimitriou", username: "stevep93", photoUrl: u("a-stack-of-pancakes-with-syrup-and-berries-on-a-plate-UBvMCte4IIo") },
   },
   {
     slug: "strawberry-shortcake",
@@ -162,11 +130,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 130,
     allergens: ["milk", "egg", "wheat"],
     image: img("strawberry-shortcake", 1500, 2000),
-    credit: {
-      name: "Vicky Ng",
-      username: "vickyng",
-      photoUrl: u("white-and-red-strawberry-cake--qQlfYB7pqM"),
-    },
+    credit: { name: "Vicky Ng", username: "vickyng", photoUrl: u("white-and-red-strawberry-cake--qQlfYB7pqM") },
   },
   {
     slug: "saeng-cream-cake",
@@ -177,11 +141,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 120,
     allergens: ["milk", "egg", "wheat"],
     image: img("saeng-cream-cake", 1500, 1000),
-    credit: {
-      name: "Takuya Nagaoka",
-      username: "takuya_n",
-      photoUrl: u("white-and-red-strawberry-cake-fENvSZUzbzU"),
-    },
+    credit: { name: "Takuya Nagaoka", username: "takuya_n", photoUrl: u("white-and-red-strawberry-cake-fENvSZUzbzU") },
   },
   {
     slug: "fraisier",
@@ -192,11 +152,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 150,
     allergens: ["milk", "egg", "wheat", "nuts"],
     image: img("fraisier", 1500, 1039),
-    credit: {
-      name: "amirali mirhashemian",
-      username: "amir_v_ali",
-      photoUrl: u("strawberry-cake-on-white-surface-cZFU60dKB6U"),
-    },
+    credit: { name: "amirali mirhashemian", username: "amir_v_ali", photoUrl: u("strawberry-cake-on-white-surface-cZFU60dKB6U") },
   },
   {
     slug: "tiramisu",
@@ -207,11 +163,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 180,
     allergens: ["milk", "egg", "wheat"],
     image: img("tiramisu", 1500, 2250),
-    credit: {
-      name: "mediha ekici",
-      username: "mediha32",
-      photoUrl: u("a-delicious-tiramisu-dessert-in-a-glass-dish-v5m_Dm7BQ_c"),
-    },
+    credit: { name: "mediha ekici", username: "mediha32", photoUrl: u("a-delicious-tiramisu-dessert-in-a-glass-dish-v5m_Dm7BQ_c") },
   },
   {
     slug: "pastel-de-nata",
@@ -222,11 +174,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 70,
     allergens: ["milk", "egg", "wheat"],
     image: img("pastel-de-nata", 1500, 1000),
-    credit: {
-      name: "Nick Fewings",
-      username: "jannerboy62",
-      photoUrl: u("brown-cupcakes-on-silver-tray-odX7I9pFFTU"),
-    },
+    credit: { name: "Nick Fewings", username: "jannerboy62", photoUrl: u("brown-cupcakes-on-silver-tray-odX7I9pFFTU") },
   },
   {
     slug: "baklava",
@@ -237,11 +185,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 120,
     allergens: ["milk", "wheat", "nuts"],
     image: img("baklava", 1500, 1000),
-    credit: {
-      name: "Syed F Hashemi",
-      username: "sfhashemi",
-      photoUrl: u("brown-and-green-bread-with-green-leaves-bGAPRnJITpQ"),
-    },
+    credit: { name: "Syed F Hashemi", username: "sfhashemi", photoUrl: u("brown-and-green-bread-with-green-leaves-bGAPRnJITpQ") },
   },
   {
     slug: "black-forest-cake",
@@ -252,11 +196,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 170,
     allergens: ["milk", "egg", "wheat"],
     image: img("black-forest-cake", 1500, 1731),
-    credit: {
-      name: "Jacob Thomas",
-      username: "jacob225",
-      photoUrl: u("chocolate-cake-with-cherries-and-cream-6jHpcBPw7i8"),
-    },
+    credit: { name: "Jacob Thomas", username: "jacob225", photoUrl: u("chocolate-cake-with-cherries-and-cream-6jHpcBPw7i8") },
   },
   {
     slug: "egg-tart",
@@ -267,11 +207,7 @@ export const PRODUCTS: Product[] = [
     weightGrams: 70,
     allergens: ["milk", "egg", "wheat"],
     image: img("egg-tart", 1500, 2250),
-    credit: {
-      name: "Moonyang Lin",
-      username: "interniweeni",
-      photoUrl: u("three-small-pies-sitting-on-top-of-a-black-plate-WdZ3qItLcjU"),
-    },
+    credit: { name: "Moonyang Lin", username: "interniweeni", photoUrl: u("three-small-pies-sitting-on-top-of-a-black-plate-WdZ3qItLcjU") },
   },
 ];
 

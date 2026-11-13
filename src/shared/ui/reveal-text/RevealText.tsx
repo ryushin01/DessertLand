@@ -64,3 +64,4 @@ export function RevealText({ text, as: Tag = "span", className, immediate, id }:
     </Tag>
   );
 }
+

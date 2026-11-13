@@ -5,13 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRef } from "react";
 import { css } from "styled-system/css";
 
-import {
-  CATEGORIES,
-  CATEGORY_COVERS,
-  PRODUCTS,
-  getProduct,
-  type Category,
-} from "@/entities/product";
+import { CATEGORIES, CATEGORY_COVERS, PRODUCTS, getProduct, type Category } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap } from "@/shared/lib/motion/gsap";
 import { scrollToY, useMotionEnabled } from "@/shared/lib/motion";
@@ -88,12 +82,7 @@ const heading = css({
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
-const lede = css({
-  fontSize: { base: "1rem", md: "1.2rem" },
-  lineHeight: "1.5",
-  maxWidth: "32rem",
-  wordBreak: "var(--word-break)",
-});
+const lede = css({ fontSize: { base: "1rem", md: "1.2rem" }, lineHeight: "1.5", maxWidth: "32rem", wordBreak: "var(--word-break)" });
 
 export function CategoryShowcase() {
   const t = useTranslations("showcase");
@@ -106,15 +95,7 @@ export function CategoryShowcase() {
   );
 }
 
-function Chapter({
-  category,
-  index,
-  first,
-}: {
-  category: Category;
-  index: number;
-  first: boolean;
-}) {
+function Chapter({ category, index, first }: { category: Category; index: number; first: boolean }) {
   const t = useTranslations("showcase");
   const tCategories = useTranslations("categories");
   const ref = useRef<HTMLDivElement>(null);
@@ -189,14 +170,7 @@ function Chapter({
     >
       <div data-stage className={stage}>
         <div data-backdrop aria-hidden="true" className={backdrop}>
-          <Image
-            src={cover.image.src}
-            alt=""
-            fill
-            sizes="20vw"
-            quality={40}
-            className={backdropImage}
-          />
+          <Image src={cover.image.src} alt="" fill sizes="20vw" quality={40} className={backdropImage} />
         </div>
         <div className={layout}>
           <div className={sharp}>

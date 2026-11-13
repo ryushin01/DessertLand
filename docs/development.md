@@ -39,6 +39,8 @@
 
 새 맛을 추가할 때는 `TASTE_CHIPS`, `TASTES`, `CHIP_MEANINGS`, 메시지 파일의 `advisor.chips`를 함께 고칩니다.
 
+추천 스트림의 이벤트는 `features/recommend-dessert/model/parse-event.ts`의 `parseRecommendEvent`로 확인하고 추천은 3개까지만 받습니다. 오류나 형식 오류로 중간에 끝나도 `finally`에서 reader를 닫습니다. 결제 창은 https 주소일 때만 엽니다.
+
 ## 성능 측정
 
 - **Web Vitals:** `<SpeedInsights />`가 프로덕션의 실사용 수치를 Vercel로 보냅니다. Vercel 프로젝트의 Speed Insights에서 봅니다. 무료 범위는 팀 전체 30일 10,000건이고, 넘으면 수집이 일시 중지됩니다.
@@ -112,3 +114,27 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - `/storybook/` 아래만 미리보기 iframe을 위해 `X-Frame-Options: SAMEORIGIN`을 쓰고, 나머지는 `DENY`를 유지합니다.
 - `pnpm build-storybook`(앱 빌드가 먼저 부르는 스크립트)으로 빌드할 때는 `public`을 복사하지 않습니다. 같은 주소에서 열리므로 이미지는 앱의 것을 씁니다.
 
+## 품질 예산
+
+- **번들 크기:** `pnpm size`가 전체 JS 365 kB, CSS 19 kB(gzip)를 넘으면 실패합니다. 기준은 `.size-limit.json`에 있습니다.
+- **Lighthouse:** `pnpm lhci`가 한국어·영어 첫 화면, 상점, 바클라바 상세가 데스크톱 기준 성능 90·접근성 100·권장 사항 95·SEO 90점, LCP 2.5초·TBT 200ms·CLS 0.1 이하인지 3번씩 재서 확인합니다. 기준은 `lighthouserc.json`에 있습니다.
+- **접근성 린트:** `eslint-config-next`는 jsx-a11y 규칙을 몇 개만 켭니다. 플러그인은 이미 등록되어 있어 `eslint.config`에서 recommended 규칙만 더해 모두 켭니다. 장바구니 서랍(`<dialog>`)의 배경 클릭 닫기는 Esc·닫기 버튼이 키보드 대안이라 그 줄만 예외로 둡니다.
+
+두 검사 모두 프로덕션 빌드가 먼저 있어야 하며, CI는 빌드 뒤에 돌립니다.
+
+## 모니터링
+
+브라우저에서 화면을 그리기 전에 모니터링을 켜고, Sentry와 web-vitals는 나중에 따로 받습니다. Sentry는 페이지를 다 받은 뒤(load) 브라우저가 한가할 때 받고, load가 10초 안에 오지 않으면 그때 바로 받습니다.
+
+| 환경 변수 | 내용 |
+| --- | --- |
+| `NEXT_PUBLIC_SENTRY_DSN` | 있으면 처리하지 못한 오류와 나쁜(poor) Web Vitals를 Sentry로 보냅니다. 없으면 Sentry를 번들에 넣지 않고, 개발 모드에서 Web Vitals를 콘솔에만 찍습니다 |
+
+- Sentry에는 오류 내용만 보내고 사용자 정보·쿠키·헤더·쿼리 문자열, 방문 기록(세션), 이동·클릭 기록(브레드크럼), 콘솔 기록은 모으지 않습니다. 오류에 붙는 콜백 인수, Error가 아닌 일반 객체로 거부된 Promise의 필드 값(`extra.__serialized__`), 주소의 `#` 뒤도 보내기 전에 지웁니다. Sentry를 받기 전에 난 오류는 모아 두었다가 처리되지 않은 오류로 보냅니다.
+- 쓰는 함수만 `sentry.ts`에서 다시 내보내 약 31 kB(gzip)로 받습니다. 모듈 전체를 불러오면 리플레이·피드백까지 들어가 140 kB가 됩니다.
+- 실제 방문자의 속도는 Vercel Speed Insights로도 봅니다. 로컬 Lighthouse에서는 이 스크립트가 404라 권장 사항이 96점으로 나옵니다.
+- 브라우저 오류만 모읍니다. 서버에서 난 오류는 호스팅(Vercel 등)의 로그로 확인합니다.
+
+## 의존성 갱신 (Dependabot)
+
+`.github/dependabot.yml`이 npm 패키지는 매주 부 버전·패치를 한 PR로 묶어 올리고, GitHub Actions는 매달 올립니다. 주 버전은 따로 PR이 열리므로 변경 내역을 확인하고 CI가 통과할 때만 병합합니다.

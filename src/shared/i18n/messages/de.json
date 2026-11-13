@@ -48,7 +48,9 @@
     "results": "{count} Desserts",
     "add": "{name} in den Warenkorb",
     "addShort": "Hinzufügen",
-    "view": "Ansehen"
+    "view": "Ansehen",
+    "buyNow": "{name} jetzt kaufen",
+    "buyNowShort": "Jetzt kaufen"
   },
   "product": {
     "back": "Zurück zu den Desserts",
@@ -104,7 +106,12 @@
     "shipping": "Versand",
     "total": "Gesamt",
     "checkout": "Zur Kasse",
-    "added": "{name} wurde in den Warenkorb gelegt."
+    "added": "{name} wurde in den Warenkorb gelegt.",
+    "select": "{name} in die Bestellung aufnehmen",
+    "selectAll": "Alle auswählen",
+    "selected": "{count} von {total} ausgewählt",
+    "checkoutSelected": "Auswahl bestellen ({count})",
+    "noneSelected": "Wählen Sie die Artikel aus, die Sie bestellen möchten."
   },
   "checkout": {
     "metaTitle": "Kasse",

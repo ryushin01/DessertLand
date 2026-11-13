@@ -48,7 +48,9 @@
     "results": "{count}개의 디저트",
     "add": "{name} 장바구니에 담기",
     "addShort": "담기",
-    "view": "보기"
+    "view": "보기",
+    "buyNow": "{name} 바로 구매",
+    "buyNowShort": "바로 구매"
   },
   "product": {
     "back": "디저트 목록으로",
@@ -104,7 +106,12 @@
     "shipping": "배송비",
     "total": "합계",
     "checkout": "주문하기",
-    "added": "{name}을(를) 장바구니에 담았습니다."
+    "added": "{name}을(를) 장바구니에 담았습니다.",
+    "select": "{name} 주문에 넣기",
+    "selectAll": "전체 선택",
+    "selected": "{count}/{total}개 선택",
+    "checkoutSelected": "선택 상품 주문하기 ({count})",
+    "noneSelected": "주문할 상품을 골라 주세요."
   },
   "checkout": {
     "metaTitle": "주문",
