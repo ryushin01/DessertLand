@@ -1,5 +1,45 @@
 # 변경 기록
 
+## 0.4.10 - 2026-11-13
+
+- 모니터링: load가 10초 전에 오면 기한을 거두고 한가할 때를 기다림. 전에는 load가 9초에 와도 10초 기한이 먼저 Sentry를 받기 시작해 한가할 때를 기다리지 않을 수 있었음(+테스트)
+
+## 0.4.9 - 2026-11-13
+
+- 모니터링: 끝나지 않는 요청이 load를 붙잡아도 10초가 지나면 Sentry를 바로 받음(전에는 load가 오지 않으면 끝내 받지 않았음). Error가 아닌 일반 객체로 거부된 Promise의 필드 값(`extra.__serialized__`)도 보내기 전에 지움(+테스트)
+
+## 0.4.8 - 2026-11-13
+
+- 성능: Sentry를 앱 시작과 동시에 받던 것을 페이지를 다 받은 뒤(load) 브라우저가 한가할 때 받게 바꿈. 첫 화면을 그리는 동안 대역폭을 나눠 쓰지 않음(그 사이 오류는 버퍼가 20개까지 모음)
+- 공통화: 결제·결제 완료 화면의 같은 바깥 여백·큰 제목 스타일을 `shared/ui`의 `pageShell`·`pageTitle`로 모음
+- 정리: 슬라이스 밖에서 쓰지 않는 공개 내보내기(장바구니 `countItems`·`selectLines`, `validateCheckout`, i18n `redirect`·`useRouter`·`getPathname`·`DEFAULT_LOCALE`, `ICON_NAMES`, `usePrefersReducedMotion`과 쓰지 않는 타입) 정리
+
+## 0.4.7 - 2026-11-13
+
+- 버그: AI 추천 스트림에서 오류 이벤트나 형식 오류로 중간에 빠져나와도 스트림을 닫지 않아 연결과 버퍼가 남던 문제. 끝나면 항상 reader를 닫음
+- 버그: 추천 이벤트를 그대로 믿고 그려 형식이 어긋나면 화면이 깨지던 문제. `parseRecommendEvent`로 확인하고 추천은 최대 3개까지만 받음
+- 결제 창 주소는 https일 때만 엶
+- 공통화: 미디어 쿼리 문자열(정밀 포인터 5곳, 동작 줄이기 2곳)을 `MEDIA`, 움직임 멈춤 저장 키(2곳)를 `MOTION_PAUSED_KEY`로 모으고, `usePrefersReducedMotion`은 `useMediaQuery`를 다시 씀
+- 메모리 점검: GSAP 애니메이션은 모두 `gsap.context`(`useGsap`)로 묶여 언마운트 때 되돌려지고, ticker·Lenis·WebGL·옵저버·리스너도 정리됨을 확인
+
+## 0.4.6 - 2026-11-12
+
+- 접근성 린트: eslint-plugin-jsx-a11y의 recommended 규칙을 모두 켬
+- 모니터링: `NEXT_PUBLIC_SENTRY_DSN`이 있으면 처리하지 못한 오류와 나쁜 Web Vitals를 Sentry로 보냄. 오류 내용만 보내고, Sentry(약 31 kB gzip)와 web-vitals는 첫 화면 뒤에 따로 받음
+- 성능 예산: CI에서 size-limit(전체 JS 365 kB, CSS 19 kB)과 Lighthouse CI(한국어·영어 첫 화면, 상점, 바클라바 상세가 데스크톱 기준 성능 90·접근성 100·권장 사항 95·SEO 90점, LCP 2.5초·TBT 200ms·CLS 0.1 이하)로 검사
+- Dependabot: npm 매주, GitHub Actions 매월 업데이트 PR
+
+## 0.4.5 - 2026-11-12
+
+- 장바구니 골라서 구매: 상품마다 체크박스와 전체 선택. 합계와 주문은 고른 상품만 계산하고, 결제가 끝나면 산 상품만 장바구니에서 뺌(내장 테스트 결제와 Stripe 모두). 고른 상태는 브라우저에 저장하고, 다시 담은 상품은 주문에 넣음
+- 상품 목록에서 바로 구매: 목록의 "담기" 옆에 "바로 구매". 그 상품 1개로 주문 화면에 감
+- 콘텐츠 보안 정책(CSP): 외부 출처는 Google Fonts와 Vercel 미리보기 도구만 허용하고, 플러그인·프레임 삽입·base 바꾸기·외부 폼 전송을 막음. 주요 화면의 CSP 위반을 E2E로 검사
+
+## 0.4.4 - 2026-11-12
+
+- 언어 메뉴: 언어 이름 대신 원형 테두리 안의 원형 국기와 나라 이름(그 나라 말)으로 표시. 영어는 번역이 미국식 표기라 미국, 포르투갈어는 카탈로그의 포르투갈 디저트에 맞춰 포르투갈
+- 국기는 SVG(`country-flag-icons`)라 Windows에서도 보이고, 꾸밈으로 숨김. 링크 이름은 "나라 이름, 언어 이름"으로 읽혀 언어를 바꾸는 링크임을 알림
+
 ## 0.4.2 - 2026-11-11
 
 - 대체 글꼴: 제목은 Didot·Bodoni 72·Georgia, 본문은 Helvetica Neue·Segoe UI, 한중일은 각 운영체제의 명조·고딕으로 이음. 한중일이 아닌 언어에서 뒤의 대체 글꼴이 쓰이지 않던 문제(변수 기본값 serif)를 고침

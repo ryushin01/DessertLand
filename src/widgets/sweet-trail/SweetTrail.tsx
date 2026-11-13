@@ -8,7 +8,7 @@ import { css } from "styled-system/css";
 import { PRODUCTS } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { gsap } from "@/shared/lib/motion/gsap";
-import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 import { RevealText } from "@/shared/ui/reveal-text";
 
@@ -57,7 +57,7 @@ export function SweetTrail() {
   const t = useTranslations("trail");
   const ref = useRef<HTMLElement>(null);
   const motion = useMotionEnabled();
-  const fine = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const fine = useMediaQuery(MEDIA.finePointer);
   const enabled = motion && fine;
 
   useEffect(() => {

@@ -32,12 +32,7 @@ const track = css({
   gap: "32px",
   paddingInline: { base: "16px", md: "28px" },
   gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
-  "&[data-horizontal=true]": {
-    display: "flex",
-    width: "max-content",
-    alignItems: "center",
-    gap: "4vw",
-  },
+  "&[data-horizontal=true]": { display: "flex", width: "max-content", alignItems: "center", gap: "4vw" },
 });
 const intro = css({
   gridColumn: { sm: "1 / -1" },
@@ -59,16 +54,8 @@ const card = css({
     "&:nth-child(odd)": { transform: "translateY(-5vh)" },
   },
 });
-const cardLink = css({
-  display: "block",
-  _hover: { "& [data-photo]": { transform: "scale(1.08)" } },
-});
-const photoFrame = css({
-  position: "relative",
-  aspectRatio: "4 / 5",
-  overflow: "hidden",
-  borderRadius: "6px",
-});
+const cardLink = css({ display: "block", _hover: { "& [data-photo]": { transform: "scale(1.08)" } } });
+const photoFrame = css({ position: "relative", aspectRatio: "4 / 5", overflow: "hidden", borderRadius: "6px" });
 const photo = css({ objectFit: "cover", transition: "transform 1s {easings.silk}" });
 const meta = css({
   display: "flex",
@@ -78,12 +65,7 @@ const meta = css({
   fontSize: "0.82rem",
   color: "muted",
 });
-const name = css({
-  fontFamily: "display",
-  fontSize: "clamp(1.6rem, 2.6vw, 2.6rem)",
-  lineHeight: "1.1",
-  marginBlockStart: "4px",
-});
+const name = css({ fontFamily: "display", fontSize: "clamp(1.6rem, 2.6vw, 2.6rem)", lineHeight: "1.1", marginBlockStart: "4px" });
 
 /** 세로 스크롤을 가로 이동으로 바꾸는 국가별 디저트 여행입니다. */
 export function WorldTour() {
@@ -171,11 +153,7 @@ export function WorldTour() {
           <ul className={list}>
             {STOPS.map((product) => (
               <li key={product.slug} className={card} data-horizontal={horizontal}>
-                <Link
-                  href={`/shop/${product.slug}`}
-                  className={cardLink}
-                  data-cursor={tShop("view")}
-                >
+                <Link href={`/shop/${product.slug}`} className={cardLink} data-cursor={tShop("view")}>
                   <span className={photoFrame} style={{ display: "block" }}>
                     <Image
                       data-photo

@@ -37,16 +37,7 @@ describe("confirmPayment", () => {
     ["0개", { ...valid, items: [{ slug: "baklava", quantity: 0 }] }],
     ["소수 수량", { ...valid, items: [{ slug: "baklava", quantity: 1.5 }] }],
     ["최대 초과", { ...valid, items: [{ slug: "baklava", quantity: 21 }] }],
-    [
-      "중복 상품",
-      {
-        ...valid,
-        items: [
-          { slug: "baklava", quantity: 1 },
-          { slug: "baklava", quantity: 1 },
-        ],
-      },
-    ],
+    ["중복 상품", { ...valid, items: [{ slug: "baklava", quantity: 1 }, { slug: "baklava", quantity: 1 }] }],
     ["없는 결제 수단", { ...valid, method: "cash" }],
     ["없는 언어", { ...valid, locale: "xx" }],
     ["없는 결과", { ...valid, outcome: "maybe" }],

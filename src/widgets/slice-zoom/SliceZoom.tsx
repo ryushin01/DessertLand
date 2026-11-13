@@ -43,12 +43,7 @@ const title = css({
   lineHeight: "1",
   wordBreak: "var(--word-break)",
 });
-const body = css({
-  maxWidth: "34rem",
-  fontSize: "1.1rem",
-  lineHeight: "1.55",
-  wordBreak: "var(--word-break)",
-});
+const body = css({ maxWidth: "34rem", fontSize: "1.1rem", lineHeight: "1.55", wordBreak: "var(--word-break)" });
 
 /** 글자 안의 사진으로 빨려 들어가는 스크롤 줌입니다. */
 export function SliceZoom() {

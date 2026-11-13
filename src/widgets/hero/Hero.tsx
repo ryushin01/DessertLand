@@ -8,7 +8,7 @@ import { css, cx } from "styled-system/css";
 import { getProduct } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap } from "@/shared/lib/motion/gsap";
-import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, buttonRecipe } from "@/shared/ui";
 
 import type { BakerRenderer } from "./baker-renderer";
@@ -18,60 +18,12 @@ const DEPTH = "/images/hero/baker-depth.webp";
 const CUTOUT_RATIO = 1000 / 1250;
 
 const FLOATS = [
-  {
-    slug: "freakshake",
-    top: "13%",
-    left: "6%",
-    width: "13vw",
-    depth: 0.9,
-    front: false,
-    wide: false,
-  },
-  {
-    slug: "tiramisu",
-    top: "12%",
-    left: "79%",
-    width: "12vw",
-    depth: 0.6,
-    front: false,
-    wide: false,
-  },
-  {
-    slug: "basque-cheesecake",
-    top: "58%",
-    left: "7%",
-    width: "17vw",
-    depth: 1.5,
-    front: true,
-    wide: true,
-  },
-  {
-    slug: "pastel-de-nata",
-    top: "60%",
-    left: "76%",
-    width: "19vw",
-    depth: 1.8,
-    front: true,
-    wide: true,
-  },
-  {
-    slug: "strawberry-shortcake",
-    top: "36%",
-    left: "20%",
-    width: "9vw",
-    depth: 0.4,
-    front: false,
-    wide: false,
-  },
-  {
-    slug: "blueberry-muffin",
-    top: "34%",
-    left: "69%",
-    width: "9vw",
-    depth: 0.5,
-    front: false,
-    wide: false,
-  },
+  { slug: "freakshake", top: "13%", left: "6%", width: "13vw", depth: 0.9, front: false, wide: false },
+  { slug: "tiramisu", top: "12%", left: "79%", width: "12vw", depth: 0.6, front: false, wide: false },
+  { slug: "basque-cheesecake", top: "58%", left: "7%", width: "17vw", depth: 1.5, front: true, wide: true },
+  { slug: "pastel-de-nata", top: "60%", left: "76%", width: "19vw", depth: 1.8, front: true, wide: true },
+  { slug: "strawberry-shortcake", top: "36%", left: "20%", width: "9vw", depth: 0.4, front: false, wide: false },
+  { slug: "blueberry-muffin", top: "34%", left: "69%", width: "9vw", depth: 0.5, front: false, wide: false },
 ] as const;
 
 const wrapper = css({ position: "relative", height: "240vh" });
@@ -93,8 +45,7 @@ const glow = css({
   marginBlockStart: "-31vmax",
   marginInlineStart: "-31vmax",
   borderRadius: "50%",
-  background:
-    "radial-gradient(circle, rgba(255, 100, 132, 0.34), rgba(242, 178, 103, 0.1) 45%, transparent 68%)",
+  background: "radial-gradient(circle, rgba(255, 100, 132, 0.34), rgba(242, 178, 103, 0.1) 45%, transparent 68%)",
   pointerEvents: "none",
 });
 const title = css({
@@ -163,17 +114,8 @@ const copyPanel = css({
   background: "rgba(18, 11, 10, 0.78)",
   backdropFilter: "blur(10px)",
 });
-const eyebrow = css({
-  fontSize: "0.8rem",
-  letterSpacing: "0.04em",
-  marginBlockEnd: "6px",
-  color: "caramel",
-});
-const tagline = css({
-  fontSize: { base: "0.95rem", md: "1.05rem" },
-  lineHeight: "1.5",
-  wordBreak: "var(--word-break)",
-});
+const eyebrow = css({ fontSize: "0.8rem", letterSpacing: "0.04em", marginBlockEnd: "6px", color: "caramel" });
+const tagline = css({ fontSize: { base: "0.95rem", md: "1.05rem" }, lineHeight: "1.5", wordBreak: "var(--word-break)" });
 const actions = css({
   display: "flex",
   alignItems: "center",
@@ -194,7 +136,7 @@ export function Hero() {
   const bakerRef = useRef<HTMLDivElement>(null);
   const fallbackRef = useRef<HTMLImageElement>(null);
   const enabled = useMotionEnabled();
-  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const finePointer = useMediaQuery(MEDIA.finePointer);
   const [webglReady, setWebglReady] = useState(false);
 
   // WebGL 손과 밀가루. 실패하면 컷아웃 이미지를 그대로 보여 줍니다.
@@ -304,13 +246,7 @@ export function Hero() {
       };
       window.addEventListener("pointermove", onPointer, { passive: true });
 
-      gsap.from(lines, {
-        yPercent: 110,
-        duration: 1.5,
-        ease: "expo.out",
-        stagger: 0.12,
-        delay: 0.1,
-      });
+      gsap.from(lines, { yPercent: 110, duration: 1.5, ease: "expo.out", stagger: 0.12, delay: 0.1 });
       gsap.from(floats, {
         scale: 0.2,
         autoAlpha: 0,
@@ -321,12 +257,7 @@ export function Hero() {
       });
 
       const scroll = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.7,
-        },
+        scrollTrigger: { trigger: rootRef.current, start: "top top", end: "bottom bottom", scrub: 0.7 },
       });
       scroll
         .to(lines[0] ?? {}, { xPercent: -28, opacity: 0.15, ease: "none" }, 0)
