@@ -99,7 +99,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 ## 라이선스
 
 - **사진:** [Unsplash License](https://unsplash.com/license)의 무료 사진만 씁니다. Unsplash+ 사진은 쓰지 않습니다. 출처는 README의 '출처'와 `docs/credits.md`에 있습니다.
-- **아이콘:** Flaticon UIcons 무료 라이선스는 출처 표기가 필요해 README의 '출처'에 적고, 푸터의 출처 링크가 그곳으로 갑니다. 쓰는 아이콘만 `scripts/build-icons.py`로 추려 냅니다.
+- **아이콘:** Flaticon UIcons 무료 라이선스는 사이트 바닥글에 출처 줄을 두도록 정해 푸터에 'Uicons by Flaticon' 링크를 두고, README의 '출처'에도 적습니다. 쓰는 아이콘만 `scripts/build-icons.py`로 추려 냅니다.
 
 ## 테스트
 

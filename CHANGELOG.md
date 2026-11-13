@@ -2,7 +2,7 @@
 
 ## 0.4.11 - 2026-11-13
 
-- 출처: 사진(Unsplash)·아이콘(Flaticon)·글꼴의 출처를 README '출처' 표와 `docs/credits.md`(사진 17장)로 옮기고, 사이트의 출처 페이지(`/credits`)를 걷어 냄. 바닥글에는 README 출처 링크 하나만 두고(Flaticon 링크 포함), 예전 `/{언어}/credits` 주소는 README 출처로 넘김
+- 출처: 사진(Unsplash)·아이콘(Flaticon)·글꼴의 출처를 README '출처' 표와 `docs/credits.md`(사진 17장)로 옮기고, 사이트의 출처 페이지(`/credits`)를 걷어 냄. 바닥글에는 README 출처 링크를 두고(Flaticon 라이선스가 정한 'Uicons by Flaticon' 링크는 그대로), 예전 `/{언어}/credits` 주소는 README 출처로 넘김
 - 상품 데이터의 사진가 정보(`credit`, `HERO_CREDIT`)와 10개 언어의 출처 페이지 문구를 지움
 - E2E: 출처 페이지에서 시작하던 머리글·장바구니 검사를 주문·상품 목록 화면에서 시작
 

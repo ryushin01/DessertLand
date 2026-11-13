@@ -149,6 +149,8 @@ test("출처는 바닥글 링크로 README에 가고, 예전 출처 페이지 �
   await page.goto("/ko");
   const credits = page.getByRole("contentinfo").getByRole("link", { name: "사진과 아이콘 출처" });
   await expect(credits).toHaveAttribute("href", "https://github.com/ryushin01/DessertLand#출처");
+  // Flaticon 무료 라이선스가 정한 바닥글 출처 줄
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "Uicons by Flaticon" })).toHaveAttribute("href", "https://www.flaticon.com/uicons");
   const old = await request.get("/en/credits", { maxRedirects: 0 });
   expect(old.status()).toBe(308);
   expect(decodeURI(old.headers()["location"] ?? "")).toBe("https://github.com/ryushin01/DessertLand#출처");
