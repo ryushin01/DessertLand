@@ -39,6 +39,8 @@
 
 새 맛을 추가할 때는 `TASTE_CHIPS`, `TASTES`, `CHIP_MEANINGS`, 메시지 파일의 `advisor.chips`를 함께 고칩니다.
 
+추천 스트림의 이벤트는 `features/recommend-dessert/model/parse-event.ts`의 `parseRecommendEvent`로 확인하고 추천은 3개까지만 받습니다. 오류나 형식 오류로 중간에 끝나도 `finally`에서 reader를 닫습니다. 결제 창은 https 주소일 때만 엽니다.
+
 ## 성능 측정
 
 - **Web Vitals:** `<SpeedInsights />`가 프로덕션의 실사용 수치를 Vercel로 보냅니다. Vercel 프로젝트의 Speed Insights에서 봅니다. 무료 범위는 팀 전체 30일 10,000건이고, 넘으면 수집이 일시 중지됩니다.
@@ -132,3 +134,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - 쓰는 함수만 `sentry.ts`에서 다시 내보내 약 31 kB(gzip)로 받습니다. 모듈 전체를 불러오면 리플레이·피드백까지 들어가 140 kB가 됩니다.
 - 실제 방문자의 속도는 Vercel Speed Insights로도 봅니다. 로컬 Lighthouse에서는 이 스크립트가 404라 권장 사항이 96점으로 나옵니다.
 - 브라우저 오류만 모읍니다. 서버에서 난 오류는 호스팅(Vercel 등)의 로그로 확인합니다.
+
+## 의존성 갱신 (Dependabot)
+
+`.github/dependabot.yml`이 npm 패키지는 매주 부 버전·패치를 한 PR로 묶어 올리고, GitHub Actions는 매달 올립니다. 주 버전은 따로 PR이 열리므로 변경 내역을 확인하고 CI가 통과할 때만 병합합니다.
