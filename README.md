@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.4.10-ff6484)
+![version](https://img.shields.io/badge/version-0.4.11-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -12,7 +12,7 @@
 
 ## 화면
 
-사진은 [Unsplash](https://unsplash.com), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 사이트의 출처 페이지에 있습니다.
+사진은 [Unsplash](https://unsplash.com), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 아래 [출처](#출처)에 있습니다.
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
@@ -111,3 +111,19 @@ src/
 | [개발 가이드](docs/development.md) | 언어와 상품 추가, 모션 규칙, 사진과 아이콘 라이선스 |
 | [시퀀스 다이어그램](docs/sequence-diagrams.md) | Stripe 테스트 결제, 내장 테스트 결제, AI 디저트 추천(스트리밍) |
 | [변경 기록](CHANGELOG.md) | 버전별 변경 사항 |
+| [사진 출처](docs/credits.md) | 상품·첫 화면 사진 17장의 사진가와 원본 |
+
+## 출처
+
+| 자료 | 저작자 | 사용 허락 | 원본 |
+|---|---|---|---|
+| 상품·첫 화면 사진 17장 | Unsplash 사진가 ([목록](docs/credits.md)) | Unsplash License | [unsplash.com](https://unsplash.com) |
+| 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
+| Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
+| Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
+| Gowun Dodum(고운돋움) 글꼴 (한국어 본문) | The Gowun Dodum Project Authors(류양희) | SIL OFL 1.1 | [yangheeryu/Gowun-Dodum](https://github.com/yangheeryu/Gowun-Dodum) |
+| Grandiflora One 글꼴 (한국어 제목) | The Grandiflora Project Authors(JAMO) | SIL OFL 1.1 | [JAMO-TYPEFACE/Grandiflora](https://github.com/JAMO-TYPEFACE/Grandiflora) |
+| Noto Sans·Serif JP 글꼴 (일본어) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+JP) |
+| Noto Sans·Serif SC 글꼴 (중국어) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+SC) |
+
+사이트 바닥글의 출처 링크가 이 표로 옵니다. 예전 출처 페이지(`/{언어}/credits`)도 이곳으로 넘어옵니다.

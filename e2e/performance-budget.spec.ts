@@ -12,7 +12,6 @@ const JS_BUDGET_KB: Record<string, number> = {
   "/ko/shop": 235,
   "/ko/shop/baklava": 235,
   "/ko/checkout": 190,
-  "/ko/credits": 185,
 };
 const CSS_BUDGET_KB = 25;
 
@@ -69,7 +68,7 @@ for (const [path, budget] of Object.entries(JS_BUDGET_KB)) {
 }
 
 test("모션이 없는 페이지의 첫 화면에는 GSAP이 없습니다", async ({ request }) => {
-  for (const path of ["/ko/credits", "/ko/checkout"]) {
+  for (const path of ["/ko/checkout"]) {
     const html = await loadHtml(request, path);
     const scripts = await loadAssets(request, html, /<script[^>]*\bsrc="([^"]+\.js[^"]*)"[^>]*>/g);
     expect(scripts.length).toBeGreaterThan(0);
