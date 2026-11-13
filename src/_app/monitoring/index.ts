@@ -28,7 +28,8 @@ export function initMonitoring() {
       if (early.length < MAX_EARLY_ERRORS) early.push({ error, type });
     };
     const onError = (event: ErrorEvent) => keep(event.error ?? event.message, "onerror");
-    const onRejection = (event: PromiseRejectionEvent) => keep(event.reason, "onunhandledrejection");
+    const onRejection = (event: PromiseRejectionEvent) =>
+      keep(event.reason, "onunhandledrejection");
     window.addEventListener("error", onError);
     window.addEventListener("unhandledrejection", onRejection);
     const stopBuffering = () => {
@@ -36,7 +37,8 @@ export function initMonitoring() {
       window.removeEventListener("unhandledrejection", onRejection);
     };
 
-    sentry = import("./sentry")
+    sentry = afterFirstPaint()
+      .then(() => import("./sentry"))
       .then((Sentry) => {
         Sentry.init({
           dsn,
@@ -117,5 +119,20 @@ function captureUnhandled(Sentry: SentryModule, error: unknown, type: string) {
       return event;
     });
     Sentry.captureException(error);
+  });
+}
+
+/**
+ * 페이지를 다 받은 뒤(load) 브라우저가 한가할 때 풀립니다. 첫 화면을 그리는 동안 Sentry를 받느라 대역폭을 나눠 쓰지 않게 합니다.
+ * requestIdleCallback이 없는 브라우저(Safari 등)는 바로 다음 차례에 풉니다. 그 사이 오류는 위의 버퍼가 모읍니다.
+ */
+function afterFirstPaint(): Promise<void> {
+  return new Promise((resolve) => {
+    const idle = () =>
+      "requestIdleCallback" in window
+        ? window.requestIdleCallback(() => resolve(), { timeout: 3000 })
+        : setTimeout(resolve, 0);
+    if (document.readyState === "complete") idle();
+    else window.addEventListener("load", idle, { once: true });
   });
 }
