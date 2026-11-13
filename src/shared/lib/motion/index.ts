@@ -6,5 +6,4 @@ export {
   motionPausedAtom,
   useMediaQuery,
   useMotionEnabled,
-  usePrefersReducedMotion,
 } from "./state";
