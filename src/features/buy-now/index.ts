@@ -1,2 +1,2 @@
-export { BuyNowLink } from "./BuyNowLink";
-export { parseBuyNow } from "./parseBuyNow";
+export { BuyNowLink } from "./ui/BuyNowLink";
+export { parseBuyNow } from "./model/parseBuyNow";
