@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.4.2-ff6484)
+![version](https://img.shields.io/badge/version-0.5.1-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -12,7 +12,7 @@
 
 ## 화면
 
-사진은 [Unsplash](https://unsplash.com), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 사이트의 출처 페이지에 있습니다.
+사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)(자유 라이선스), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 아래 [출처](#출처)에 있습니다.
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
@@ -38,15 +38,16 @@
 
 | 구분 | 내용 |
 |---|---|
-| 전 세계 디저트 | 밀크셰이크, 치즈케이크, 머핀, 팬케이크, 생크림 케이크, 세계의 명작 등 13개 나라의 16종 |
-| 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시 |
+| 전 세계 디저트 | 35개 나라와 기원이 여럿인 "기타"까지 174종. 케이크, 파이·타르트, 페이스트리, 쿠키·구움과자, 아이스크림·빙수, 푸딩·크림, 떡·전통 과자, 팬케이크·튀김, 커피, 음료의 10개 분류 |
+| 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시. 언어 메뉴는 원형 국기와 나라 이름으로 고름 |
 | 쇼핑 | 카테고리 필터, 상품 상세, 장바구니(저장 유지) |
 | AI 추천 | 입맛을 적으면 Claude가 카탈로그 안에서 디저트를 추천(스트리밍). 키가 없으면 규칙 기반 추천 |
-| 구매 | 장바구니 구매, 바로 구매(장바구니 유지), 배송 정보 입력과 오류 안내 |
+| 구매 | 장바구니에서 고른 상품만 주문(산 상품만 장바구니에서 뺌), 상세와 상품 목록의 바로 구매(장바구니 유지), 배송 정보 입력과 오류 안내 |
 | 결제 | Stripe Checkout 테스트 모드(키가 없으면 내장 테스트 결제창), 서버 금액 검증, 중복 결제 방지 |
 | 첫 화면 인터랙션 | 마우스 위치에 따라 가운데 손과 밀가루가 움직이고 빛이 바뀌는 WebGL 2.5D 시차 |
 | 커서 | 따라오는 링, 흩날리는 스프링클, 끌어당기는 버튼, 지나간 자리에 피어나는 사진 |
 | 스크롤 | 원형으로 열리는 장면 전환, 글자 마스크 줌, 가로 스크롤 여행, 단어별 밝아짐, 패럴랙스 |
+| 보안 | 콘텐츠 보안 정책(CSP), 프레임 삽입 금지, 서버 금액 검증. 주요 화면의 CSP 위반을 E2E로 검사 |
 | 성능 | Web Vitals 수집, 페이지별 전송량 예산(E2E), 언어별 글꼴과 필요한 코드만 로드 |
 | 접근성 | 모션 멈춤 버튼, `prefers-reduced-motion` 대응, 키보드 초점 시 장면 이동, 본문 바로가기 |
 
@@ -59,11 +60,12 @@
 | 프레임워크 | Next.js 16 (App Router), React 19, TypeScript |
 | 스타일 | Panda CSS |
 | 상태 | jotai |
-| 다국어 | next-intl |
+| 다국어 | next-intl, country-flag-icons(언어 메뉴 국기) |
 | 결제 | Stripe Checkout(테스트 모드) |
 | AI | Claude API (`@anthropic-ai/sdk`) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
-| 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe, Vercel Speed Insights |
+| 품질 | ESLint(jsx-a11y), Vitest, Testing Library, Storybook 10, Playwright, axe, size-limit, Lighthouse CI |
+| 모니터링 | Sentry(DSN이 있을 때만), web-vitals, Vercel Speed Insights |
 | 구조 | Feature-Sliced Design |
 
 ## 시작하기
@@ -84,6 +86,7 @@ Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`
 | `pnpm typecheck` / `pnpm lint` | 타입 검사와 린트 |
 | `pnpm test` | 단위 테스트 |
 | `pnpm e2e` | 프로덕션 빌드 기준 E2E와 접근성 검사(`pnpm build` 후 실행) |
+| `pnpm size` / `pnpm lhci` | 번들 크기 예산 / Lighthouse 점수 기준 검사(`pnpm build` 후 실행) |
 | `pnpm analyze` | 번들 분석 화면 |
 | `pnpm storybook` | 컴포넌트 문서 |
 
@@ -94,7 +97,7 @@ src/
 ├─ app/[locale]/   # 라우트. _pages를 다시 내보냅니다.
 ├─ proxy.ts        # 언어 라우팅
 ├─ _app/           # 레이아웃, 프로바이더, 전역 스타일
-├─ _pages/         # 홈, 목록, 상세, 주문, 출처
+├─ _pages/         # 홈, 목록, 상세, 주문
 ├─ widgets/        # 히어로, 쇼케이스, 커서, 장바구니 등
 ├─ features/       # 담기, 바로 구매, 결제, 주문 폼, AI 추천, 언어 변경, 모션 멈춤
 ├─ entities/       # 상품 카탈로그, 장바구니
@@ -106,4 +109,23 @@ src/
 | 문서 | 내용 |
 |---|---|
 | [개발 가이드](docs/development.md) | 언어와 상품 추가, 모션 규칙, 사진과 아이콘 라이선스 |
+| [시퀀스 다이어그램](docs/sequence-diagrams.md) | Stripe 테스트 결제, 내장 테스트 결제, AI 디저트 추천(스트리밍) |
 | [변경 기록](CHANGELOG.md) | 버전별 변경 사항 |
+| [사진 출처](docs/credits.md) | 상품·첫 화면 사진 175장의 저작자, 사용 허락(라이선스), 원본 |
+
+## 출처
+
+| 자료 | 저작자 | 사용 허락 | 원본 |
+|---|---|---|---|
+| 상품·첫 화면 사진 17장 | Unsplash 사진가 ([목록](docs/credits.md#unsplash)) | Unsplash License | [unsplash.com](https://unsplash.com) |
+| 상품 사진 158장 (1400px 이하로 줄여 WebP로 바꿈) | Wikimedia Commons 기여자 ([목록](docs/credits.md#wikimedia-commons)) | 사진마다 CC0, 퍼블릭 도메인, CC BY, CC BY-SA 중 하나 (목록에 사진별로 표시) | [commons.wikimedia.org](https://commons.wikimedia.org) |
+| 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
+| Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
+| Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
+| Gowun Dodum(고운돋움) 글꼴 (한국어 본문) | The Gowun Dodum Project Authors(류양희) | SIL OFL 1.1 | [yangheeryu/Gowun-Dodum](https://github.com/yangheeryu/Gowun-Dodum) |
+| Grandiflora One 글꼴 (한국어 제목) | The Grandiflora Project Authors(JAMO) | SIL OFL 1.1 | [JAMO-TYPEFACE/Grandiflora](https://github.com/JAMO-TYPEFACE/Grandiflora) |
+| Kaisei Decol 글꼴 (일본어 제목) | The Kaisei Project Authors(Font-Kai) | SIL OFL 1.1 | [Font-Kai/Kaisei](https://github.com/Font-Kai/Kaisei) |
+| Zen Maru Gothic 글꼴 (일본어 본문) | The Zen Maru Gothic Project Authors(Yoshimichi Ohira) | SIL OFL 1.1 | [googlefonts/zen-marugothic](https://github.com/googlefonts/zen-marugothic) |
+| Noto Sans·Serif SC 글꼴 (중국어) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+SC) |
+
+사이트 바닥글의 출처 링크가 이 표로 옵니다. 예전 출처 페이지(`/{언어}/credits`)도 이곳으로 넘어옵니다. Flaticon 무료 라이선스는 사이트 바닥글에 출처 줄을 두도록 정해, 바닥글의 'Uicons by Flaticon' 링크는 그대로 둡니다.
