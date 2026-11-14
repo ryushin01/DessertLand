@@ -48,6 +48,23 @@ export function formatProductPrice(priceUsd: number, locale: string): string {
   return formatMoney(priceInCurrency(priceUsd, currencyForLocale(locale)), locale);
 }
 
+/** 기원이 여러 나라에 걸치거나 다툼이 있는 디저트의 나라 코드. */
+export const OTHER_COUNTRY = "XX";
+
+const OTHER_LABELS: Record<string, string> = {
+  ko: "기타",
+  en: "Other",
+  ja: "その他",
+  zh: "其他",
+  fr: "Autre",
+  it: "Altro",
+  es: "Otro",
+  de: "Sonstige",
+  pt: "Outro",
+  tr: "Diğer",
+};
+
 export function countryName(code: string, locale: string): string {
+  if (code === OTHER_COUNTRY) return OTHER_LABELS[locale] ?? OTHER_LABELS.en!;
   return new Intl.DisplayNames([locale], { type: "region" }).of(code) ?? code;
 }

@@ -9,6 +9,7 @@ export {
 export type { Allergen, Category, Product } from "./model/catalog";
 export type { Currency } from "./lib/price";
 export {
+  OTHER_COUNTRY,
   countryName,
   currencyForLocale,
   formatMoney,

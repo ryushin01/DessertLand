@@ -98,10 +98,10 @@ test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) =>
 });
 
 test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", async ({ page }) => {
-  await page.goto("/ko/shop?category=muffin");
+  await page.goto("/ko/shop?category=baked");
   await page.getByText("KO", { exact: true }).click();
   await page.getByRole("banner").getByRole("link", { name: "Deutschland, Deutsch" }).click();
-  await expect(page).toHaveURL(/\/de\/shop\?category=muffin$/);
+  await expect(page).toHaveURL(/\/de\/shop\?category=baked$/);
 
   await page.goto("/ko/checkout?buy=baklava&qty=2&canceled=1");
   await page.getByText("KO", { exact: true }).click();
@@ -121,15 +121,15 @@ test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소
   const english = page.getByRole("banner").getByRole("link", { name: "United States, English" });
   await expect(english).toBeVisible();
   await english.focus();
-  const muffin = page
+  const baked = page
     .getByRole("navigation", { name: "카테고리 선택" })
-    .getByRole("link", { name: "머핀" });
-  await muffin.focus();
+    .getByRole("link", { name: "쿠키·구움과자" });
+  await baked.focus();
   await expect(english).toBeHidden();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/category=muffin/);
+  await expect(page).toHaveURL(/category=baked/);
   await summary.click();
-  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=muffin$/);
+  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=baked$/);
 });
 
 test.describe("좁은 화면 메뉴", () => {
@@ -189,14 +189,24 @@ test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("style", /Gowun Dodum/);
 });
 
+test("예전 분류 주소는 새 분류로 보냅니다", async ({ page }) => {
+  await page.goto("/ko/shop?category=muffin");
+  await expect(page).toHaveURL(/\/ko\/shop\?category=baked$/);
+  await page.goto("/ko/shop?category=classic");
+  await expect(page).toHaveURL(/\/ko\/shop$/);
+  // 객체 기본 속성 이름은 예전 분류가 아니므로 그대로 전체 목록을 보여 줍니다.
+  await page.goto("/ko/shop?category=toString");
+  await expect(page).toHaveURL(/\/ko\/shop\?category=toString$/);
+});
+
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await page.goto("/ko/shop");
   await page
     .getByRole("navigation", { name: "카테고리 선택" })
-    .getByRole("link", { name: "머핀" })
+    .getByRole("link", { name: "쿠키·구움과자" })
     .click();
-  await expect(page).toHaveURL(/category=muffin/);
-  await expect(page.getByRole("status").filter({ hasText: "2개의 디저트" })).toBeVisible();
+  await expect(page).toHaveURL(/category=baked/);
+  await expect(page.getByRole("status").filter({ hasText: "26개의 디저트" })).toBeVisible();
 });
 
 async function fillCheckout(page: Page) {
@@ -297,8 +307,11 @@ test("장바구니에서 고른 상품만 주문하고, 고르지 않은 상품�
 });
 
 test("상품 목록에서 바로 구매하면 그 상품 1개로 주문 화면에 갑니다", async ({ page }) => {
-  await page.goto("/ko/shop");
-  await page.getByRole("link", { name: "바클라바 바로 구매" }).click();
+  // 전체 목록은 길어서, 바클라바가 있는 페이스트리 분류에서 누릅니다.
+  await page.goto("/ko/shop?category=pastry");
+  const buyNow = page.getByRole("link", { name: "바클라바 바로 구매" });
+  await buyNow.scrollIntoViewIfNeeded();
+  await buyNow.click();
   await expect(page).toHaveURL(/\/ko\/checkout\?buy=baklava&qty=1$/);
   await expect(page.getByRole("region", { name: "주문 내역" })).toContainText("바클라바 × 1");
 });
@@ -599,7 +612,7 @@ test.describe("데스크톱 모션", () => {
   test("키보드로 가려진 카테고리에 들어가면 장면이 펼쳐집니다", async ({ page }) => {
     await page.goto("/ko");
     await page.waitForTimeout(3200);
-    const link = page.getByRole("link", { name: "머핀 보기" });
+    const link = page.getByRole("link", { name: "쿠키·구움과자 보기" });
     await link.focus();
     await page.waitForTimeout(1500);
     await expect(link).toBeInViewport();
