@@ -1772,7 +1772,7 @@ export const PRODUCTS: Product[] = [
     priceUsd: 2.5,
     weightGrams: 60,
     allergens: ["wheat", "egg", "milk"],
-    image: img("simon-cupcake", 1400, 934),
+    image: img("simon-cupcake", 1400, 930),
   },
 ];
 
