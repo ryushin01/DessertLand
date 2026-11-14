@@ -54,7 +54,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     // 빌드할 때 만든 Storybook(public/storybook)은 정적 파일이라 폴더 주소로는 열리지 않아 index.html로 보냅니다.
-    return [{ source: "/storybook", destination: "/storybook/index.html", permanent: false }];
+    return [
+      { source: "/storybook", destination: "/storybook/index.html", permanent: false },
+      // 출처 페이지는 README의 '출처' 표로 옮겼습니다. 예전 주소는 그곳으로 보냅니다.
+      { source: "/:locale/credits", destination: "https://github.com/ryushin01/DessertLand#출처", permanent: true },
+    ];
   },
 };
 
