@@ -759,6 +759,10 @@
       "name": "Kahlúa'lı süt",
       "description": "Kahve likörü ve sütten tatlı kokteyl. Alkol içerir."
     },
+    "baileys-milk": {
+      "name": "Baileys'li süt",
+      "description": "İrlanda kremalı likör ve sütle buz üzerine hazırlanan yumuşak kokteyl. Alkol içerir."
+    },
     "steamed-milk": {
       "name": "Buharda ısıtılmış süt",
       "description": "Buharla ısıtılıp yumuşak köpüklenen sıcak süt."

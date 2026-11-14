@@ -1485,6 +1485,16 @@ export const PRODUCTS: Product[] = [
     image: img("kahlua-milk", 1400, 1886),
   },
   {
+    slug: "baileys-milk",
+    category: "drink",
+    country: "XX",
+    coordinates: "",
+    priceUsd: 8,
+    weightGrams: 250,
+    allergens: ["milk"],
+    image: img("baileys-milk", 1400, 1867),
+  },
+  {
     slug: "steamed-milk",
     category: "drink",
     country: "XX",
@@ -1772,7 +1782,7 @@ export const PRODUCTS: Product[] = [
     priceUsd: 2.5,
     weightGrams: 60,
     allergens: ["wheat", "egg", "milk"],
-    image: img("simon-cupcake", 1400, 934),
+    image: img("simon-cupcake", 1400, 930),
   },
 ];
 

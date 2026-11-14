@@ -759,6 +759,10 @@
       "name": "Kahlúa e latte",
       "description": "Cocktail dolce di liquore al caffè e latte. Contiene alcol."
     },
+    "baileys-milk": {
+      "name": "Baileys e latte",
+      "description": "Cocktail vellutato di liquore alla crema irlandese e latte, servito con ghiaccio. Contiene alcol."
+    },
     "steamed-milk": {
       "name": "Latte caldo montato",
       "description": "Latte scaldato al vapore con una morbida schiuma."
