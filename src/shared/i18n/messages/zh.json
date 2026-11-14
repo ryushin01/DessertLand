@@ -759,6 +759,10 @@
       "name": "咖啡利口酒牛奶",
       "description": "咖啡利口酒加牛奶的甜鸡尾酒，含酒精。"
     },
+    "baileys-milk": {
+      "name": "百利甜酒牛奶",
+      "description": "爱尔兰奶油利口酒加牛奶倒在冰上的顺滑鸡尾酒，含酒精。"
+    },
     "steamed-milk": {
       "name": "热牛奶",
       "description": "蒸汽加热、覆上柔软奶泡的热牛奶。"

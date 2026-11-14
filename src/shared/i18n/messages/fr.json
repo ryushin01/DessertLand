@@ -759,6 +759,10 @@
       "name": "Kahlúa au lait",
       "description": "Cocktail sucré de liqueur de café et de lait. Contient de l’alcool."
     },
+    "baileys-milk": {
+      "name": "Baileys au lait",
+      "description": "Cocktail onctueux de liqueur de crème irlandaise et de lait, servi sur glace. Contient de l’alcool."
+    },
     "steamed-milk": {
       "name": "Lait chaud mousseux",
       "description": "Lait chauffé à la vapeur, coiffé d'une mousse légère."
