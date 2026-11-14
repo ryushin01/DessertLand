@@ -1,6 +1,6 @@
 {
   "name": "dessert-land",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "전 세계 디저트가 모인 달콤한 나라: 10개 언어로 디저트를 소개하고 판매하는 쇼핑몰",
   "private": true,
   "type": "module",
@@ -12,6 +12,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
+    "lint:fsd": "steiger ./src",
     "test": "vitest run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o public/storybook --quiet",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@feature-sliced/steiger-plugin": "^0.8.2",
     "@lhci/cli": "^0.16.0",
     "@pandacss/dev": "^2.5.0",
     "@pandacss/preset-base": "^2.5.0",
@@ -60,6 +62,7 @@
     "postcss": "^8.5.32",
     "prettier": "^3.9.10",
     "size-limit": "^14.3.0",
+    "steiger": "^0.10.0",
     "storybook": "^10.6.6",
     "typescript": "~5.9.3",
     "vitest": "^5.1.0"

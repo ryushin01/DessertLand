@@ -2,6 +2,15 @@
 
 디저트 랜드(Dessert Land)는 전 세계 디저트가 모인 달콤한 나라를 콘셉트로, 디저트를 10개 언어로 소개하고 판매하는 쇼핑몰입니다.
 
+## 구조 (Feature-Sliced Design)
+
+- 계층: `_app` → `_pages` → `widgets` → `features` → `entities` → `shared`. Next의 `src/app` 라우트 파일은 `_pages`·`_app`을 다시 내보내기만 합니다.
+- 슬라이스 안 코드는 세그먼트(`ui` 컴포넌트, `model` 상태·도메인 로직, `lib` 도우미, `api` 서버·요청, `config`)에 둡니다. 슬라이스는 `index.ts`(서버 전용은 `index.server.ts`)로만 가져옵니다.
+- 한 곳에서만 쓰는 코드는 그 슬라이스에 둡니다. 예를 들어 홈에서만 쓰는 히어로·쇼케이스·세계 여행 같은 섹션은 `_pages/home`에, 언어·모션 전환은 `widgets/site-header`에 있습니다. 두 곳 이상에서 쓰게 되면 `features`·`widgets`로 올립니다.
+- 같은 계층끼리는 가져오지 않습니다. 결제 기능 둘이 함께 쓰는 장바구니 합계(`summarizeCart`)는 `entities/cart`에 있고, 상품 가격은 `entities/product/@x/cart.ts`로 엽니다.
+- GSAP은 `@/shared/lib/gsap`(독립 폴더)에서만 가져와, 움직임 상태(`@/shared/lib/motion`)를 쓰는 곳에 GSAP이 실리지 않게 합니다.
+- `pnpm lint:fsd`(Steiger, CI에서도 실행)가 이 규칙을 검사합니다. `_app`·`_pages` 이름 때문에 나는 `fsd/typo-in-layer-name`만 끄고, `src/app`과 테스트·스토리는 검사에서 뺍니다. API 라우트만 쓰는 결제·추천 슬라이스는 Steiger가 참조를 세지 못해 `fsd/insignificant-slice`를 그 슬라이스에서만 끕니다.
+
 ## 언어 추가
 
 1. `src/shared/i18n/routing.ts`의 `LOCALES`와 `LOCALE_LABELS`에 추가합니다. 지원 언어는 10개 이내로 유지합니다.
@@ -25,7 +34,7 @@
 
 ## 첫 화면 사진
 
-`widgets/hero/baker-renderer.ts`가 컷아웃과 깊이 지도로 시차를 그립니다. WebGL을 쓸 수 없거나 모션이 꺼져 있으면 컷아웃 이미지를 그대로 보여 줍니다. 컷아웃은 macOS Vision의 인물 분할과 밝기 기반 알파(밀가루)를 합쳐 만들었습니다. 얼굴이 나오지 않는 사진을 써서 초상권 부담을 줄였습니다.
+`_pages/home/lib/baker-renderer.ts`가 컷아웃과 깊이 지도로 시차를 그립니다. WebGL을 쓸 수 없거나 모션이 꺼져 있으면 컷아웃 이미지를 그대로 보여 줍니다. 컷아웃은 macOS Vision의 인물 분할과 밝기 기반 알파(밀가루)를 합쳐 만들었습니다. 얼굴이 나오지 않는 사진을 써서 초상권 부담을 줄였습니다.
 
 ## AI 추천
 
@@ -55,7 +64,7 @@
 | `/ko/checkout` | 179KB | 190KB |
 | `/ko/credits` | 175KB | 185KB |
 
-GSAP은 `@/shared/lib/motion/gsap`에서만 가져옵니다. `@/shared/lib/motion`이나 `@/shared/ui`로 다시 내보내면 모든 페이지에 실립니다. `RevealText`도 같은 이유로 `@/shared/ui/reveal-text`에서 가져옵니다.
+GSAP은 `@/shared/lib/gsap`에서만 가져옵니다. `@/shared/lib/motion`이나 `@/shared/ui`로 다시 내보내면 모든 페이지에 실립니다. `RevealText`도 같은 이유로 `@/shared/ui/reveal-text`에서 가져옵니다.
 
 ## 배포
 
