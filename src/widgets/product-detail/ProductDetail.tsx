@@ -11,7 +11,7 @@ import { AddToCartButton } from "@/features/add-to-cart";
 import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap } from "@/shared/lib/motion/gsap";
-import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 import { Icon, QuantityStepper } from "@/shared/ui";
 import { RevealText } from "@/shared/ui/reveal-text";
 
@@ -90,7 +90,7 @@ export function ProductDetail({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
   const ref = useRef<HTMLElement>(null);
   const motion = useMotionEnabled();
-  const fine = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const fine = useMediaQuery(MEDIA.finePointer);
 
   useGsap(
     ref,
@@ -158,7 +158,11 @@ export function ProductDetail({ product }: { product: Product }) {
             <dt>{t("weight")}</dt>
             <dd>{new Intl.NumberFormat(locale, { style: "unit", unit: "gram" }).format(product.weightGrams)}</dd>
             <dt>{t("allergens")}</dt>
-            <dd>{product.allergens.map((item) => tAllergens(item)).join(", ")}</dd>
+            <dd>
+              {product.allergens.length > 0
+                ? product.allergens.map((item) => tAllergens(item)).join(", ")
+                : tAllergens("none")}
+            </dd>
           </dl>
           <p className={price} data-rise>
             {formatProductPrice(product.priceUsd, locale)}

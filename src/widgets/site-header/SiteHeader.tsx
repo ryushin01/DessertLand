@@ -31,14 +31,6 @@ const brand = css({
   minHeight: "44px",
   justifySelf: "start",
 });
-// 아주 좁은 화면에서는 로고만 남겨 메뉴 자리를 확보합니다. 링크 이름은 aria-label로 유지됩니다.
-const brandText = css({
-  display: "inline-flex",
-  flexDirection: "column",
-  "@media (max-width: 379px)": { display: "none" },
-});
-const brandTop = css({ fontSize: "0.72rem", letterSpacing: "0.02em" });
-const brandMain = css({ fontFamily: "display", fontSize: "1.45rem" });
 const nav = css({ display: "flex", alignItems: "center", gap: { base: "2px", md: "10px" } });
 const navLink = css({
   display: "inline-flex",
@@ -85,15 +77,7 @@ export function SiteHeader() {
   return (
     <header className={header}>
       <Link href="/" className={brand} aria-label={t("home")} data-cursor="">
-        <Logo />
-        <span className={brandText}>
-          <span className={brandTop} lang="en">
-            Dessert
-          </span>
-          <span className={brandMain} lang="en">
-            Land
-          </span>
-        </span>
+        <Logo size={44} />
       </Link>
       <nav aria-label={t("main")} className={nav}>
         <Link href="/shop" className={navLink}>

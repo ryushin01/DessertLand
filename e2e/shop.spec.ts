@@ -92,20 +92,20 @@ test("사용자가 움직임을 멈출 수 있습니다", async ({ page }) => {
 test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) => {
   await page.goto("/ko/shop/tiramisu");
   await page.getByText("KO", { exact: true }).click();
-  await page.getByRole("banner").getByRole("link", { name: "Italiano" }).click();
+  await page.getByRole("banner").getByRole("link", { name: "Italia, Italiano" }).click();
   await expect(page).toHaveURL(/\/it\/shop\/tiramisu$/);
   await expect(page.getByRole("heading", { level: 1, name: "Tiramisù" })).toBeVisible();
 });
 
 test("언어를 바꿔도 필터와 바로 구매 주문을 유지합니다", async ({ page }) => {
-  await page.goto("/ko/shop?category=muffin");
+  await page.goto("/ko/shop?category=baked");
   await page.getByText("KO", { exact: true }).click();
-  await page.getByRole("banner").getByRole("link", { name: "Deutsch" }).click();
-  await expect(page).toHaveURL(/\/de\/shop\?category=muffin$/);
+  await page.getByRole("banner").getByRole("link", { name: "Deutschland, Deutsch" }).click();
+  await expect(page).toHaveURL(/\/de\/shop\?category=baked$/);
 
   await page.goto("/ko/checkout?buy=baklava&qty=2&canceled=1");
   await page.getByText("KO", { exact: true }).click();
-  await page.getByRole("banner").getByRole("link", { name: "English" }).click();
+  await page.getByRole("banner").getByRole("link", { name: "United States, English" }).click();
   await expect(page).toHaveURL(/\/en\/checkout\?buy=baklava&qty=2$/);
   await expect(page.getByRole("region", { name: "Order summary" })).toContainText("Baklava × 2");
 });
@@ -118,31 +118,42 @@ test("언어 메뉴는 초점이 나가면 닫히고 다시 열면 현재 주소
   await page.goto("/ko/shop");
   const summary = page.getByText("KO", { exact: true });
   await summary.click();
-  const english = page.getByRole("banner").getByRole("link", { name: "English" });
+  const english = page.getByRole("banner").getByRole("link", { name: "United States, English" });
   await expect(english).toBeVisible();
   await english.focus();
-  const muffin = page
+  const baked = page
     .getByRole("navigation", { name: "카테고리 선택" })
-    .getByRole("link", { name: "머핀" });
-  await muffin.focus();
+    .getByRole("link", { name: "쿠키·구움과자" });
+  await baked.focus();
   await expect(english).toBeHidden();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/category=muffin/);
+  await expect(page).toHaveURL(/category=baked/);
   await summary.click();
-  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=muffin$/);
+  await expect(english).toHaveAttribute("href", /\/en\/shop\?category=baked$/);
 });
 
 test.describe("좁은 화면 메뉴", () => {
   test.use({ viewport: { width: 320, height: 640 } });
 
   test("메뉴로 디저트에 갈 수 있고 넘치지 않습니다", async ({ page }) => {
-    await page.goto("/de/credits");
+    await page.goto("/de/checkout");
     const link = page.getByRole("banner").getByRole("link", { name: "Desserts", exact: true });
     await expect(link).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await link.click();
     await expect(page).toHaveURL(/\/de\/shop$/);
   });
+});
+
+test("출처는 바닥글 링크로 README에 가고, 예전 출처 페이지 주소도 그곳으로 넘깁니다", async ({ page, request }) => {
+  await page.goto("/ko");
+  const credits = page.getByRole("contentinfo").getByRole("link", { name: "사진과 아이콘 출처" });
+  await expect(credits).toHaveAttribute("href", "https://github.com/ryushin01/DessertLand#출처");
+  // Flaticon 무료 라이선스가 정한 바닥글 출처 줄
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "Uicons by Flaticon" })).toHaveAttribute("href", "https://www.flaticon.com/uicons");
+  const old = await request.get("/en/credits", { maxRedirects: 0 });
+  expect(old.status()).toBe(308);
+  expect(decodeURI(old.headers()["location"] ?? "")).toBe("https://github.com/ryushin01/DessertLand#출처");
 });
 
 test("검색 엔진과 보안 정보를 제공합니다", async ({ page, request }) => {
@@ -178,14 +189,24 @@ test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("style", /Gowun Dodum/);
 });
 
+test("예전 분류 주소는 새 분류로 보냅니다", async ({ page }) => {
+  await page.goto("/ko/shop?category=muffin");
+  await expect(page).toHaveURL(/\/ko\/shop\?category=baked$/);
+  await page.goto("/ko/shop?category=classic");
+  await expect(page).toHaveURL(/\/ko\/shop$/);
+  // 객체 기본 속성 이름은 예전 분류가 아니므로 그대로 전체 목록을 보여 줍니다.
+  await page.goto("/ko/shop?category=toString");
+  await expect(page).toHaveURL(/\/ko\/shop\?category=toString$/);
+});
+
 test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await page.goto("/ko/shop");
   await page
     .getByRole("navigation", { name: "카테고리 선택" })
-    .getByRole("link", { name: "머핀" })
+    .getByRole("link", { name: "쿠키·구움과자" })
     .click();
-  await expect(page).toHaveURL(/category=muffin/);
-  await expect(page.getByRole("status").filter({ hasText: "2개의 디저트" })).toBeVisible();
+  await expect(page).toHaveURL(/category=baked/);
+  await expect(page.getByRole("status").filter({ hasText: "26개의 디저트" })).toBeVisible();
 });
 
 async function fillCheckout(page: Page) {
@@ -253,6 +274,48 @@ test("바로 구매는 그 상품만 결제하고 장바구니를 유지합니�
   await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
 });
 
+test("장바구니에서 고른 상품만 주문하고, 고르지 않은 상품은 남깁니다", async ({ page }) => {
+  await page.addInitScript(() => {
+    if (sessionStorage.getItem("seeded")) return;
+    sessionStorage.setItem("seeded", "1");
+    localStorage.setItem(
+      "dessert-land.cart",
+      JSON.stringify([
+        { slug: "baklava", quantity: 1 },
+        { slug: "tiramisu", quantity: 1 },
+      ]),
+    );
+  });
+  await page.goto("/ko/shop");
+  await page.getByRole("button", { name: "장바구니, 2개 담김" }).click();
+  const dialog = page.getByRole("dialog", { name: "장바구니" });
+  await dialog.getByRole("checkbox", { name: "티라미수 주문에 넣기" }).uncheck();
+  await expect(dialog).toContainText("1/2개 선택");
+  await scan(page);
+  await dialog.getByRole("link", { name: "선택 상품 주문하기 (1)" }).click();
+
+  const summary = page.getByRole("region", { name: "주문 내역" });
+  await expect(summary).toContainText("바클라바 × 1");
+  await expect(summary).not.toContainText("티라미수");
+  await fillCheckout(page);
+  await page.getByRole("button", { name: /결제하기$/ }).click();
+  await page.getByRole("button", { name: "결제 승인" }).click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "장바구니, 1개 담김" })).toBeVisible();
+});
+
+test("상품 목록에서 바로 구매하면 그 상품 1개로 주문 화면에 갑니다", async ({ page }) => {
+  // 전체 목록은 길어서, 바클라바가 있는 페이스트리 분류에서 누릅니다.
+  await page.goto("/ko/shop?category=pastry");
+  const buyNow = page.getByRole("link", { name: "바클라바 바로 구매" });
+  await buyNow.scrollIntoViewIfNeeded();
+  await buyNow.click();
+  await expect(page).toHaveURL(/\/ko\/checkout\?buy=baklava&qty=1$/);
+  await expect(page.getByRole("region", { name: "주문 내역" })).toContainText("바클라바 × 1");
+});
+
 test("결제 실패와 취소에도 입력과 장바구니를 유지합니다", async ({ page }) => {
   await page.goto("/ko/shop/baklava");
   await page.getByRole("button", { name: "장바구니에 담기" }).click();
@@ -305,7 +368,7 @@ test.describe("낮은 화면의 모달", () => {
         JSON.stringify(items.map((slug) => ({ slug, quantity: 1 }))),
       );
     }, slugs);
-    await page.goto("/ko/credits");
+    await page.goto("/ko/shop");
     await page.getByRole("button", { name: "장바구니, 6개 담김" }).click();
     const dialog = page.getByRole("dialog", { name: "장바구니" });
     await expect(dialog).toBeVisible();
@@ -549,7 +612,7 @@ test.describe("데스크톱 모션", () => {
   test("키보드로 가려진 카테고리에 들어가면 장면이 펼쳐집니다", async ({ page }) => {
     await page.goto("/ko");
     await page.waitForTimeout(3200);
-    const link = page.getByRole("link", { name: "머핀 보기" });
+    const link = page.getByRole("link", { name: "쿠키·구움과자 보기" });
     await link.focus();
     await page.waitForTimeout(1500);
     await expect(link).toBeInViewport();
@@ -566,4 +629,19 @@ test.describe("데스크톱 모션", () => {
     await page.waitForTimeout(1800);
     await expect(link).toBeInViewport();
   });
+});
+
+test("주요 화면에서 콘텐츠 보안 정책(CSP) 위반이 없습니다", async ({ page }) => {
+  const violations: string[] = [];
+  page.on("console", (message) => {
+    if (/Content Security Policy/i.test(message.text())) violations.push(message.text());
+  });
+  // ja는 한중일 웹 글꼴(Google Fonts)을 받는 화면입니다.
+  for (const path of ["/ko", "/ko/shop", "/ko/shop/baklava", "/ko/checkout?buy=baklava&qty=1", "/ja"]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle");
+  }
+  const response = await page.request.get("/ko");
+  expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+  expect(violations).toEqual([]);
 });

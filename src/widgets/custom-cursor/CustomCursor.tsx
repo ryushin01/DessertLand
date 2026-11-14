@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
 
 import { gsap } from "@/shared/lib/motion/gsap";
-import { useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
+import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
 
 const canvas = css({
   position: "fixed",
@@ -62,7 +62,7 @@ type Sprinkle = {
 /** 마우스를 따라오는 링과 흩날리는 스프링클입니다. 정밀 포인터에서만 동작합니다. */
 export function CustomCursor() {
   const motion = useMotionEnabled();
-  const fine = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const fine = useMediaQuery(MEDIA.finePointer);
   const enabled = motion && fine;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);

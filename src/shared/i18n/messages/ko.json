@@ -48,7 +48,9 @@
     "results": "{count}개의 디저트",
     "add": "{name} 장바구니에 담기",
     "addShort": "담기",
-    "view": "보기"
+    "view": "보기",
+    "buyNow": "{name} 바로 구매",
+    "buyNowShort": "바로 구매"
   },
   "product": {
     "back": "디저트 목록으로",
@@ -67,32 +69,51 @@
     "milk": "우유",
     "egg": "달걀",
     "wheat": "밀",
-    "nuts": "견과류"
+    "nuts": "견과류",
+    "soy": "대두",
+    "sesame": "참깨",
+    "none": "표시할 성분 없음"
   },
   "categories": {
-    "milkshake": {
-      "name": "밀크셰이크",
-      "lede": "차갑고 진하게, 잔 위로 넘치는 즐거움."
+    "cake": {
+      "name": "케이크",
+      "lede": "폭신한 시트와 크림, 축하의 한 조각."
     },
-    "cheesecake": {
-      "name": "치즈케이크",
-      "lede": "묵직하거나 그을리거나, 진한 크림치즈의 시간."
+    "tart": {
+      "name": "파이·타르트",
+      "lede": "바삭한 반죽 위에 과일과 커스터드."
     },
-    "muffin": {
-      "name": "머핀",
-      "lede": "봉긋하게 솟은 아침의 온기."
+    "pastry": {
+      "name": "페이스트리",
+      "lede": "겹겹이 부서지는 버터와 반죽."
     },
-    "pancake": {
-      "name": "팬케이크",
-      "lede": "겹겹이 쌓고 흘러내리는 시럽까지."
+    "baked": {
+      "name": "쿠키·구움과자",
+      "lede": "한 입에 들어오는 오븐의 온기."
     },
-    "creamcake": {
-      "name": "생크림 케이크",
-      "lede": "폭신한 시트와 가벼운 크림, 그리고 딸기."
+    "frozen": {
+      "name": "아이스크림·빙수",
+      "lede": "차갑게, 사르르 녹는 즐거움."
     },
-    "classic": {
-      "name": "세계의 명작",
-      "lede": "티라미수부터 바클라바까지, 나라를 대표하는 맛."
+    "pudding": {
+      "name": "푸딩·크림",
+      "lede": "숟가락으로 떠먹는 부드러움."
+    },
+    "confection": {
+      "name": "떡·전통 과자",
+      "lede": "나라마다 손끝으로 이어 온 단맛."
+    },
+    "griddle": {
+      "name": "팬케이크·튀김",
+      "lede": "팬과 기름 위에서 갓 구운 따끈함."
+    },
+    "coffee": {
+      "name": "커피",
+      "lede": "디저트 곁의 한 잔."
+    },
+    "drink": {
+      "name": "음료",
+      "lede": "차와 탄산, 밀크셰이크까지."
     }
   },
   "cart": {
@@ -104,7 +125,12 @@
     "shipping": "배송비",
     "total": "합계",
     "checkout": "주문하기",
-    "added": "{name}을(를) 장바구니에 담았습니다."
+    "added": "{name}을(를) 장바구니에 담았습니다.",
+    "select": "{name} 주문에 넣기",
+    "selectAll": "전체 선택",
+    "selected": "{count}/{total}개 선택",
+    "checkoutSelected": "선택 상품 주문하기 ({count})",
+    "noneSelected": "주문할 상품을 골라 주세요."
   },
   "checkout": {
     "metaTitle": "주문",
@@ -143,14 +169,6 @@
     "stripePay": "Stripe에서 {amount} 결제하기",
     "stripeRedirecting": "결제 화면으로 이동 중",
     "unverified": "결제를 확인하지 못했습니다. 청구 여부는 Stripe 테스트 대시보드에서 확인할 수 있습니다."
-  },
-  "credits": {
-    "metaTitle": "출처",
-    "title": "사진과 아이콘 출처",
-    "photos": "사진: Unsplash",
-    "icons": "아이콘: Flaticon",
-    "hero": "첫 화면 사진",
-    "by": "{name} 촬영"
   },
   "footer": {
     "tagline": "디저트 랜드는 전 세계 디저트를 10개 언어로 소개하는 데모 쇼핑몰입니다.",
@@ -224,6 +242,638 @@
     "egg-tart": {
       "name": "광둥식 에그타르트",
       "description": "광둥 지역 차 문화와 함께 자란 간식으로, 매끄러운 달걀 커스터드가 특징입니다."
+    },
+    "castella": {
+      "name": "카스텔라",
+      "description": "포르투갈 선교사에게서 전해져 나가사키에서 자리 잡은 촉촉한 꿀 카스텔라입니다."
+    },
+    "bibingka": {
+      "name": "비빙카",
+      "description": "바나나 잎을 깔고 구운 필리핀의 성탄절 쌀 케이크입니다."
+    },
+    "spekkoek": {
+      "name": "레이어 케이크(스펙코엑)",
+      "description": "한 겹씩 구워 쌓은 향신료 버터 케이크로, 인도네시아의 명물입니다."
+    },
+    "pandan-cake": {
+      "name": "판단 시폰 케이크",
+      "description": "판단 잎으로 향과 연둣빛을 낸 동남아시아의 폭신한 케이크입니다."
+    },
+    "basbousa": {
+      "name": "바스부사",
+      "description": "세몰리나 케이크를 시럽에 적신, 중동과 북아프리카에서 즐기는 디저트입니다."
+    },
+    "malva-pudding": {
+      "name": "말바 푸딩",
+      "description": "살구잼을 넣은 스펀지에 따뜻한 크림 소스를 부은 남아프리카공화국 디저트입니다."
+    },
+    "mont-blanc": {
+      "name": "몽블랑",
+      "description": "밤 크림을 가늘게 짜 올려 눈 덮인 산을 닮게 만든 디저트입니다."
+    },
+    "panettone": {
+      "name": "파네토네",
+      "description": "건과일을 넣어 높이 부풀린 밀라노의 크리스마스 빵입니다."
+    },
+    "sachertorte": {
+      "name": "자허토르테",
+      "description": "살구잼을 바른 초콜릿 케이크에 진한 초콜릿을 입힌 빈의 명물입니다."
+    },
+    "baumkuchen": {
+      "name": "바움쿠헨",
+      "description": "꼬챙이에 반죽을 한 겹씩 입혀 구워 나이테 무늬가 생기는 독일 케이크입니다."
+    },
+    "stollen": {
+      "name": "슈톨렌",
+      "description": "건과일과 마지판을 넣고 슈거파우더를 덮은 드레스덴의 크리스마스 빵입니다."
+    },
+    "sticky-toffee-pudding": {
+      "name": "스티키 토피 푸딩",
+      "description": "대추야자 스펀지에 따뜻한 토피 소스를 듬뿍 부은 영국 디저트입니다."
+    },
+    "victoria-sponge": {
+      "name": "빅토리아 스펀지",
+      "description": "두 장의 스펀지 사이에 라즈베리잼과 크림을 넣은 영국의 티타임 케이크입니다."
+    },
+    "dobos-torte": {
+      "name": "도보시 토르타",
+      "description": "얇은 스펀지와 초콜릿 버터크림을 쌓고 캐러멜을 올린 부다페스트의 케이크입니다."
+    },
+    "medovik": {
+      "name": "메도빅",
+      "description": "꿀을 넣은 얇은 시트와 사워크림을 여러 겹 쌓은 러시아의 꿀 케이크입니다."
+    },
+    "tres-leches": {
+      "name": "트레스 레체스",
+      "description": "세 가지 우유에 흠뻑 적신 스펀지 케이크로, 중남미 여러 나라가 원조를 다툽니다."
+    },
+    "red-velvet": {
+      "name": "레드벨벳 케이크",
+      "description": "붉은 코코아 시트에 크림치즈 프로스팅을 바른 미국 케이크입니다."
+    },
+    "lamington": {
+      "name": "래밍턴",
+      "description": "스펀지 큐브에 초콜릿을 입히고 코코넛을 묻힌 호주 케이크입니다."
+    },
+    "pavlova": {
+      "name": "파블로바",
+      "description": "겉은 바삭하고 속은 마시멜로 같은 머랭에 크림과 과일을 올린, 호주와 뉴질랜드가 원조를 다투는 디저트입니다."
+    },
+    "tarte-tatin": {
+      "name": "타르트 타탱",
+      "description": "캐러멜에 졸인 사과 위에 반죽을 덮어 구운 뒤 뒤집어 내는 프랑스 타르트입니다."
+    },
+    "key-lime-pie": {
+      "name": "키 라임 파이",
+      "description": "작은 키 라임 즙과 연유로 만든 새콤한 플로리다의 파이입니다."
+    },
+    "pecan-pie": {
+      "name": "피칸 파이",
+      "description": "피칸을 가득 올린 달콤한 시럽 필링의 미국 남부 파이입니다."
+    },
+    "apple-pie": {
+      "name": "애플파이",
+      "description": "계피 향 사과를 격자 반죽 아래 구운 파이로, 여러 나라가 저마다 즐깁니다."
+    },
+    "butter-tart": {
+      "name": "버터 타르트",
+      "description": "버터, 설탕, 달걀로 만든 끈적한 필링을 채운 캐나다의 작은 타르트입니다."
+    },
+    "kunefe": {
+      "name": "쿠나파",
+      "description": "가는 면 반죽 사이에 치즈를 넣어 굽고 시럽과 피스타치오를 올린 중동 디저트입니다."
+    },
+    "mille-feuille": {
+      "name": "밀푀유",
+      "description": "바삭한 퍼프 페이스트리와 커스터드 크림을 겹겹이 쌓은 프랑스 디저트입니다."
+    },
+    "eclair": {
+      "name": "에클레르",
+      "description": "길쭉한 슈에 크림을 채우고 초콜릿을 입힌 프랑스 과자입니다."
+    },
+    "kouign-amann": {
+      "name": "퀸아망",
+      "description": "버터와 설탕을 겹겹이 접어 캐러멜처럼 구운 브르타뉴의 페이스트리입니다."
+    },
+    "cannoli": {
+      "name": "칸놀리",
+      "description": "바삭하게 튀긴 원통 반죽에 달콤한 리코타를 채운 시칠리아 과자입니다."
+    },
+    "sfogliatella": {
+      "name": "스폴리아텔라",
+      "description": "조개껍데기 모양의 겹겹 반죽에 리코타와 세몰리나를 채운 나폴리 과자입니다."
+    },
+    "apfelstrudel": {
+      "name": "아펠슈트루델",
+      "description": "종잇장처럼 늘린 반죽에 사과와 계피, 건포도를 말아 구운 오스트리아 과자입니다."
+    },
+    "semla": {
+      "name": "셈라",
+      "description": "카다멈 빵에 아몬드 반죽과 생크림을 채운 스웨덴의 사순절 과자입니다."
+    },
+    "kurtoskalacs": {
+      "name": "퀴르퇴슈칼라치",
+      "description": "반죽을 원통에 감아 숯불에 구워 설탕을 입힌 헝가리 굴뚝빵입니다."
+    },
+    "galaktoboureko": {
+      "name": "갈락토부레코",
+      "description": "세몰리나 커스터드를 필로 반죽으로 감싸 굽고 시럽을 부은 그리스 디저트입니다."
+    },
+    "pineapple-bun": {
+      "name": "보로바오",
+      "description": "파인애플 껍질처럼 갈라진 바삭한 윗면이 특징인 홍콩 빵입니다(파인애플은 없습니다)."
+    },
+    "pineapple-cake": {
+      "name": "펑리수",
+      "description": "버터 향 가득한 반죽에 새콤달콤한 파인애플 잼을 넣은 대만 과자입니다."
+    },
+    "maamoul": {
+      "name": "마아물",
+      "description": "대추야자나 견과를 넣어 나무틀로 무늬를 찍은 레반트의 명절 쿠키입니다."
+    },
+    "macaron": {
+      "name": "마카롱",
+      "description": "아몬드 머랭 두 장 사이에 크림을 넣은 프랑스의 작은 과자입니다."
+    },
+    "madeleine": {
+      "name": "마들렌",
+      "description": "조개 모양 틀에 구워 가운데가 볼록 솟은 프랑스의 버터 케이크입니다."
+    },
+    "canele": {
+      "name": "카눌레",
+      "description": "럼과 바닐라 향의 반죽을 구리틀에 구워 겉은 캐러멜, 속은 촉촉한 보르도 과자입니다."
+    },
+    "financier": {
+      "name": "피낭시에",
+      "description": "태운 버터와 아몬드 가루로 금괴 모양을 낸 파리의 구움과자입니다."
+    },
+    "biscotti": {
+      "name": "비스코티",
+      "description": "아몬드를 넣고 두 번 구워 단단한, 와인이나 커피에 찍어 먹는 토스카나 과자입니다."
+    },
+    "stroopwafel": {
+      "name": "스트룹와플",
+      "description": "얇은 와플 두 장 사이에 캐러멜 시럽을 바른 네덜란드 하우다의 과자입니다."
+    },
+    "scone": {
+      "name": "스콘",
+      "description": "버터를 넣고 가볍게 구워 클로티드 크림과 잼을 곁들이는 영국 과자입니다."
+    },
+    "alfajor": {
+      "name": "알파호르",
+      "description": "두 장의 쿠키 사이에 둘세 데 레체를 넣고 초콜릿을 입힌 아르헨티나 과자입니다."
+    },
+    "concha": {
+      "name": "콘차",
+      "description": "조개껍데기 무늬의 바삭한 설탕 옷을 입힌 멕시코의 달콤한 빵입니다."
+    },
+    "brownie": {
+      "name": "브라우니",
+      "description": "겉은 바삭, 속은 꾸덕한 초콜릿 바로, 시카고에서 처음 만들어졌습니다."
+    },
+    "nanaimo-bar": {
+      "name": "나나이모 바",
+      "description": "코코넛 크럼, 커스터드 크림, 초콜릿을 세 겹으로 쌓은 캐나다의 굽지 않는 과자입니다."
+    },
+    "anzac-biscuit": {
+      "name": "앤잭 비스킷",
+      "description": "귀리, 코코넛, 골든 시럽으로 구운 호주·뉴질랜드의 쿠키입니다."
+    },
+    "patbingsu": {
+      "name": "팥빙수",
+      "description": "곱게 간 얼음에 단팥과 연유를 듬뿍 올린 한국의 여름 빙수입니다."
+    },
+    "kakigori": {
+      "name": "가키고리",
+      "description": "눈처럼 간 얼음에 녹차 시럽과 팥을 올린 일본의 여름 빙수입니다."
+    },
+    "mochi-ice-cream": {
+      "name": "모찌 아이스크림",
+      "description": "얇은 찹쌀떡이 아이스크림을 감싼, 일본과 미국이 함께 키운 디저트입니다."
+    },
+    "halo-halo": {
+      "name": "할로할로",
+      "description": "빙수에 과일, 젤리, 우베 아이스크림을 섞어 먹는 필리핀 디저트입니다."
+    },
+    "cendol": {
+      "name": "첸돌",
+      "description": "초록 쌀국수 젤리에 코코넛 밀크와 야자당 시럽을 부은 동남아시아 빙수입니다."
+    },
+    "kulfi": {
+      "name": "쿨피 팔루다",
+      "description": "진하게 졸인 우유 아이스크림 쿨피에 팔루다 국수를 곁들인 인도의 여름 디저트입니다."
+    },
+    "dondurma": {
+      "name": "돈두르마",
+      "description": "살렙과 매스틱으로 쫀득하게 늘어나는 튀르키예 카흐라만마라쉬의 아이스크림입니다."
+    },
+    "gelato": {
+      "name": "젤라토",
+      "description": "공기를 적게 넣어 진하고 쫀득한 이탈리아 아이스크림입니다."
+    },
+    "affogato": {
+      "name": "아포가토",
+      "description": "바닐라 젤라토에 뜨거운 에스프레소를 부어 먹는 이탈리아 디저트입니다."
+    },
+    "banana-split": {
+      "name": "바나나 스플릿",
+      "description": "반으로 가른 바나나 위에 아이스크림 세 덩이와 소스, 체리를 올린 미국 디저트입니다."
+    },
+    "vanilla-ice-cream": {
+      "name": "바닐라 아이스크림",
+      "description": "바닐라 향의 부드러운 아이스크림에 체리잼을 곁들였습니다."
+    },
+    "soft-serve": {
+      "name": "소프트아이스크림",
+      "description": "기계에서 바로 짜내 공기를 머금은 부드러운 콘 아이스크림입니다."
+    },
+    "sundae": {
+      "name": "선데",
+      "description": "아이스크림에 소스와 휘핑크림, 견과류, 체리를 올린 미국 디저트입니다."
+    },
+    "sorbet": {
+      "name": "샤베트",
+      "description": "과일과 설탕을 얼려 우유 없이 상큼하게 만든 빙과입니다."
+    },
+    "douhua": {
+      "name": "더우화",
+      "description": "부드러운 순두부에 달콤한 시럽을 끼얹어 먹는 중국 디저트입니다."
+    },
+    "mango-pomelo-sago": {
+      "name": "망고 포멜로 사고",
+      "description": "망고 퓌레에 포멜로와 사고를 넣은 홍콩의 시원한 디저트입니다."
+    },
+    "che-chuoi": {
+      "name": "체 쭈오이",
+      "description": "바나나와 타피오카를 코코넛 밀크에 끓인 베트남의 따뜻한 디저트입니다."
+    },
+    "ube-halaya": {
+      "name": "우베 할라야",
+      "description": "보랏빛 얌을 우유와 버터에 졸여 만든 필리핀의 진한 디저트입니다."
+    },
+    "kheer": {
+      "name": "키르",
+      "description": "쌀을 우유에 천천히 끓여 카다멈과 견과를 넣은 인도의 쌀 푸딩입니다."
+    },
+    "gajar-halwa": {
+      "name": "가자르 할와",
+      "description": "당근을 우유와 기에 볶아 견과를 올린 인도 펀자브의 겨울 디저트입니다."
+    },
+    "muhallebi": {
+      "name": "무할레비",
+      "description": "우유와 쌀가루를 끓여 장미수 향을 낸 중동의 부드러운 푸딩입니다."
+    },
+    "umm-ali": {
+      "name": "움 알리",
+      "description": "페이스트리를 견과와 함께 달콤한 우유에 구운 이집트의 빵 푸딩입니다."
+    },
+    "creme-brulee": {
+      "name": "크렘 브륄레",
+      "description": "바닐라 커스터드 위 설탕을 토치로 그을려 바삭하게 깬, 기원 논쟁이 있는 디저트입니다."
+    },
+    "panna-cotta": {
+      "name": "판나코타",
+      "description": "크림을 젤라틴으로 살짝 굳혀 흔들리듯 부드러운 피에몬테 디저트입니다."
+    },
+    "crema-catalana": {
+      "name": "크레마 카탈라나",
+      "description": "레몬과 계피 향 커스터드 위 설탕을 그을린 카탈루냐의 디저트입니다."
+    },
+    "eton-mess": {
+      "name": "이튼 메스",
+      "description": "부순 머랭과 딸기, 생크림을 섞은 영국 이튼 칼리지의 여름 디저트입니다."
+    },
+    "trifle": {
+      "name": "트라이플",
+      "description": "스펀지, 과일 젤리, 커스터드, 크림을 유리 그릇에 층층이 쌓은 영국 디저트입니다."
+    },
+    "injeolmi": {
+      "name": "인절미",
+      "description": "찹쌀을 쳐서 고소한 콩고물을 묻힌 쫄깃한 한국 떡입니다."
+    },
+    "songpyeon": {
+      "name": "송편",
+      "description": "깨와 꿀 소를 넣어 솔잎에 찐 한국 추석의 반달 떡입니다."
+    },
+    "yakgwa": {
+      "name": "약과",
+      "description": "꿀과 참기름으로 반죽해 튀긴 뒤 조청에 재운 한국 전통 과자입니다."
+    },
+    "daifuku": {
+      "name": "딸기 다이후쿠",
+      "description": "팥소와 딸기를 쫀득한 찹쌀떡으로 감싼 일본 화과자입니다."
+    },
+    "dango": {
+      "name": "미타라시 당고",
+      "description": "꼬치에 꿴 쌀경단에 달콤짭짤한 간장 소스를 바른 교토의 간식입니다."
+    },
+    "yokan": {
+      "name": "양갱",
+      "description": "팥과 한천을 졸여 굳힌, 녹차와 어울리는 일본 과자입니다."
+    },
+    "mooncake": {
+      "name": "월병",
+      "description": "연밥소와 노른자를 넣어 중추절에 나누는 중국의 둥근 과자입니다."
+    },
+    "tangyuan": {
+      "name": "탕위안",
+      "description": "검은깨 소를 넣은 찹쌀 경단을 달콤한 국물에 띄운 중국 디저트입니다."
+    },
+    "tanghulu": {
+      "name": "탕후루",
+      "description": "꼬치에 꿴 과일에 설탕 시럽을 입혀 바삭하게 굳힌 베이징 간식입니다."
+    },
+    "mango-sticky-rice": {
+      "name": "망고 찹쌀밥",
+      "description": "코코넛 밀크를 머금은 찹쌀밥에 잘 익은 망고를 곁들인 태국 디저트입니다."
+    },
+    "gulab-jamun": {
+      "name": "굴랍 자문",
+      "description": "우유 반죽 경단을 튀겨 장미향 시럽에 담근 인도의 축제 과자입니다."
+    },
+    "rasgulla": {
+      "name": "라스굴라",
+      "description": "생치즈 경단을 가벼운 시럽에 삶아 낸 벵골 지방의 스펀지 같은 과자입니다."
+    },
+    "kaju-katli": {
+      "name": "카주 카틀리",
+      "description": "캐슈너트 반죽을 마름모로 잘라 은박을 올린 인도의 명절 과자입니다."
+    },
+    "turkish-delight": {
+      "name": "로쿰",
+      "description": "전분과 설탕을 졸여 장미수로 향을 내고 분당을 묻힌 튀르키예 과자입니다."
+    },
+    "halva": {
+      "name": "할바",
+      "description": "참깨 반죽에 설탕을 섞어 굳힌, 중동에서 동유럽까지 널리 먹는 과자입니다."
+    },
+    "brigadeiro": {
+      "name": "브리가데이루",
+      "description": "연유와 코코아를 졸여 동그랗게 빚고 초콜릿 스프링클을 묻힌 브라질 과자입니다."
+    },
+    "caramel": {
+      "name": "캐러멜",
+      "description": "설탕과 버터, 크림을 졸여 굳힌 쫀득한 캐러멜입니다."
+    },
+    "milk-chocolate": {
+      "name": "밀크 초콜릿",
+      "description": "1875년 스위스 브베에서 처음 만들어진, 우유를 넣어 부드러운 초콜릿입니다."
+    },
+    "hotteok": {
+      "name": "호떡",
+      "description": "흑설탕과 견과류 소가 녹아 흐르는 한국의 겨울 길거리 간식입니다."
+    },
+    "bungeoppang": {
+      "name": "붕어빵",
+      "description": "팥소를 넣고 붕어 모양 틀에 구운 한국의 겨울 풀빵입니다."
+    },
+    "dorayaki": {
+      "name": "도라야키",
+      "description": "폭신한 카스텔라 반죽 두 장 사이에 팥소를 넣은 일본 과자입니다."
+    },
+    "taiyaki": {
+      "name": "다이야키",
+      "description": "팥소를 넣고 도미 모양으로 바삭하게 구운 일본 과자입니다."
+    },
+    "jalebi": {
+      "name": "잘레비",
+      "description": "반죽을 소용돌이 모양으로 튀겨 시럽에 적신, 서아시아와 남아시아의 과자입니다."
+    },
+    "chebakia": {
+      "name": "체바키아",
+      "description": "꽃 모양으로 접어 튀긴 반죽을 꿀에 적시고 참깨를 뿌린 모로코 과자입니다."
+    },
+    "crepe": {
+      "name": "크레프",
+      "description": "얇게 부친 반죽에 초콜릿 소스를 뿌린 브르타뉴의 크레프입니다."
+    },
+    "churros": {
+      "name": "추로스",
+      "description": "별 모양으로 짜 튀긴 반죽을 진한 핫초콜릿에 찍어 먹는 스페인 간식입니다."
+    },
+    "kaiserschmarrn": {
+      "name": "카이저슈마렌",
+      "description": "폭신한 팬케이크를 찢어 슈거파우더와 과일 콤포트를 곁들인 오스트리아 요리입니다."
+    },
+    "berliner": {
+      "name": "베를리너",
+      "description": "구멍 없는 튀긴 빵에 잼을 채우고 설탕을 뿌린 독일 도넛입니다."
+    },
+    "belgian-waffle": {
+      "name": "벨기에 와플",
+      "description": "깊은 격자 무늬의 가볍고 바삭한 와플에 딸기를 곁들인 벨기에 디저트입니다."
+    },
+    "syrniki": {
+      "name": "시르니키",
+      "description": "코티지치즈 반죽을 부쳐 잼이나 사워크림을 곁들이는 동유럽의 아침 디저트입니다."
+    },
+    "loukoumades": {
+      "name": "루쿠마데스",
+      "description": "작은 반죽 공을 튀겨 꿀과 계피, 호두를 뿌린 그리스 간식입니다."
+    },
+    "caramel-macchiato": {
+      "name": "카라멜 마키아토",
+      "description": "바닐라 우유에 에스프레소를 붓고 캐러멜 소스를 그물처럼 뿌린 커피입니다."
+    },
+    "dalgona-coffee": {
+      "name": "달고나 커피",
+      "description": "인스턴트 커피를 거품 내어 차가운 우유 위에 올린 한국에서 유행한 음료입니다."
+    },
+    "egg-coffee": {
+      "name": "에그 커피",
+      "description": "노른자와 연유를 거품 내어 진한 커피 위에 올린 하노이의 커피입니다."
+    },
+    "wiener-melange": {
+      "name": "비너 멜랑주",
+      "description": "에스프레소에 데운 우유와 우유 거품을 얹은 빈 카페의 대표 커피입니다."
+    },
+    "espresso": {
+      "name": "에스프레소",
+      "description": "곱게 간 원두에 높은 압력으로 짧게 뽑아 크레마가 덮인 이탈리아 커피입니다."
+    },
+    "cappuccino": {
+      "name": "카푸치노",
+      "description": "에스프레소에 데운 우유와 풍성한 우유 거품을 같은 비율로 올린 커피입니다."
+    },
+    "caffe-latte": {
+      "name": "카페라테",
+      "description": "에스프레소에 데운 우유를 넉넉히 붓고 라테 아트를 그린 커피입니다."
+    },
+    "americano": {
+      "name": "아메리카노",
+      "description": "에스프레소에 뜨거운 물을 부어 부드럽게 마시는 커피입니다."
+    },
+    "flat-white": {
+      "name": "플랫 화이트",
+      "description": "진한 에스프레소에 얇고 고운 우유 거품을 올린, 호주와 뉴질랜드가 원조를 다투는 커피입니다."
+    },
+    "caffe-mocha": {
+      "name": "카페모카",
+      "description": "에스프레소에 초콜릿과 우유를 섞고 코코아 가루를 뿌린 커피입니다."
+    },
+    "ca-phe-sua-da": {
+      "name": "카페 쓰어 다",
+      "description": "핀 필터로 진하게 내린 커피에 연유와 얼음을 넣은 베트남 커피입니다."
+    },
+    "frappe": {
+      "name": "프라페",
+      "description": "인스턴트 커피를 흔들어 거품을 내고 얼음에 부은 그리스의 여름 커피입니다."
+    },
+    "cold-brew": {
+      "name": "콜드브루",
+      "description": "찬물에 오랫동안 우려내 쓴맛이 적고 부드러운 커피입니다."
+    },
+    "royal-milk-tea": {
+      "name": "로얄 밀크티",
+      "description": "홍차 잎을 우유에 직접 끓여 진하게 우려낸 일본식 밀크티입니다."
+    },
+    "bubble-tea": {
+      "name": "버블티",
+      "description": "쫀득한 타피오카 펄을 넣은 밀크티로, 대만 타이중의 찻집에서 시작됐습니다."
+    },
+    "thai-tea": {
+      "name": "타이 티",
+      "description": "진하게 우린 홍차에 연유를 섞어 얼음에 부은 주황빛 태국 밀크티입니다."
+    },
+    "ramune": {
+      "name": "라무네",
+      "description": "유리구슬로 입구를 막은 병에 담긴 일본의 여름 탄산음료입니다."
+    },
+    "melon-soda-float": {
+      "name": "멜론 소다 플로트",
+      "description": "초록빛 멜론 소다에 바닐라 아이스크림과 체리를 띄운 일본 찻집의 음료입니다."
+    },
+    "root-beer-float": {
+      "name": "루트비어 플로트",
+      "description": "루트비어에 바닐라 아이스크림을 띄워 거품이 이는 미국의 음료입니다."
+    },
+    "sikhye": {
+      "name": "식혜",
+      "description": "엿기름으로 삭힌 밥알이 동동 뜨는 한국의 달콤한 쌀 음료입니다."
+    },
+    "sujeonggwa": {
+      "name": "수정과",
+      "description": "생강과 계피를 달여 곶감과 잣을 띄운 한국의 차가운 음료입니다."
+    },
+    "kahlua-milk": {
+      "name": "깔루아 밀크",
+      "description": "커피 리큐어에 우유를 부은 달콤한 칵테일입니다. 술이 들어 있습니다."
+    },
+    "steamed-milk": {
+      "name": "스팀 밀크",
+      "description": "스팀으로 데워 부드러운 거품을 얹은 따뜻한 우유입니다."
+    },
+    "hot-chocolate": {
+      "name": "코코아",
+      "description": "코코아를 따뜻한 우유에 풀고 마시멜로를 띄운 음료입니다."
+    },
+    "cola": {
+      "name": "콜라",
+      "description": "캐러멜 빛 탄산음료로, 19세기 말 미국 애틀랜타에서 시작됐습니다."
+    },
+    "ginger-ale": {
+      "name": "진저에일",
+      "description": "생강 향을 더한 산뜻한 탄산음료로, 캐나다식 드라이 진저에일이 널리 알려졌습니다."
+    },
+    "lemonade": {
+      "name": "레모네이드",
+      "description": "레몬즙과 설탕, 물을 섞어 얼음에 띄운 시원한 음료입니다."
+    },
+    "italian-soda": {
+      "name": "이탈리안 소다",
+      "description": "탄산수에 과일 시럽을 섞은 음료로, 이름과 달리 미국 샌프란시스코에서 시작됐습니다."
+    },
+    "root-beer": {
+      "name": "루트비어",
+      "description": "사사프라스와 바닐라 향을 낸 북미의 무알코올 탄산음료입니다."
+    },
+    "soboro-ppang": {
+      "name": "소보로빵",
+      "description": "땅콩버터 반죽을 울퉁불퉁하게 올려 구운 한국 빵집의 오랜 단골 빵입니다."
+    },
+    "milk-bread": {
+      "name": "우유 식빵",
+      "description": "우유를 넣어 결결이 찢어지는 부드러운 식빵으로, 일본과 한국 빵집에서 사랑받습니다."
+    },
+    "cream-pan": {
+      "name": "슈크림빵",
+      "description": "부드러운 빵 속에 커스터드 크림을 가득 채운 일본 빵집의 명물입니다."
+    },
+    "chestnut-bread": {
+      "name": "밤식빵",
+      "description": "달콤하게 조린 밤을 듬뿍 넣어 구운 한국 빵집의 식빵입니다."
+    },
+    "glazed-doughnut": {
+      "name": "글레이즈드 도넛",
+      "description": "링 모양으로 튀겨 설탕 글레이즈를 입힌 미국의 도넛입니다."
+    },
+    "kkwabaegi": {
+      "name": "꽈배기",
+      "description": "반죽을 꼬아 튀기고 설탕을 묻힌 한국의 꽈배기 도넛입니다."
+    },
+    "malasada": {
+      "name": "말라사다",
+      "description": "구멍 없는 반죽을 튀겨 설탕을 굴린 도넛으로, 포르투갈에서 하와이로 건너갔습니다."
+    },
+    "beignet": {
+      "name": "베녜",
+      "description": "튀긴 반죽에 슈거파우더를 눈처럼 뿌린, 프랑스에서 뉴올리언스로 이어진 간식입니다."
+    },
+    "cream-puff": {
+      "name": "슈크림",
+      "description": "속이 빈 슈 반죽에 커스터드와 생크림을 채운 프랑스 과자입니다."
+    },
+    "liege-waffle": {
+      "name": "리에주 와플",
+      "description": "펄 슈거가 녹아 캐러멜처럼 바삭한, 벨기에 리에주의 묵직한 와플입니다."
+    },
+    "souffle-pancake": {
+      "name": "수플레 팬케이크",
+      "description": "머랭을 섞어 높이 부풀린, 흔들리듯 폭신한 일본식 팬케이크입니다."
+    },
+    "mille-crepe": {
+      "name": "크레이프 케이크",
+      "description": "얇은 크레이프와 크림을 스무 겹 넘게 쌓은 케이크로, 일본에서 이름을 얻었습니다."
+    },
+    "japanese-cheesecake": {
+      "name": "수플레 치즈케이크",
+      "description": "머랭을 섞어 구름처럼 가볍게 구운 일본식 치즈케이크입니다."
+    },
+    "chocolate-chip-cookie": {
+      "name": "초코칩 쿠키",
+      "description": "버터 반죽에 초콜릿 조각을 넣어 구운, 1930년대 미국 매사추세츠에서 태어난 쿠키입니다."
+    },
+    "shortbread": {
+      "name": "쇼트브레드",
+      "description": "버터, 설탕, 밀가루만으로 바삭하게 구운 스코틀랜드 과자입니다."
+    },
+    "butter-cookie": {
+      "name": "버터 쿠키",
+      "description": "링과 꽈배기 모양으로 짜서 구운, 둥근 틴에 담긴 덴마크식 버터 쿠키입니다."
+    },
+    "senbei": {
+      "name": "센베이",
+      "description": "쌀 반죽을 굽고 간장을 발라 바삭하게 만든 일본의 쌀과자입니다."
+    },
+    "gangjeong": {
+      "name": "땅콩 엿강정",
+      "description": "볶은 땅콩을 조청에 버무려 굳힌 한국의 전통 과자입니다."
+    },
+    "yugwa": {
+      "name": "유과",
+      "description": "찹쌀 반죽을 튀겨 조청을 바르고 튀밥을 묻힌 한국의 명절 과자입니다."
+    },
+    "speculoos": {
+      "name": "스페퀼로스",
+      "description": "계피와 향신료를 넣어 무늬 틀로 찍어 구운, 벨기에와 네덜란드의 과자입니다."
+    },
+    "chiffon-cake": {
+      "name": "시폰 케이크",
+      "description": "식용유와 머랭으로 가볍게 부풀린, 1920년대 로스앤젤레스에서 태어난 케이크입니다."
+    },
+    "simon-cupcake": {
+      "name": "시몬 컵케이크",
+      "description": "종이컵에 카스텔라처럼 폭신한 반죽을 구운, 한국 동네 빵집의 추억의 컵케이크입니다."
     }
   },
   "advisor": {

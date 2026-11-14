@@ -6,8 +6,9 @@ import { Logo } from "./Logo";
 describe("Logo", () => {
   it("장식 요소로 숨기고 지정한 크기로 그립니다", () => {
     const { container } = render(<Logo size={48} />);
-    const svg = container.querySelector("svg");
-    expect(svg).toHaveAttribute("aria-hidden", "true");
-    expect(svg).toHaveAttribute("width", "48");
+    const img = container.querySelector("img");
+    expect(img).toHaveAttribute("aria-hidden", "true");
+    expect(img).toHaveAttribute("alt", "");
+    expect(img).toHaveAttribute("width", "48");
   });
 });

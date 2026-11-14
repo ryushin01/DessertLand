@@ -48,7 +48,9 @@
     "results": "{count} Desserts",
     "add": "{name} in den Warenkorb",
     "addShort": "Hinzufügen",
-    "view": "Ansehen"
+    "view": "Ansehen",
+    "buyNow": "{name} jetzt kaufen",
+    "buyNowShort": "Jetzt kaufen"
   },
   "product": {
     "back": "Zurück zu den Desserts",
@@ -67,32 +69,51 @@
     "milk": "Milch",
     "egg": "Ei",
     "wheat": "Weizen",
-    "nuts": "Schalenfrüchte"
+    "nuts": "Schalenfrüchte",
+    "soy": "Soja",
+    "sesame": "Sesam",
+    "none": "Keine anzugeben"
   },
   "categories": {
-    "milkshake": {
-      "name": "Milkshake",
-      "lede": "Kalt, cremig und voller Freude."
+    "cake": {
+      "name": "Kuchen und Torten",
+      "lede": "Weicher Biskuit, Sahne und ein Stück zum Feiern."
     },
-    "cheesecake": {
-      "name": "Käsekuchen",
-      "lede": "Dicht oder karamellisiert: reine Frischkäse-Zeit."
+    "tart": {
+      "name": "Pies und Tartes",
+      "lede": "Knuspriger Teig mit Obst und Creme."
     },
-    "muffin": {
-      "name": "Muffin",
-      "lede": "Die Wärme des Morgens, hoch aufgegangen."
+    "pastry": {
+      "name": "Gebäck",
+      "lede": "Butter und Teig, die in Schichten zerbrechen."
     },
-    "pancake": {
-      "name": "Pancake",
-      "lede": "Hoch gestapelt, mit fließendem Sirup."
+    "baked": {
+      "name": "Kekse und Kleingebäck",
+      "lede": "Die Wärme des Ofens in einem Bissen."
     },
-    "creamcake": {
-      "name": "Sahnetorte",
-      "lede": "Weicher Biskuit, leichte Sahne und Erdbeeren."
+    "frozen": {
+      "name": "Eis",
+      "lede": "Kalt und sofort schmelzend."
     },
-    "classic": {
-      "name": "Klassiker der Welt",
-      "lede": "Von Tiramisu bis Baklava: der Geschmack eines Landes."
+    "pudding": {
+      "name": "Puddings und Cremes",
+      "lede": "Zartes zum Löffeln."
+    },
+    "confection": {
+      "name": "Süßigkeiten und Konfekt",
+      "lede": "Süßes, von Hand zu Hand weitergegeben."
+    },
+    "griddle": {
+      "name": "Pfannkuchen und Frittiertes",
+      "lede": "Frisch aus Pfanne und Fritteuse."
+    },
+    "coffee": {
+      "name": "Kaffee",
+      "lede": "Eine Tasse zum Dessert."
+    },
+    "drink": {
+      "name": "Getränke",
+      "lede": "Tees, Limonaden und Milchshakes."
     }
   },
   "cart": {
@@ -104,7 +125,12 @@
     "shipping": "Versand",
     "total": "Gesamt",
     "checkout": "Zur Kasse",
-    "added": "{name} wurde in den Warenkorb gelegt."
+    "added": "{name} wurde in den Warenkorb gelegt.",
+    "select": "{name} in die Bestellung aufnehmen",
+    "selectAll": "Alle auswählen",
+    "selected": "{count} von {total} ausgewählt",
+    "checkoutSelected": "Auswahl bestellen ({count})",
+    "noneSelected": "Wählen Sie die Artikel aus, die Sie bestellen möchten."
   },
   "checkout": {
     "metaTitle": "Kasse",
@@ -143,14 +169,6 @@
     "stripePay": "{amount} mit Stripe bezahlen",
     "stripeRedirecting": "Weiterleitung zur Zahlung",
     "unverified": "Diese Zahlung konnte nicht bestätigt werden. Sie lässt sich im Stripe-Test-Dashboard prüfen."
-  },
-  "credits": {
-    "metaTitle": "Quellen",
-    "title": "Foto- und Icon-Quellen",
-    "photos": "Fotos: Unsplash",
-    "icons": "Icons: Flaticon",
-    "hero": "Foto auf der Startseite",
-    "by": "Foto von {name}"
   },
   "footer": {
     "tagline": "Dessert Land ist ein Demo-Shop mit Desserts der Welt in 10 Sprachen.",
@@ -224,6 +242,638 @@
     "egg-tart": {
       "name": "Kantonesisches Eiertörtchen",
       "description": "Mit der kantonesischen Teekultur gewachsen, bekannt für seine seidige Eiercreme."
+    },
+    "castella": {
+      "name": "Castella",
+      "description": "Saftiger Nagasaki-Honigbiskuit, einst von portugiesischen Händlern gebracht."
+    },
+    "bibingka": {
+      "name": "Bibingka",
+      "description": "Philippinischer Weihnachts-Reiskuchen auf Bananenblättern gebacken."
+    },
+    "spekkoek": {
+      "name": "Spekkoek",
+      "description": "Indonesischer Gewürz-Butterkuchen, Schicht für Schicht gebacken."
+    },
+    "pandan-cake": {
+      "name": "Pandan-Chiffonkuchen",
+      "description": "Luftiger südostasiatischer Chiffonkuchen mit Pandanblatt."
+    },
+    "basbousa": {
+      "name": "Basbousa",
+      "description": "In Sirup getränkter Grießkuchen aus dem Nahen Osten."
+    },
+    "malva-pudding": {
+      "name": "Malva-Pudding",
+      "description": "Südafrikanischer Aprikosenkuchen in warmer Sahnesoße."
+    },
+    "mont-blanc": {
+      "name": "Mont Blanc",
+      "description": "Maronencreme als verschneiter Berg auf Baiser gespritzt."
+    },
+    "panettone": {
+      "name": "Panettone",
+      "description": "Hohes Mailänder Weihnachtsbrot mit kandierten Früchten."
+    },
+    "sachertorte": {
+      "name": "Sachertorte",
+      "description": "Wiener Schokoladentorte mit Marillenmarmelade und glänzender Glasur."
+    },
+    "baumkuchen": {
+      "name": "Baumkuchen",
+      "description": "Schicht für Schicht am Spieß gebackener Kuchen mit Jahresringen."
+    },
+    "stollen": {
+      "name": "Christstollen",
+      "description": "Dresdner Christstollen mit Trockenfrüchten und Marzipan."
+    },
+    "sticky-toffee-pudding": {
+      "name": "Sticky Toffee Pudding",
+      "description": "Britischer Dattelkuchen in warmer Toffeesoße."
+    },
+    "victoria-sponge": {
+      "name": "Victoria Sponge Cake",
+      "description": "Britischer Teekuchen mit Himbeermarmelade und Sahne."
+    },
+    "dobos-torte": {
+      "name": "Dobostorte",
+      "description": "Budapester Schichttorte mit Schokoladencreme und Karamelldeckel."
+    },
+    "medovik": {
+      "name": "Medowik",
+      "description": "Russische Honigtorte aus dünnen Schichten mit Schmandcreme."
+    },
+    "tres-leches": {
+      "name": "Tres-Leches-Kuchen",
+      "description": "In drei Milchsorten getränkter Biskuit, in ganz Lateinamerika beansprucht."
+    },
+    "red-velvet": {
+      "name": "Red-Velvet-Torte",
+      "description": "Amerikanische rote Kakaotorte mit Frischkäsecreme."
+    },
+    "lamington": {
+      "name": "Lamington",
+      "description": "Australischer Biskuitwürfel in Schokolade und Kokosraspeln."
+    },
+    "pavlova": {
+      "name": "Pavlova",
+      "description": "Knuspriges, innen weiches Baiser mit Sahne und Obst, beansprucht von Australien und Neuseeland."
+    },
+    "tarte-tatin": {
+      "name": "Tarte Tatin",
+      "description": "Gestürzte französische Tarte mit karamellisierten Äpfeln."
+    },
+    "key-lime-pie": {
+      "name": "Key Lime Pie",
+      "description": "Säuerliche Florida-Tarte aus Key-Limetten und Kondensmilch."
+    },
+    "pecan-pie": {
+      "name": "Pekannusskuchen",
+      "description": "Südstaaten-Tarte mit Pekannüssen in süßer Sirupfüllung."
+    },
+    "apple-pie": {
+      "name": "Apfelkuchen",
+      "description": "Zimtäpfel unter einem Teiggitter gebacken."
+    },
+    "butter-tart": {
+      "name": "Butter Tart",
+      "description": "Kleine kanadische Tarte mit klebriger Butter-Zucker-Füllung."
+    },
+    "kunefe": {
+      "name": "Kunafa",
+      "description": "Engelshaar-Teig über Käse gebacken, mit Sirup und Pistazien."
+    },
+    "mille-feuille": {
+      "name": "Mille-feuille",
+      "description": "Schichten aus knusprigem Blätterteig und Konditorcreme."
+    },
+    "eclair": {
+      "name": "Éclair",
+      "description": "Langes Brandteiggebäck mit Creme und Schokoladenglasur."
+    },
+    "kouign-amann": {
+      "name": "Kouign-amann",
+      "description": "Bretonisches Gebäck aus Butter- und Zuckerschichten, karamellisiert."
+    },
+    "cannoli": {
+      "name": "Cannoli",
+      "description": "Knusprig frittierte sizilianische Röllchen mit süßer Ricotta."
+    },
+    "sfogliatella": {
+      "name": "Sfogliatella",
+      "description": "Muschelförmiges neapolitanisches Gebäck mit Ricotta-Grieß-Füllung."
+    },
+    "apfelstrudel": {
+      "name": "Apfelstrudel",
+      "description": "Hauchdünner Teig, gerollt um Äpfel, Zimt und Rosinen."
+    },
+    "semla": {
+      "name": "Semla",
+      "description": "Schwedisches Kardamombrötchen mit Mandelmasse und Sahne."
+    },
+    "kurtoskalacs": {
+      "name": "Baumstriezel",
+      "description": "Ungarischer Baumstriezel, über Glut gedreht und karamellisiert."
+    },
+    "galaktoboureko": {
+      "name": "Galaktoboureko",
+      "description": "Grießcreme in Filoteig gebacken und in Sirup getränkt."
+    },
+    "pineapple-bun": {
+      "name": "Ananasbrötchen",
+      "description": "Hongkonger Brötchen mit rissiger Zuckerkruste, ganz ohne Ananas."
+    },
+    "pineapple-cake": {
+      "name": "Ananaskuchen",
+      "description": "Butteriges taiwanisches Gebäck mit Ananaskonfitüre."
+    },
+    "maamoul": {
+      "name": "Maamoul",
+      "description": "Levantinische Festkekse mit Dattel- oder Nussfüllung, in Formen gepresst."
+    },
+    "macaron": {
+      "name": "Macaron",
+      "description": "Zwei Mandel-Baiserschalen mit cremiger Füllung."
+    },
+    "madeleine": {
+      "name": "Madeleine",
+      "description": "Französische Butterküchlein in Muschelform mit typischem Buckel."
+    },
+    "canele": {
+      "name": "Canelé",
+      "description": "Bordeaux-Gebäck mit karamellisierter Kruste und weichem Rum-Vanille-Kern."
+    },
+    "financier": {
+      "name": "Financier",
+      "description": "Pariser Küchlein in Barrenform aus Nussbutter und Mandeln."
+    },
+    "biscotti": {
+      "name": "Cantuccini",
+      "description": "Zweimal gebackene toskanische Mandelkekse zum Eintunken."
+    },
+    "stroopwafel": {
+      "name": "Stroopwafel",
+      "description": "Zwei dünne Waffeln mit Karamellsirup, aus Gouda."
+    },
+    "scone": {
+      "name": "Scone",
+      "description": "Leichtes britisches Gebäck mit Clotted Cream und Marmelade."
+    },
+    "alfajor": {
+      "name": "Alfajor",
+      "description": "Argentinischer Doppelkeks mit Dulce de Leche und Schokolade."
+    },
+    "concha": {
+      "name": "Concha",
+      "description": "Mexikanisches Süßbrötchen mit knuspriger Muschelkruste."
+    },
+    "brownie": {
+      "name": "Brownie",
+      "description": "Saftiges Schokoladenquadrat aus Chicago mit knuspriger Kruste."
+    },
+    "nanaimo-bar": {
+      "name": "Nanaimo-Schnitte",
+      "description": "Kanadische Schnitte ohne Backen: Kokos, Vanillecreme, Schokolade."
+    },
+    "anzac-biscuit": {
+      "name": "Anzac-Keks",
+      "description": "Keks aus Hafer, Kokos und Golden Syrup aus Australien und Neuseeland."
+    },
+    "patbingsu": {
+      "name": "Patbingsu",
+      "description": "Koreanisches Milcheis-Bingsu mit süßen roten Bohnen und Kondensmilch."
+    },
+    "kakigori": {
+      "name": "Kakigori",
+      "description": "Japanisches Schnee-Eis mit Matchasirup und roten Bohnen."
+    },
+    "mochi-ice-cream": {
+      "name": "Mochi-Eis",
+      "description": "Eiscreme in einer dünnen Hülle aus weichem Mochi."
+    },
+    "halo-halo": {
+      "name": "Halo-halo",
+      "description": "Philippinisches Schabeis mit Obst, Gelee und Ube-Eis."
+    },
+    "cendol": {
+      "name": "Cendol",
+      "description": "Eisgekühlte Kokosmilch mit grünem Reisgelee und Palmzuckersirup."
+    },
+    "kulfi": {
+      "name": "Kulfi-Falooda",
+      "description": "Dichtes indisches Milcheis mit Falooda-Nudeln."
+    },
+    "dondurma": {
+      "name": "Dondurma",
+      "description": "Dehnbares türkisches Eis, gebunden mit Salep und Mastix."
+    },
+    "gelato": {
+      "name": "Gelato",
+      "description": "Dichtes, seidiges italienisches Eis mit wenig Luft."
+    },
+    "affogato": {
+      "name": "Affogato",
+      "description": "Vanillegelato, übergossen mit heißem Espresso."
+    },
+    "banana-split": {
+      "name": "Bananensplit",
+      "description": "Halbierte Banane mit drei Kugeln Eis, Soßen, Nüssen und Kirschen."
+    },
+    "vanilla-ice-cream": {
+      "name": "Vanilleeis",
+      "description": "Cremiges Vanilleeis mit Kirschmarmelade."
+    },
+    "soft-serve": {
+      "name": "Softeis",
+      "description": "Luftiges Softeis direkt aus der Maschine auf die Waffel."
+    },
+    "sundae": {
+      "name": "Eisbecher",
+      "description": "Amerikanischer Eisbecher mit Soße, Sahne, Nüssen und Kirsche."
+    },
+    "sorbet": {
+      "name": "Sorbet",
+      "description": "Milchfreies Fruchteis aus Obst und Zucker, frisch und spritzig."
+    },
+    "douhua": {
+      "name": "Douhua",
+      "description": "Seidiger Tofu mit süßem Ingwersirup."
+    },
+    "mango-pomelo-sago": {
+      "name": "Mango-Pomelo-Sago",
+      "description": "Kühle Hongkonger Mangosuppe mit Pomelo und Sago."
+    },
+    "che-chuoi": {
+      "name": "Chè chuối",
+      "description": "Warmer vietnamesischer Bananen-Tapioka-Pudding in Kokosmilch."
+    },
+    "ube-halaya": {
+      "name": "Ube halaya",
+      "description": "Philippinische Lila-Yams-Creme mit Milch und Butter."
+    },
+    "kheer": {
+      "name": "Kheer",
+      "description": "Indischer Milchreis mit Kardamom und Nüssen."
+    },
+    "gajar-halwa": {
+      "name": "Gajar Halwa",
+      "description": "In Milch und Ghee geschmorte Karotten, ein Punjabi-Winterdessert."
+    },
+    "muhallebi": {
+      "name": "Muhallebi",
+      "description": "Seidiger nahöstlicher Milchpudding mit Rosenwasser."
+    },
+    "umm-ali": {
+      "name": "Umm Ali",
+      "description": "Ägyptischer Brotpudding aus Blätterteig, in süßer Milch mit Nüssen gebacken."
+    },
+    "creme-brulee": {
+      "name": "Crème brûlée",
+      "description": "Vanillecreme unter einer knackigen Karamellkruste."
+    },
+    "panna-cotta": {
+      "name": "Panna cotta",
+      "description": "Zitternde piemontesische Sahne, sanft mit Gelatine gestockt."
+    },
+    "crema-catalana": {
+      "name": "Crema catalana",
+      "description": "Katalanische Creme mit Zitrone und Zimt unter Karamellkruste."
+    },
+    "eton-mess": {
+      "name": "Eton Mess",
+      "description": "Zerbröseltes Baiser mit Erdbeeren und Sahne aus Eton."
+    },
+    "trifle": {
+      "name": "Trifle",
+      "description": "Schichten aus Biskuit, Fruchtgelee, Vanillecreme und Sahne."
+    },
+    "injeolmi": {
+      "name": "Injeolmi",
+      "description": "Koreanischer Klebreiskuchen in gerösteter Sojabohnenmehl-Hülle."
+    },
+    "songpyeon": {
+      "name": "Songpyeon",
+      "description": "Halbmondförmige Reiskuchen, auf Kiefernnadeln gedämpft, zum Chuseok-Fest."
+    },
+    "yakgwa": {
+      "name": "Yakgwa",
+      "description": "Koreanischer Honigkeks, frittiert und in Reissirup getränkt."
+    },
+    "daifuku": {
+      "name": "Erdbeer-Daifuku",
+      "description": "Weicher Mochi um rote Bohnenpaste und eine ganze Erdbeere."
+    },
+    "dango": {
+      "name": "Mitarashi-Dango",
+      "description": "Reisklößchen am Spieß mit süßer Sojasoßenglasur."
+    },
+    "yokan": {
+      "name": "Yokan",
+      "description": "Feste Gelee aus roten Bohnen und Agar, passend zu grünem Tee."
+    },
+    "mooncake": {
+      "name": "Mondkuchen",
+      "description": "Runder Mittherbstkuchen mit Lotuspaste und gesalzenem Eigelb."
+    },
+    "tangyuan": {
+      "name": "Tangyuan",
+      "description": "Klebreisbällchen mit schwarzem Sesam in warmer süßer Suppe."
+    },
+    "tanghulu": {
+      "name": "Tanghulu",
+      "description": "Obst am Spieß mit knackiger Zuckerglasur, ein Pekinger Klassiker."
+    },
+    "mango-sticky-rice": {
+      "name": "Mango-Klebreis",
+      "description": "Kokos-Klebreis mit reifer thailändischer Mango."
+    },
+    "gulab-jamun": {
+      "name": "Gulab Jamun",
+      "description": "Frittierte Milchbällchen in Rosensirup getränkt."
+    },
+    "rasgulla": {
+      "name": "Rasgulla",
+      "description": "Schwammige bengalische Frischkäsebällchen in leichtem Sirup."
+    },
+    "kaju-katli": {
+      "name": "Kaju Katli",
+      "description": "Indisches Cashew-Konfekt in Rautenform mit Blattsilber."
+    },
+    "turkish-delight": {
+      "name": "Lokum",
+      "description": "Würfel aus Rosenwasser-Gelee, mit Puderzucker bestäubt."
+    },
+    "halva": {
+      "name": "Halva",
+      "description": "Mürbes Sesamkonfekt vom Nahen Osten bis Osteuropa."
+    },
+    "brigadeiro": {
+      "name": "Brigadeiro",
+      "description": "Brasilianische Trüffel aus Kondensmilch und Kakao mit Streuseln."
+    },
+    "caramel": {
+      "name": "Karamellbonbon",
+      "description": "Weiche Karamellbonbons aus Zucker, Butter und Sahne."
+    },
+    "milk-chocolate": {
+      "name": "Milchschokolade",
+      "description": "Zarte Schokolade mit Milch, 1875 im schweizerischen Vevey erfunden."
+    },
+    "hotteok": {
+      "name": "Hotteok",
+      "description": "Koreanischer Straßenpfannkuchen mit flüssigem braunem Zucker und Nüssen."
+    },
+    "bungeoppang": {
+      "name": "Bungeoppang",
+      "description": "Koreanisches Fischgebäck mit süßer roter Bohnenpaste."
+    },
+    "dorayaki": {
+      "name": "Dorayaki",
+      "description": "Zwei fluffige Honigpfannkuchen mit süßer roter Bohnenpaste."
+    },
+    "taiyaki": {
+      "name": "Taiyaki",
+      "description": "Knuspriger Kuchen in Brassenform mit roter Bohnenpaste."
+    },
+    "jalebi": {
+      "name": "Jalebi",
+      "description": "Knusprige frittierte Teigspiralen in Safransirup."
+    },
+    "chebakia": {
+      "name": "Chebakia",
+      "description": "Marokkanisches Blütengebäck, frittiert, in Honig und Sesam."
+    },
+    "crepe": {
+      "name": "Crêpe",
+      "description": "Hauchdünne bretonische Crêpe mit Schokoladensoße."
+    },
+    "churros": {
+      "name": "Churros",
+      "description": "Sternförmig gespritztes Gebäck zum Eintunken in dicke Schokolade."
+    },
+    "kaiserschmarrn": {
+      "name": "Kaiserschmarrn",
+      "description": "Zerrissener fluffiger Pfannkuchen mit Puderzucker und Kompott."
+    },
+    "berliner": {
+      "name": "Berliner Pfannkuchen",
+      "description": "Mit Marmelade gefülltes, gezuckertes Hefegebäck."
+    },
+    "belgian-waffle": {
+      "name": "Belgische Waffel",
+      "description": "Leichte, knusprige Waffel mit tiefem Gitter und Erdbeeren."
+    },
+    "syrniki": {
+      "name": "Syrniki",
+      "description": "Osteuropäische Quarkpfannkuchen mit Marmelade."
+    },
+    "loukoumades": {
+      "name": "Loukoumades",
+      "description": "Griechische Teigbällchen mit Honig, Zimt und Walnüssen."
+    },
+    "caramel-macchiato": {
+      "name": "Karamell-Macchiato",
+      "description": "Vanillemilch mit Espresso und einem Karamellgitter."
+    },
+    "dalgona-coffee": {
+      "name": "Dalgona-Kaffee",
+      "description": "Aufgeschlagener Instantkaffee auf kalter Milch, ein koreanischer Trend."
+    },
+    "egg-coffee": {
+      "name": "Eierkaffee",
+      "description": "Hanoier Kaffee mit aufgeschlagenem Eigelb und Kondensmilch."
+    },
+    "wiener-melange": {
+      "name": "Wiener Melange",
+      "description": "Wiener Kaffeehausklassiker aus Espresso, heißer Milch und Schaum."
+    },
+    "espresso": {
+      "name": "Espresso",
+      "description": "Kurzer, kräftiger italienischer Kaffee unter Druck, mit Crema."
+    },
+    "cappuccino": {
+      "name": "Cappuccino",
+      "description": "Espresso mit gleichen Teilen heißer Milch und luftigem Schaum."
+    },
+    "caffe-latte": {
+      "name": "Milchkaffee (Latte)",
+      "description": "Espresso mit viel heißer Milch und Latte Art."
+    },
+    "americano": {
+      "name": "Americano",
+      "description": "Mit heißem Wasser verlängerter Espresso."
+    },
+    "flat-white": {
+      "name": "Flat White",
+      "description": "Kräftiger Espresso mit seidigem Mikroschaum, beansprucht von Australien und Neuseeland."
+    },
+    "caffe-mocha": {
+      "name": "Caffè Mocha",
+      "description": "Espresso mit Schokolade und Milch, mit Kakao bestäubt."
+    },
+    "ca-phe-sua-da": {
+      "name": "Vietnamesischer Eiskaffee",
+      "description": "Kräftiger Phin-Kaffee mit Kondensmilch und Eis."
+    },
+    "frappe": {
+      "name": "Griechischer Frappé",
+      "description": "Geschüttelter Instantkaffeeschaum auf Eis, griechischer Sommer."
+    },
+    "cold-brew": {
+      "name": "Cold Brew",
+      "description": "Lange kalt gezogener, milder Kaffee mit wenig Bitterkeit."
+    },
+    "royal-milk-tea": {
+      "name": "Royal Milk Tea",
+      "description": "Japanischer Milchtee, die Blätter direkt in Milch gekocht."
+    },
+    "bubble-tea": {
+      "name": "Bubble Tea",
+      "description": "Milchtee mit Tapiokaperlen, entstanden in einem Teehaus in Taichung."
+    },
+    "thai-tea": {
+      "name": "Thai-Eistee",
+      "description": "Leuchtend oranger Thai-Tee mit Kondensmilch auf Eis."
+    },
+    "ramune": {
+      "name": "Ramune",
+      "description": "Japanische Sommerlimonade in einer Flasche mit Glasmurmel."
+    },
+    "melon-soda-float": {
+      "name": "Melonensoda mit Eis",
+      "description": "Grüne Melonenlimonade mit Vanilleeis und Kirsche."
+    },
+    "root-beer-float": {
+      "name": "Root-Beer-Float",
+      "description": "Schäumendes Root Beer über einer Kugel Vanilleeis."
+    },
+    "sikhye": {
+      "name": "Sikhye",
+      "description": "Süßes koreanisches Reisgetränk mit schwimmenden Körnern."
+    },
+    "sujeonggwa": {
+      "name": "Sujeonggwa",
+      "description": "Kalter koreanischer Ingwer-Zimt-Punsch mit Kaki und Pinienkernen."
+    },
+    "kahlua-milk": {
+      "name": "Kahlúa Milch",
+      "description": "Süßer Cocktail aus Kaffeelikör und Milch. Enthält Alkohol."
+    },
+    "steamed-milk": {
+      "name": "Heiße Dampfmilch",
+      "description": "Mit Dampf erhitzte Milch und weicher Schaum."
+    },
+    "hot-chocolate": {
+      "name": "Heiße Schokolade",
+      "description": "Kakao in warmer Milch mit Marshmallows."
+    },
+    "cola": {
+      "name": "Cola",
+      "description": "Karamellfarbene Limonade, Ende des 19. Jahrhunderts in Atlanta entstanden."
+    },
+    "ginger-ale": {
+      "name": "Ginger Ale",
+      "description": "Spritzige Ingwerlimonade, bekannt im trockenen kanadischen Stil."
+    },
+    "lemonade": {
+      "name": "Limonade",
+      "description": "Kühles Getränk aus Zitronensaft, Zucker und Wasser auf Eis."
+    },
+    "italian-soda": {
+      "name": "Italian Soda",
+      "description": "Fruchtsirup mit Sodawasser, trotz des Namens aus San Francisco."
+    },
+    "root-beer": {
+      "name": "Root Beer",
+      "description": "Alkoholfreie nordamerikanische Limonade mit Sassafras und Vanille."
+    },
+    "soboro-ppang": {
+      "name": "Soboro-Brot",
+      "description": "Koreanischer Bäckereiklassiker mit Erdnussbutter-Streuselkruste."
+    },
+    "milk-bread": {
+      "name": "Milchbrot",
+      "description": "Weiches Kastenbrot mit Milch, das sich in Fasern zupfen lässt."
+    },
+    "cream-pan": {
+      "name": "Puddingbrötchen",
+      "description": "Weiches japanisches Brötchen voller Vanillecreme."
+    },
+    "chestnut-bread": {
+      "name": "Kastanienbrot",
+      "description": "Koreanisches Kastenbrot mit kandierten Kastanien."
+    },
+    "glazed-doughnut": {
+      "name": "Glasierter Donut",
+      "description": "Amerikanischer Ringdonut, frittiert und glasiert."
+    },
+    "kkwabaegi": {
+      "name": "Kkwabaegi",
+      "description": "Koreanischer gedrehter Donut, frittiert und gezuckert."
+    },
+    "malasada": {
+      "name": "Malasada",
+      "description": "Gezuckerter Krapfen ohne Loch, von Portugal nach Hawaii gereist."
+    },
+    "beignet": {
+      "name": "Beignets",
+      "description": "Frittierter Teig unter Puderzuckerschnee, von Frankreich bis New Orleans."
+    },
+    "cream-puff": {
+      "name": "Windbeutel",
+      "description": "Hohler Brandteig mit Vanillecreme und Sahne gefüllt."
+    },
+    "liege-waffle": {
+      "name": "Lütticher Waffel",
+      "description": "Dichte Lütticher Waffel mit Hagelzucker, der beim Backen karamellisiert."
+    },
+    "souffle-pancake": {
+      "name": "Soufflé-Pancakes",
+      "description": "Hohe, wackelige japanische Pancakes mit Baiser."
+    },
+    "mille-crepe": {
+      "name": "Crêpe-Torte",
+      "description": "Torte aus über zwanzig Crêpes und Creme, in Japan benannt."
+    },
+    "japanese-cheesecake": {
+      "name": "Japanischer Käsekuchen",
+      "description": "Wolkenleichter japanischer Käsekuchen mit Baiser."
+    },
+    "chocolate-chip-cookie": {
+      "name": "Schokoladenkeks (Cookie)",
+      "description": "Butterkeks mit Schokostücken, in den 1930ern in Massachusetts erfunden."
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "description": "Mürber schottischer Keks aus Butter, Zucker und Mehl."
+    },
+    "butter-cookie": {
+      "name": "Dänische Butterkekse",
+      "description": "Gespritzte dänische Butterkekse in Ringen, in der runden Dose."
+    },
+    "senbei": {
+      "name": "Senbei",
+      "description": "Knusprige japanische Reiscracker mit Sojasoße bestrichen."
+    },
+    "gangjeong": {
+      "name": "Erdnuss-Gangjeong",
+      "description": "Koreanisches Konfekt aus gerösteten Erdnüssen in Reissirup."
+    },
+    "yugwa": {
+      "name": "Yugwa",
+      "description": "Koreanisches Festgebäck aus frittiertem Klebreis mit Sirup und Puffreis."
+    },
+    "speculoos": {
+      "name": "Spekulatius",
+      "description": "Gewürzkekse mit Bildmotiven aus Belgien und den Niederlanden."
+    },
+    "chiffon-cake": {
+      "name": "Chiffonkuchen",
+      "description": "Luftiger Kuchen aus Öl und Baiser, in den 1920ern in Los Angeles erfunden."
+    },
+    "simon-cupcake": {
+      "name": "Simon-Cupcake",
+      "description": "Nostalgischer koreanischer Bäckerei-Cupcake, castellaweich im Papierförmchen gebacken."
     }
   },
   "advisor": {
