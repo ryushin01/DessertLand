@@ -161,6 +161,7 @@
 | 식혜 | by gliuoo | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Korean_rice_punch-Sikhye-01A.jpg) |
 | 수정과 | by gliuoo | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Korean_fruit_punch-Sujeonggwa-02.jpg) |
 | 깔루아 밀크 | Hitomi | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Kahlua_and_Milk.png) |
+| 베일리스 밀크 | Alessio Sbarbaro | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Baileys_and_ice_01.jpg) |
 | 스팀 밀크 | Scudsvlad | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hot_steamed_milk.jpg) |
 | 코코아 | UggBoy♥UggGirl | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:After_The_St._Patrick%27s_Parade_Late_Lunch_@_Lemon,_Dawson_Street,_Dublin,_Rep._Of_Ireland_A_Fine_Tradition!_(6992614913).jpg) |
 | 콜라 | Cocktailmarler | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Glass_of_Cola.jpg) |

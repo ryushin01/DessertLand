@@ -759,6 +759,10 @@
       "name": "Kahlúa con leche",
       "description": "Cóctel dulce de licor de café y leche. Contiene alcohol."
     },
+    "baileys-milk": {
+      "name": "Baileys con leche",
+      "description": "Cóctel suave de licor de crema irlandesa y leche, servido con hielo. Contiene alcohol."
+    },
     "steamed-milk": {
       "name": "Leche al vapor",
       "description": "Leche calentada al vapor con espuma suave."

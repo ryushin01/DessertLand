@@ -158,6 +158,7 @@ const TASTES: Record<string, TasteChip[]> = {
   "sikhye": ["light"],
   "sujeonggwa": ["nutty", "light"],
   "kahlua-milk": ["coffee", "creamy"],
+  "baileys-milk": ["creamy"],
   "steamed-milk": ["creamy", "light"],
   "hot-chocolate": ["chocolate", "creamy"],
   "cola": ["light"],
