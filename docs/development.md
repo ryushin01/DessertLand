@@ -12,7 +12,7 @@
 ## 상품 추가
 
 1. 사진을 `public/images/products/<slug>.webp`에 둡니다. 가로 1500px, WebP 품질 76 정도로 맞춥니다.
-2. `src/entities/product/model/catalog.ts`에 상품과 사진 출처를 추가합니다.
+2. `src/entities/product/model/catalog.ts`에 상품을 추가하고, 사진 출처는 `docs/credits.md`(사진 표)에 한 줄 더합니다.
 3. 모든 메시지 파일의 `products.<slug>`에 이름과 설명을 추가합니다.
 
 ## 모션 규칙
@@ -98,8 +98,8 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 ## 라이선스
 
-- **사진:** [Unsplash License](https://unsplash.com/license)의 무료 사진만 씁니다. Unsplash+ 사진은 쓰지 않습니다. 출처는 `catalog.ts`와 `/credits` 페이지에 있습니다.
-- **아이콘:** Flaticon UIcons 무료 라이선스는 출처 표기가 필요해 푸터와 `/credits`에 표기합니다. 쓰는 아이콘만 `scripts/build-icons.py`로 추려 냅니다.
+- **사진:** [Unsplash License](https://unsplash.com/license)의 무료 사진만 씁니다. Unsplash+ 사진은 쓰지 않습니다. 출처는 README의 '출처'와 `docs/credits.md`에 있습니다.
+- **아이콘:** Flaticon UIcons 무료 라이선스는 사이트 바닥글에 출처 줄을 두도록 정해 푸터에 'Uicons by Flaticon' 링크를 두고, README의 '출처'에도 적습니다. 쓰는 아이콘만 `scripts/build-icons.py`로 추려 냅니다.
 
 ## 테스트
 

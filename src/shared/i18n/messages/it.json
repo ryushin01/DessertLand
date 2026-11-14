@@ -151,14 +151,6 @@
     "stripeRedirecting": "Reindirizzamento al pagamento",
     "unverified": "Impossibile confermare il pagamento. Puoi controllarlo nella dashboard di prova di Stripe."
   },
-  "credits": {
-    "metaTitle": "Crediti",
-    "title": "Crediti di foto e icone",
-    "photos": "Foto: Unsplash",
-    "icons": "Icone: Flaticon",
-    "hero": "Foto iniziale",
-    "by": "Foto di {name}"
-  },
   "footer": {
     "tagline": "Dessert Land è un negozio dimostrativo che presenta i dolci del mondo in 10 lingue.",
     "credits": "Crediti di foto e icone"

@@ -151,14 +151,6 @@
     "stripeRedirecting": "결제 화면으로 이동 중",
     "unverified": "결제를 확인하지 못했습니다. 청구 여부는 Stripe 테스트 대시보드에서 확인할 수 있습니다."
   },
-  "credits": {
-    "metaTitle": "출처",
-    "title": "사진과 아이콘 출처",
-    "photos": "사진: Unsplash",
-    "icons": "아이콘: Flaticon",
-    "hero": "첫 화면 사진",
-    "by": "{name} 촬영"
-  },
   "footer": {
     "tagline": "디저트 랜드는 전 세계 디저트를 10개 언어로 소개하는 데모 쇼핑몰입니다.",
     "credits": "사진과 아이콘 출처"
