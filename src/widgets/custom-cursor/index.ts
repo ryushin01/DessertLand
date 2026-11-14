@@ -1,1 +1,1 @@
-export { CustomCursor } from "./CustomCursor";
+export { CustomCursor } from "./ui/CustomCursor";

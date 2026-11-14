@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getTranslations } from "next-intl/server";
 
 import type { Allergen, Product } from "@/entities/product";
-import { LOCALES } from "@/shared/i18n/routing";
+import { LOCALES } from "@/shared/i18n/index.server";
 import { clientKey, createRateLimiter } from "@/shared/lib/rate-limit";
 
 import { isRecommendRequest, recommendLocally } from "../lib/recommend";
