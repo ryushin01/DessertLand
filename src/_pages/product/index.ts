@@ -1,1 +1,1 @@
-export { default, generateMetadata, generateStaticParams } from "./ProductPage";
+export { default, generateMetadata, generateStaticParams } from "./ui/ProductPage";

@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 0.5.2 - 2026-11-14
+
+- 구조(FSD, 화면 동작은 같음): Steiger로 검사해 34건을 0건으로
+  - 세그먼트 없이 슬라이스 바로 아래에 있던 파일 46개를 `ui`·`model`·`lib`로 나눔
+  - 한 곳에서만 쓰던 슬라이스 13개를 쓰는 곳으로 합침: 홈의 히어로·쇼케이스·추천·막·선언문·조각 확대·스윗 트레일·세계 여행은 `_pages/home`, 주문 폼은 `_pages/checkout`, 상품 상세·목록은 각 화면, 언어·모션 전환은 `widgets/site-header`
+  - 결제 기능 둘이 서로 가져오던 장바구니 합계(`summarizeCart`)를 `entities/cart`로 내리고 상품 가격은 `@x`로 엶. 서버 코드의 언어 목록은 `@/shared/i18n/index.server`에서, GSAP은 독립 폴더 `@/shared/lib/gsap`에서 가져옴
+  - `_app/providers`를 용도대로 `_app/state`(jotai)와 `_app/motion`(부드러운 스크롤·커서·움직임 표시)으로 나눔
+- 품질: Steiger를 넣어 `pnpm lint:fsd`로 FSD 규칙을 검사(CI 포함)
+
 ## 0.5.1 - 2026-11-14
 
 - 일본어 글꼴: 한국어판과 같은 파티스리 결로 제목은 장식 명조 Kaisei Decol, 본문은 둥근 Zen Maru Gothic (Noto Serif JP·Noto Sans JP에서 바꿈). 중국어는 장식 서체 파일이 커서 Noto 유지
