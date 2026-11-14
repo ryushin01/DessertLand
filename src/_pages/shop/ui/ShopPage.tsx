@@ -1,0 +1,127 @@
+import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { css } from "styled-system/css";
+
+import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
+import { Link, localeAlternates, redirect, siteOpenGraph } from "@/shared/i18n";
+import { RevealText } from "@/shared/ui/reveal-text";
+import { ProductScroller } from "./ProductScroller";
+
+type ShopPageProps = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string | string[] }>;
+};
+
+const head = css({
+  position: "relative",
+  zIndex: 2,
+  paddingBlockStart: "100px",
+  paddingInline: { base: "16px", md: "28px" },
+  display: "grid",
+  gap: "20px",
+});
+const title = css({
+  fontFamily: "display",
+  fontSize: "clamp(3.2rem, 11vw, 12rem)",
+  lineHeight: "0.95",
+  textTransform: "uppercase",
+  wordBreak: "var(--word-break)",
+});
+const advisorLink = css({
+  display: "inline-block",
+  paddingBlock: "8px",
+  textDecoration: "underline",
+  textUnderlineOffset: "4px",
+  _hover: { color: "caramel" },
+});
+const filters = css({ display: "flex", flexWrap: "wrap", gap: "8px" });
+const filter = css({
+  display: "inline-flex",
+  alignItems: "center",
+  minHeight: "44px",
+  paddingInline: "16px",
+  borderRadius: "999px",
+  border: "1px solid {colors.muted}",
+  fontSize: "0.9rem",
+  transition: "background 0.3s, color 0.3s",
+  _hover: { background: "cocoa.800" },
+  "&[aria-current=page]": { background: "cream", color: "cocoa.950", borderColor: "cream" },
+});
+
+export async function generateMetadata({ params }: ShopPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "shop" });
+  const title = `${t("metaTitle")} | Dessert Land`;
+  return { title, alternates: localeAlternates(locale, "/shop"), openGraph: siteOpenGraph(title) };
+}
+
+const LEGACY_CATEGORIES: Record<string, Category | null> = {
+  milkshake: "drink",
+  cheesecake: "cake",
+  muffin: "baked",
+  pancake: "griddle",
+  creamcake: "cake",
+  classic: null,
+};
+
+export default async function ShopPage({ params, searchParams }: ShopPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const { category } = await searchParams;
+  // 0.5.0 이전의 분류 주소는 가장 가까운 새 분류로 보냅니다. "세계의 명작"은 맞는 분류가 없어 전체 목록으로 보냅니다.
+  if (typeof category === "string" && Object.hasOwn(LEGACY_CATEGORIES, category)) {
+    const next = LEGACY_CATEGORIES[category];
+    redirect({ href: next ? { pathname: "/shop", query: { category: next } } : "/shop", locale });
+  }
+  const active = isCategory(category) ? category : undefined;
+  return <ShopContent active={active} />;
+}
+
+function ShopContent({ active }: { active?: Category }) {
+  const t = useTranslations("shop");
+  const tCategories = useTranslations("categories");
+  const tAdvisor = useTranslations("advisor");
+  const products = getProductsByCategory(active);
+
+  return (
+    <>
+      <div className={head}>
+        <RevealText as="h1" text={t("title")} className={title} immediate />
+        <nav aria-label={t("filter")}>
+          <ul className={filters}>
+            <li>
+              <Link
+                href="/shop"
+                scroll={false}
+                className={filter}
+                aria-current={active ? undefined : "page"}
+              >
+                {t("all")}
+              </Link>
+            </li>
+            {CATEGORIES.map((category) => (
+              <li key={category}>
+                <Link
+                  href={{ pathname: "/shop", query: { category } }}
+                  scroll={false}
+                  className={filter}
+                  aria-current={active === category ? "page" : undefined}
+                >
+                  {tCategories(`${category}.name`)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <p role="status">{t("results", { count: products.length })}</p>
+        <p>
+          <Link href="/#advisor" className={advisorLink}>
+            {tAdvisor("shopLink")}
+          </Link>
+        </p>
+      </div>
+      <ProductScroller key={active ?? "all"} products={products} />
+    </>
+  );
+}

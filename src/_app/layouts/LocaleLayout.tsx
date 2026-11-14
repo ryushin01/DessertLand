@@ -9,9 +9,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { CSSProperties, ReactNode } from "react";
 import { css } from "styled-system/css";
 
-import { AppProviders } from "@/_app/providers/AppProviders";
-import { DeferredMotion } from "@/_app/providers/DeferredMotion";
-import { MotionAttribute } from "@/_app/providers/MotionAttribute";
+import { AppProviders } from "@/_app/state/AppProviders";
+import { DeferredMotion } from "@/_app/motion/DeferredMotion";
+import { MotionAttribute } from "@/_app/motion/MotionAttribute";
 import { SITE_NAME, SITE_URL } from "@/shared/config";
 import { LOCALES, routing } from "@/shared/i18n";
 import { Grain } from "@/shared/ui";

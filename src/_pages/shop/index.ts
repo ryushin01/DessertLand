@@ -1,1 +1,1 @@
-export { default, generateMetadata } from "./ShopPage";
+export { default, generateMetadata } from "./ui/ShopPage";

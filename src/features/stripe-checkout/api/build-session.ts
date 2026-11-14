@@ -7,9 +7,9 @@ import {
   priceInCurrency,
   shippingInCurrency,
 } from "@/entities/product";
-import { summarizeCart } from "@/features/cart-summary";
+import { summarizeCart } from "@/entities/cart";
 import { SITE_NAME } from "@/shared/config";
-import { LOCALES } from "@/shared/i18n/routing";
+import { LOCALES } from "@/shared/i18n/index.server";
 
 import { toMinorUnits } from "./minor-units";
 
