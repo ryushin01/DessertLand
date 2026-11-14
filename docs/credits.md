@@ -193,10 +193,10 @@
 
 ## Flickr
 
-자유 라이선스(CC BY, CC BY-SA) 사진입니다. 라이선스에 따라 저작자, 라이선스, 원본을 밝힙니다.
+자유 라이선스(CC BY, CC BY-SA) 사진입니다. 라이선스에 따라 저작자, 라이선스, 원본을 밝히고, CC 2.0·3.0 라이선스가 요구하는 대로 사진가가 붙인 원래 제목도 적습니다(Flickr 주소에는 제목이 없음).
 
-| 사진 | 저작자 | 사용 허락 | 원본 |
-|---|---|---|---|
-| 시몬 컵케이크 | [Rick Chung](https://www.flickr.com/photos/57611655@N05/) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
+| 사진 | 제목 | 저작자 | 사용 허락 | 원본 |
+|---|---|---|---|---|
+| 시몬 컵케이크 | \[新\]蜂蜜杯子蛋糕 | [Rick Chung](https://www.flickr.com/photos/57611655@N05/) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
 
 시몬 컵케이크 사진은 같은 종류인 대만의 꿀 컵케이크(蜂蜜杯子蛋糕) 사진입니다. 주름 종이컵에 카스텔라처럼 구운 모양이 같아 골랐습니다.

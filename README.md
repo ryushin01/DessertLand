@@ -119,7 +119,7 @@ src/
 |---|---|---|---|
 | 상품·첫 화면 사진 17장 | Unsplash 사진가 ([목록](docs/credits.md#unsplash)) | Unsplash License | [unsplash.com](https://unsplash.com) |
 | 상품 사진 158장 (1400px 이하로 줄여 WebP로 바꿈) | Wikimedia Commons 기여자 ([목록](docs/credits.md#wikimedia-commons)) | 사진마다 CC0, 퍼블릭 도메인, CC BY, CC BY-SA 중 하나 (목록에 사진별로 표시) | [commons.wikimedia.org](https://commons.wikimedia.org) |
-| 상품 사진 1장 (시몬 컵케이크, 1400px로 줄여 WebP로 바꿈) | Rick Chung ([목록](docs/credits.md#flickr)) | CC BY-SA 2.0 | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
+| 상품 사진 1장 (시몬 컵케이크, 원래 제목 "\[新\]蜂蜜杯子蛋糕", 1400px로 줄여 WebP로 바꿈) | Rick Chung ([목록](docs/credits.md#flickr)) | CC BY-SA 2.0 | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
 | 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
 | Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
 | Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
