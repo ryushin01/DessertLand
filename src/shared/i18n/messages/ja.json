@@ -170,15 +170,6 @@
     "stripeRedirecting": "決済画面へ移動中",
     "unverified": "決済を確認できませんでした。Stripeのテストダッシュボードで確認できます。"
   },
-  "credits": {
-    "metaTitle": "クレジット",
-    "title": "写真とアイコンのクレジット",
-    "photos": "写真: Unsplash、Wikimedia Commons",
-    "icons": "アイコン: Flaticon",
-    "hero": "トップ画面の写真",
-    "by": "撮影: {name}",
-    "changes": "Wikimedia Commons の写真は各ライセンスに従って掲載し、サイズとファイル形式(WebP)を変更しています。"
-  },
   "footer": {
     "tagline": "Dessert Landは世界のデザートを10言語で紹介するデモショップです。",
     "credits": "写真とアイコンのクレジット"

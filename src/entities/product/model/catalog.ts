@@ -14,7 +14,6 @@ export type Category = (typeof CATEGORIES)[number];
 
 export type Allergen = "milk" | "egg" | "wheat" | "nuts" | "soy" | "sesame";
 
-
 export type Product = {
   slug: string;
   category: Category;

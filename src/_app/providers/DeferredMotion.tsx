@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-import { useMediaQuery } from "@/shared/lib/motion";
+import { MEDIA, useMediaQuery } from "@/shared/lib/motion";
 
 const SmoothScroll = dynamic(
   () => import("@/widgets/smooth-scroll").then((module) => module.SmoothScroll),
@@ -18,7 +18,7 @@ const CustomCursor = dynamic(
  * 첫 화면을 막지 않도록 나중에 받고, 터치 기기에서는 코드 자체를 받지 않습니다.
  */
 export function DeferredMotion() {
-  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const finePointer = useMediaQuery(MEDIA.finePointer);
   if (!finePointer) return null;
   return (
     <>

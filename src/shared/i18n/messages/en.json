@@ -170,15 +170,6 @@
     "stripeRedirecting": "Going to the payment page",
     "unverified": "We couldn’t confirm this payment. It can be checked in the Stripe test dashboard."
   },
-  "credits": {
-    "metaTitle": "Credits",
-    "title": "Photo and icon credits",
-    "photos": "Photos: Unsplash, Wikimedia Commons",
-    "icons": "Icons: Flaticon",
-    "hero": "Hero photo",
-    "by": "Photo by {name}",
-    "changes": "Wikimedia Commons photos are used under their licenses and were resized and converted to WebP."
-  },
   "footer": {
     "tagline": "Dessert Land is a demo shop presenting the world’s desserts in 10 languages.",
     "credits": "Photo and icon credits"

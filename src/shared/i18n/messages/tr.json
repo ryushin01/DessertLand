@@ -170,15 +170,6 @@
     "stripeRedirecting": "Ödeme sayfasına gidiliyor",
     "unverified": "Bu ödeme doğrulanamadı. Stripe test panelinden kontrol edilebilir."
   },
-  "credits": {
-    "metaTitle": "Kaynaklar",
-    "title": "Fotoğraf ve simge kaynakları",
-    "photos": "Fotoğraflar: Unsplash, Wikimedia Commons",
-    "icons": "Simgeler: Flaticon",
-    "hero": "Ana sayfa fotoğrafı",
-    "by": "Fotoğraf: {name}",
-    "changes": "Wikimedia Commons fotoğrafları lisanslarına uygun kullanılmış, boyutları ve biçimi (WebP) değiştirilmiştir."
-  },
   "footer": {
     "tagline": "Dessert Land, dünya tatlılarını 10 dilde tanıtan bir demo mağazadır.",
     "credits": "Fotoğraf ve simge kaynakları"

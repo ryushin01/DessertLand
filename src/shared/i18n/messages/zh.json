@@ -170,15 +170,6 @@
     "stripeRedirecting": "正在前往付款页面",
     "unverified": "无法确认此付款。可在 Stripe 测试控制台中查看。"
   },
-  "credits": {
-    "metaTitle": "版权信息",
-    "title": "图片与图标来源",
-    "photos": "图片:Unsplash、Wikimedia Commons",
-    "icons": "图标:Flaticon",
-    "hero": "首屏图片",
-    "by": "摄影:{name}",
-    "changes": "Wikimedia Commons 图片依各自许可使用，并调整了尺寸和文件格式(WebP)。"
-  },
   "footer": {
     "tagline": "Dessert Land 是以 10 种语言介绍全球甜点的演示商店。",
     "credits": "图片与图标来源"
