@@ -759,6 +759,10 @@
       "name": "Kahlúa Milch",
       "description": "Süßer Cocktail aus Kaffeelikör und Milch. Enthält Alkohol."
     },
+    "baileys-milk": {
+      "name": "Baileys Milch",
+      "description": "Milder Cocktail aus Irish-Cream-Likör und Milch auf Eis. Enthält Alkohol."
+    },
     "steamed-milk": {
       "name": "Heiße Dampfmilch",
       "description": "Mit Dampf erhitzte Milch und weicher Schaum."

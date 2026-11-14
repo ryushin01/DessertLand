@@ -1,6 +1,6 @@
 # 사진 출처
 
-상품과 첫 화면 사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)에서 가져왔습니다. 모두 1400~1500px 이하로 줄인 WebP로 바꿔 `public/images/`에 두었고, 그 밖에는 고치지 않았습니다.
+상품과 첫 화면 사진은 [Unsplash](https://unsplash.com), [Wikimedia Commons](https://commons.wikimedia.org), [Flickr](https://www.flickr.com)에서 가져왔습니다. 모두 1400~1500px 이하로 줄인 WebP로 바꿔 `public/images/`에 두었고, 그 밖에는 고치지 않았습니다.
 
 ## Unsplash
 
@@ -161,6 +161,7 @@
 | 식혜 | by gliuoo | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Korean_rice_punch-Sikhye-01A.jpg) |
 | 수정과 | by gliuoo | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Korean_fruit_punch-Sujeonggwa-02.jpg) |
 | 깔루아 밀크 | Hitomi | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Kahlua_and_Milk.png) |
+| 베일리스 밀크 | Alessio Sbarbaro | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Baileys_and_ice_01.jpg) |
 | 스팀 밀크 | Scudsvlad | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hot_steamed_milk.jpg) |
 | 코코아 | UggBoy♥UggGirl | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:After_The_St._Patrick%27s_Parade_Late_Lunch_@_Lemon,_Dawson_Street,_Dublin,_Rep._Of_Ireland_A_Fine_Tradition!_(6992614913).jpg) |
 | 콜라 | Cocktailmarler | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Glass_of_Cola.jpg) |
@@ -189,4 +190,13 @@
 | 유과 | abex | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Korean.desserts-Yugwa-01.jpg) |
 | 스페퀼로스 | Torsten Maue | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Butterspekulatius_-_Flickr_-_tm-md_(5).jpg) |
 | 시폰 케이크 | Kimberly Vardeman from Lubbock, TX, USA | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lemon_Chiffon_Cake.jpg) |
-| 시몬 컵케이크 | W.carter | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Plain_vanilla_muffin_in_Tuntorp.jpg) |
+
+## Flickr
+
+자유 라이선스(CC BY, CC BY-SA) 사진입니다. 라이선스에 따라 저작자, 라이선스, 원본을 밝히고, CC 2.0·3.0 라이선스가 요구하는 대로 사진가가 붙인 원래 제목도 적습니다(Flickr 주소에는 제목이 없음).
+
+| 사진 | 제목 | 저작자 | 사용 허락 | 원본 |
+|---|---|---|---|---|
+| 시몬 컵케이크 | \[新\]蜂蜜杯子蛋糕 | [Rick Chung](https://www.flickr.com/photos/57611655@N05/) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
+
+시몬 컵케이크 사진은 같은 종류인 대만의 꿀 컵케이크(蜂蜜杯子蛋糕) 사진입니다. 주름 종이컵에 카스텔라처럼 구운 모양이 같아 골랐습니다.

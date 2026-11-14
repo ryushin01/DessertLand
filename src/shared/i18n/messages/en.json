@@ -759,6 +759,10 @@
       "name": "Kahlúa milk",
       "description": "Sweet cocktail of coffee liqueur and milk. Contains alcohol."
     },
+    "baileys-milk": {
+      "name": "Baileys milk",
+      "description": "Smooth cocktail of Irish cream liqueur and milk, served over ice. Contains alcohol."
+    },
     "steamed-milk": {
       "name": "Steamed milk",
       "description": "Warm milk heated with steam and topped with soft foam."

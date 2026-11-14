@@ -759,6 +759,10 @@
       "name": "Kahlúa com leite",
       "description": "Cocktail doce de licor de café e leite. Contém álcool."
     },
+    "baileys-milk": {
+      "name": "Baileys com leite",
+      "description": "Cocktail suave de licor de creme irlandês e leite, servido com gelo. Contém álcool."
+    },
     "steamed-milk": {
       "name": "Leite vaporizado",
       "description": "Leite aquecido a vapor com espuma macia."

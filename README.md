@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.5.2-ff6484)
+![version](https://img.shields.io/badge/version-0.5.3-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -12,7 +12,7 @@
 
 ## 화면
 
-사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)(자유 라이선스), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 아래 [출처](#출처)에 있습니다.
+사진은 [Unsplash](https://unsplash.com), [Wikimedia Commons](https://commons.wikimedia.org)·[Flickr](https://www.flickr.com)(자유 라이선스), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 아래 [출처](#출처)에 있습니다.
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
@@ -38,7 +38,7 @@
 
 | 구분 | 내용 |
 |---|---|
-| 전 세계 디저트 | 35개 나라와 기원이 여럿인 "기타"까지 174종. 케이크, 파이·타르트, 페이스트리, 쿠키·구움과자, 아이스크림·빙수, 푸딩·크림, 떡·전통 과자, 팬케이크·튀김, 커피, 음료의 10개 분류 |
+| 전 세계 디저트 | 35개 나라와 기원이 여럿인 "기타"까지 175종. 케이크, 파이·타르트, 페이스트리, 쿠키·구움과자, 아이스크림·빙수, 푸딩·크림, 떡·전통 과자, 팬케이크·튀김, 커피, 음료의 10개 분류 |
 | 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시. 언어 메뉴는 원형 국기와 나라 이름으로 고름 |
 | 쇼핑 | 카테고리 필터, 상품 상세, 장바구니(저장 유지) |
 | AI 추천 | 입맛을 적으면 Claude가 카탈로그 안에서 디저트를 추천(스트리밍). 키가 없으면 규칙 기반 추천 |
@@ -111,7 +111,7 @@ src/
 | [개발 가이드](docs/development.md) | 언어와 상품 추가, 모션 규칙, 사진과 아이콘 라이선스 |
 | [시퀀스 다이어그램](docs/sequence-diagrams.md) | Stripe 테스트 결제, 내장 테스트 결제, AI 디저트 추천(스트리밍) |
 | [변경 기록](CHANGELOG.md) | 버전별 변경 사항 |
-| [사진 출처](docs/credits.md) | 상품·첫 화면 사진 175장의 저작자, 사용 허락(라이선스), 원본 |
+| [사진 출처](docs/credits.md) | 상품·첫 화면 사진 176장의 저작자, 사용 허락(라이선스), 원본 |
 
 ## 출처
 
@@ -119,6 +119,7 @@ src/
 |---|---|---|---|
 | 상품·첫 화면 사진 17장 | Unsplash 사진가 ([목록](docs/credits.md#unsplash)) | Unsplash License | [unsplash.com](https://unsplash.com) |
 | 상품 사진 158장 (1400px 이하로 줄여 WebP로 바꿈) | Wikimedia Commons 기여자 ([목록](docs/credits.md#wikimedia-commons)) | 사진마다 CC0, 퍼블릭 도메인, CC BY, CC BY-SA 중 하나 (목록에 사진별로 표시) | [commons.wikimedia.org](https://commons.wikimedia.org) |
+| 상품 사진 1장 (시몬 컵케이크, 원래 제목 "\[新\]蜂蜜杯子蛋糕", 1400px로 줄여 WebP로 바꿈) | Rick Chung ([목록](docs/credits.md#flickr)) | CC BY-SA 2.0 | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
 | 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
 | Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
 | Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
