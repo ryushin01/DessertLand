@@ -1,1 +1,1 @@
-export { SmoothScroll } from "./SmoothScroll";
+export { SmoothScroll } from "./ui/SmoothScroll";

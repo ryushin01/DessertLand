@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.5.1-ff6484)
+![version](https://img.shields.io/badge/version-0.5.2-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -64,7 +64,7 @@
 | 결제 | Stripe Checkout(테스트 모드) |
 | AI | Claude API (`@anthropic-ai/sdk`) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
-| 품질 | ESLint(jsx-a11y), Vitest, Testing Library, Storybook 10, Playwright, axe, size-limit, Lighthouse CI |
+| 품질 | ESLint(jsx-a11y), Steiger, Vitest, Testing Library, Storybook 10, Playwright, axe, size-limit, Lighthouse CI |
 | 모니터링 | Sentry(DSN이 있을 때만), web-vitals, Vercel Speed Insights |
 | 구조 | Feature-Sliced Design |
 
@@ -83,7 +83,7 @@ Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`
 | 명령 | 설명 |
 |---|---|
 | `pnpm build` / `pnpm start` | 프로덕션 빌드와 실행 |
-| `pnpm typecheck` / `pnpm lint` | 타입 검사와 린트 |
+| `pnpm typecheck` / `pnpm lint` / `pnpm lint:fsd` | 타입 검사, 린트, FSD 구조 검사(Steiger) |
 | `pnpm test` | 단위 테스트 |
 | `pnpm e2e` | 프로덕션 빌드 기준 E2E와 접근성 검사(`pnpm build` 후 실행) |
 | `pnpm size` / `pnpm lhci` | 번들 크기 예산 / Lighthouse 점수 기준 검사(`pnpm build` 후 실행) |
@@ -96,11 +96,11 @@ Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`
 src/
 ├─ app/[locale]/   # 라우트. _pages를 다시 내보냅니다.
 ├─ proxy.ts        # 언어 라우팅
-├─ _app/           # 레이아웃, 프로바이더, 전역 스타일
-├─ _pages/         # 홈, 목록, 상세, 주문
-├─ widgets/        # 히어로, 쇼케이스, 커서, 장바구니 등
-├─ features/       # 담기, 바로 구매, 결제, 주문 폼, AI 추천, 언어 변경, 모션 멈춤
-├─ entities/       # 상품 카탈로그, 장바구니
+├─ _app/           # 레이아웃, 상태·모션 설정, 전역 스타일
+├─ _pages/         # 홈(히어로·쇼케이스 등 섹션), 목록, 상세, 주문(주문 폼)
+├─ widgets/        # 머리글(언어·모션 전환), 바닥글, 장바구니, 커서, 부드러운 스크롤
+├─ features/       # 담기, 바로 구매, 장바구니 요약, 결제, AI 추천
+├─ entities/       # 상품 카탈로그, 장바구니(합계 포함)
 └─ shared/         # 다국어, 모션, UI
 ```
 

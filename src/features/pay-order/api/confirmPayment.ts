@@ -1,7 +1,7 @@
 import { MAX_QUANTITY, type CartLine } from "@/entities/cart";
 import { getProduct } from "@/entities/product";
-import { summarizeCart } from "@/features/cart-summary";
-import { LOCALES } from "@/shared/i18n/routing";
+import { summarizeCart } from "@/entities/cart";
+import { LOCALES } from "@/shared/i18n/index.server";
 
 import { PAYMENT_METHODS, type PaymentRequest, type PaymentResult } from "../model/types";
 

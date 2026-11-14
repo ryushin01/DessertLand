@@ -1,2 +1,1 @@
-export { summarizeCart } from "./summarize";
-export { useCartSummary } from "./useCartSummary";
+export { useCartSummary } from "./model/useCartSummary";
