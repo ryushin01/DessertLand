@@ -1,6 +1,6 @@
 # 사진 출처
 
-상품과 첫 화면 사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)에서 가져왔습니다. 모두 1400~1500px 이하로 줄인 WebP로 바꿔 `public/images/`에 두었고, 그 밖에는 고치지 않았습니다.
+상품과 첫 화면 사진은 [Unsplash](https://unsplash.com), [Wikimedia Commons](https://commons.wikimedia.org), [Flickr](https://www.flickr.com)에서 가져왔습니다. 모두 1400~1500px 이하로 줄인 WebP로 바꿔 `public/images/`에 두었고, 그 밖에는 고치지 않았습니다.
 
 ## Unsplash
 
@@ -189,4 +189,13 @@
 | 유과 | abex | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Korean.desserts-Yugwa-01.jpg) |
 | 스페퀼로스 | Torsten Maue | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Butterspekulatius_-_Flickr_-_tm-md_(5).jpg) |
 | 시폰 케이크 | Kimberly Vardeman from Lubbock, TX, USA | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lemon_Chiffon_Cake.jpg) |
-| 시몬 컵케이크 | W.carter | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Plain_vanilla_muffin_in_Tuntorp.jpg) |
+
+## Flickr
+
+자유 라이선스(CC BY, CC BY-SA) 사진입니다. 라이선스에 따라 저작자, 라이선스, 원본을 밝힙니다.
+
+| 사진 | 저작자 | 사용 허락 | 원본 |
+|---|---|---|---|
+| 시몬 컵케이크 | [Rick Chung](https://www.flickr.com/photos/57611655@N05/) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
+
+시몬 컵케이크 사진은 같은 종류인 대만의 꿀 컵케이크(蜂蜜杯子蛋糕) 사진입니다. 주름 종이컵에 카스텔라처럼 구운 모양이 같아 골랐습니다.
