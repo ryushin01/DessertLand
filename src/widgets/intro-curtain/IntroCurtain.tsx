@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
+import { MEDIA, MOTION_PAUSED_KEY } from "@/shared/lib/motion";
 import { gsap } from "@/shared/lib/motion/gsap";
 
 const SEEN_KEY = "dessert-land.intro-seen";
@@ -28,11 +29,11 @@ const counter = css({
 });
 
 function shouldSkip(): boolean {
-  if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return true;
+  if (window.matchMedia(`${MEDIA.reducedMotion}, ${MEDIA.coarsePointer}`).matches) return true;
   try {
     return (
       sessionStorage.getItem(SEEN_KEY) === "1" ||
-      localStorage.getItem("dessert-land.motion-paused") === "true"
+      localStorage.getItem(MOTION_PAUSED_KEY) === "true"
     );
   } catch {
     return false;

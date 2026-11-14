@@ -139,6 +139,8 @@ export function CartDrawer() {
       <p role="status" className={live}>
         {announcement}
       </p>
+      {/* 배경을 누르면 닫는 마우스 지름길이다. 키보드로는 Esc와 닫기 버튼으로 닫는다. */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <dialog
         ref={ref}
         className={dialog}

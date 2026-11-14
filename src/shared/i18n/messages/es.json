@@ -170,15 +170,6 @@
     "stripeRedirecting": "Yendo a la página de pago",
     "unverified": "No se ha podido confirmar el pago. Puedes comprobarlo en el panel de pruebas de Stripe."
   },
-  "credits": {
-    "metaTitle": "Créditos",
-    "title": "Créditos de fotos e iconos",
-    "photos": "Fotos: Unsplash, Wikimedia Commons",
-    "icons": "Iconos: Flaticon",
-    "hero": "Foto de portada",
-    "by": "Foto de {name}",
-    "changes": "Las fotos de Wikimedia Commons se usan según sus licencias y se redimensionaron y convirtieron a WebP."
-  },
   "footer": {
     "tagline": "Dessert Land es una tienda de demostración con postres del mundo en 10 idiomas.",
     "credits": "Créditos de fotos e iconos"

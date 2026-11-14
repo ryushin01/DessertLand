@@ -12,7 +12,7 @@
 
 ## 화면
 
-사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)(자유 라이선스), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 사이트의 출처 페이지에 있습니다.
+사진은 [Unsplash](https://unsplash.com)와 [Wikimedia Commons](https://commons.wikimedia.org)(자유 라이선스), 아이콘은 [Flaticon UIcons](https://www.flaticon.com/uicons)에서 가져왔습니다. 출처는 아래 [출처](#출처)에 있습니다.
 
 | 첫 화면 | 카테고리 쇼케이스 |
 |---|---|
@@ -64,7 +64,8 @@
 | 결제 | Stripe Checkout(테스트 모드) |
 | AI | Claude API (`@anthropic-ai/sdk`) |
 | 모션 | GSAP(ScrollTrigger), Lenis, OGL(WebGL) |
-| 품질 | ESLint, Vitest, Testing Library, Storybook 10, Playwright, axe, Vercel Speed Insights |
+| 품질 | ESLint(jsx-a11y), Vitest, Testing Library, Storybook 10, Playwright, axe, size-limit, Lighthouse CI |
+| 모니터링 | Sentry(DSN이 있을 때만), web-vitals, Vercel Speed Insights |
 | 구조 | Feature-Sliced Design |
 
 ## 시작하기
@@ -85,6 +86,7 @@ Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`
 | `pnpm typecheck` / `pnpm lint` | 타입 검사와 린트 |
 | `pnpm test` | 단위 테스트 |
 | `pnpm e2e` | 프로덕션 빌드 기준 E2E와 접근성 검사(`pnpm build` 후 실행) |
+| `pnpm size` / `pnpm lhci` | 번들 크기 예산 / Lighthouse 점수 기준 검사(`pnpm build` 후 실행) |
 | `pnpm analyze` | 번들 분석 화면 |
 | `pnpm storybook` | 컴포넌트 문서 |
 
@@ -95,7 +97,7 @@ src/
 ├─ app/[locale]/   # 라우트. _pages를 다시 내보냅니다.
 ├─ proxy.ts        # 언어 라우팅
 ├─ _app/           # 레이아웃, 프로바이더, 전역 스타일
-├─ _pages/         # 홈, 목록, 상세, 주문, 출처
+├─ _pages/         # 홈, 목록, 상세, 주문
 ├─ widgets/        # 히어로, 쇼케이스, 커서, 장바구니 등
 ├─ features/       # 담기, 바로 구매, 결제, 주문 폼, AI 추천, 언어 변경, 모션 멈춤
 ├─ entities/       # 상품 카탈로그, 장바구니
@@ -109,3 +111,20 @@ src/
 | [개발 가이드](docs/development.md) | 언어와 상품 추가, 모션 규칙, 사진과 아이콘 라이선스 |
 | [시퀀스 다이어그램](docs/sequence-diagrams.md) | Stripe 테스트 결제, 내장 테스트 결제, AI 디저트 추천(스트리밍) |
 | [변경 기록](CHANGELOG.md) | 버전별 변경 사항 |
+| [사진 출처](docs/credits.md) | 상품·첫 화면 사진 175장의 저작자, 사용 허락(라이선스), 원본 |
+
+## 출처
+
+| 자료 | 저작자 | 사용 허락 | 원본 |
+|---|---|---|---|
+| 상품·첫 화면 사진 17장 | Unsplash 사진가 ([목록](docs/credits.md#unsplash)) | Unsplash License | [unsplash.com](https://unsplash.com) |
+| 상품 사진 158장 (1400px 이하로 줄여 WebP로 바꿈) | Wikimedia Commons 기여자 ([목록](docs/credits.md#wikimedia-commons)) | 사진마다 CC0, 퍼블릭 도메인, CC BY, CC BY-SA 중 하나 (목록에 사진별로 표시) | [commons.wikimedia.org](https://commons.wikimedia.org) |
+| 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
+| Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
+| Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
+| Gowun Dodum(고운돋움) 글꼴 (한국어 본문) | The Gowun Dodum Project Authors(류양희) | SIL OFL 1.1 | [yangheeryu/Gowun-Dodum](https://github.com/yangheeryu/Gowun-Dodum) |
+| Grandiflora One 글꼴 (한국어 제목) | The Grandiflora Project Authors(JAMO) | SIL OFL 1.1 | [JAMO-TYPEFACE/Grandiflora](https://github.com/JAMO-TYPEFACE/Grandiflora) |
+| Noto Sans·Serif JP 글꼴 (일본어) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+JP) |
+| Noto Sans·Serif SC 글꼴 (중국어) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+SC) |
+
+사이트 바닥글의 출처 링크가 이 표로 옵니다. 예전 출처 페이지(`/{언어}/credits`)도 이곳으로 넘어옵니다. Flaticon 무료 라이선스는 사이트 바닥글에 출처 줄을 두도록 정해, 바닥글의 'Uicons by Flaticon' 링크는 그대로 둡니다.
