@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
 import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
-import { Link, localeAlternates, siteOpenGraph } from "@/shared/i18n";
+import { Link, localeAlternates, redirect, siteOpenGraph } from "@/shared/i18n";
 import { RevealText } from "@/shared/ui/reveal-text";
 import { ProductScroller } from "@/widgets/product-scroller";
 
@@ -56,10 +56,24 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
   return { title, alternates: localeAlternates(locale, "/shop"), openGraph: siteOpenGraph(title) };
 }
 
+const LEGACY_CATEGORIES: Record<string, Category | null> = {
+  milkshake: "drink",
+  cheesecake: "cake",
+  muffin: "baked",
+  pancake: "griddle",
+  creamcake: "cake",
+  classic: null,
+};
+
 export default async function ShopPage({ params, searchParams }: ShopPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const { category } = await searchParams;
+  // 0.5.0 이전의 분류 주소는 가장 가까운 새 분류로 보냅니다. "세계의 명작"은 맞는 분류가 없어 전체 목록으로 보냅니다.
+  if (typeof category === "string" && Object.hasOwn(LEGACY_CATEGORIES, category)) {
+    const next = LEGACY_CATEGORIES[category];
+    redirect({ href: next ? { pathname: "/shop", query: { category: next } } : "/shop", locale });
+  }
   const active = isCategory(category) ? category : undefined;
   return <ShopContent active={active} />;
 }
