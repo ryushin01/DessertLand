@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 0.5.4 - 2026-11-14
+
+- 파비콘·로고를 소프트아이스크림 아이콘으로: `favicon.ico`(16·32·48), `icon-192.png`, `apple-touch-icon.png`(180, 코코아 #120b0a 바탕), 머리글 로고(`public/brand/logo.png`). 'Dessert Land' 글자는 그대로
+- 아이콘은 Google Noto Emoji(Apache 2.0). README 출처 표에 적고 라이선스 사본(고지와 전문)을 `public/brand/LICENSE-noto-emoji.txt`에 둠
+- README 스크린샷 9장의 머리글 로고를 새 로고로 바꿈. 첫 화면 연출의 스크롤 위치와 Stripe 결제 세션이 필요한 화면이 있어, 운영 사이트에서 잰 로고 자리(44px)만 바꿔 끼움(장바구니 화면은 배경막과 같은 흐림 6px·덮개 0.65로 맞춤). Stripe 결제 화면은 머리글이 없어 그대로
+
 ## 0.5.3 - 2026-11-14
 
 - 음료에 베일리스 밀크를 더해 175종: 아이리시 크림 리큐어에 우유를 섞어 얼음에 낸 칵테일. 기원 나라가 정해져 있지 않아 깔루아 밀크처럼 "기타"로 두고, 술이 들어 있다고 10개 언어로 적음. 사진은 Wikimedia Commons의 Alessio Sbarbaro 사진(얼음에 낸 베일리스, CC BY-SA 3.0)

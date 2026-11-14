@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.5.3-ff6484)
+![version](https://img.shields.io/badge/version-0.5.4-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -120,6 +120,7 @@ src/
 | 상품·첫 화면 사진 17장 | Unsplash 사진가 ([목록](docs/credits.md#unsplash)) | Unsplash License | [unsplash.com](https://unsplash.com) |
 | 상품 사진 158장 (1400px 이하로 줄여 WebP로 바꿈) | Wikimedia Commons 기여자 ([목록](docs/credits.md#wikimedia-commons)) | 사진마다 CC0, 퍼블릭 도메인, CC BY, CC BY-SA 중 하나 (목록에 사진별로 표시) | [commons.wikimedia.org](https://commons.wikimedia.org) |
 | 상품 사진 1장 (시몬 컵케이크, 원래 제목 "\[新\]蜂蜜杯子蛋糕", 1400px로 줄여 WebP로 바꿈) | Rick Chung ([목록](docs/credits.md#flickr)) | CC BY-SA 2.0 | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
+| 소프트아이스크림 아이콘 (파비콘·로고) | Google (Noto Emoji) | Apache 2.0 ([사본](public/brand/LICENSE-noto-emoji.txt)) | [googlefonts/noto-emoji](https://github.com/googlefonts/noto-emoji) |
 | 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
 | Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
 | Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
