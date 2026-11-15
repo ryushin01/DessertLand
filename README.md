@@ -89,6 +89,7 @@ Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`
 | `pnpm size` / `pnpm lhci` | 번들 크기 예산 / Lighthouse 점수 기준 검사(`pnpm build` 후 실행) |
 | `pnpm analyze` | 번들 분석 화면 |
 | `pnpm storybook` | 컴포넌트 문서 |
+| `pnpm screenshots` | README 화면 다시 찍기 (Stripe 키 없이 `pnpm build && pnpm start` 뒤 `BASE_URL` 지정) |
 
 ## 프로젝트 구조
 
