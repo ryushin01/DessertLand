@@ -31,7 +31,20 @@ async function imagesReady(page) {
       { timeout: 10_000 },
     )
     .catch(() => console.warn("일부 이미지를 기다리다 제한 시간이 지났습니다."));
-  await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode().catch(() => {}))));
+  // 화면에 보이는 이미지만 그릴 준비를 마칩니다(지연 로딩 중인 이미지까지 풀면 오래 걸림).
+  await page.evaluate(() =>
+    Promise.race([
+      Promise.all(
+        [...document.images]
+          .filter((image) => {
+            const rect = image.getBoundingClientRect();
+            return image.complete && rect.bottom > 0 && rect.top < window.innerHeight && rect.width > 0;
+          })
+          .map((image) => image.decode().catch(() => {})),
+      ),
+      new Promise((resolve) => setTimeout(resolve, 5000)),
+    ]),
+  );
 }
 
 async function shot(page, name, options = {}) {
