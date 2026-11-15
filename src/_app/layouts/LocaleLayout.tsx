@@ -1,8 +1,10 @@
 import "@/_app/styles/global.css";
+// 한국어 본문: 하다 바탕 중 화면에 쓰는 글자만 담은 파일(pnpm fonts로 만듦). 한글이 없는 언어에서는 받지 않습니다.
+import "@/_app/styles/fonts/hada-batang.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Playfair_Display } from "next/font/google";
+import { Lora } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -12,6 +14,7 @@ import { css } from "styled-system/css";
 import { AppProviders } from "@/_app/state/AppProviders";
 import { DeferredMotion } from "@/_app/motion/DeferredMotion";
 import { MotionAttribute } from "@/_app/motion/MotionAttribute";
+import { RestFonts } from "@/_app/layouts/RestFonts";
 import { SITE_NAME, SITE_URL } from "@/shared/config";
 import { LOCALES, routing } from "@/shared/i18n";
 import { Grain } from "@/shared/ui";
@@ -19,21 +22,17 @@ import { CartDrawer } from "@/widgets/cart-drawer";
 import { SiteFooter } from "@/widgets/site-footer";
 import { SiteHeader } from "@/widgets/site-header";
 
-// 영문 상품명은 파티스리 간판 같은 Playfair Display
-const display = Playfair_Display({
-  subsets: ["latin", "latin-ext"],
-  weight: "400",
-  variable: "--font-display",
-});
-const body = Instrument_Sans({ subsets: ["latin", "latin-ext"], variable: "--font-body" });
+// 영문·숫자는 제목과 본문 모두 붓맛이 남은 세리프 Lora(가변 400~700)
+const lora = Lora({ subsets: ["latin", "latin-ext"], variable: "--font-lora" });
 
 // next/font로 함께 선언하면 모든 언어에 CSS가 붙어 렌더링을 막으므로, 그 언어의 글꼴만 따로 받습니다.
-// 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 고운돋움(본문). 두 글꼴은 굵기가 400 하나뿐입니다.
+// 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 하다 바탕(본문, 400·700). 하다 바탕은 저장소에서 직접 제공하므로
+// Google Fonts에서는 제목 글꼴만 받습니다(sansWeights 없음).
 // 일본어도 같은 결로 장식 명조 Kaisei Decol(제목)과 둥근 Zen Maru Gothic(본문).
 // 중국어는 Google Fonts의 장식 서체가 파일이 커서 Noto를 씁니다.
-type CjkFonts = { sans: string; sansWeights: string; serif: string; serifWeights: string };
+type CjkFonts = { sans: string; sansWeights?: string; serif: string; serifWeights: string };
 const CJK_FONTS: Record<string, CjkFonts> = {
-  ko: { sans: "Gowun Dodum", sansWeights: "400", serif: "Grandiflora One", serifWeights: "400" },
+  ko: { sans: "Hada Batang", serif: "Grandiflora One", serifWeights: "400" },
   ja: {
     sans: "Zen Maru Gothic",
     sansWeights: "400;500;700",
@@ -50,7 +49,8 @@ const CJK_FONTS: Record<string, CjkFonts> = {
 
 function cjkStylesheet({ sans, sansWeights, serif, serifWeights }: CjkFonts): string {
   const family = (name: string, axis: string) => `family=${name.replaceAll(" ", "+")}:wght@${axis}`;
-  return `https://fonts.googleapis.com/css2?${family(sans, sansWeights)}&${family(serif, serifWeights)}&display=swap`;
+  const families = sansWeights ? [family(sans, sansWeights), family(serif, serifWeights)] : [family(serif, serifWeights)];
+  return `https://fonts.googleapis.com/css2?${families.join("&")}&display=swap`;
 }
 
 const skipLink = css({
@@ -106,7 +106,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html
       lang={locale}
       data-motion="on"
-      className={`${display.variable} ${body.variable}`}
+      className={lora.variable}
       style={
         cjk
           ? ({
@@ -143,6 +143,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             <SpeedInsights />
           </AppProviders>
         </NextIntlClientProvider>
+        {locale === "ko" ? <RestFonts href="/fonts/hada-batang-rest.css" /> : null}
       </body>
     </html>
   );

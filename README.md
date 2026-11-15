@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.5.4-ff6484)
+![version](https://img.shields.io/badge/version-0.6.0-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -113,6 +113,18 @@ src/
 | [변경 기록](CHANGELOG.md) | 버전별 변경 사항 |
 | [사진 출처](docs/credits.md) | 상품·첫 화면 사진 176장의 저작자, 사용 허락(라이선스), 원본 |
 
+## 웹 폰트
+
+| 글꼴 | 쓰는 곳 | 굵기 |
+|---|---|---|
+| Lora | 영문·숫자 (제목·본문) | 400~700 가변 |
+| 그란디플로라 원 | 한국어 제목 | 400 |
+| 하다 바탕 | 한국어 본문 | 400·700 |
+| Kaisei Decol · Zen Maru Gothic | 일본어 제목 · 본문 | 500 · 400·500·700 |
+| Noto Serif SC · Noto Sans SC | 중국어 제목 · 본문 | 500 · 400·500·700 |
+
+저작자·라이선스·원본은 아래 출처 표에 있습니다. 하다 바탕은 저장소에서 직접 제공하며, 화면에 쓰는 글자만 담은 작은 파일을 먼저 받고 나머지 글자는 글자 묶음별 조각으로 나눠 그 글자를 쓸 때만 받습니다(`pnpm fonts`로 다시 만듦). 그 밖의 한중일 글꼴은 그 언어 화면에서만 Google Fonts에서 받습니다.
+
 ## 출처
 
 | 자료 | 저작자 | 사용 허락 | 원본 |
@@ -122,9 +134,8 @@ src/
 | 상품 사진 1장 (시몬 컵케이크, 원래 제목 "\[新\]蜂蜜杯子蛋糕", 1400px로 줄여 WebP로 바꿈) | Rick Chung ([목록](docs/credits.md#flickr)) | CC BY-SA 2.0 | [Flickr](https://www.flickr.com/photos/57611655@N05/6956173364) |
 | 소프트아이스크림 아이콘 (파비콘·로고) | Google (Noto Emoji) | Apache 2.0 ([사본](public/brand/LICENSE-noto-emoji.txt)) | [googlefonts/noto-emoji](https://github.com/googlefonts/noto-emoji) |
 | 아이콘 (Uicons by Flaticon, 쓰는 것만 남긴 `uicons-subset.woff2`) | Flaticon | Flaticon 무료 라이선스 (출처 표시) | [flaticon.com/uicons](https://www.flaticon.com/uicons) |
-| Playfair Display 글꼴 (영문 제목) | The Playfair Display Project Authors | SIL OFL 1.1 | [clauseggers/Playfair-Display](https://github.com/clauseggers/Playfair-Display) |
-| Instrument Sans 글꼴 (본문) | The Instrument Sans Project Authors | SIL OFL 1.1 | [Instrument/instrument-sans](https://github.com/Instrument/instrument-sans) |
-| Gowun Dodum(고운돋움) 글꼴 (한국어 본문) | The Gowun Dodum Project Authors(류양희) | SIL OFL 1.1 | [yangheeryu/Gowun-Dodum](https://github.com/yangheeryu/Gowun-Dodum) |
+| Lora 글꼴 (영문·숫자 제목·본문) | The Lora Project Authors(Cyreal) | SIL OFL 1.1 | [cyrealtype/Lora-Cyrillic](https://github.com/cyrealtype/Lora-Cyrillic) |
+| 하다 바탕 글꼴 (한국어 본문) | Hada Type Foundry (RIDI바탕·마루 부리·고운바탕 기반) | SIL OFL 1.1 | [눈누](https://noonnu.cc/font_page/1960) |
 | Grandiflora One 글꼴 (한국어 제목) | The Grandiflora Project Authors(JAMO) | SIL OFL 1.1 | [JAMO-TYPEFACE/Grandiflora](https://github.com/JAMO-TYPEFACE/Grandiflora) |
 | Kaisei Decol 글꼴 (일본어 제목) | The Kaisei Project Authors(Font-Kai) | SIL OFL 1.1 | [Font-Kai/Kaisei](https://github.com/Font-Kai/Kaisei) |
 | Zen Maru Gothic 글꼴 (일본어 본문) | The Zen Maru Gothic Project Authors(Yoshimichi Ohira) | SIL OFL 1.1 | [googlefonts/zen-marugothic](https://github.com/googlefonts/zen-marugothic) |
