@@ -20,7 +20,8 @@
     "analyze": "next experimental-analyze",
     "size": "size-limit",
     "lhci": "lhci autorun",
-    "fonts": "node scripts/build-fonts.mjs"
+    "fonts": "node scripts/build-fonts.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",
