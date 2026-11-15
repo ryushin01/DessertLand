@@ -1,6 +1,6 @@
 {
   "name": "dessert-land",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "전 세계 디저트가 모인 달콤한 나라: 10개 언어로 디저트를 소개하고 판매하는 쇼핑몰",
   "private": true,
   "type": "module",
@@ -19,7 +19,8 @@
     "e2e": "playwright test",
     "analyze": "next experimental-analyze",
     "size": "size-limit",
-    "lhci": "lhci autorun"
+    "lhci": "lhci autorun",
+    "fonts": "node scripts/build-fonts.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",
@@ -58,12 +59,15 @@
     "@vitejs/plugin-react": "^6.3.0",
     "eslint": "^10.14.0",
     "eslint-config-next": "^16.4.5",
+    "fontverter": "2.0.0",
+    "harfbuzzjs": "1.6.4",
     "jsdom": "^31.0.0",
     "postcss": "^8.5.32",
     "prettier": "^3.9.10",
     "size-limit": "^14.3.0",
     "steiger": "^0.10.0",
     "storybook": "^10.6.6",
+    "subset-font": "2.9.0",
     "typescript": "~5.9.3",
     "vitest": "^5.1.0"
   }

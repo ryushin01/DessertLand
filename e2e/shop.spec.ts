@@ -186,7 +186,9 @@ test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
   const korean = page.locator('link[rel="stylesheet"][href*="fonts.googleapis.com/css2"]');
   await expect(korean).toHaveAttribute("href", /Grandiflora\+One/);
   await expect(korean).not.toHaveAttribute("href", /JP|SC/);
-  await expect(page.locator("html")).toHaveAttribute("style", /Gowun Dodum/);
+  // 한국어 본문 하다 바탕은 저장소에서 직접 제공하므로 Google Fonts 주소에는 없습니다.
+  await expect(korean).not.toHaveAttribute("href", /Hada/);
+  await expect(page.locator("html")).toHaveAttribute("style", /Hada Batang/);
 });
 
 test("예전 분류 주소는 새 분류로 보냅니다", async ({ page }) => {
