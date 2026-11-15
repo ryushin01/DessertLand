@@ -16,7 +16,26 @@ async function open(path, viewport = { width: 1440, height: 900 }, scale = 1) {
   return { page, context };
 }
 
+/** 화면에 보이는 이미지를 다 받고 그릴 준비가 될 때까지 기다립니다(최대 10초). */
+async function imagesReady(page) {
+  await page
+    .waitForFunction(
+      () =>
+        [...document.images]
+          .filter((image) => {
+            const rect = image.getBoundingClientRect();
+            return rect.bottom > 0 && rect.top < window.innerHeight && rect.width > 0;
+          })
+          .every((image) => image.complete && image.naturalWidth > 0),
+      null,
+      { timeout: 10_000 },
+    )
+    .catch(() => console.warn("일부 이미지를 기다리다 제한 시간이 지났습니다."));
+  await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode().catch(() => {}))));
+}
+
 async function shot(page, name, options = {}) {
+  await imagesReady(page);
   await page.screenshot({ path: `${OUT}/${name}.jpg`, type: "jpeg", quality: 82, ...options });
   console.log("저장", name);
 }
