@@ -34,7 +34,17 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  images: { formats: ["image/avif", "image/webp"], qualities: [40, 75] },
+  // 이미지 변형 수를 줄여 Vercel 무료 플랜의 이미지 변환 한도 안에 둡니다(docs/development.md '이미지 변형').
+  // - 너비: 원본이 1,500px 이하라 그보다 큰 기본 너비(1920·2048·3840)는 같은 그림을 따로 만들 뿐입니다.
+  // - 형식: AVIF 하나만 만듭니다. AVIF를 못 받는 오래된 브라우저는 Next가 JPEG로 바꿔 줍니다.
+  // - 캐시: 사진은 바뀌지 않으므로 31일 동안 다시 변환하지 않습니다. 사진을 바꿀 때는 파일 이름을 바꿉니다.
+  images: {
+    formats: ["image/avif"],
+    qualities: [40, 75],
+    deviceSizes: [640, 828, 1080, 1500],
+    imageSizes: [128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 31,
+  },
   async headers() {
     return [
       {
