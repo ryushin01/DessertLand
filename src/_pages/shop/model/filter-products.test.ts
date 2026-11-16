@@ -28,6 +28,9 @@ describe("filterProducts", () => {
     expect(japan.length).toBeGreaterThan(3);
     expect(japan.every((slug) => getProduct(slug)?.country === "JP")).toBe(true);
     expect(foldText("Tiramisù")).toBe("tiramisu");
+    // 영문 slug는 하이픈 그대로도, 띄어 써도 찾습니다.
+    expect(slugs({ query: "new-york-cheesecake" })).toEqual(["new-york-cheesecake"]);
+    expect(slugs({ query: "new york cheese" })).toEqual(["new-york-cheesecake"]);
     expect(slugs({ query: "없는 디저트" })).toEqual([]);
   });
 

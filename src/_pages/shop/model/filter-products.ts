@@ -35,9 +35,11 @@ export function filterProducts(
       return false;
     }
     if (!needle) return true;
+    // 영문 slug는 하이픈 그대로(new-york-cheesecake)와 띄어 쓴 꼴(new york cheesecake) 모두로 찾습니다.
     const haystack = [
       words.name(product.slug),
       words.country(product),
+      product.slug,
       product.slug.replaceAll("-", " "),
     ];
     return haystack.some((text) => foldText(text).includes(needle));
