@@ -20,8 +20,8 @@ jobs:
       - run: pnpm lint
       - run: pnpm lint:fsd
       - run: pnpm test
+      # pnpm build가 Storybook(public/storybook)까지 빌드하므로 따로 돌리지 않습니다.
       - run: pnpm build
-      - run: pnpm build-storybook
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm e2e
       - run: pnpm size
