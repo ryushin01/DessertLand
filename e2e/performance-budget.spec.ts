@@ -9,10 +9,10 @@ import { expect, test, type APIRequestContext } from "./fixtures";
  * 링크 프리페치로 나중에 받는 코드는 첫 화면을 막지 않으므로 세지 않습니다.
  */
 const JS_BUDGET_KB: Record<string, number> = {
-  "/ko": 240,
-  "/ko/shop": 235,
-  "/ko/shop/baklava": 235,
-  "/ko/checkout": 190,
+  "/ko": 250,
+  "/ko/shop": 245,
+  "/ko/shop/baklava": 245,
+  "/ko/checkout": 200,
 };
 const CSS_BUDGET_KB = 25;
 

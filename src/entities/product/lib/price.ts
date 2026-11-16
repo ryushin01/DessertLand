@@ -39,9 +39,14 @@ export function shippingInCurrency(currency: Currency): number {
 }
 
 export function formatMoney(amount: number, locale: string): string {
+  return formatCurrency(amount, currencyForLocale(locale), locale);
+}
+
+/** 정한 통화의 금액을 그 언어의 표기로 씁니다. 다른 언어 화면에서 한 주문의 금액을 보여 줄 때 씁니다. */
+export function formatCurrency(amount: number, currency: string, locale: string): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: currencyForLocale(locale),
+    currency,
     maximumFractionDigits: Number.isInteger(amount) ? 0 : 2,
   }).format(amount);
 }

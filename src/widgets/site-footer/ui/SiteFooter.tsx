@@ -91,6 +91,11 @@ export function SiteFooter() {
         </ul>
         <ul>
           <li>
+            <Link href="/orders" className={link}>
+              {t("orders")}
+            </Link>
+          </li>
+          <li>
             {/* 사진·아이콘·글꼴의 출처는 화면이 아니라 README에 적고, 여기서 그 표로 잇습니다. */}
             <a href={SOURCES_URL} className={link}>
               {t("credits")}
