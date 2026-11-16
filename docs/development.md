@@ -95,7 +95,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 2. 사용자는 Stripe 화면에서 카드와 배송 정보를 입력합니다.
 3. 완료 페이지가 주소의 세션 ID를 Stripe에 직접 조회해 결제 여부를 확인합니다. 장바구니 주문이면 이때 장바구니를 비웁니다.
 
-한 주문은 99종까지입니다(`MAX_ORDER_LINES`). Stripe Checkout이 결제 항목을 100줄까지 받고 그중 한 줄이 배송비이기 때문입니다. 넘으면 주문 화면이 결제 버튼 대신 장바구니에서 고르라고 안내하고, 서버 검증(`isValidOrderLines`, 두 결제 경로가 함께 씀)도 거절합니다. 결제 뒤 장바구니에서 뺄 상품의 slug는 메타데이터 값 하나의 상한(500자)을 넘지 않게 `items_1`, `items_2`…로 나눠 담습니다.
+한 주문은 99종까지입니다(`MAX_ORDER_LINES`). Stripe Checkout이 결제 항목을 100줄까지 받고 그중 한 줄이 배송비이기 때문입니다. 넘으면 주문 화면이 결제 버튼 대신 장바구니에서 고르라고 안내하고, 서버 검증(`isValidOrderLines`, 두 결제 경로가 함께 씀)도 거절합니다. 결제 뒤 장바구니에서 뺄 상품의 slug는 메타데이터 `items`에 쉼표로 이어 담고, 값 하나의 상한(500자)을 넘을 때만 `items_1`, `items_2`…로 나눕니다. 500자 안이면 예전과 같은 모양이라 이전 버전으로 되돌려도 읽힙니다.
 
 키가 없으면 내장 테스트 결제창과 `POST /api/payments`를 씁니다. CI와 E2E는 이 경로로 동작합니다.
 
@@ -146,7 +146,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - Sentry에는 오류 내용만 보내고 사용자 정보·쿠키·헤더·쿼리 문자열, 방문 기록(세션), 이동·클릭 기록(브레드크럼), 콘솔 기록은 모으지 않습니다. 오류에 붙는 콜백 인수, Error가 아닌 일반 객체로 거부된 Promise의 필드 값(`extra.__serialized__`), 주소의 `#` 뒤도 보내기 전에 지웁니다. Sentry를 받기 전에 난 오류는 모아 두었다가 처리되지 않은 오류로 보냅니다.
 - 쓰는 함수만 `sentry.ts`에서 다시 내보내 약 31 kB(gzip)로 받습니다. 모듈 전체를 불러오면 리플레이·피드백까지 들어가 140 kB가 됩니다.
 - 실제 방문자의 속도는 Vercel Speed Insights로도 봅니다. 로컬 Lighthouse에서는 이 스크립트가 404라 권장 사항이 96점으로 나옵니다.
-- **중계 경로:** 브라우저는 Sentry로 직접 보내지 않고 같은 사이트의 `POST /api/monitoring`으로 보냅니다(`tunnel`). CSP의 `connect-src 'self'`를 넓히지 않아도 되고 광고 차단기에도 덜 막힙니다. 중계는 묶음 머리글의 DSN이 이 사이트의 DSN과 같을 때만 넘기고, 256KB를 넘는 묶음은 거절하며, 접속자마다 1분에 60번까지 받습니다. DSN이 없으면 404로 답합니다.
+- **중계 경로:** 브라우저는 Sentry로 직접 보내지 않고 같은 사이트의 `POST /api/monitoring`으로 보냅니다(`tunnel`). CSP의 `connect-src 'self'`를 넓히지 않아도 되고 광고 차단기에도 덜 막힙니다. 중계는 묶음 머리글의 DSN이 이 사이트의 DSN과 같을 때만 넘기고, 256KB를 넘는 묶음은 거절하며(Content-Length가 없어도 바이트 수를 세며 읽다가 넘으면 멈춤), 접속자마다 1분에 60번까지 받습니다. DSN이 없으면 404로 답합니다.
 - **서버 오류:** `src/instrumentation.ts`의 `onRequestError`가 화면 렌더링·API 라우트에서 처리하지 못한 오류를 Sentry로 보냅니다(`_app/monitoring/server.ts`). SDK 없이 envelope를 직접 만들고, 경로는 쿼리 없이 보내며 헤더·쿠키는 넣지 않습니다. 보내기는 2초까지만 기다립니다.
 - **오류 화면:** 화면을 그리다 오류가 나면 `app/[locale]/error.tsx`(`_app/layouts/RouteError.tsx`)가 404 화면과 같은 배치로 다시 시도·홈으로 버튼을 보여 주고, 오류를 Sentry로 보냅니다.
 

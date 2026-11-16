@@ -6,8 +6,9 @@ import { PRODUCTS } from "@/entities/product";
 import { METADATA_VALUE_LIMIT, packSlugs, unpackSlugs } from "./order-metadata";
 
 describe("order metadata", () => {
-  it("상품이 적으면 키 하나에 담습니다", () => {
-    expect(packSlugs(["baklava", "tiramisu"])).toEqual({ items_1: "baklava,tiramisu" });
+  it("500자 안이면 0.6.0까지와 같은 items 키 하나에 담습니다(이전 버전으로 되돌려도 읽힘)", () => {
+    expect(packSlugs(["baklava", "tiramisu"])).toEqual({ items: "baklava,tiramisu" });
+    expect(packSlugs([])).toEqual({});
   });
 
   it("가장 긴 slug로 상한까지 담아도 값마다 500자, 키 50개를 넘지 않고 그대로 되돌립니다", () => {
@@ -22,7 +23,7 @@ describe("order metadata", () => {
     expect(unpackSlugs({ source: "cart", ...packed })).toEqual(longest);
   });
 
-  it("예전 items 키도 읽습니다", () => {
+  it("items 키 하나짜리도 읽습니다", () => {
     expect(unpackSlugs({ source: "cart", items: "baklava,tiramisu" })).toEqual([
       "baklava",
       "tiramisu",
