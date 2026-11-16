@@ -92,7 +92,14 @@ GSAP은 `@/shared/lib/gsap`에서만 가져옵니다. `@/shared/lib/motion`이�
 
 ## 로고
 
-케이크 언덕 꼭대기에 깃발을 꽂은 모양으로, "랜드"를 표현합니다. 원본은 `src/shared/ui/logo/Logo.tsx`이고, 바꾸면 `public/favicon.svg`, `public/apple-touch-icon.png`, `docs/images/logo.svg`도 함께 맞춥니다.
+소프트아이스크림 아이콘(Google Noto Emoji, Apache 2.0)입니다. 머리글 로고(`src/shared/ui/logo/Logo.tsx`)와 README 제목은 같은 파일 `public/brand/logo.png`(128px, 바탕 없음)를 씁니다. 바꾸면 같은 그림으로 아래를 모두 맞추고, 머리글이 찍힌 README 화면(`pnpm screenshots`)을 다시 찍고 README 출처 표를 고칩니다.
+
+| 파일 | 쓰임 |
+|---|---|
+| `public/brand/logo.png` | 머리글 로고, README 제목 (128px, 바탕 없음) |
+| `public/favicon.ico` | 파비콘 (16·32·48px) |
+| `public/icon-192.png` | 큰 파비콘 (192px, 바탕 없음) |
+| `public/apple-touch-icon.png` | iPhone 홈 화면 아이콘 (180px, 코코아 바탕) |
 
 ## 구매와 결제
 
