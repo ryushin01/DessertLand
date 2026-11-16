@@ -86,6 +86,8 @@ export type BakerRenderer = {
   canvas: HTMLCanvasElement;
   render: (input: { pointerX: number; pointerY: number; time: number; intro: number }) => void;
   resize: (width: number, height: number) => void;
+  /** 텍스처를 받는 사이 GPU가 컨텍스트를 거둬 갔는지 확인합니다. */
+  isContextLost: () => boolean;
   destroy: () => void;
 };
 
@@ -128,6 +130,7 @@ export async function createBakerRenderer(colorSrc: string, depthSrc: string): P
       renderer.render({ scene: mesh });
     },
     resize: (width, height) => renderer.setSize(width, height),
+    isContextLost: () => gl.isContextLost(),
     destroy: () => {
       gl.getExtension("WEBGL_lose_context")?.loseContext();
       gl.canvas.remove();

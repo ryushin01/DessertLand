@@ -36,6 +36,17 @@ const title = css({
   pointerEvents: "none",
 });
 const cta = css({ position: "relative", zIndex: 3 });
+/**
+ * 사진들의 층. 사진마다 쌓임 순서(zIndex)를 계속 올려 새 사진을 위에 그리는데,
+ * 이 층에서 쌓임 맥락을 새로 만들어(isolation) 그 순서가 제목(2)·버튼(3) 위로 새어 나가지 않게 합니다.
+ */
+const trailLayer = css({
+  position: "absolute",
+  inset: 0,
+  zIndex: 1,
+  isolation: "isolate",
+  pointerEvents: "none",
+});
 const trailItem = css({
   position: "absolute",
   insetBlockStart: 0,
@@ -102,13 +113,15 @@ export function SweetTrail() {
 
   return (
     <section ref={ref} className={section}>
-      {enabled
-        ? TRAIL.map((product) => (
-            <div key={product.slug} data-trail aria-hidden="true" className={trailItem}>
+      {enabled ? (
+        <div data-trail-layer aria-hidden="true" className={trailLayer}>
+          {TRAIL.map((product) => (
+            <div key={product.slug} data-trail className={trailItem}>
               <Image src={product.image.src} alt="" fill sizes="280px" className={trailImage} />
             </div>
-          ))
-        : null}
+          ))}
+        </div>
+      ) : null}
       <RevealText as="h2" text={t("title")} className={title} />
       <Link href="/shop" className={`${buttonRecipe()} ${cta}`} data-magnetic>
         {t("cta")}
