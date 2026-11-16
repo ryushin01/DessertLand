@@ -117,6 +117,7 @@ export function CheckoutForm({ items, total, onPaid }: CheckoutFormProps) {
     try {
       const result = await requestPayment({ items, method, locale, expectedTotal: total, outcome });
       if (result.status === "approved") {
+        // 승인되면 완료 화면으로 바뀌므로 잠금을 풀지 않아, 그사이 다시 결제할 수 없게 합니다.
         onPaid({ orderNo: result.orderNo, total: result.total, method });
         return;
       }
@@ -125,10 +126,10 @@ export function CheckoutForm({ items, total, onPaid }: CheckoutFormProps) {
       else setNotice("paymentError");
     } catch {
       setNotice("paymentError");
-    } finally {
-      pendingRef.current = false;
-      setPending(false);
     }
+    // 실패했을 때만 다시 결제할 수 있게 잠금을 풉니다.
+    pendingRef.current = false;
+    setPending(false);
   };
 
   const resolveDialog = (outcome: TestOutcome | "cancel") => {
@@ -165,6 +166,8 @@ export function CheckoutForm({ items, total, onPaid }: CheckoutFormProps) {
               required
               className={input}
               aria-invalid={error ? true : undefined}
+              // aria-errormessage는 화면 낭독기 지원이 고르지 않아 aria-describedby로도 함께 연결합니다.
+              aria-errormessage={error ? errorId : undefined}
               aria-describedby={error ? errorId : undefined}
             />
             {error ? (

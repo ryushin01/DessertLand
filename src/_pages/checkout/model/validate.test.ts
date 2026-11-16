@@ -5,9 +5,9 @@ import { validateCheckout } from "./validate";
 describe("validateCheckout", () => {
   it("빈 값을 찾습니다", () => {
     expect(validateCheckout({ name: " ", email: "", address: "" })).toEqual({
-      name: "required",
-      email: "required",
-      address: "required",
+      name: "nameRequired",
+      email: "emailRequired",
+      address: "addressRequired",
     });
   });
 
