@@ -46,7 +46,13 @@ const filter = css({
   fontSize: "0.9rem",
   transition: "background 0.3s, color 0.3s",
   _hover: { background: "cocoa.800" },
-  "&[aria-current=page]": { background: "cream", color: "cocoa.950", borderColor: "cream" },
+  // 마우스를 올려도 현재 분류의 밝은 바탕을 유지합니다(어두운 바탕에 어두운 글자가 되지 않게).
+  "&[aria-current=page]": {
+    background: "cream",
+    color: "cocoa.950",
+    borderColor: "cream",
+    _hover: { background: "cream" },
+  },
 });
 
 export async function generateMetadata({ params }: ShopPageProps): Promise<Metadata> {

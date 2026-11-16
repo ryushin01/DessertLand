@@ -31,4 +31,40 @@ describe("parsePartialJson", () => {
     expect(parsePartialJson("{")).toEqual({});
     expect(parsePartialJson("not json")).toBeNull();
   });
+
+  it("공백과 줄바꿈이 섞여도 키와 값을 구분합니다", () => {
+    expect(parsePartialJson('{\n  "intro" : "안녕",\n  "picks" : [ { "slug" : "bak')).toEqual({
+      intro: "안녕",
+      picks: [{ slug: "bak" }],
+    });
+  });
+
+  it("스트림의 모든 조각을 읽고, 끝까지 오면 완성된 값과 같습니다", () => {
+    const full = JSON.stringify({
+      intro: "오늘은 \"달콤한\" 디저트를 골랐어요.",
+      excludedAllergens: ["nuts"],
+      picks: [
+        { slug: "baklava", reason: "견과 대신 꿀이 \\ 가득" },
+        { slug: "tiramisu", reason: "커피 향" },
+      ],
+    });
+    for (let end = 0; end <= full.length; end += 1) {
+      const value = parsePartialJson(full.slice(0, end));
+      expect(value === null || typeof value === "object").toBe(true);
+    }
+    expect(parsePartialJson(full)).toEqual(JSON.parse(full));
+  });
+
+  it("긴 응답을 조각마다 읽어도 빠르게 끝납니다", () => {
+    const picks = Array.from({ length: 400 }, (_, index) => ({
+      slug: `dessert-${index}`,
+      reason: "부드럽고 달콤한 맛이 오래 남는 디저트입니다.".repeat(2),
+    }));
+    const full = JSON.stringify({ intro: "추천", picks });
+    const started = performance.now();
+    for (let end = 0; end <= full.length; end += 100) parsePartialJson(full.slice(0, end));
+    // 3만여 자를 100자 조각마다 다시 읽어도 로컬에서 0.1초 남짓입니다. 크게 느려지면 실패합니다.
+    expect(performance.now() - started).toBeLessThan(3000);
+  });
 });
+

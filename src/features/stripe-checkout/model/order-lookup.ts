@@ -1,3 +1,5 @@
+import { isSessionId } from "@/entities/order/index.server";
+
 /**
  * 서버가 Stripe에서 조회한 주문의 상태.
  * paid 결제됨 · open 결제 중이거나 결제하지 않고 돌아옴(세션이 아직 유효) · expired 결제하지 않고 만료 ·
@@ -25,8 +27,8 @@ export type StripeOrderLookup = {
 /** 한 번에 조회할 수 있는 주문 수. 저장해 두는 주문 수와 같습니다. */
 export const MAX_LOOKUP = 20;
 
-export const isSessionId = (value: unknown): value is string =>
-  typeof value === "string" && /^cs_test_[A-Za-z0-9]{10,200}$/.test(value);
+/** 세션 ID 규칙은 저장한 주문(entities/order)과 같은 것을 씁니다. */
+export { isSessionId };
 
 const STATES = new Set<StripeOrderState>(["paid", "open", "expired", "unknown", "unavailable"]);
 
