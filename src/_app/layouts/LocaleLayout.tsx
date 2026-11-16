@@ -7,7 +7,7 @@ import type { Metadata, Viewport } from "next";
 import { Lora } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import type { CSSProperties, ReactNode } from "react";
 import { css } from "styled-system/css";
 
@@ -17,6 +17,7 @@ import { MotionAttribute } from "@/_app/motion/MotionAttribute";
 import { RestFonts } from "@/_app/layouts/RestFonts";
 import { SITE_NAME, SITE_URL } from "@/shared/config";
 import { LOCALES, routing } from "@/shared/i18n";
+import { pickClientMessages } from "@/shared/i18n/index.server";
 import { Grain } from "@/shared/ui";
 import { CartDrawer } from "@/widgets/cart-drawer";
 import { SiteFooter } from "@/widgets/site-footer";
@@ -100,6 +101,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "nav" });
+  // 클라이언트에는 쓰는 메시지만 넘깁니다(상품 설명·서버 전용 묶음 제외).
+  const messages = pickClientMessages(await getMessages());
   const cjk = CJK_FONTS[locale];
 
   return (
@@ -126,7 +129,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         ) : null}
       </head>
       <body>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <AppProviders>
             <a href="#main" className={skipLink}>
               {t("skip")}

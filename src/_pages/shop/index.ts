@@ -1,1 +1,7 @@
-export { default, generateMetadata } from "./ui/ShopPage";
+export {
+  default,
+  ShopCategoryPage,
+  generateCategoryMetadata,
+  generateCategoryStaticParams,
+  generateMetadata,
+} from "./ui/ShopPage";

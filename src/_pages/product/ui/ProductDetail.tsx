@@ -82,7 +82,13 @@ const price = css({ fontSize: "1.9rem" });
 const buy = css({ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" });
 const notice = css({ fontSize: "0.82rem", color: "muted" });
 
-export function ProductDetail({ product }: { product: Product }) {
+type ProductDetailProps = {
+  product: Product;
+  /** 상품 설명. 모든 화면에 설명을 싣지 않도록 서버에서 번역해 넘깁니다. */
+  description: string;
+};
+
+export function ProductDetail({ product, description: descriptionText }: ProductDetailProps) {
   const t = useTranslations("product");
   const tProducts = useTranslations("products");
   const tAllergens = useTranslations("allergens");
@@ -120,9 +126,6 @@ export function ProductDetail({ product }: { product: Product }) {
   );
 
   const name = tProducts(`${product.slug}.name` as Parameters<typeof tProducts>[0]) as string;
-  const descriptionText = tProducts(
-    `${product.slug}.description` as Parameters<typeof tProducts>[0],
-  ) as string;
 
   return (
     <section ref={ref} className={root}>
