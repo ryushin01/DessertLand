@@ -11,9 +11,19 @@ export type ShopFilters = {
 
 export const NO_FILTERS: ShopFilters = { query: "", excluded: [], tastes: [] };
 
-/** 대소문자와 라틴 문자 악센트(é, ù 등)를 무시하고 비교합니다. 한글·가나는 그대로 둡니다. */
+/**
+ * 대소문자와 라틴 문자 악센트(é, ù 등)를 무시하고 비교합니다. 한글·가나는 그대로 둡니다.
+ * 브라우저 언어에 따라 결과가 달라지지 않게 toLocaleLowerCase 대신 toLowerCase를 쓰고,
+ * 튀르키예어의 점 없는 ı도 i로 맞춥니다(튀르키예어 환경에서 "VANILLA"가 "vanılla"가 되어 영문 이름을 못 찾던 문제).
+ */
 export function foldText(text: string): string {
-  return text.normalize("NFD").replace(/[̀-ͯ]/g, "").normalize("NFC").toLocaleLowerCase().trim();
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .normalize("NFC")
+    .toLowerCase()
+    .replaceAll("ı", "i")
+    .trim();
 }
 
 type Words = {
