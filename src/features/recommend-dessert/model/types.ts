@@ -1,4 +1,4 @@
-import { TASTES, type Allergen } from "@/entities/product";
+import { ALLERGENS, TASTES } from "@/entities/product";
 
 /** 맛 고르기: 상품의 맛 태그(entities/product의 TASTES)에 "견과 빼고"를 더합니다. */
 export const TASTE_CHIPS = [...TASTES, "nutFree"] as const;
@@ -28,4 +28,5 @@ export type RawRecommendation = {
   picks?: unknown;
 };
 
-export const ALLERGENS: Allergen[] = ["milk", "egg", "wheat", "nuts", "soy", "sesame"];
+/** 추천이 다루는 알레르기 성분(상품 엔티티의 목록). */
+export { ALLERGENS };
