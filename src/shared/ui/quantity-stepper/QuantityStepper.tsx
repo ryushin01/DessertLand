@@ -53,7 +53,8 @@ export function QuantityStepper({
       >
         <Icon name="minus" />
       </button>
-      <output className={value} aria-live="polite">
+      {/* output은 암시적으로 role="status"(polite)라 aria-live를 다시 쓰지 않습니다. */}
+      <output className={value}>
         {current}
       </output>
       <button

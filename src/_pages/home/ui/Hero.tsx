@@ -170,6 +170,12 @@ export function Hero() {
       // 변환 전 크기를 씁니다.
       bakerRenderer?.resize(host.offsetWidth || rect.width, host.offsetHeight || rect.height);
     };
+    // GPU가 컨텍스트를 거둬 가면(드라이버 재시작, 열린 탭이 많을 때 등) 빈 캔버스 대신 컷아웃 이미지로 돌아갑니다.
+    const onContextLost = () => {
+      gsap.ticker.remove(tick);
+      if (bakerRenderer) bakerRenderer.canvas.style.visibility = "hidden";
+      setWebglReady(false);
+    };
 
     import("../lib/baker-renderer")
       .then(({ createBakerRenderer }) => createBakerRenderer(CUTOUT, DEPTH))
@@ -180,6 +186,7 @@ export function Hero() {
         }
         bakerRenderer = created;
         created.canvas.setAttribute("aria-hidden", "true");
+        created.canvas.addEventListener("webglcontextlost", onContextLost);
         host.appendChild(created.canvas);
         resize();
         setWebglReady(true);
@@ -197,6 +204,7 @@ export function Hero() {
       gsap.killTweensOf(intro);
       window.removeEventListener("pointermove", onPointer);
       window.removeEventListener("resize", resize);
+      bakerRenderer?.canvas.removeEventListener("webglcontextlost", onContextLost);
       bakerRenderer?.destroy();
       setWebglReady(false);
     };

@@ -19,5 +19,5 @@ export const selectedCartLinesAtom = atom((get) =>
 );
 export const cartCountAtom = atom((get) => countItems(get(cartLinesAtom)));
 export const cartOpenAtom = atom(false);
-/** 스크린 리더에 알릴 최근 장바구니 메시지. */
+/** 장바구니 서랍이 열릴 때 설명으로 함께 읽는 메시지(방금 담은 상품). 서랍을 닫으면 비웁니다. */
 export const cartAnnouncementAtom = atom("");

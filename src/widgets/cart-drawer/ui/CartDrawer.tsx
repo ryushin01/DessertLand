@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
@@ -79,7 +79,6 @@ const foot = css({
 const line = css({ display: "flex", justifyContent: "space-between", fontSize: "0.95rem" });
 const total = css({ display: "flex", justifyContent: "space-between", fontSize: "1.2rem", fontWeight: "600" });
 const empty = css({ paddingBlock: "48px", textAlign: "center", color: "muted" });
-const live = css({ srOnly: true });
 const srOnly = css({ srOnly: true });
 const check = css({
   width: "20px",
@@ -113,7 +112,9 @@ export function CartDrawer() {
   const [open, setOpen] = useAtom(cartOpenAtom);
   const setLines = useSetAtom(cartLinesAtom);
   const [excluded, setExcluded] = useAtom(cartExcludedAtom);
-  const announcement = useAtomValue(cartAnnouncementAtom);
+  // 담기 버튼이 정한 알림. 서랍은 모달이라 열리면 바깥이 비활성(inert)이 되어 바깥 알림 영역은 읽히지 않으므로,
+  // 서랍의 설명으로 연결해 열릴 때 제목과 함께 읽히게 합니다. 닫으면 비웁니다.
+  const [announcement, setAnnouncement] = useAtom(cartAnnouncementAtom);
   // 목록은 담은 상품 전체, 합계와 주문은 고른 상품만 계산합니다.
   const summary = useCartSummary("all");
   const selected = useCartSummary("selected");
@@ -136,23 +137,25 @@ export function CartDrawer() {
 
   return (
     <>
-      <p role="status" className={live}>
-        {announcement}
-      </p>
       {/* 배경을 누르면 닫는 마우스 지름길이다. 키보드로는 Esc와 닫기 버튼으로 닫는다. */}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <dialog
         ref={ref}
         className={dialog}
         aria-labelledby="cart-title"
+        aria-describedby={announcement ? "cart-announcement" : undefined}
         onClose={() => {
           setOpen(false);
+          setAnnouncement("");
           getLenis()?.start();
         }}
         onClick={(event) => {
           if (event.target === ref.current) setOpen(false);
         }}
       >
+        <p id="cart-announcement" className={srOnly}>
+          {announcement}
+        </p>
         <div className={head}>
           <h2 id="cart-title" className={title}>
             {t("title")}
