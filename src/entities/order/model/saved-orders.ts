@@ -62,11 +62,25 @@ export function pendingStripeOrders(
   );
 }
 
+/** Date가 나타낼 수 있는 시각인지 봅니다(그 밖이면 날짜 표시가 RangeError를 던짐). */
+const isValidTime = (value: unknown): value is number =>
+  typeof value === "number" && Number.isFinite(value) && Math.abs(value) <= 8.64e15;
+
+const isCartLine = (value: unknown): value is CartLine => {
+  const line = value as Partial<CartLine> | null;
+  return (
+    typeof line === "object" &&
+    line !== null &&
+    typeof line.slug === "string" &&
+    Number.isInteger(line.quantity) &&
+    (line.quantity as number) > 0
+  );
+};
+
 /** 저장된 값이 모양에 맞는지 확인합니다. 다른 버전이 남긴 값이나 손댄 값은 버립니다. */
 export function isSavedOrder(value: unknown): value is SavedOrder {
   const order = value as Partial<SavedOrder> | null;
-  if (typeof order !== "object" || order === null || typeof order.createdAt !== "number")
-    return false;
+  if (typeof order !== "object" || order === null || !isValidTime(order.createdAt)) return false;
   if (order.kind === "stripe") {
     return (
       typeof order.sessionId === "string" &&
@@ -78,8 +92,10 @@ export function isSavedOrder(value: unknown): value is SavedOrder {
     return (
       typeof order.orderNo === "string" &&
       typeof order.total === "number" &&
+      Number.isFinite(order.total) &&
       typeof order.locale === "string" &&
-      Array.isArray(order.items)
+      Array.isArray(order.items) &&
+      order.items.every(isCartLine)
     );
   }
   return false;

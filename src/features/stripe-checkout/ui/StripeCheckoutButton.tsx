@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 import type { CartLine } from "@/entities/cart";
-import { addSavedOrder, savedOrdersAtom } from "@/entities/order";
+import { addSavedOrder, updateSavedOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { Button } from "@/shared/ui";
 
@@ -42,7 +42,8 @@ export function StripeCheckoutButton({
   const [notice, setNotice] = useState<Notice | null>(canceled ? "canceled" : null);
   const [pending, setPending] = useState(false);
   const pendingRef = useRef(false);
-  const setSavedOrders = useSetAtom(savedOrdersAtom);
+  // 주문 목록을 구독하지 않는 버튼이라, 저장소의 최신 목록 위에 더하는 갱신 atom을 씁니다.
+  const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
 
   // Stripe 화면에서 브라우저 뒤로 가기로 돌아오면 이전 상태가 복원되므로 버튼을 다시 켭니다.
   useEffect(() => {
@@ -72,7 +73,7 @@ export function StripeCheckoutButton({
         // 결제 뒤 완료 화면으로 돌아오지 못해도 다음 방문 때 결과를 반영하도록, 세션 ID만 기억합니다.
         if (isSessionId(result.id)) {
           const sessionId = result.id;
-          setSavedOrders((orders) =>
+          updateSavedOrders((orders) =>
             addSavedOrder(orders, {
               kind: "stripe",
               sessionId,

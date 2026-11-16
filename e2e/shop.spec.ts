@@ -289,6 +289,23 @@ test("장바구니에 담아 결제까지 마치면 장바구니가 비워집니
   await scan(page);
 });
 
+test("결제를 두 번 해도 주문 내역에 두 주문이 모두 남습니다", async ({ page }) => {
+  // 주문 화면은 주문 목록을 구독하지 않으므로, 저장소의 예전 주문을 덮어쓰지 않아야 합니다.
+  const orderNumbers: string[] = [];
+  for (const slug of ["baklava", "tiramisu"]) {
+    await page.goto(`/ko/checkout?buy=${slug}&qty=1`);
+    await fillCheckout(page);
+    await page.getByRole("button", { name: /결제하기$/ }).click();
+    await page.getByRole("dialog", { name: "테스트 결제창" }).getByRole("button", { name: "결제 승인" }).click();
+    await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeVisible();
+    orderNumbers.push((await page.locator("main").innerText()).match(/DL-[0-9A-F]{8}/)?.[0] ?? "");
+  }
+  await page.goto("/ko/orders");
+  for (const orderNo of orderNumbers) {
+    await expect(page.getByRole("heading", { level: 2, name: orderNo })).toBeVisible();
+  }
+});
+
 test("주문 내역은 처음에는 비어 있고, 바닥글과 빈 장바구니에서 갈 수 있습니다", async ({ page }) => {
   await page.goto("/ko/orders");
   await expect(page.getByRole("heading", { level: 1, name: "주문 내역" })).toBeVisible();

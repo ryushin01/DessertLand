@@ -1,4 +1,4 @@
-export { savedOrdersAtom, useSavedOrders } from "./model/atoms";
+export { savedOrdersAtom, updateSavedOrdersAtom, useSavedOrders } from "./model/atoms";
 export {
   MAX_SAVED_ORDERS,
   SETTLE_WINDOW_MS,

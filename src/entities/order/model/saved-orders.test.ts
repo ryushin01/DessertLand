@@ -57,5 +57,11 @@ describe("saved orders", () => {
     expect(isSavedOrder({ kind: "stripe", sessionId: 1, createdAt: 1 })).toBe(false);
     expect(isSavedOrder({ kind: "other", createdAt: 1 })).toBe(false);
     expect(isSavedOrder(null)).toBe(false);
+    // 날짜로 나타낼 수 없는 시각은 주문 내역의 날짜 표시를 깨뜨립니다.
+    expect(isSavedOrder({ ...demo("DL-1"), createdAt: 1e100 })).toBe(false);
+    expect(isSavedOrder({ ...demo("DL-1"), createdAt: Number.NaN })).toBe(false);
+    // 상품 줄이 하나라도 모양이 다르면 버립니다.
+    expect(isSavedOrder({ ...demo("DL-1"), items: [null] })).toBe(false);
+    expect(isSavedOrder({ ...demo("DL-1"), items: [{ slug: "baklava", quantity: 0 }] })).toBe(false);
   });
 });

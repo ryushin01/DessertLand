@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 import { MAX_ORDER_LINES, cartLinesAtom, removePurchased, type CartLine } from "@/entities/cart";
-import { addSavedOrder, savedOrdersAtom } from "@/entities/order";
+import { addSavedOrder, updateSavedOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { summarizeCart } from "@/entities/cart";
 import { useCartSummary } from "@/features/cart-summary";
@@ -65,7 +65,8 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
   const locale = useLocale();
   const cartSummary = useCartSummary();
   const setCart = useSetAtom(cartLinesAtom);
-  const setSavedOrders = useSetAtom(savedOrdersAtom);
+  // 주문 목록을 구독하지 않는 화면이라, 저장소의 최신 목록 위에 더하는 갱신 atom을 씁니다.
+  const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
   const buyNowSummary = useMemo(
     () => (buyNow ? summarizeCart([buyNow], locale) : null),
     [buyNow, locale],
@@ -82,7 +83,7 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
   const onPaid = (paid: PaidOrder) => {
     setOrder(paid);
     // 내장 테스트 결제는 서버에 남지 않으므로, 주문 내역에 보일 정보를 이 브라우저에 남깁니다.
-    setSavedOrders((orders) =>
+    updateSavedOrders((orders) =>
       addSavedOrder(orders, {
         kind: "demo",
         orderNo: paid.orderNo,

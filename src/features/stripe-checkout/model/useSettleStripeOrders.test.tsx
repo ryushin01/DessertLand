@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cartLinesAtom } from "@/entities/cart";
 import { savedOrdersAtom, type SavedOrder } from "@/entities/order";
 
-import { useSettleStripeOrders } from "./useSettleStripeOrders";
+import { RECHECK_MS, useSettleStripeOrders } from "./useSettleStripeOrders";
 
 const PAID = "cs_test_paidpaidpaid01";
 const OPEN = "cs_test_openopenopen01";
@@ -51,7 +51,7 @@ describe("useSettleStripeOrders", () => {
         status: "ok",
         orders: [
           { sessionId: PAID, state: "paid", purchased: ["baklava", "tiramisu"] },
-          { sessionId: OPEN, state: "open" },
+          { sessionId: OPEN, state: "unavailable" },
           { sessionId: BUY, state: "paid", purchased: [] },
         ],
       }),
@@ -65,7 +65,7 @@ describe("useSettleStripeOrders", () => {
     const settled = store
       .get(savedOrdersAtom)
       .flatMap((order) => (order.kind === "stripe" && order.settled ? [order.sessionId] : []));
-    // 결제 전인 주문은 그대로 두고 다음에 다시 확인합니다.
+    // 잠시 조회하지 못한 주문은 반영됨으로 표시하지 않고 다음에 다시 확인합니다.
     expect(settled.sort()).toEqual([BUY, PAID].sort());
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
@@ -89,5 +89,31 @@ describe("useSettleStripeOrders", () => {
     await new Promise((resolve) => setTimeout(resolve, 20));
     expect(store.get(cartLinesAtom)).toHaveLength(3);
     expect(store.get(savedOrdersAtom)[0]).toMatchObject({ settled: false });
+  });
+
+  it("결과가 정해지지 않은 주문은 재확인 간격이 지나면 같은 화면에서 다시 묻습니다", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      const fetchMock = vi
+        .fn()
+        .mockResolvedValueOnce(Response.json({ status: "ok", orders: [{ sessionId: PAID, state: "open" }] }))
+        .mockResolvedValueOnce(
+          Response.json({ status: "ok", orders: [{ sessionId: PAID, state: "paid", purchased: ["baklava"] }] }),
+        );
+      vi.stubGlobal("fetch", fetchMock);
+      const store = setup([stripeOrder(PAID)]);
+
+      await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+      expect(store.get(cartLinesAtom)).toHaveLength(3);
+
+      await vi.advanceTimersByTimeAsync(RECHECK_MS + 1000);
+      await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+      await waitFor(() =>
+        expect(store.get(cartLinesAtom).map(({ slug }) => slug)).toEqual(["tiramisu", "macaron"]),
+      );
+      expect(store.get(savedOrdersAtom)[0]).toMatchObject({ settled: true });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

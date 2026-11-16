@@ -931,6 +931,7 @@
     "open": "Noch nicht bezahlt",
     "expired": "Nicht bezahlt",
     "unknown": "Nicht verfügbar",
+    "unavailable": "Vorübergehend nicht verfügbar",
     "demo": "Testzahlung",
     "loading": "Bestellungen werden geladen.",
     "error": "Die Bestellungen konnten nicht geladen werden. Bitte versuchen Sie es gleich noch einmal.",

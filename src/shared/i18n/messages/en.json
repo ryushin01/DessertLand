@@ -931,6 +931,7 @@
     "open": "Not paid yet",
     "expired": "Not paid",
     "unknown": "Unavailable",
+    "unavailable": "Temporarily unavailable",
     "demo": "Test payment",
     "loading": "Loading your orders.",
     "error": "Couldn’t load your orders. Please try again in a moment.",
