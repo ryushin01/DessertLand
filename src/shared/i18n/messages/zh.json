@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land 是以 10 种语言介绍全球甜点的演示商店。",
-    "credits": "图片与图标来源"
+    "credits": "图片与图标来源",
+    "orders": "订单记录"
   },
   "notFound": {
     "title": "找不到页面",
@@ -916,5 +917,23 @@
       "light": "口感轻盈",
       "nutFree": "不含坚果"
     }
+  },
+  "orders": {
+    "metaTitle": "订单记录",
+    "title": "订单记录",
+    "lede": "这里只显示在此浏览器中下的订单。本网站不保存姓名、邮箱和地址，已付款订单的编号和金额通过 Stripe 查询。",
+    "empty": "还没有订单。",
+    "orderNo": "订单编号",
+    "date": "下单时间",
+    "total": "付款金额",
+    "items": "{count} 件甜点",
+    "paid": "已付款",
+    "open": "尚未付款",
+    "expired": "未付款",
+    "unknown": "无法确认",
+    "demo": "测试支付",
+    "loading": "正在加载订单信息。",
+    "error": "无法加载订单信息，请稍后再打开。",
+    "link": "查看订单记录"
   }
 }

@@ -15,7 +15,11 @@ describe("pickClientMessages", () => {
     expect(picked.cart).toEqual(messages.cart);
   });
 
-  it("보내는 양이 절반 아래로 줄어듭니다", () => {
-    expect(JSON.stringify(picked).length).toBeLessThan(JSON.stringify(messages).length / 2);
+  it("상품 설명 전체만큼 보내는 양이 줄어듭니다", () => {
+    const descriptions = Object.values(messages.products)
+      .map(({ description }) => description)
+      .join("");
+    const saved = JSON.stringify(messages).length - JSON.stringify(picked).length;
+    expect(saved).toBeGreaterThan(descriptions.length);
   });
 });

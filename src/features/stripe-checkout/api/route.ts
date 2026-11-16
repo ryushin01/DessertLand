@@ -30,7 +30,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const session = await stripe.checkout.sessions.create(params);
-    return NextResponse.json({ status: "created", url: session.url });
+    // id: 브라우저가 이 주문을 기억했다가, 결제 뒤 돌아오지 않아도 결과를 장바구니에 반영합니다.
+    return NextResponse.json({ status: "created", url: session.url, id: session.id });
   } catch (error) {
     console.error("Stripe 결제 세션 생성 실패", error instanceof Error ? error.message : error);
     return NextResponse.json({ status: "error" }, { status: 502 });

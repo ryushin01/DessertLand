@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land est une boutique de démonstration présentant les desserts du monde en 10 langues.",
-    "credits": "Crédits photos et icônes"
+    "credits": "Crédits photos et icônes",
+    "orders": "Historique des commandes"
   },
   "notFound": {
     "title": "Page introuvable",
@@ -916,5 +917,23 @@
       "light": "Léger",
       "nutFree": "Sans fruits à coque"
     }
+  },
+  "orders": {
+    "metaTitle": "Historique des commandes",
+    "title": "Historique des commandes",
+    "lede": "Seules les commandes passées dans ce navigateur apparaissent ici. Les noms, e-mails et adresses ne sont pas enregistrés sur ce site ; le numéro et le montant des commandes payées viennent de Stripe.",
+    "empty": "Aucune commande pour l’instant.",
+    "orderNo": "Numéro de commande",
+    "date": "Date de commande",
+    "total": "Montant payé",
+    "items": "{count, plural, one {# dessert} other {# desserts}}",
+    "paid": "Payée",
+    "open": "Pas encore payée",
+    "expired": "Non payée",
+    "unknown": "Indisponible",
+    "demo": "Paiement test",
+    "loading": "Chargement de vos commandes.",
+    "error": "Impossible de charger vos commandes. Réessayez dans un instant.",
+    "link": "Voir l’historique des commandes"
   }
 }

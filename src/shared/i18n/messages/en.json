@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land is a demo shop presenting the world’s desserts in 10 languages.",
-    "credits": "Photo and icon credits"
+    "credits": "Photo and icon credits",
+    "orders": "Order history"
   },
   "notFound": {
     "title": "Page not found",
@@ -916,5 +917,23 @@
       "light": "Light",
       "nutFree": "No nuts"
     }
+  },
+  "orders": {
+    "metaTitle": "Order history",
+    "title": "Order history",
+    "lede": "Only orders placed in this browser appear here. Names, emails and addresses are not stored on this site; order numbers and amounts of paid orders come from Stripe.",
+    "empty": "No orders yet.",
+    "orderNo": "Order number",
+    "date": "Ordered",
+    "total": "Amount paid",
+    "items": "{count, plural, one {# dessert} other {# desserts}}",
+    "paid": "Paid",
+    "open": "Not paid yet",
+    "expired": "Not paid",
+    "unknown": "Unavailable",
+    "demo": "Test payment",
+    "loading": "Loading your orders.",
+    "error": "Couldn’t load your orders. Please try again in a moment.",
+    "link": "View order history"
   }
 }

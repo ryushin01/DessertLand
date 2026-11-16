@@ -14,6 +14,7 @@ export {
   OTHER_COUNTRY,
   countryName,
   currencyForLocale,
+  formatCurrency,
   formatMoney,
   formatProductPrice,
   priceInCurrency,
