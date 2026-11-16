@@ -931,6 +931,7 @@
     "open": "Ainda por pagar",
     "expired": "Não paga",
     "unknown": "Indisponível",
+    "unavailable": "Temporariamente indisponível",
     "demo": "Pagamento de teste",
     "loading": "A carregar as encomendas.",
     "error": "Não foi possível carregar as encomendas. Tente novamente daqui a pouco.",

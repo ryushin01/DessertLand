@@ -70,19 +70,27 @@ describe("describeSession", () => {
 });
 
 describe("POST /api/orders", () => {
-  it("저장된 세션들을 조회하고, 조회하지 못한 세션은 unknown으로 돌려줍니다", async () => {
-    const other = "cs_test_zzzzzzzzzzzzzzzz";
+  it("저장된 세션들을 조회하고, 없는 세션은 unknown, 잠시 조회하지 못한 세션은 unavailable로 돌려줍니다", async () => {
+    const missing = "cs_test_zzzzzzzzzzzzzzzz";
+    const flaky = "cs_test_yyyyyyyyyyyyyyyy";
     retrieve.mockImplementation(async (id: string) => {
-      if (id === other) throw new Error("No such checkout.session");
+      if (id === missing) {
+        throw Object.assign(new Error("No such checkout.session"), {
+          code: "resource_missing",
+          statusCode: 404,
+        });
+      }
+      if (id === flaky) throw Object.assign(new Error("connection reset"), { statusCode: 500 });
       return session({});
     });
-    const response = await post({ ids: [ID, other] });
+    const response = await post({ ids: [ID, missing, flaky] });
     expect(response.status).toBe(200);
     expect(response.headers.get("cache-control")).toBe("no-store");
     const body = (await response.json()) as { orders: { sessionId: string; state: string }[] };
     expect(body.orders.map(({ sessionId, state }) => [sessionId, state])).toEqual([
       [ID, "paid"],
-      [other, "unknown"],
+      [missing, "unknown"],
+      [flaky, "unavailable"],
     ]);
   });
 

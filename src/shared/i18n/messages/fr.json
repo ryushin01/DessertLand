@@ -931,6 +931,7 @@
     "open": "Pas encore payée",
     "expired": "Non payée",
     "unknown": "Indisponible",
+    "unavailable": "Momentanément indisponible",
     "demo": "Paiement test",
     "loading": "Chargement de vos commandes.",
     "error": "Impossible de charger vos commandes. Réessayez dans un instant.",

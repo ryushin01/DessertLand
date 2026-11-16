@@ -55,7 +55,12 @@ export async function retrievePaidOrder(
   }
 }
 
-/** 이 브라우저가 저장해 둔 세션들의 주문 정보를 Stripe에서 조회합니다. 조회하지 못한 세션은 unknown입니다. */
+function isMissingSession(error: unknown): boolean {
+  const failure = error as { code?: unknown; statusCode?: unknown } | null;
+  return failure?.code === "resource_missing" || failure?.statusCode === 404;
+}
+
+/** 이 브라우저가 저장해 둔 세션들의 주문 정보를 Stripe에서 조회합니다. */
 export async function lookupStripeOrders(
   stripe: Stripe,
   sessionIds: readonly string[],
@@ -64,8 +69,9 @@ export async function lookupStripeOrders(
     sessionIds.map(async (sessionId) => {
       try {
         return describeSession(await stripe.checkout.sessions.retrieve(sessionId));
-      } catch {
-        return { sessionId, state: "unknown" as const };
+      } catch (error) {
+        // 없는 세션은 끝난 결과(unknown)이고, 네트워크·요청 제한·서버 오류는 나중에 다시 물을 수 있게 unavailable입니다.
+        return { sessionId, state: isMissingSession(error) ? ("unknown" as const) : ("unavailable" as const) };
       }
     }),
   );

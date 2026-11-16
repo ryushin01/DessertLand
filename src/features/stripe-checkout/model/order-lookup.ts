@@ -1,8 +1,13 @@
 /**
  * 서버가 Stripe에서 조회한 주문의 상태.
- * paid 결제됨 · open 결제 중이거나 결제하지 않고 돌아옴(세션이 아직 유효) · expired 결제하지 않고 만료 · unknown 이 사이트 세션이 아니거나 조회 실패
+ * paid 결제됨 · open 결제 중이거나 결제하지 않고 돌아옴(세션이 아직 유효) · expired 결제하지 않고 만료 ·
+ * unknown 이 사이트 세션이 아니거나 없는 세션(끝난 결과) · unavailable 잠시 조회하지 못함(나중에 다시 물음)
  */
-export type StripeOrderState = "paid" | "open" | "expired" | "unknown";
+export type StripeOrderState = "paid" | "open" | "expired" | "unknown" | "unavailable";
+
+/** 결과가 정해져 다시 묻지 않아도 되는 상태. 나머지(open, unavailable)는 나중에 다시 묻습니다. */
+export const isSettledState = (state: StripeOrderState): boolean =>
+  state === "paid" || state === "expired" || state === "unknown";
 
 /** 개인정보(이름·이메일·주소)는 담지 않습니다. */
 export type StripeOrderLookup = {
@@ -23,7 +28,7 @@ export const MAX_LOOKUP = 20;
 export const isSessionId = (value: unknown): value is string =>
   typeof value === "string" && /^cs_test_[A-Za-z0-9]{10,200}$/.test(value);
 
-const STATES = new Set<StripeOrderState>(["paid", "open", "expired", "unknown"]);
+const STATES = new Set<StripeOrderState>(["paid", "open", "expired", "unknown", "unavailable"]);
 
 /** 응답의 모양을 확인합니다. 어긋난 항목은 버립니다. */
 export function parseOrderLookups(value: unknown): StripeOrderLookup[] | null {

@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
 
 import { cartLinesAtom, removePurchased } from "@/entities/cart";
-import { savedOrdersAtom, settleOrders } from "@/entities/order";
+import { settleOrders, updateSavedOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { Icon, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
@@ -29,7 +29,7 @@ export function CompleteView({ order }: CompleteViewProps) {
   const tOrders = useTranslations("orders");
   const locale = useLocale();
   const setCart = useSetAtom(cartLinesAtom);
-  const setSavedOrders = useSetAtom(savedOrdersAtom);
+  const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
   const headingRef = useRef<HTMLHeadingElement>(null);
   // 장바구니에서 고른 상품만 결제했으므로 그 상품만 뺍니다.
   const purchased = order?.purchased.join(",") ?? "";
@@ -39,8 +39,8 @@ export function CompleteView({ order }: CompleteViewProps) {
     headingRef.current?.focus();
     if (purchased) setCart((lines) => removePurchased(lines, purchased.split(",")));
     // 결과를 여기서 반영했으므로, 다음 방문 때 다시 반영하지 않게 표시합니다.
-    if (sessionId) setSavedOrders((orders) => settleOrders(orders, [sessionId]));
-  }, [purchased, sessionId, setCart, setSavedOrders]);
+    if (sessionId) updateSavedOrders((orders) => settleOrders(orders, [sessionId]));
+  }, [purchased, sessionId, setCart, updateSavedOrders]);
 
   return (
     <div className={pageShell}>

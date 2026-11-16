@@ -931,6 +931,7 @@
     "open": "Henüz ödenmedi",
     "expired": "Ödenmedi",
     "unknown": "Doğrulanamadı",
+    "unavailable": "Geçici olarak doğrulanamıyor",
     "demo": "Test ödemesi",
     "loading": "Siparişler yükleniyor.",
     "error": "Siparişler yüklenemedi. Lütfen biraz sonra tekrar deneyin.",
