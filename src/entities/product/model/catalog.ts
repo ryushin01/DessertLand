@@ -12,7 +12,9 @@ export const CATEGORIES = [
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
 
-export type Allergen = "milk" | "egg" | "wheat" | "nuts" | "soy" | "sesame";
+/** 표시하는 알레르기 성분. 추천의 제외 조건과 상품 목록의 "빼고 싶은 성분" 필터가 함께 씁니다. */
+export const ALLERGENS = ["milk", "egg", "wheat", "nuts", "soy", "sesame"] as const;
+export type Allergen = (typeof ALLERGENS)[number];
 
 export type Product = {
   slug: string;

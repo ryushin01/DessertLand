@@ -227,6 +227,54 @@ test("필터로 카테고리를 좁힙니다", async ({ page }) => {
   await expect(page.getByRole("status").filter({ hasText: "175개의 디저트" })).toBeVisible();
 });
 
+test("이름·나라로 찾고, 맛과 빼고 싶은 성분으로 좁히며, 없으면 조건을 지울 수 있습니다", async ({ page }) => {
+  await page.goto("/ko/shop");
+  const status = page.getByRole("status").filter({ hasText: "개의 디저트" });
+  await expect(status).toHaveText("175개의 디저트");
+
+  const search = page.getByRole("searchbox", { name: "이름이나 나라로 찾기" });
+  await search.fill("티라미수");
+  await expect(status).toHaveText("1개의 디저트");
+  await expect(page.getByRole("link", { name: "티라미수", exact: true })).toBeVisible();
+  await search.fill("");
+
+  const nuts = page.getByRole("group", { name: "빼고 싶은 성분" }).getByRole("button", { name: "견과류" });
+  await nuts.click();
+  await expect(nuts).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("link", { name: "바클라바", exact: true })).toHaveCount(0);
+  const coffee = page.getByRole("group", { name: "맛" }).getByRole("button", { name: "커피 풍미" });
+  await coffee.click();
+  await expect(coffee).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("link", { name: "티라미수", exact: true })).toBeVisible();
+  // 눌린 알약은 색이 0.3초 동안 바뀌므로, 바뀐 뒤의 명도 대비를 잽니다.
+  await coffee.evaluate((element) => Promise.all(element.getAnimations().map(({ finished }) => finished)));
+  await scan(page);
+
+  await search.fill("없는 디저트");
+  await expect(status).toHaveText("0개의 디저트");
+  await expect(page.getByText("조건에 맞는 디저트가 없습니다.", { exact: false })).toBeVisible();
+  await page.getByRole("button", { name: "조건 지우기" }).click();
+  await expect(status).toHaveText("175개의 디저트");
+  await expect(search).toHaveValue("");
+  await expect(nuts).toHaveAttribute("aria-pressed", "false");
+});
+
+test("상품 상세는 검색 엔진에 이름과 가격을 구조화 데이터로 알립니다", async ({ page }) => {
+  await page.goto("/ko/shop/baklava");
+  const json = await page.locator('script[type="application/ld+json"]').textContent();
+  const data = JSON.parse(json ?? "{}") as {
+    "@type"?: string;
+    name?: string;
+    offers?: { price?: number; priceCurrency?: string };
+  };
+  expect(data["@type"]).toBe("Product");
+  expect(data.name).toBe("바클라바");
+  expect(data.offers?.priceCurrency).toBe("KRW");
+  await expect(page.locator("main")).toContainText(
+    new Intl.NumberFormat("ko", { style: "currency", currency: "KRW" }).format(data.offers?.price ?? 0),
+  );
+});
+
 async function fillCheckout(page: Page) {
   await page.getByLabel("받는 분 이름").fill("홍길동");
   await page.getByLabel("이메일").fill("demo@example.com");

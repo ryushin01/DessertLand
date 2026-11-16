@@ -85,6 +85,17 @@ test("화면에 쓰지 않는 상품 설명은 보내지 않습니다", async ({
   expect(detail).not.toContain(baklava);
 });
 
+test("서버가 번역해 넘긴 상품 설명이 상세 화면에 보입니다", async ({ page }) => {
+  const ko = JSON.parse(readFileSync("src/shared/i18n/messages/ko.json", "utf8")) as {
+    products: Record<string, { description: string }>;
+  };
+  await page.goto("/ko/shop/tiramisu");
+  // 메타데이터에도 같은 설명이 있으므로, HTML이 아니라 화면의 문단으로 확인합니다.
+  await expect(
+    page.locator("main p").filter({ hasText: ko.products.tiramisu?.description ?? "-" }),
+  ).toBeVisible();
+});
+
 test("상품 목록은 분류마다 미리 만든 정적 페이지로 보냅니다", async ({ request }) => {
   for (const path of ["/ko/shop", "/ko/shop/category/cake", "/en/shop/category/drink"]) {
     const response = await request.get(path);
