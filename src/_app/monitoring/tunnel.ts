@@ -16,15 +16,18 @@ export async function POST(request: Request): Promise<Response> {
   if (!target) return new Response(null, { status: 404 });
   if (!limiter.take(clientKey(request.headers))) return new Response(null, { status: 429 });
 
+  // Content-Length가 없거나 틀려도 상한을 넘기 전에 읽기를 멈추도록, 바이트 수를 세며 읽습니다.
   const declared = Number(request.headers.get("content-length") ?? 0);
   if (declared > MAX_ENVELOPE_BYTES) return new Response(null, { status: 413 });
-  const body = await request.text().catch(() => null);
-  if (body === null || body.length > MAX_ENVELOPE_BYTES) return new Response(null, { status: 413 });
+  const body = await readLimited(request, MAX_ENVELOPE_BYTES);
+  if (body === "too-large") return new Response(null, { status: 413 });
+  if (body === null) return new Response(null, { status: 400 });
 
-  const newline = body.indexOf("\n");
+  const newline = body.indexOf(0x0a);
   let header: { dsn?: unknown } | null = null;
   try {
-    header = JSON.parse(newline === -1 ? body : body.slice(0, newline)) as { dsn?: unknown };
+    const firstLine = new TextDecoder().decode(newline === -1 ? body : body.subarray(0, newline));
+    header = JSON.parse(firstLine) as { dsn?: unknown };
   } catch {
     // 아래에서 거절합니다.
   }
@@ -44,4 +47,36 @@ export async function POST(request: Request): Promise<Response> {
   } catch {
     return new Response(null, { status: 502 });
   }
+}
+
+/** 본문을 바이트 상한까지만 읽습니다. 넘으면 읽기를 멈추고 "too-large", 읽지 못하면 null입니다. */
+async function readLimited(
+  request: Request,
+  limit: number,
+): Promise<Uint8Array<ArrayBuffer> | "too-large" | null> {
+  if (!request.body) return new Uint8Array(0);
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > limit) {
+        await reader.cancel().catch(() => undefined);
+        return "too-large";
+      }
+      chunks.push(value);
+    }
+  } catch {
+    return null;
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return bytes;
 }
