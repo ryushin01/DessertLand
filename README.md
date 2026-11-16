@@ -1,4 +1,4 @@
-# <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
+# <img src="public/brand/logo.png" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
 ![version](https://img.shields.io/badge/version-1.0.0-ff6484)
