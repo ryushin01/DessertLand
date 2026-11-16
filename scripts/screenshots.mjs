@@ -53,6 +53,13 @@ async function shot(page, name, options = {}) {
   console.log("저장", name);
 }
 
+/** 커서 연출(링)이 글자를 가리지 않게 마우스를 빈 구석으로 옮깁니다. */
+async function parkCursor(page) {
+  const { width, height } = page.viewportSize();
+  await page.mouse.move(width - 40, height - 40, { steps: 8 });
+  await page.waitForTimeout(800);
+}
+
 /** 스크롤 위치로 옮긴 뒤 연출이 따라올 때까지 기다립니다. */
 async function scrollTo(page, y, wait = 2000) {
   await page.evaluate((top) => window.scrollTo({ top, behavior: "instant" }), y);
@@ -109,6 +116,16 @@ async function scrollToSection(page, text, progress) {
   await shot(page, "shop");
   await context.close();
 }
+// 상품 목록의 찾기·맛 필터
+{
+  const { page, context } = await open("/ko/shop");
+  await page.getByRole("searchbox", { name: "이름이나 나라로 찾기" }).fill("일본");
+  await page.getByRole("group", { name: "맛" }).getByRole("button", { name: "가벼운 맛" }).click();
+  await page.waitForTimeout(1500);
+  await parkCursor(page);
+  await shot(page, "shop-filters");
+  await context.close();
+}
 {
   const { page, context } = await open("/ja/shop/strawberry-shortcake");
   await shot(page, "product-ja");
@@ -129,7 +146,14 @@ async function scrollToSection(page, text, progress) {
   await page.getByRole("dialog", { name: "테스트 결제창" }).getByRole("button", { name: "결제 승인" }).click();
   await page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" }).waitFor();
   await page.waitForTimeout(1500);
+  await parkCursor(page);
   await shot(page, "order-complete");
+  // 주문 내역: 방금 한 테스트 결제가 이 브라우저의 주문으로 보입니다.
+  await page.getByRole("link", { name: "주문 내역 보기" }).click();
+  await page.getByRole("heading", { level: 1, name: "주문 내역" }).waitFor();
+  await page.waitForTimeout(1500);
+  await parkCursor(page);
+  await shot(page, "orders");
   await context.close();
 }
 

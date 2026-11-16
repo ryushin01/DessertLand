@@ -5,8 +5,16 @@ import { useLocale, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
-import { PRODUCTS, formatProductPrice, getProduct, type Product } from "@/entities/product";
+import {
+  PRODUCTS,
+  currencyForLocale,
+  formatProductPrice,
+  getProduct,
+  priceInCurrency,
+  type Product,
+} from "@/entities/product";
 import { Link, LOCALES, localeAlternates, siteOpenGraph } from "@/shared/i18n";
+import { productJsonLd } from "../lib/json-ld";
 import { ProductDetail } from "./ProductDetail";
 
 type ProductPageProps = { params: Promise<{ locale: string; slug: string }> };
@@ -27,9 +35,21 @@ const grid = css({
   gap: "20px",
 });
 const card = css({ display: "block", _hover: { "& img": { transform: "scale(1.06)" } } });
-const photo = css({ position: "relative", display: "block", aspectRatio: "4 / 3", overflow: "hidden", borderRadius: "6px" });
+const photo = css({
+  position: "relative",
+  display: "block",
+  aspectRatio: "4 / 3",
+  overflow: "hidden",
+  borderRadius: "6px",
+});
 const image = css({ objectFit: "cover", transition: "transform 0.9s {easings.silk}" });
-const name = css({ display: "block", fontFamily: "display", fontSize: "1.6rem", lineHeight: "1.2", marginBlockStart: "10px" });
+const name = css({
+  display: "block",
+  fontFamily: "display",
+  fontSize: "1.6rem",
+  lineHeight: "1.2",
+  marginBlockStart: "10px",
+});
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) => PRODUCTS.map(({ slug }) => ({ locale, slug })));
@@ -71,12 +91,32 @@ function ProductContent({ product }: { product: Product }) {
   );
   const items = [...others, ...fillers].slice(0, 3);
 
+  const productName = tProducts(
+    `${product.slug}.name` as Parameters<typeof tProducts>[0],
+  ) as string;
+  const description = tProducts(
+    `${product.slug}.description` as Parameters<typeof tProducts>[0],
+  ) as string;
+  const currency = currencyForLocale(locale);
+
   return (
     <>
-      <ProductDetail
-        product={product}
-        description={tProducts(`${product.slug}.description` as Parameters<typeof tProducts>[0]) as string}
+      <script
+        type="application/ld+json"
+        // 구조화 데이터는 실행되지 않는 JSON이고, productJsonLd가 "<"를 이스케이프합니다.
+        dangerouslySetInnerHTML={{
+          __html: productJsonLd({
+            slug: product.slug,
+            locale,
+            name: productName,
+            description,
+            image: product.image.src,
+            price: priceInCurrency(product.priceUsd, currency),
+            currency,
+          }),
+        }}
       />
+      <ProductDetail product={product} description={description} />
       <section className={related} aria-labelledby="related-title">
         <h2 id="related-title" className={relatedTitle}>
           {t("related")}
@@ -86,7 +126,13 @@ function ProductContent({ product }: { product: Product }) {
             <li key={item.slug}>
               <Link href={`/shop/${item.slug}`} className={card}>
                 <span className={photo}>
-                  <Image src={item.image.src} alt="" fill sizes="(max-width: 768px) 50vw, 33vw" className={image} />
+                  <Image
+                    src={item.image.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className={image}
+                  />
                 </span>
                 <span className={name}>
                   {tProducts(`${item.slug}.name` as Parameters<typeof tProducts>[0]) as string}
