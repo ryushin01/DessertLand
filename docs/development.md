@@ -95,6 +95,8 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 2. 사용자는 Stripe 화면에서 카드와 배송 정보를 입력합니다.
 3. 완료 페이지가 주소의 세션 ID를 Stripe에 직접 조회해 결제 여부를 확인합니다. 장바구니 주문이면 이때 장바구니를 비웁니다.
 
+한 주문은 99종까지입니다(`MAX_ORDER_LINES`). Stripe Checkout이 결제 항목을 100줄까지 받고 그중 한 줄이 배송비이기 때문입니다. 넘으면 주문 화면이 결제 버튼 대신 장바구니에서 고르라고 안내하고, 서버 검증(`isValidOrderLines`, 두 결제 경로가 함께 씀)도 거절합니다. 결제 뒤 장바구니에서 뺄 상품의 slug는 메타데이터 `items`에 쉼표로 이어 담고, 값 하나의 상한(500자)을 넘을 때만 `items_1`, `items_2`…로 나눕니다. 500자 안이면 예전과 같은 모양이라 이전 버전으로 되돌려도 읽힙니다.
+
 키가 없으면 내장 테스트 결제창과 `POST /api/payments`를 씁니다. CI와 E2E는 이 경로로 동작합니다.
 
 ### 실제 판매로 전환할 때
@@ -108,13 +110,14 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 ## 라이선스
 
 - **사진:** [Unsplash License](https://unsplash.com/license)의 무료 사진(Unsplash+ 제외)과 [Wikimedia Commons](https://commons.wikimedia.org)의 자유 라이선스 사진(CC0, 퍼블릭 도메인, CC BY, CC BY-SA)만 씁니다. 출처는 화면이 아니라 README의 '출처'와 `docs/credits.md`에 둡니다. Commons 사진은 저작자·라이선스(링크)·원본 파일 주소를 적고, 크기와 형식(WebP, 1400px 이하) 말고는 고치지 않습니다. 단위 테스트(`photo-credits.test.ts`)가 모든 상품의 사진 파일과 `docs/credits.md`의 출처 줄, Commons 사진의 라이선스를 확인합니다.
-- **나라:** 기원이 여러 나라에 걸치거나 다툼이 있는 디저트는 나라 코드 `XX`로 두고 "기타"로 표시합니다. 세계 여행 구간에는 넣지 않습니다.
+- **나라:** 기원이 여러 나라에 걸치거나 다툼이 있는 디저트는 나라 코드 `XX`로 두고 "기타"로 표시합니다. 세계 여행 구간에는 넣지 않습니다. 나라 이름은 런타임 `Intl.DisplayNames` 대신 고정 표(`entities/product/lib/country-names.ts`)에서 읽습니다. ICU 데이터가 실행 환경마다 달라(홍콩: Node "Hong Kong SAR China", Chrome "Hong Kong") 서버와 브라우저가 다른 글자를 그리면 하이드레이션이 깨지기 때문입니다. 새 나라는 Node의 `Intl.DisplayNames`로 10개 언어 이름을 만들어 더하고, 긴 이름이 환경마다 다르면 짧은 이름(`style: "short"`)을 씁니다. 단위 테스트가 모든 상품의 나라가 표에 있는지 확인합니다.
 - **아이콘:** Flaticon UIcons 무료 라이선스는 사이트 바닥글에 출처 줄을 두도록 정해 푸터에 'Uicons by Flaticon' 링크를 두고, README의 '출처'에도 적습니다. 쓰는 아이콘만 `scripts/build-icons.py`로 추려 냅니다.
 
 ## 테스트
 
 - 단위 테스트는 코드 옆의 `*.test.ts(x)`에 둡니다.
 - 잘림, 넘침, 접근성은 `pnpm build` 후 `pnpm e2e`로 확인합니다. axe를 통과해도 KWCAG 준수는 아니므로 새 UI는 항목을 직접 점검합니다.
+- E2E 서버는 4391 포트를 씁니다. 다른 작업이 그 포트를 쓰고 있으면 `E2E_PORT=4492 pnpm e2e`처럼 바꿉니다.
 
 ## 디자인 시스템(Storybook) 배포
 
@@ -138,12 +141,14 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 | 환경 변수 | 내용 |
 | --- | --- |
-| `NEXT_PUBLIC_SENTRY_DSN` | 있으면 처리하지 못한 오류와 나쁜(poor) Web Vitals를 Sentry로 보냅니다. 없으면 Sentry를 번들에 넣지 않고, 개발 모드에서 Web Vitals를 콘솔에만 찍습니다 |
+| `NEXT_PUBLIC_SENTRY_DSN` | 있으면 브라우저와 서버에서 처리하지 못한 오류, 나쁜(poor) Web Vitals를 Sentry로 보냅니다. 없으면 Sentry를 번들에 넣지 않고, 개발 모드에서 Web Vitals를 콘솔에만 찍습니다 |
 
 - Sentry에는 오류 내용만 보내고 사용자 정보·쿠키·헤더·쿼리 문자열, 방문 기록(세션), 이동·클릭 기록(브레드크럼), 콘솔 기록은 모으지 않습니다. 오류에 붙는 콜백 인수, Error가 아닌 일반 객체로 거부된 Promise의 필드 값(`extra.__serialized__`), 주소의 `#` 뒤도 보내기 전에 지웁니다. Sentry를 받기 전에 난 오류는 모아 두었다가 처리되지 않은 오류로 보냅니다.
 - 쓰는 함수만 `sentry.ts`에서 다시 내보내 약 31 kB(gzip)로 받습니다. 모듈 전체를 불러오면 리플레이·피드백까지 들어가 140 kB가 됩니다.
 - 실제 방문자의 속도는 Vercel Speed Insights로도 봅니다. 로컬 Lighthouse에서는 이 스크립트가 404라 권장 사항이 96점으로 나옵니다.
-- 브라우저 오류만 모읍니다. 서버에서 난 오류는 호스팅(Vercel 등)의 로그로 확인합니다.
+- **중계 경로:** 브라우저는 Sentry로 직접 보내지 않고 같은 사이트의 `POST /api/monitoring`으로 보냅니다(`tunnel`). CSP의 `connect-src 'self'`를 넓히지 않아도 되고 광고 차단기에도 덜 막힙니다. 중계는 묶음 머리글의 DSN이 이 사이트의 DSN과 같을 때만 넘기고, 256KB를 넘는 묶음은 거절하며(Content-Length가 없어도 바이트 수를 세며 읽다가 넘으면 멈춤), 접속자마다 1분에 60번까지 받습니다. DSN이 없으면 404로 답합니다.
+- **서버 오류:** `src/instrumentation.ts`의 `onRequestError`가 화면 렌더링·API 라우트에서 처리하지 못한 오류를 Sentry로 보냅니다(`_app/monitoring/server.ts`). SDK 없이 envelope를 직접 만들고, 경로는 쿼리 없이 보내며 헤더·쿠키는 넣지 않습니다. 보내기는 2초까지만 기다립니다.
+- **오류 화면:** 화면을 그리다 오류가 나면 `app/[locale]/error.tsx`(`_app/layouts/RouteError.tsx`)가 404 화면과 같은 배치로 다시 시도·홈으로 버튼을 보여 주고, 오류를 Sentry로 보냅니다.
 
 ## 의존성 갱신 (Dependabot)
 

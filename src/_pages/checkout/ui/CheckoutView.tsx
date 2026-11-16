@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
-import { cartLinesAtom, removePurchased, type CartLine } from "@/entities/cart";
+import { MAX_ORDER_LINES, cartLinesAtom, removePurchased, type CartLine } from "@/entities/cart";
 import { formatMoney } from "@/entities/product";
 import { summarizeCart } from "@/entities/cart";
 import { useCartSummary } from "@/features/cart-summary";
@@ -22,6 +22,12 @@ const demo = css({
   lineHeight: "1.5",
 });
 const buyNowNote = css({ marginBlockEnd: "24px", color: "caramel" });
+const limitNotice = css({
+  padding: "14px 16px",
+  border: "2px solid {colors.strawberry}",
+  borderRadius: "12px",
+  lineHeight: "1.5",
+});
 const columns = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", md: "minmax(0, 3fr) minmax(0, 2fr)" },
@@ -115,7 +121,12 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
         </>
       ) : (
         <div className={columns}>
-          {stripeEnabled ? (
+          {items.length > MAX_ORDER_LINES ? (
+            // Stripe 결제 항목 상한 때문에 서버가 거절하므로, 결제를 시작하기 전에 알립니다.
+            <p className={limitNotice}>
+              {t("tooManyItems", { max: MAX_ORDER_LINES, count: items.length })}
+            </p>
+          ) : stripeEnabled ? (
             <StripeCheckoutButton
               items={items}
               total={summary.total}
