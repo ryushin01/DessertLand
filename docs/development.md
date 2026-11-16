@@ -55,7 +55,7 @@
 - **입력:** 200자로 제한하고, 프롬프트에서 고객 입력을 지시가 아닌 데이터로 다룹니다. 입력 내용은 로그에 남기지 않습니다.
 - **비용 제한:** 사람당 분당 8회, 서버 인스턴스당 하루 300회입니다. 메모리 기반이라 정확한 상한은 아닙니다. 실제 비용 상한은 Claude Console의 사용 한도로 정합니다.
 
-새 맛을 추가할 때는 `TASTE_CHIPS`, `TASTES`, `CHIP_MEANINGS`, 메시지 파일의 `advisor.chips`를 함께 고칩니다.
+상품별 맛은 `entities/product/model/tastes.ts`에 있습니다(규칙 기반 추천과 상품 목록이 함께 씀). 상품을 추가하면 그 상품의 맛도 더합니다(단위 테스트가 모든 상품을 확인). 새 맛을 추가할 때는 `TASTES`(같은 파일), 추천의 `CHIP_MEANINGS`(`api/prompt.ts`), 메시지 파일의 `advisor.chips`를 함께 고칩니다.
 
 추천 스트림의 이벤트는 `features/recommend-dessert/model/parse-event.ts`의 `parseRecommendEvent`로 확인하고 추천은 3개까지만 받습니다. 오류나 형식 오류로 중간에 끝나도 `finally`에서 reader를 닫습니다. 결제 창은 https 주소일 때만 엽니다.
 
@@ -72,7 +72,7 @@
 | `/ko/shop/baklava` | 245KB |
 | `/ko/checkout` | 200KB |
 
-0.8.0에서 예산을 10KB씩 올렸습니다. 모든 화면에 실리는 코드가 늘었기 때문입니다. 하이드레이션이 깨지지 않도록 나라 이름을 고정 표로 그리게 했고(0.6.1, 약 2.6KB), 주문 내역이 들어갔습니다. 결제 뒤 반영 코드는 반영할 주문이 있을 때만 받습니다(`_app/state/OrderSync`).
+0.8.0에서 예산을 10KB씩 올렸습니다. 모든 화면에 실리는 코드가 늘었기 때문입니다. 하이드레이션이 깨지지 않도록 나라 이름을 고정 표로 그리게 했고(0.6.1, 약 2.6KB), 주문 내역이 들어갔습니다. 결제 뒤 반영 코드는 반영할 주문이 있을 때만 받습니다(`_app/state/OrderSync`). 상품별 맛 표는 커서 서버 공개 API(`entities/product/index.server.ts`)로만 내보냅니다.
 
 GSAP은 `@/shared/lib/gsap`에서만 가져옵니다. `@/shared/lib/motion`이나 `@/shared/ui`로 다시 내보내면 모든 페이지에 실립니다. `RevealText`도 같은 이유로 `@/shared/ui/reveal-text`에서 가져옵니다.
 
