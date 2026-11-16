@@ -1,7 +1,7 @@
 # <img src="docs/images/logo.svg" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-0.9.0-ff6484)
+![version](https://img.shields.io/badge/version-1.0.0-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -22,17 +22,21 @@
 |---|---|
 | ![어두운 화면의 SWEET 글자 안으로 케이크 사진이 보이는 장면](docs/images/home-zoom.jpg) | ![국가와 좌표, 가격이 적힌 디저트 카드가 가로로 이어지는 화면](docs/images/home-world.jpg) |
 
-| 상품 목록 | 상품 상세(일본어) |
+| 상품 목록 | 찾기·맛 필터 |
 |---|---|
-| ![가운데 상품을 강조하고 왼쪽에 그 상품 사진을 보여 주는 목록](docs/images/shop.jpg) | ![일본어로 표시된 쇼트케이크 상세 정보와 엔화 가격](docs/images/product-ja.jpg) |
+| ![가운데 상품을 강조하고 왼쪽에 그 상품 사진을 보여 주는 목록](docs/images/shop.jpg) | ![찾기 칸에 일본을 입력하고 가벼운 맛을 고른 뒤 결과 수가 줄어든 상품 목록 위쪽](docs/images/shop-filters.jpg) |
 
-| 장바구니(일본어) | Stripe 테스트 결제 |
+| 상품 상세(일본어) | 장바구니(일본어) |
 |---|---|
-| ![오른쪽에서 열린 장바구니와 수량, 합계, 주문 버튼](docs/images/cart-ja.jpg) | ![원화 주문 금액과 배송 정보, 카드 입력칸이 있는 Stripe 샌드박스 결제 화면](docs/images/payment.jpg) |
+| ![일본어로 표시된 쇼트케이크 상세 정보와 엔화 가격](docs/images/product-ja.jpg) | ![오른쪽에서 열린 장바구니와 수량, 합계, 주문 버튼](docs/images/cart-ja.jpg) |
 
-| 주문 완료 | 모바일 |
+| Stripe 테스트 결제 | 주문 완료 |
 |---|---|
-| ![주문 번호와 결제 금액을 보여 주는 주문 완료 화면](docs/images/order-complete.jpg) | <img src="docs/images/mobile-hero.jpg" alt="모바일 첫 화면의 손과 밀가루, 제목, 소개 문구" width="240"> |
+| ![원화 주문 금액과 배송 정보, 카드 입력칸이 있는 Stripe 샌드박스 결제 화면](docs/images/payment.jpg) | ![주문 번호와 결제 금액, 디저트 더 보기와 주문 내역 보기 버튼이 있는 주문 완료 화면](docs/images/order-complete.jpg) |
+
+| 주문 내역 | 모바일 |
+|---|---|
+| ![테스트 결제로 한 주문의 번호, 일시, 금액, 상품 수를 보여 주는 주문 내역](docs/images/orders.jpg) | <img src="docs/images/mobile-hero.jpg" alt="모바일 첫 화면의 손과 밀가루, 제목, 소개 문구" width="240"> |
 
 ## 주요 기능
 
@@ -40,16 +44,18 @@
 |---|---|
 | 전 세계 디저트 | 35개 나라와 기원이 여럿인 "기타"까지 175종. 케이크, 파이·타르트, 페이스트리, 쿠키·구움과자, 아이스크림·빙수, 푸딩·크림, 떡·전통 과자, 팬케이크·튀김, 커피, 음료의 10개 분류 |
 | 10개 언어 | ko(기본), en, ja, zh, fr, it, es, de, pt, tr. 언어별 URL, 통화, 국가 이름, 숫자 표시. 언어 메뉴는 원형 국기와 나라 이름으로 고름 |
-| 쇼핑 | 카테고리 필터, 상품 상세, 장바구니(저장 유지) |
+| 쇼핑 | 분류별 목록, 이름·나라로 찾기, 맛과 빼고 싶은 알레르기 성분으로 좁히기, 상품 상세, 장바구니(저장 유지) |
 | AI 추천 | 입맛을 적으면 Claude가 카탈로그 안에서 디저트를 추천(스트리밍). 키가 없으면 규칙 기반 추천 |
 | 구매 | 장바구니에서 고른 상품만 주문(산 상품만 장바구니에서 뺌), 상세와 상품 목록의 바로 구매(장바구니 유지), 배송 정보 입력과 오류 안내, 이 브라우저의 주문 내역 |
 | 결제 | Stripe Checkout 테스트 모드(키가 없으면 내장 테스트 결제창), 서버 금액 검증, 중복 결제 방지 |
 | 첫 화면 인터랙션 | 마우스 위치에 따라 가운데 손과 밀가루가 움직이고 빛이 바뀌는 WebGL 2.5D 시차 |
 | 커서 | 따라오는 링, 흩날리는 스프링클, 끌어당기는 버튼, 지나간 자리에 피어나는 사진 |
 | 스크롤 | 원형으로 열리는 장면 전환, 글자 마스크 줌, 가로 스크롤 여행, 단어별 밝아짐, 패럴랙스 |
-| 보안 | 콘텐츠 보안 정책(CSP), 프레임 삽입 금지, 서버 금액 검증. 주요 화면의 CSP 위반을 E2E로 검사 |
+| 보안 | 콘텐츠 보안 정책(CSP), 프레임 삽입 금지, 서버 금액 검증, 이 사이트가 만든 결제 세션만 확인. 주요 화면의 CSP 위반을 E2E로 검사 |
 | 성능 | Web Vitals 수집, 페이지별 전송량 예산(E2E), 언어별 글꼴과 필요한 코드·메시지만 로드, 분류별 정적 상품 목록 |
-| 접근성 | 모션 멈춤 버튼, `prefers-reduced-motion` 대응, 키보드 초점 시 장면 이동, 본문 바로가기 |
+| 접근성 | 모션 멈춤 버튼, `prefers-reduced-motion` 대응, 키보드 초점 시 장면 이동, 본문 바로가기, 모달·오류 문구 낭독 |
+| 검색 엔진 | 언어별 대표 주소와 hreflang, 사이트맵, 상품 구조화 데이터(JSON-LD) |
+| 운영 | Sentry 오류 수집(같은 사이트 중계, 서버 오류 포함), 오류 화면, 이미지 변형 수 관리 |
 
 ## 기술 스택
 

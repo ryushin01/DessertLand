@@ -6,9 +6,11 @@ import { css } from "styled-system/css";
 import { notFound } from "next/navigation";
 
 import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
+import { productTastes } from "@/entities/product/index.server";
 import { LOCALES, Link, localeAlternates, siteOpenGraph } from "@/shared/i18n";
 import { RevealText } from "@/shared/ui/reveal-text";
-import { ProductScroller } from "./ProductScroller";
+import { ShopBrowser } from "./ShopBrowser";
+import { pill, pillList } from "./pill";
 
 type ShopPageProps = { params: Promise<{ locale: string }> };
 type ShopCategoryPageProps = { params: Promise<{ locale: string; category: string }> };
@@ -28,33 +30,6 @@ const title = css({
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
-const advisorLink = css({
-  display: "inline-block",
-  paddingBlock: "8px",
-  textDecoration: "underline",
-  textUnderlineOffset: "4px",
-  _hover: { color: "caramel" },
-});
-const filters = css({ display: "flex", flexWrap: "wrap", gap: "8px" });
-const filter = css({
-  display: "inline-flex",
-  alignItems: "center",
-  minHeight: "44px",
-  paddingInline: "16px",
-  borderRadius: "999px",
-  border: "1px solid {colors.muted}",
-  fontSize: "0.9rem",
-  transition: "background 0.3s, color 0.3s",
-  _hover: { background: "cocoa.800" },
-  // 마우스를 올려도 현재 분류의 밝은 바탕을 유지합니다(어두운 바탕에 어두운 글자가 되지 않게).
-  "&[aria-current=page]": {
-    background: "cream",
-    color: "cocoa.950",
-    borderColor: "cream",
-    _hover: { background: "cream" },
-  },
-});
-
 export async function generateMetadata({ params }: ShopPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "shop" });
@@ -100,20 +75,20 @@ export async function ShopCategoryPage({ params }: ShopCategoryPageProps) {
 function ShopContent({ active }: { active?: Category }) {
   const t = useTranslations("shop");
   const tCategories = useTranslations("categories");
-  const tAdvisor = useTranslations("advisor");
   const products = getProductsByCategory(active);
+  const tastesBySlug = Object.fromEntries(products.map(({ slug }) => [slug, productTastes(slug)]));
 
   return (
     <>
       <div className={head}>
         <RevealText as="h1" text={t("title")} className={title} immediate />
         <nav aria-label={t("filter")}>
-          <ul className={filters}>
+          <ul className={pillList}>
             <li>
               <Link
                 href="/shop"
                 scroll={false}
-                className={filter}
+                className={pill}
                 aria-current={active ? undefined : "page"}
               >
                 {t("all")}
@@ -124,7 +99,7 @@ function ShopContent({ active }: { active?: Category }) {
                 <Link
                   href={`/shop/category/${category}`}
                   scroll={false}
-                  className={filter}
+                  className={pill}
                   aria-current={active === category ? "page" : undefined}
                 >
                   {tCategories(`${category}.name`)}
@@ -133,14 +108,13 @@ function ShopContent({ active }: { active?: Category }) {
             ))}
           </ul>
         </nav>
-        <p role="status">{t("results", { count: products.length })}</p>
-        <p>
-          <Link href="/#advisor" className={advisorLink}>
-            {tAdvisor("shopLink")}
-          </Link>
-        </p>
       </div>
-      <ProductScroller key={active ?? "all"} products={products} />
+      <ShopBrowser
+        key={active ?? "all"}
+        products={products}
+        tastesBySlug={tastesBySlug}
+        categoryKey={active ?? "all"}
+      />
     </>
   );
 }

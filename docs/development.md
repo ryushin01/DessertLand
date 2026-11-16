@@ -59,24 +59,31 @@
 
 추천 스트림의 이벤트는 `features/recommend-dessert/model/parse-event.ts`의 `parseRecommendEvent`로 확인하고 추천은 3개까지만 받습니다. 오류나 형식 오류로 중간에 끝나도 `finally`에서 reader를 닫습니다. 결제 창은 https 주소일 때만 엽니다.
 
+## 검색 엔진
+
+- 언어별 대표 주소와 `hreflang`(`localeAlternates`), 사이트맵(홈·목록·분류별 목록·상품, 10개 언어)을 둡니다.
+- 상품 상세는 schema.org `Product`·`Offer` 구조화 데이터(JSON-LD)로 이름·설명·사진·가격(그 언어의 통화)을 알립니다(`_pages/product/lib/json-ld.ts`). `<`를 이스케이프해 script 태그가 닫히지 않게 합니다.
+- 주문·주문 완료·주문 내역은 검색에서 뺍니다(`robots: { index: false }`).
+
 ## 성능 측정
 
 - **Web Vitals:** `<SpeedInsights />`가 프로덕션의 실사용 수치를 Vercel로 보냅니다. Vercel 프로젝트의 Speed Insights에서 봅니다. 무료 범위는 팀 전체 30일 10,000건이고, 넘으면 수집이 일시 중지됩니다.
 - **번들 분석:** `pnpm analyze`로 어떤 모듈이 어느 경로에 실리는지 봅니다.
 - **전송량 예산:** `e2e/performance-budget.spec.ts`가 첫 화면 HTML이 요구하는 JS의 압축 크기를 검사합니다. 프리페치로 나중에 받는 코드는 세지 않습니다.
 
-| 경로 | 예산 |
-|---|---|
-| `/ko` | 250KB |
-| `/ko/shop` | 245KB |
-| `/ko/shop/baklava` | 245KB |
-| `/ko/checkout` | 200KB |
+| 경로 | 측정값(JS, 1.0.0) | 예산 |
+|---|---|---|
+| `/ko` | 241KB | 250KB |
+| `/ko/shop` | 234KB | 245KB |
+| `/ko/shop/baklava` | 233KB | 245KB |
+| `/ko/checkout` | 192KB | 200KB |
 
-0.8.0에서 예산을 10KB씩 올렸습니다. 모든 화면에 실리는 코드가 늘었기 때문입니다. 하이드레이션이 깨지지 않도록 나라 이름을 고정 표로 그리게 했고(0.6.1, 약 2.6KB), 주문 내역이 들어갔습니다. 결제 뒤 반영 코드는 반영할 주문이 있을 때만 받습니다(`_app/state/OrderSync`). 상품별 맛 표는 커서 서버 공개 API(`entities/product/index.server.ts`)로만 내보냅니다.
+0.8.0에서 예산을 10KB씩 올렸습니다. 모든 화면에 실리는 코드가 늘었기 때문입니다. 하이드레이션이 깨지지 않도록 나라 이름을 고정 표로 그리게 했고(0.6.1, 약 2.6KB), 주문 내역·결제 뒤 반영 코드가 들어갔습니다(0.8.0). 결제 뒤 반영 코드는 반영할 주문이 있을 때만 받습니다(`_app/state/OrderSync`). 상품별 맛 표는 커서 서버 공개 API(`entities/product/index.server.ts`)로만 내보내고, 상품 목록이 그 목록의 맛만 속성으로 받습니다.
 
 GSAP은 `@/shared/lib/gsap`에서만 가져옵니다. `@/shared/lib/motion`이나 `@/shared/ui`로 다시 내보내면 모든 페이지에 실립니다. `RevealText`도 같은 이유로 `@/shared/ui/reveal-text`에서 가져옵니다.
 
 - **클라이언트 메시지:** 레이아웃의 `NextIntlClientProvider`에는 `pickClientMessages`(`shared/i18n/client-messages.ts`)로 고른 메시지만 넘깁니다. 지정하지 않으면 next-intl이 메시지 전체를 모든 화면에 싣습니다. 상품은 이름만 넘기고, 설명은 상품 상세가 서버에서 번역해 `ProductDetail`의 `description` 속성으로 넘깁니다. 서버에서만 쓰는 `meta`·`footer`·`notFound`는 넘기지 않습니다. 클라이언트 컴포넌트에서 이 묶음을 새로 쓰게 되면 함께 고칩니다. E2E가 주문·목록 화면에 상품 설명이 없는지 확인합니다.
+- **찾기·필터:** 상품 목록의 이름·나라 찾기, 맛 고르기, 빼고 싶은 성분은 브라우저에서만 거릅니다(`_pages/shop/model/filter-products.ts`). 주소를 바꾸지 않아 목록 페이지는 정적으로 남습니다. 맛은 고른 것 중 하나라도 있으면, 성분은 하나라도 들어 있으면 뺍니다. 대소문자와 라틴 문자 악센트는 무시하고, 영문 slug로도 찾습니다.
 - **정적 상품 목록:** 상품 목록은 주소의 검색 매개변수를 읽지 않고 정적으로 만듭니다. 분류별 목록도 미리 만든 페이지 `/[locale]/shop/category/[category]`입니다. 0.6.x까지의 `/[locale]/shop?category=<분류>`와 0.5.0 이전 분류 주소는 `src/proxy.ts`가 그 페이지로 영구 이동(308)합니다(`_app/routing/shop-category.ts`). 정적 페이지는 클라이언트 탐색에서 검색 매개변수를 캐시 키로 쓰지 않으므로, 분류를 `?category=`로 두고 내부 재작성하면 필터를 눌러도 목록이 바뀌지 않습니다. E2E가 목록 응답이 `no-store`가 아닌지 확인합니다.
 
 ## 배포
@@ -122,6 +129,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - **세션 구분:** Stripe 샌드박스를 다른 프로젝트와 함께 쓰므로, 세션 메타데이터에 `app: "dessert-land"`를 남기고 결제 확인과 주문 조회는 이 표시가 있는 세션만 받습니다. 0.7.x까지의 세션은 `source`(cart·buy)로 알아봅니다.
 - **내장 테스트 결제:** 서버에 남지 않으므로 주문 번호·금액·상품을 브라우저에 남겨 주문 내역에 보여 줍니다.
 - 웹훅과 주문 DB는 배송 정보 같은 개인정보를 이 사이트가 저장하게 되고, 함께 쓰는 샌드박스의 웹훅 설정도 바꿔야 해서 쓰지 않습니다.
+- **알려진 한계:** 결제 뒤 반영은 Stripe 메타데이터의 상품 slug로 장바구니 줄을 통째로 뺍니다(수량은 보지 않음). 반영이 늦어지는 사이(잠시 조회 실패 뒤 10분 재시도 등) 같은 상품을 다시 담으면 그 줄도 빠질 수 있습니다. 결제 화면으로 가기 전에 산 수량을 저장해 두고 그만큼만 빼면 고칠 수 있습니다.
 
 ### 실제 판매로 전환할 때
 
