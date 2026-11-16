@@ -168,7 +168,8 @@
     "stripeNotice": "Stripe-Testmodus: Es wird nichts berechnet. Verwenden Sie auf der Zahlungsseite die Testkarte 4242 4242 4242 4242, ein zukünftiges Ablaufdatum und einen beliebigen CVC. Geben Sie keine echte Kartennummer ein. Die dort eingegebenen Daten gehen an Stripe.",
     "stripePay": "{amount} mit Stripe bezahlen",
     "stripeRedirecting": "Weiterleitung zur Zahlung",
-    "unverified": "Diese Zahlung konnte nicht bestätigt werden. Sie lässt sich im Stripe-Test-Dashboard prüfen."
+    "unverified": "Diese Zahlung konnte nicht bestätigt werden. Sie lässt sich im Stripe-Test-Dashboard prüfen.",
+    "tooManyItems": "Du kannst bis zu {max} Dessertsorten auf einmal bestellen. Deine Bestellung enthält {count}. Wähle im Warenkorb aus, welche Desserts du bestellen möchtest."
   },
   "footer": {
     "tagline": "Dessert Land ist ein Demo-Shop mit Desserts der Welt in 10 Sprachen.",
@@ -176,6 +177,11 @@
   },
   "notFound": {
     "title": "Seite nicht gefunden",
+    "back": "Zur Startseite"
+  },
+  "error": {
+    "title": "Etwas ist schiefgelaufen",
+    "retry": "Erneut versuchen",
     "back": "Zur Startseite"
   },
   "products": {

@@ -3,6 +3,7 @@ import "server-only";
 import { currencyForLocale } from "@/entities/product";
 
 import { fromMinorUnits } from "./minor-units";
+import { unpackSlugs } from "./order-metadata";
 import { getStripeTestClient } from "./stripe.server";
 
 /** purchased: 장바구니 주문이면 장바구니에서 뺄 상품의 slug, 바로 구매면 빈 배열입니다. */
@@ -24,10 +25,7 @@ export async function retrievePaidOrder(
     return {
       orderNo: `DL-${session.id.slice(-8).toUpperCase()}`,
       total: fromMinorUnits(session.amount_total ?? 0, currency),
-      purchased:
-        session.metadata?.source === "cart"
-          ? (session.metadata.items ?? "").split(",").filter(Boolean)
-          : [],
+      purchased: session.metadata?.source === "cart" ? unpackSlugs(session.metadata) : [],
     };
   } catch {
     return null;

@@ -168,7 +168,8 @@
     "stripeNotice": "Modo de teste da Stripe: não será cobrado nenhum valor. Na página de pagamento, use o cartão de teste 4242 4242 4242 4242, uma validade futura e qualquer CVC. Não introduza um número de cartão real. Os dados introduzidos são enviados à Stripe.",
     "stripePay": "Pagar {amount} com a Stripe",
     "stripeRedirecting": "A ir para a página de pagamento",
-    "unverified": "Não foi possível confirmar o pagamento. Pode verificá-lo no painel de teste da Stripe."
+    "unverified": "Não foi possível confirmar o pagamento. Pode verificá-lo no painel de teste da Stripe.",
+    "tooManyItems": "Você pode pedir até {max} tipos de sobremesa de uma vez. Seu pedido tem {count}; escolha no carrinho quais sobremesas incluir."
   },
   "footer": {
     "tagline": "A Dessert Land é uma loja de demonstração com sobremesas do mundo em 10 idiomas.",
@@ -176,6 +177,11 @@
   },
   "notFound": {
     "title": "Página não encontrada",
+    "back": "Voltar ao início"
+  },
+  "error": {
+    "title": "Algo deu errado",
+    "retry": "Tentar novamente",
     "back": "Voltar ao início"
   },
   "products": {
