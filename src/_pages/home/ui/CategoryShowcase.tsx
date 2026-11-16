@@ -201,7 +201,7 @@ function Chapter({ category, index, first }: { category: Category; index: number
             <p className={lede}>{tCategories(`${category}.lede`)}</p>
             <p>
               <Link
-                href={{ pathname: "/shop", query: { category } }}
+                href={`/shop/category/${category}`}
                 className={buttonRecipe({ tone: "outline" })}
                 data-magnetic
               >

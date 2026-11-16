@@ -71,9 +71,11 @@
 | `/ko/shop` | 221KB | 235KB |
 | `/ko/shop/baklava` | 221KB | 235KB |
 | `/ko/checkout` | 179KB | 190KB |
-| `/ko/credits` | 175KB | 185KB |
 
 GSAP은 `@/shared/lib/gsap`에서만 가져옵니다. `@/shared/lib/motion`이나 `@/shared/ui`로 다시 내보내면 모든 페이지에 실립니다. `RevealText`도 같은 이유로 `@/shared/ui/reveal-text`에서 가져옵니다.
+
+- **클라이언트 메시지:** 레이아웃의 `NextIntlClientProvider`에는 `pickClientMessages`(`shared/i18n/client-messages.ts`)로 고른 메시지만 넘깁니다. 지정하지 않으면 next-intl이 메시지 전체를 모든 화면에 싣습니다. 상품은 이름만 넘기고, 설명은 상품 상세가 서버에서 번역해 `ProductDetail`의 `description` 속성으로 넘깁니다. 서버에서만 쓰는 `meta`·`footer`·`notFound`는 넘기지 않습니다. 클라이언트 컴포넌트에서 이 묶음을 새로 쓰게 되면 함께 고칩니다. E2E가 주문·목록 화면에 상품 설명이 없는지 확인합니다.
+- **정적 상품 목록:** 상품 목록은 주소의 검색 매개변수를 읽지 않고 정적으로 만듭니다. 분류별 목록도 미리 만든 페이지 `/[locale]/shop/category/[category]`입니다. 0.6.x까지의 `/[locale]/shop?category=<분류>`와 0.5.0 이전 분류 주소는 `src/proxy.ts`가 그 페이지로 영구 이동(308)합니다(`_app/routing/shop-category.ts`). 정적 페이지는 클라이언트 탐색에서 검색 매개변수를 캐시 키로 쓰지 않으므로, 분류를 `?category=`로 두고 내부 재작성하면 필터를 눌러도 목록이 바뀌지 않습니다. E2E가 목록 응답이 `no-store`가 아닌지 확인합니다.
 
 ## 배포
 

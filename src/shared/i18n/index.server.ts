@@ -2,3 +2,4 @@
 // index.ts는 클라이언트 탐색 도우미(navigation)까지 내보내므로, 서버 코드는 언어 목록만 여기서 가져옵니다.
 export { LOCALES } from "./routing";
 export type { Locale } from "./routing";
+export { pickClientMessages } from "./client-messages";
