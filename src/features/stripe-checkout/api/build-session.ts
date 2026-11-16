@@ -11,7 +11,7 @@ import { SITE_NAME } from "@/shared/config";
 import { LOCALES } from "@/shared/i18n/index.server";
 
 import { toMinorUnits } from "./minor-units";
-import { packSlugs } from "./order-metadata";
+import { ORDER_APP, packSlugs } from "./order-metadata";
 
 export type OrderSource = "cart" | "buy";
 
@@ -93,7 +93,8 @@ export function buildSessionParams({
     line_items: [...lines, lineItem(shippingName, shippingInCurrency(currency), 1)],
     shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },
     // 결제 뒤 장바구니에서 산 상품만 빼도록 slug를 남깁니다. 값 하나가 500자를 넘지 않게 나눠 담습니다.
-    metadata: { source, ...packSlugs(items.map((item) => item.slug)) },
+    // app: 샌드박스를 함께 쓰는 다른 프로젝트의 세션과 구분합니다.
+    metadata: { app: ORDER_APP, source, ...packSlugs(items.map((item) => item.slug)) },
     success_url: `${origin}/${locale}/checkout/complete?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/${locale}/checkout?${canceledQuery}`,
   };

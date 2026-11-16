@@ -21,5 +21,5 @@ export default async function CheckoutCompletePage({ params, searchParams }: Pro
   setRequestLocale(locale);
   const { session_id: sessionId } = await searchParams;
   const order = typeof sessionId === "string" ? await retrievePaidOrder(sessionId, locale) : null;
-  return <CompleteView order={order} />;
+  return <CompleteView order={order ? { ...order, sessionId: sessionId as string } : null} />;
 }

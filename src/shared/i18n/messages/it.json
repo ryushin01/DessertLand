@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land è un negozio dimostrativo che presenta i dolci del mondo in 10 lingue.",
-    "credits": "Crediti di foto e icone"
+    "credits": "Crediti di foto e icone",
+    "orders": "Storico ordini"
   },
   "notFound": {
     "title": "Pagina non trovata",
@@ -916,5 +917,24 @@
       "light": "Leggero",
       "nutFree": "Senza frutta a guscio"
     }
+  },
+  "orders": {
+    "metaTitle": "Storico ordini",
+    "title": "Storico ordini",
+    "lede": "Qui compaiono solo gli ordini fatti in questo browser. Nomi, e-mail e indirizzi non vengono salvati su questo sito; numero e importo degli ordini pagati arrivano da Stripe.",
+    "empty": "Nessun ordine per ora.",
+    "orderNo": "Numero d’ordine",
+    "date": "Data dell’ordine",
+    "total": "Importo pagato",
+    "items": "{count, plural, one {# dolce} other {# dolci}}",
+    "paid": "Pagato",
+    "open": "Non ancora pagato",
+    "expired": "Non pagato",
+    "unknown": "Non disponibile",
+    "unavailable": "Temporaneamente non disponibile",
+    "demo": "Pagamento di prova",
+    "loading": "Caricamento degli ordini.",
+    "error": "Impossibile caricare gli ordini. Riprova tra poco.",
+    "link": "Vedi lo storico ordini"
   }
 }

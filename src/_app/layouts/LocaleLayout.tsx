@@ -12,6 +12,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { css } from "styled-system/css";
 
 import { AppProviders } from "@/_app/state/AppProviders";
+import { OrderSync } from "@/_app/state/OrderSync";
 import { DeferredMotion } from "@/_app/motion/DeferredMotion";
 import { MotionAttribute } from "@/_app/motion/MotionAttribute";
 import { RestFonts } from "@/_app/layouts/RestFonts";
@@ -135,6 +136,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
               {t("skip")}
             </a>
             <MotionAttribute />
+            <OrderSync />
             <DeferredMotion />
             <SiteHeader />
             <main id="main" tabIndex={-1}>

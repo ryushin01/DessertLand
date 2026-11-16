@@ -78,7 +78,15 @@ const foot = css({
 });
 const line = css({ display: "flex", justifyContent: "space-between", fontSize: "0.95rem" });
 const total = css({ display: "flex", justifyContent: "space-between", fontSize: "1.2rem", fontWeight: "600" });
-const empty = css({ paddingBlock: "48px", textAlign: "center", color: "muted" });
+const empty = css({ display: "grid", gap: "12px", justifyItems: "center", paddingBlock: "48px", textAlign: "center", color: "muted" });
+const emptyLink = css({
+  display: "inline-block",
+  paddingBlock: "8px",
+  color: "cream",
+  textDecoration: "underline",
+  textUnderlineOffset: "4px",
+  _hover: { color: "caramel" },
+});
 const srOnly = css({ srOnly: true });
 const check = css({
   width: "20px",
@@ -108,6 +116,7 @@ export function CartDrawer() {
   const t = useTranslations("cart");
   const tProducts = useTranslations("products");
   const tProduct = useTranslations("product");
+  const tOrders = useTranslations("orders");
   const locale = useLocale();
   const [open, setOpen] = useAtom(cartOpenAtom);
   const setLines = useSetAtom(cartLinesAtom);
@@ -171,7 +180,12 @@ export function CartDrawer() {
         </div>
         <div className={body} data-lenis-prevent>
           {summary.lines.length === 0 ? (
-            <p className={empty}>{t("empty")}</p>
+            <div className={empty}>
+              <p>{t("empty")}</p>
+              <Link href="/orders" className={emptyLink} onClick={() => setOpen(false)}>
+                {tOrders("link")}
+              </Link>
+            </div>
           ) : (
             <>
             <label className={selectRow}>

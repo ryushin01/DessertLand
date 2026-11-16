@@ -1,3 +1,16 @@
+/**
+ * 이 사이트가 만든 결제 세션 표시. Stripe 샌드박스를 다른 프로젝트와 함께 쓰므로,
+ * 결제 확인과 주문 조회는 이 표시가 있는 세션만 받습니다.
+ */
+export const ORDER_APP = "dessert-land";
+
+/** 이 사이트가 만든 세션인지 봅니다. 0.7.x까지의 세션은 app 표시 없이 source(cart·buy)만 있습니다. */
+export function isOwnSession(metadata: Record<string, string> | null | undefined): boolean {
+  if (!metadata) return false;
+  if (metadata.app !== undefined) return metadata.app === ORDER_APP;
+  return metadata.source === "cart" || metadata.source === "buy";
+}
+
 /** Stripe 메타데이터 값 하나에 담을 수 있는 최대 글자 수입니다. */
 export const METADATA_VALUE_LIMIT = 500;
 const KEY_PREFIX = "items_";
