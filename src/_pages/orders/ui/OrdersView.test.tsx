@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { createStore, Provider } from "jotai";
 import { NextIntlClientProvider } from "next-intl";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -29,6 +29,7 @@ function renderOrders(orders: SavedOrder[]) {
       </NextIntlClientProvider>
     </Provider>,
   );
+  return store;
 }
 
 describe("OrdersView", () => {
@@ -105,5 +106,45 @@ describe("OrdersView", () => {
       await screen.findByText("주문 정보를 불러오지 못했습니다. 잠시 후 다시 열어 주세요."),
     ).toBeInTheDocument();
     expect(screen.getByText("확인할 수 없음")).toBeInTheDocument();
+  });
+
+  it("결과가 반영(settled)되면 같은 주문들이라도 다시 조회해 새 상태를 보여 줍니다", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(
+        Response.json({ status: "ok", orders: [{ sessionId: SESSION, state: "open" }] }),
+      )
+      .mockResolvedValueOnce(
+        Response.json({
+          status: "ok",
+          orders: [
+            {
+              sessionId: SESSION,
+              state: "paid",
+              orderNo: "DL-AID01XYZ",
+              total: 15,
+              currency: "USD",
+              createdAt: Date.UTC(2026, 10, 15, 3, 0),
+              purchased: [],
+            },
+          ],
+        }),
+      );
+    vi.stubGlobal("fetch", fetchMock);
+    const order: SavedOrder = {
+      kind: "stripe",
+      sessionId: SESSION,
+      createdAt: Date.UTC(2026, 10, 15),
+      source: "cart",
+      settled: false,
+    };
+    const store = renderOrders([order]);
+    expect(await screen.findByText("결제 전")).toBeInTheDocument();
+
+    act(() => store.set(savedOrdersAtom, [{ ...order, settled: true }]));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(
+      await screen.findByRole("heading", { level: 2, name: "DL-AID01XYZ" }),
+    ).toBeInTheDocument();
   });
 });

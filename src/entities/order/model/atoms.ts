@@ -14,6 +14,14 @@ const sanitize = (value: unknown, fallback: SavedOrder[]): SavedOrder[] =>
 const storage: typeof json = {
   ...json,
   getItem: (key, initialValue) => sanitize(json.getItem(key, initialValue), initialValue),
+  // 주문 내역 저장은 덤입니다. 저장 공간이 꽉 차는 등으로 실패해도 결제·장바구니 흐름을 막지 않습니다.
+  setItem: (key, value) => {
+    try {
+      json.setItem(key, value);
+    } catch {
+      // 이번 주문은 주문 내역에 남지 않을 뿐입니다.
+    }
+  },
   subscribe: (key, callback, initialValue) =>
     json.subscribe?.(key, (value) => callback(sanitize(value, initialValue)), initialValue) ??
     (() => {}),

@@ -3,6 +3,7 @@ export {
   MAX_SAVED_ORDERS,
   SETTLE_WINDOW_MS,
   addSavedOrder,
+  isSessionId,
   orderKey,
   pendingStripeOrders,
   settleOrders,
