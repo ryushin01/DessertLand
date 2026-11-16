@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land es una tienda de demostración con postres del mundo en 10 idiomas.",
-    "credits": "Créditos de fotos e iconos"
+    "credits": "Créditos de fotos e iconos",
+    "orders": "Historial de pedidos"
   },
   "notFound": {
     "title": "Página no encontrada",
@@ -916,5 +917,24 @@
       "light": "Ligero",
       "nutFree": "Sin frutos secos"
     }
+  },
+  "orders": {
+    "metaTitle": "Historial de pedidos",
+    "title": "Historial de pedidos",
+    "lede": "Aquí solo aparecen los pedidos hechos en este navegador. Este sitio no guarda nombres, correos ni direcciones; el número y el importe de los pedidos pagados se consultan en Stripe.",
+    "empty": "Aún no hay pedidos.",
+    "orderNo": "Número de pedido",
+    "date": "Fecha del pedido",
+    "total": "Importe pagado",
+    "items": "{count, plural, one {# postre} other {# postres}}",
+    "paid": "Pagado",
+    "open": "Aún sin pagar",
+    "expired": "Sin pagar",
+    "unknown": "No disponible",
+    "unavailable": "No disponible por ahora",
+    "demo": "Pago de prueba",
+    "loading": "Cargando tus pedidos.",
+    "error": "No se pudieron cargar tus pedidos. Vuelve a intentarlo en un momento.",
+    "link": "Ver historial de pedidos"
   }
 }

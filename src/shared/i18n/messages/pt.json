@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "A Dessert Land é uma loja de demonstração com sobremesas do mundo em 10 idiomas.",
-    "credits": "Créditos de fotos e ícones"
+    "credits": "Créditos de fotos e ícones",
+    "orders": "Histórico de encomendas"
   },
   "notFound": {
     "title": "Página não encontrada",
@@ -916,5 +917,24 @@
       "light": "Leve",
       "nutFree": "Sem frutos secos"
     }
+  },
+  "orders": {
+    "metaTitle": "Histórico de encomendas",
+    "title": "Histórico de encomendas",
+    "lede": "Aqui só aparecem as encomendas feitas neste navegador. Este site não guarda nomes, e-mails nem moradas; o número e o valor das encomendas pagas vêm da Stripe.",
+    "empty": "Ainda não há encomendas.",
+    "orderNo": "Número da encomenda",
+    "date": "Data da encomenda",
+    "total": "Valor pago",
+    "items": "{count, plural, one {# sobremesa} other {# sobremesas}}",
+    "paid": "Paga",
+    "open": "Ainda por pagar",
+    "expired": "Não paga",
+    "unknown": "Indisponível",
+    "unavailable": "Temporariamente indisponível",
+    "demo": "Pagamento de teste",
+    "loading": "A carregar as encomendas.",
+    "error": "Não foi possível carregar as encomendas. Tente novamente daqui a pouco.",
+    "link": "Ver histórico de encomendas"
   }
 }

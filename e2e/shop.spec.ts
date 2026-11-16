@@ -277,6 +277,48 @@ test("장바구니에 담아 결제까지 마치면 장바구니가 비워집니
   await expect(page.locator("main")).toContainText("결제 금액: ₩23,100");
   await expect(page.locator("main")).toContainText("결제 수단: 간편결제");
   await expect(page.getByRole("button", { name: "장바구니", exact: true })).toBeVisible();
+
+  // 주문 내역에서 방금 한 주문을 다시 볼 수 있습니다(이 브라우저에만 남음).
+  const orderNo = (await page.locator("main").innerText()).match(/DL-[0-9A-F]{8}/)?.[0] ?? "";
+  expect(orderNo).not.toBe("");
+  await page.getByRole("link", { name: "주문 내역 보기" }).click();
+  await expect(page).toHaveURL(/\/ko\/orders$/);
+  await expect(page.getByRole("heading", { level: 2, name: orderNo })).toBeVisible();
+  await expect(page.locator("main")).toContainText("₩23,100");
+  await expect(page.locator("main")).toContainText("테스트 결제");
+  await scan(page);
+});
+
+test("결제를 두 번 해도 주문 내역에 두 주문이 모두 남습니다", async ({ page }) => {
+  // 주문 화면은 주문 목록을 구독하지 않으므로, 저장소의 예전 주문을 덮어쓰지 않아야 합니다.
+  const orderNumbers: string[] = [];
+  for (const slug of ["baklava", "tiramisu"]) {
+    await page.goto(`/ko/checkout?buy=${slug}&qty=1`);
+    await fillCheckout(page);
+    await page.getByRole("button", { name: /결제하기$/ }).click();
+    await page.getByRole("dialog", { name: "테스트 결제창" }).getByRole("button", { name: "결제 승인" }).click();
+    await expect(page.getByRole("heading", { level: 1, name: "주문이 완료되었습니다" })).toBeVisible();
+    orderNumbers.push((await page.locator("main").innerText()).match(/DL-[0-9A-F]{8}/)?.[0] ?? "");
+  }
+  await page.goto("/ko/orders");
+  for (const orderNo of orderNumbers) {
+    await expect(page.getByRole("heading", { level: 2, name: orderNo })).toBeVisible();
+  }
+});
+
+test("주문 내역은 처음에는 비어 있고, 바닥글과 빈 장바구니에서 갈 수 있습니다", async ({ page }) => {
+  await page.goto("/ko/orders");
+  await expect(page.getByRole("heading", { level: 1, name: "주문 내역" })).toBeVisible();
+  await expect(page.getByText("아직 주문이 없습니다.")).toBeVisible();
+  await scan(page);
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "주문 내역" })).toHaveAttribute(
+    "href",
+    "/ko/orders",
+  );
+  await page.getByRole("button", { name: "장바구니", exact: true }).click();
+  await page.getByRole("dialog", { name: "장바구니" }).getByRole("link", { name: "주문 내역 보기" }).click();
+  await expect(page.getByRole("dialog", { name: "장바구니" })).toBeHidden();
+  await expect(page).toHaveURL(/\/ko\/orders$/);
 });
 
 test("바로 구매는 그 상품만 결제하고 장바구니를 유지합니다", async ({ page }) => {
@@ -468,6 +510,11 @@ test("서버 오류가 나면 안내하고 다시 시도할 수 있습니다", a
 });
 
 test.describe("Stripe 결제 경로", () => {
+  test("키가 없으면 주문 조회도 하지 않습니다", async ({ request }) => {
+    const response = await request.post("/api/orders", { data: { ids: ["cs_test_abcdefghijklmnop"] } });
+    expect(response.status()).toBe(503);
+  });
+
   test("키가 없으면 세션을 만들지 않습니다", async ({ request }) => {
     const response = await request.post("/api/checkout-session", {
       data: {
@@ -714,7 +761,14 @@ test("주요 화면에서 콘텐츠 보안 정책(CSP) 위반이 없습니다", 
     if (/Content Security Policy/i.test(message.text())) violations.push(message.text());
   });
   // ja는 한중일 웹 글꼴(Google Fonts)을 받는 화면입니다.
-  for (const path of ["/ko", "/ko/shop", "/ko/shop/baklava", "/ko/checkout?buy=baklava&qty=1", "/ja"]) {
+  for (const path of [
+    "/ko",
+    "/ko/shop",
+    "/ko/shop/baklava",
+    "/ko/checkout?buy=baklava&qty=1",
+    "/ko/orders",
+    "/ja",
+  ]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
   }

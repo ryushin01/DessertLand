@@ -6,10 +6,12 @@ import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
 
 import { cartLinesAtom, removePurchased } from "@/entities/cart";
+import { settleOrders, updateSavedOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { Icon, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
 
+const actions = css({ display: "flex", flexWrap: "wrap", gap: "12px" });
 const box = css({
   padding: "14px 16px",
   borderRadius: "12px",
@@ -19,21 +21,26 @@ const box = css({
 });
 
 type CompleteViewProps = {
-  order: { orderNo: string; total: number; purchased: string[] } | null;
+  order: { orderNo: string; total: number; purchased: string[]; sessionId: string } | null;
 };
 
 export function CompleteView({ order }: CompleteViewProps) {
   const t = useTranslations("checkout");
+  const tOrders = useTranslations("orders");
   const locale = useLocale();
   const setCart = useSetAtom(cartLinesAtom);
+  const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
   const headingRef = useRef<HTMLHeadingElement>(null);
   // 장바구니에서 고른 상품만 결제했으므로 그 상품만 뺍니다.
   const purchased = order?.purchased.join(",") ?? "";
+  const sessionId = order?.sessionId;
 
   useEffect(() => {
     headingRef.current?.focus();
     if (purchased) setCart((lines) => removePurchased(lines, purchased.split(",")));
-  }, [purchased, setCart]);
+    // 결과를 여기서 반영했으므로, 다음 방문 때 다시 반영하지 않게 표시합니다.
+    if (sessionId) updateSavedOrders((orders) => settleOrders(orders, [sessionId]));
+  }, [purchased, sessionId, setCart, updateSavedOrders]);
 
   return (
     <div className={pageShell}>
@@ -50,10 +57,15 @@ export function CompleteView({ order }: CompleteViewProps) {
           <p>{t("unverified")}</p>
         )}
       </div>
-      <Link href="/shop" className={buttonRecipe()}>
-        {t("continue")}
-        <Icon name="arrow-right" />
-      </Link>
+      <p className={actions}>
+        <Link href="/shop" className={buttonRecipe()}>
+          {t("continue")}
+          <Icon name="arrow-right" />
+        </Link>
+        <Link href="/orders" className={buttonRecipe({ tone: "outline" })}>
+          {tOrders("link")}
+        </Link>
+      </p>
     </div>
   );
 }

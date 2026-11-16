@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land, dünya tatlılarını 10 dilde tanıtan bir demo mağazadır.",
-    "credits": "Fotoğraf ve simge kaynakları"
+    "credits": "Fotoğraf ve simge kaynakları",
+    "orders": "Sipariş geçmişi"
   },
   "notFound": {
     "title": "Sayfa bulunamadı",
@@ -916,5 +917,24 @@
       "light": "Hafif",
       "nutFree": "Kuruyemişsiz"
     }
+  },
+  "orders": {
+    "metaTitle": "Sipariş geçmişi",
+    "title": "Sipariş geçmişi",
+    "lede": "Burada yalnızca bu tarayıcıda verilen siparişler görünür. Ad, e-posta ve adresler bu sitede saklanmaz; ödenen siparişlerin numarası ve tutarı Stripe’tan alınır.",
+    "empty": "Henüz sipariş yok.",
+    "orderNo": "Sipariş numarası",
+    "date": "Sipariş tarihi",
+    "total": "Ödenen tutar",
+    "items": "{count} tatlı",
+    "paid": "Ödendi",
+    "open": "Henüz ödenmedi",
+    "expired": "Ödenmedi",
+    "unknown": "Doğrulanamadı",
+    "unavailable": "Geçici olarak doğrulanamıyor",
+    "demo": "Test ödemesi",
+    "loading": "Siparişler yükleniyor.",
+    "error": "Siparişler yüklenemedi. Lütfen biraz sonra tekrar deneyin.",
+    "link": "Sipariş geçmişini gör"
   }
 }

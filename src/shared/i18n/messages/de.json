@@ -175,7 +175,8 @@
   },
   "footer": {
     "tagline": "Dessert Land ist ein Demo-Shop mit Desserts der Welt in 10 Sprachen.",
-    "credits": "Foto- und Icon-Quellen"
+    "credits": "Foto- und Icon-Quellen",
+    "orders": "Bestellübersicht"
   },
   "notFound": {
     "title": "Seite nicht gefunden",
@@ -916,5 +917,24 @@
       "light": "Leicht",
       "nutFree": "Ohne Nüsse"
     }
+  },
+  "orders": {
+    "metaTitle": "Bestellübersicht",
+    "title": "Bestellübersicht",
+    "lede": "Hier erscheinen nur Bestellungen aus diesem Browser. Namen, E-Mail-Adressen und Anschriften werden auf dieser Website nicht gespeichert; Nummer und Betrag bezahlter Bestellungen kommen von Stripe.",
+    "empty": "Noch keine Bestellungen.",
+    "orderNo": "Bestellnummer",
+    "date": "Bestellt am",
+    "total": "Bezahlter Betrag",
+    "items": "{count, plural, one {# Dessert} other {# Desserts}}",
+    "paid": "Bezahlt",
+    "open": "Noch nicht bezahlt",
+    "expired": "Nicht bezahlt",
+    "unknown": "Nicht verfügbar",
+    "unavailable": "Vorübergehend nicht verfügbar",
+    "demo": "Testzahlung",
+    "loading": "Bestellungen werden geladen.",
+    "error": "Die Bestellungen konnten nicht geladen werden. Bitte versuchen Sie es gleich noch einmal.",
+    "link": "Bestellübersicht ansehen"
   }
 }

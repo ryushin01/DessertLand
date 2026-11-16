@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 import { MAX_ORDER_LINES, cartLinesAtom, removePurchased, type CartLine } from "@/entities/cart";
+import { addSavedOrder, updateSavedOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { summarizeCart } from "@/entities/cart";
 import { useCartSummary } from "@/features/cart-summary";
@@ -22,6 +23,7 @@ const demo = css({
   lineHeight: "1.5",
 });
 const buyNowNote = css({ marginBlockEnd: "24px", color: "caramel" });
+const successActions = css({ display: "flex", flexWrap: "wrap", gap: "12px" });
 const limitNotice = css({
   padding: "14px 16px",
   border: "2px solid {colors.strawberry}",
@@ -58,10 +60,13 @@ type CheckoutViewProps = { buyNow?: CartLine; stripeEnabled: boolean; canceled: 
 export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewProps) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
+  const tOrders = useTranslations("orders");
   const tProducts = useTranslations("products");
   const locale = useLocale();
   const cartSummary = useCartSummary();
   const setCart = useSetAtom(cartLinesAtom);
+  // 주문 목록을 구독하지 않는 화면이라, 저장소의 최신 목록 위에 더하는 갱신 atom을 씁니다.
+  const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
   const buyNowSummary = useMemo(
     () => (buyNow ? summarizeCart([buyNow], locale) : null),
     [buyNow, locale],
@@ -77,6 +82,17 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
 
   const onPaid = (paid: PaidOrder) => {
     setOrder(paid);
+    // 내장 테스트 결제는 서버에 남지 않으므로, 주문 내역에 보일 정보를 이 브라우저에 남깁니다.
+    updateSavedOrders((orders) =>
+      addSavedOrder(orders, {
+        kind: "demo",
+        orderNo: paid.orderNo,
+        createdAt: Date.now(),
+        total: paid.total,
+        locale,
+        items,
+      }),
+    );
     // 바로 구매는 장바구니를 건드리지 않고, 장바구니 주문은 고른 상품만 뺍니다.
     if (!buyNow)
       setCart((lines) =>
@@ -98,10 +114,15 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
           <p>{t("paidAmount", { amount: formatMoney(order.total, locale) })}</p>
           <p>{t("paidMethod", { method: t(METHOD_LABELS[order.method]) })}</p>
         </div>
-        <Link href="/shop" className={buttonRecipe()}>
-          {t("continue")}
-          <Icon name="arrow-right" />
-        </Link>
+        <p className={successActions}>
+          <Link href="/shop" className={buttonRecipe()}>
+            {t("continue")}
+            <Icon name="arrow-right" />
+          </Link>
+          <Link href="/orders" className={buttonRecipe({ tone: "outline" })}>
+            {tOrders("link")}
+          </Link>
+        </p>
       </div>
     );
   }
