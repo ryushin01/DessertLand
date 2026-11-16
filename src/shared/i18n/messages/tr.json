@@ -140,7 +140,7 @@
     "email": "E-posta",
     "address": "Teslimat adresi",
     "nameRequired": "Alıcı adı boş. Siparişi teslim alacak kişinin adını girin.",
-    "emailRequired": "E-posta boş. Sipariş bildirimlerini almak için bir e-posta adresi girin.",
+    "emailRequired": "E-posta boş. Bir e-posta adresi girin.",
     "addressRequired": "Teslimat adresi boş. Tatlıların teslim edileceği adresi girin.",
     "emailInvalid": "name@example.com biçiminde bir e-posta girin.",
     "errorSummary": "Lütfen bilgilerinizi kontrol edin.",

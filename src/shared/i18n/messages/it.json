@@ -140,7 +140,7 @@
     "email": "E-mail",
     "address": "Indirizzo di consegna",
     "nameRequired": "Il nome del destinatario è vuoto. Inserisci il nome di chi riceve l’ordine.",
-    "emailRequired": "L’e-mail è vuota. Inserisci un’e-mail per ricevere gli aggiornamenti dell’ordine.",
+    "emailRequired": "L’e-mail è vuota. Inserisci un indirizzo e-mail.",
     "addressRequired": "L’indirizzo di consegna è vuoto. Inserisci l’indirizzo dove consegnare i dolci.",
     "emailInvalid": "Inserisci un’e-mail come name@example.com.",
     "errorSummary": "Controlla i dati inseriti.",

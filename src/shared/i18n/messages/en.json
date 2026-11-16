@@ -140,7 +140,7 @@
     "email": "Email",
     "address": "Delivery address",
     "nameRequired": "Recipient name is empty. Enter the name of the person receiving the order.",
-    "emailRequired": "Email is empty. Enter an email to receive order updates.",
+    "emailRequired": "Email is empty. Enter an email address.",
     "addressRequired": "Delivery address is empty. Enter the address where the desserts should go.",
     "emailInvalid": "Enter an email like name@example.com.",
     "errorSummary": "Please check your details.",

@@ -140,7 +140,7 @@
     "email": "E-mail",
     "address": "Adresse de livraison",
     "nameRequired": "Le nom du destinataire est vide. Saisissez le nom de la personne qui reçoit la commande.",
-    "emailRequired": "L’e-mail est vide. Saisissez un e-mail pour recevoir le suivi de la commande.",
+    "emailRequired": "L’e-mail est vide. Saisissez une adresse e-mail.",
     "addressRequired": "L’adresse de livraison est vide. Saisissez l’adresse où livrer les desserts.",
     "emailInvalid": "Saisissez un e-mail comme name@example.com.",
     "errorSummary": "Veuillez vérifier vos informations.",
