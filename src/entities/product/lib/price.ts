@@ -1,3 +1,5 @@
+import { COUNTRY_NAMES } from "./country-names";
+
 /** 데모용 고정 환율과 통화별 반올림 단위입니다. 실제 서비스에서는 서버 가격으로 바꿉니다. */
 const CURRENCIES = {
   USD: { rate: 1, step: 0.5, shipping: 8 },
@@ -64,7 +66,8 @@ const OTHER_LABELS: Record<string, string> = {
   tr: "Diğer",
 };
 
+/** 나라 이름. 서버와 브라우저가 같은 글자를 그리도록 런타임 Intl 대신 고정 표(country-names.ts)를 씁니다. */
 export function countryName(code: string, locale: string): string {
   if (code === OTHER_COUNTRY) return OTHER_LABELS[locale] ?? OTHER_LABELS.en!;
-  return new Intl.DisplayNames([locale], { type: "region" }).of(code) ?? code;
+  return COUNTRY_NAMES[locale]?.[code] ?? COUNTRY_NAMES.en?.[code] ?? code;
 }

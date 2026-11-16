@@ -72,7 +72,9 @@ describe("isSessionRequest", () => {
     expect(isSessionRequest({ ...request, items: [] })).toBe(false);
     expect(isSessionRequest({ ...request, locale: "xx" })).toBe(false);
     expect(isSessionRequest({ ...request, source: "other" })).toBe(false);
-    expect(isSessionRequest({ ...request, items: [{ slug: "baklava", quantity: 99 }] })).toBe(false);
+    expect(isSessionRequest({ ...request, items: [{ slug: "baklava", quantity: 99 }] })).toBe(
+      false,
+    );
     expect(isSessionRequest({ ...request, items: [{ slug: "nope", quantity: 1 }] })).toBe(false);
   });
 });

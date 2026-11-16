@@ -633,6 +633,27 @@ test.describe("데스크톱 모션", () => {
   });
 });
 
+test("서버와 브라우저가 같은 화면을 그려 하이드레이션 오류가 없습니다", async ({ page }) => {
+  // 하이드레이션이 깨지면 React가 서버 HTML을 버리고 다시 그려, 그사이 누른 버튼이 듣지 않습니다.
+  // 홍콩처럼 실행 환경마다 이름이 다른 나라가 있는 목록·상세 화면을 여러 언어로 봅니다.
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(`${page.url()} ${error.message}`));
+  for (const path of [
+    "/ko",
+    "/ko/shop",
+    "/en/shop",
+    "/ja/shop",
+    "/de/shop",
+    "/ko/shop/pineapple-bun",
+    "/fr/shop/pineapple-bun",
+    "/ko/checkout?buy=pineapple-bun&qty=1",
+  ]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle");
+  }
+  expect(errors).toEqual([]);
+});
+
 test("주요 화면에서 콘텐츠 보안 정책(CSP) 위반이 없습니다", async ({ page }) => {
   const violations: string[] = [];
   page.on("console", (message) => {

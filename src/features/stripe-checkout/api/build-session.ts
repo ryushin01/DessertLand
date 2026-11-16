@@ -1,17 +1,17 @@
 import type Stripe from "stripe";
 
-import { MAX_QUANTITY, type CartLine } from "@/entities/cart";
+import { isValidOrderLines, summarizeCart, type CartLine } from "@/entities/cart";
 import {
   currencyForLocale,
   getProduct,
   priceInCurrency,
   shippingInCurrency,
 } from "@/entities/product";
-import { summarizeCart } from "@/entities/cart";
 import { SITE_NAME } from "@/shared/config";
 import { LOCALES } from "@/shared/i18n/index.server";
 
 import { toMinorUnits } from "./minor-units";
+import { packSlugs } from "./order-metadata";
 
 export type OrderSource = "cart" | "buy";
 
@@ -41,17 +41,7 @@ const SHIPPING_COUNTRIES: Stripe.Checkout.SessionCreateParams.ShippingAddressCol
 export function isSessionRequest(body: unknown): body is SessionRequest {
   const request = body as Partial<SessionRequest> | null;
   return (
-    Array.isArray(request?.items) &&
-    request.items.length > 0 &&
-    request.items.every(
-      (item: Partial<CartLine> | null) =>
-        typeof item?.slug === "string" &&
-        getProduct(item.slug) !== undefined &&
-        Number.isInteger(item.quantity) &&
-        (item.quantity as number) >= 1 &&
-        (item.quantity as number) <= MAX_QUANTITY,
-    ) &&
-    new Set(request.items.map((item) => item.slug)).size === request.items.length &&
+    isValidOrderLines(request?.items) &&
     LOCALES.includes(request.locale as never) &&
     typeof request.expectedTotal === "number" &&
     (request.source === "cart" || request.source === "buy")
@@ -102,8 +92,8 @@ export function buildSessionParams({
     locale: STRIPE_LOCALES[locale as keyof typeof STRIPE_LOCALES],
     line_items: [...lines, lineItem(shippingName, shippingInCurrency(currency), 1)],
     shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },
-    // 결제 뒤 장바구니에서 산 상품만 빼도록 slug를 남깁니다(상품 16종이라 메타데이터 길이 안에 들어갑니다).
-    metadata: { source, items: items.map((item) => item.slug).join(",") },
+    // 결제 뒤 장바구니에서 산 상품만 빼도록 slug를 남깁니다. 값 하나가 500자를 넘지 않게 나눠 담습니다.
+    metadata: { source, ...packSlugs(items.map((item) => item.slug)) },
     success_url: `${origin}/${locale}/checkout/complete?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/${locale}/checkout?${canceledQuery}`,
   };

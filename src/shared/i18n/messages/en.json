@@ -168,7 +168,8 @@
     "stripeNotice": "Stripe test mode: you will not be charged. On the payment page, use test card 4242 4242 4242 4242, any future expiry date and any CVC. Do not enter a real card number. Details entered there go to Stripe.",
     "stripePay": "Pay {amount} with Stripe",
     "stripeRedirecting": "Going to the payment page",
-    "unverified": "We couldn’t confirm this payment. It can be checked in the Stripe test dashboard."
+    "unverified": "We couldn’t confirm this payment. It can be checked in the Stripe test dashboard.",
+    "tooManyItems": "You can order up to {max} kinds of dessert at once. Your order has {count}, so please choose which desserts to include in your cart."
   },
   "footer": {
     "tagline": "Dessert Land is a demo shop presenting the world’s desserts in 10 languages.",
@@ -176,6 +177,11 @@
   },
   "notFound": {
     "title": "Page not found",
+    "back": "Back to home"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "retry": "Try again",
     "back": "Back to home"
   },
   "products": {

@@ -168,7 +168,8 @@
     "stripeNotice": "Modo de prueba de Stripe: no se realizará ningún cargo. En la página de pago, usa la tarjeta de prueba 4242 4242 4242 4242, una caducidad futura y cualquier CVC. No introduzcas un número de tarjeta real. Los datos introducidos se envían a Stripe.",
     "stripePay": "Pagar {amount} con Stripe",
     "stripeRedirecting": "Yendo a la página de pago",
-    "unverified": "No se ha podido confirmar el pago. Puedes comprobarlo en el panel de pruebas de Stripe."
+    "unverified": "No se ha podido confirmar el pago. Puedes comprobarlo en el panel de pruebas de Stripe.",
+    "tooManyItems": "Puedes pedir hasta {max} tipos de postres a la vez. Tu pedido tiene {count}; elige en el carrito los postres que quieres incluir."
   },
   "footer": {
     "tagline": "Dessert Land es una tienda de demostración con postres del mundo en 10 idiomas.",
@@ -176,6 +177,11 @@
   },
   "notFound": {
     "title": "Página no encontrada",
+    "back": "Volver al inicio"
+  },
+  "error": {
+    "title": "Algo salió mal",
+    "retry": "Reintentar",
     "back": "Volver al inicio"
   },
   "products": {
