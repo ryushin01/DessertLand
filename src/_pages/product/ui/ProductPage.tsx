@@ -73,7 +73,10 @@ function ProductContent({ product }: { product: Product }) {
 
   return (
     <>
-      <ProductDetail product={product} />
+      <ProductDetail
+        product={product}
+        description={tProducts(`${product.slug}.description` as Parameters<typeof tProducts>[0]) as string}
+      />
       <section className={related} aria-labelledby="related-title">
         <h2 id="related-title" className={relatedTitle}>
           {t("related")}

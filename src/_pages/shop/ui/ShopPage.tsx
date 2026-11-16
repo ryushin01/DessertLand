@@ -3,15 +3,15 @@ import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { css } from "styled-system/css";
 
+import { notFound } from "next/navigation";
+
 import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
-import { Link, localeAlternates, redirect, siteOpenGraph } from "@/shared/i18n";
+import { LOCALES, Link, localeAlternates, siteOpenGraph } from "@/shared/i18n";
 import { RevealText } from "@/shared/ui/reveal-text";
 import { ProductScroller } from "./ProductScroller";
 
-type ShopPageProps = {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<{ category?: string | string[] }>;
-};
+type ShopPageProps = { params: Promise<{ locale: string }> };
+type ShopCategoryPageProps = { params: Promise<{ locale: string; category: string }> };
 
 const head = css({
   position: "relative",
@@ -56,26 +56,39 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
   return { title, alternates: localeAlternates(locale, "/shop"), openGraph: siteOpenGraph(title) };
 }
 
-const LEGACY_CATEGORIES: Record<string, Category | null> = {
-  milkshake: "drink",
-  cheesecake: "cake",
-  muffin: "baked",
-  pancake: "griddle",
-  creamcake: "cake",
-  classic: null,
-};
+export async function generateCategoryMetadata({ params }: ShopCategoryPageProps): Promise<Metadata> {
+  const { locale, category } = await params;
+  if (!isCategory(category)) return {};
+  const t = await getTranslations({ locale, namespace: "shop" });
+  const tCategories = await getTranslations({ locale, namespace: "categories" });
+  const title = `${tCategories(`${category}.name`)} · ${t("metaTitle")} | Dessert Land`;
+  return {
+    title,
+    description: tCategories(`${category}.lede`),
+    alternates: localeAlternates(locale, `/shop/category/${category}`),
+    openGraph: siteOpenGraph(title, tCategories(`${category}.lede`)),
+  };
+}
 
-export default async function ShopPage({ params, searchParams }: ShopPageProps) {
+/**
+ * 상품 목록은 요청마다 그리지 않도록 정적으로 만듭니다. 분류별 목록도 미리 만든 페이지(ShopCategoryPage)이고,
+ * 예전 ?category= 주소는 proxy가 그 페이지로 넘깁니다(`_app/routing/shop-category.ts`).
+ */
+export default async function ShopPage({ params }: ShopPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const { category } = await searchParams;
-  // 0.5.0 이전의 분류 주소는 가장 가까운 새 분류로 보냅니다. "세계의 명작"은 맞는 분류가 없어 전체 목록으로 보냅니다.
-  if (typeof category === "string" && Object.hasOwn(LEGACY_CATEGORIES, category)) {
-    const next = LEGACY_CATEGORIES[category];
-    redirect({ href: next ? { pathname: "/shop", query: { category: next } } : "/shop", locale });
-  }
-  const active = isCategory(category) ? category : undefined;
-  return <ShopContent active={active} />;
+  return <ShopContent />;
+}
+
+export function generateCategoryStaticParams() {
+  return LOCALES.flatMap((locale) => CATEGORIES.map((category) => ({ locale, category })));
+}
+
+export async function ShopCategoryPage({ params }: ShopCategoryPageProps) {
+  const { locale, category } = await params;
+  if (!isCategory(category)) notFound();
+  setRequestLocale(locale);
+  return <ShopContent active={category} />;
 }
 
 function ShopContent({ active }: { active?: Category }) {
@@ -103,7 +116,7 @@ function ShopContent({ active }: { active?: Category }) {
             {CATEGORIES.map((category) => (
               <li key={category}>
                 <Link
-                  href={{ pathname: "/shop", query: { category } }}
+                  href={`/shop/category/${category}`}
                   scroll={false}
                   className={filter}
                   aria-current={active === category ? "page" : undefined}
