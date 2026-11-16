@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 
 import { expect, test, type APIRequestContext } from "@playwright/test";
@@ -66,6 +67,32 @@ for (const [path, budget] of Object.entries(JS_BUDGET_KB)) {
     expect(toKb(styles)).toBeLessThanOrEqual(CSS_BUDGET_KB);
   });
 }
+
+test("화면에 쓰지 않는 상품 설명은 보내지 않습니다", async ({ request }) => {
+  const ko = JSON.parse(readFileSync("src/shared/i18n/messages/ko.json", "utf8")) as {
+    products: Record<string, { name: string; description: string }>;
+  };
+  const tiramisu = ko.products.tiramisu?.description ?? "";
+  const baklava = ko.products.baklava?.description ?? "";
+  expect(tiramisu.length).toBeGreaterThan(0);
+  // 주문·목록 화면에는 상품 설명이 없습니다.
+  for (const path of ["/ko/checkout", "/ko/shop"]) {
+    expect(await loadHtml(request, path), path).not.toContain(tiramisu);
+  }
+  // 상품 상세는 그 상품의 설명만 싣습니다.
+  const detail = await loadHtml(request, "/ko/shop/tiramisu");
+  expect(detail).toContain(tiramisu);
+  expect(detail).not.toContain(baklava);
+});
+
+test("상품 목록은 분류마다 미리 만든 정적 페이지로 보냅니다", async ({ request }) => {
+  for (const path of ["/ko/shop", "/ko/shop/category/cake", "/en/shop/category/drink"]) {
+    const response = await request.get(path);
+    expect(response.ok(), path).toBe(true);
+    // 요청마다 그리는 페이지는 no-store로 옵니다.
+    expect(response.headers()["cache-control"] ?? "", path).not.toContain("no-store");
+  }
+});
 
 test("모션이 없는 페이지의 첫 화면에는 GSAP이 없습니다", async ({ request }) => {
   for (const path of ["/ko/checkout"]) {
