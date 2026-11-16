@@ -1,10 +1,10 @@
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createStore, Provider } from "jotai";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { cartExcludedAtom, cartLinesAtom } from "@/entities/cart";
+import { cartAnnouncementAtom, cartExcludedAtom, cartLinesAtom } from "@/entities/cart";
 import messages from "@/shared/i18n/messages/ko.json";
 
 import { CartDrawer } from "./CartDrawer";
@@ -44,12 +44,16 @@ describe("CartDrawer 골라서 주문", () => {
   it("처음에는 모두 골라 두고, 하나를 빼면 합계와 주문 버튼이 고른 상품만 셉니다", async () => {
     const user = userEvent.setup();
     const { store, dialog } = renderDrawer();
-    expect(dialog.getByRole("link", { name: "선택 상품 주문하기 (2)", hidden: true })).toBeInTheDocument();
+    expect(
+      dialog.getByRole("link", { name: "선택 상품 주문하기 (2)", hidden: true }),
+    ).toBeInTheDocument();
 
     await user.click(dialog.getByRole("checkbox", { name: "티라미수 주문에 넣기", hidden: true }));
 
     expect(store.get(cartExcludedAtom)).toEqual(["tiramisu"]);
-    expect(dialog.getByRole("link", { name: "선택 상품 주문하기 (1)", hidden: true })).toBeInTheDocument();
+    expect(
+      dialog.getByRole("link", { name: "선택 상품 주문하기 (1)", hidden: true }),
+    ).toBeInTheDocument();
     expect(dialog.getByText("1/2개 선택")).toBeInTheDocument();
     // 담은 상품 목록에는 그대로 남습니다.
     expect(dialog.getByText("티라미수")).toBeInTheDocument();
@@ -61,5 +65,25 @@ describe("CartDrawer 골라서 주문", () => {
     await user.click(dialog.getByRole("checkbox", { name: /전체 선택/, hidden: true }));
     expect(dialog.queryByRole("link", { name: /선택 상품 주문하기/, hidden: true })).toBeNull();
     expect(dialog.getByText("주문할 상품을 골라 주세요.")).toBeInTheDocument();
+  });
+});
+
+describe("CartDrawer 담기 알림", () => {
+  beforeEach(() => localStorage.clear());
+
+  it("방금 담은 상품을 서랍의 설명으로 연결하고, 닫으면 비웁니다", () => {
+    const { store } = renderDrawer();
+    const element = screen.getByRole("dialog", { hidden: true });
+    expect(element).not.toHaveAttribute("aria-describedby");
+
+    act(() => store.set(cartAnnouncementAtom, "바클라바을(를) 장바구니에 담았습니다."));
+    // 서랍은 모달이라 바깥 알림 영역은 읽히지 않으므로, 서랍 안의 설명으로 읽게 합니다.
+    expect(element).toHaveAccessibleDescription("바클라바을(를) 장바구니에 담았습니다.");
+
+    act(() => {
+      element.dispatchEvent(new Event("close"));
+    });
+    expect(store.get(cartAnnouncementAtom)).toBe("");
+    expect(element).not.toHaveAttribute("aria-describedby");
   });
 });

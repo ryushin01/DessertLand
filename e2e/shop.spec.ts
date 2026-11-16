@@ -241,6 +241,8 @@ test("장바구니에 담아 결제까지 마치면 장바구니가 비워집니
   const dialog = page.getByRole("dialog", { name: "장바구니" });
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText("바클라바");
+  // 서랍은 모달이라 바깥 알림 영역이 읽히지 않으므로, 방금 담은 상품을 서랍의 설명으로 읽습니다.
+  await expect(dialog).toHaveAccessibleDescription("바클라바을(를) 장바구니에 담았습니다.");
   await scan(page);
 
   await dialog.getByRole("link", { name: "주문하기" }).click();
@@ -250,7 +252,15 @@ test("장바구니에 담아 결제까지 마치면 장바구니가 비워집니
   await expect(pay).toContainText("23,100");
   await pay.click();
   await expect(page.getByText("입력 내용을 확인해 주세요.")).toBeVisible();
-  await expect(page.getByLabel("받는 분 이름")).toBeFocused();
+  const nameField = page.getByLabel("받는 분 이름");
+  await expect(nameField).toBeFocused();
+  // 오류 문구는 무엇이 잘못됐는지와 고치는 방법을 함께 알립니다.
+  await expect(nameField).toHaveAccessibleDescription(
+    "받는 분 이름이 비어 있습니다. 받는 분의 이름을 입력해 주세요.",
+  );
+  await expect(nameField).toHaveAccessibleErrorMessage(
+    "받는 분 이름이 비어 있습니다. 받는 분의 이름을 입력해 주세요.",
+  );
   await scan(page);
 
   await fillCheckout(page);
@@ -625,6 +635,34 @@ test.describe("데스크톱 모션", () => {
     const right = await transform();
     expect(left).not.toBe(right);
     await expect(page.locator("html")).toHaveAttribute("data-custom-cursor", "on");
+  });
+
+  test("스윗 트레일 사진이 많이 떠도 제목과 버튼 아래에 머뭅니다", async ({ page }) => {
+    await page.goto("/ko");
+    const cta = page.getByRole("link", { name: "모든 디저트 보기" });
+    await cta.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1200);
+    const box = await cta.boundingBox();
+    if (!box) throw new Error("버튼 위치를 찾지 못했습니다");
+    for (let index = 0; index < 14; index += 1) {
+      const x = box.x + box.width / 2 + (index % 2 ? 160 : -160);
+      await page.mouse.move(x, box.y + box.height / 2, { steps: 6 });
+    }
+    // 사진마다 쌓임 순서를 올려도, 사진 층(isolation)이 제목(2)·버튼(3)보다 아래(1)에 있어야 합니다.
+    const layers = await page.evaluate(() => {
+      const layer = document.querySelector("[data-trail-layer]");
+      const items = Array.from(document.querySelectorAll("[data-trail]"));
+      return {
+        isolation: layer ? getComputedStyle(layer).isolation : null,
+        layerZ: layer ? getComputedStyle(layer).zIndex : null,
+        insideLayer: items.every((item) => layer?.contains(item)),
+        maxItemZ: Math.max(...items.map((item) => Number(getComputedStyle(item).zIndex) || 0)),
+      };
+    });
+    expect(layers).toMatchObject({ isolation: "isolate", layerZ: "1", insideLayer: true });
+    expect(layers.maxItemZ).toBeGreaterThan(3);
+    const ctaZ = await cta.evaluate((element) => Number(getComputedStyle(element).zIndex));
+    expect(ctaZ).toBeGreaterThan(1);
   });
 
   test("키보드로 가려진 카테고리에 들어가면 장면이 펼쳐집니다", async ({ page }) => {

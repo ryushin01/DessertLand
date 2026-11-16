@@ -19,6 +19,9 @@ export function pickClientMessages(messages: Messages): Messages {
 
 function productNames(products: Messages): Messages {
   return Object.fromEntries(
-    Object.entries(products).map(([slug, value]) => [slug, { name: (value as { name: string }).name }]),
+    Object.entries(products).map(([slug, value]) => [
+      slug,
+      { name: (value as { name: string }).name },
+    ]),
   );
 }

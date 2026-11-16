@@ -130,6 +130,13 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - 잘림, 넘침, 접근성은 `pnpm build` 후 `pnpm e2e`로 확인합니다. axe를 통과해도 KWCAG 준수는 아니므로 새 UI는 항목을 직접 점검합니다.
 - E2E 서버는 4391 포트를 씁니다. 다른 작업이 그 포트를 쓰고 있으면 `E2E_PORT=4492 pnpm e2e`처럼 바꿉니다.
 
+## 접근성 메모
+
+- **모달과 알림:** `showModal()`로 연 대화상자 밖은 비활성(inert)이 되어 접근성 트리에서 빠집니다. 모달을 열면서 바깥 알림 영역(`role="status"`)의 문구를 바꾸면 읽히지 않으므로, 장바구니 서랍은 방금 담은 상품을 서랍의 설명(`aria-describedby`)으로 연결하고 닫을 때 비웁니다.
+- **입력 오류:** 오류가 난 칸에만 `aria-invalid="true"`를 붙이고, 오류 문구를 `aria-errormessage`와 `aria-describedby`로 함께 연결합니다. 문구에는 무엇이 잘못됐는지와 고치는 방법을 적습니다(예: "받는 분 이름이 비어 있습니다. 받는 분의 이름을 입력해 주세요.").
+- **상태 표시:** `<output>`은 암시적으로 `role="status"`이므로 `aria-live`를 다시 쓰지 않습니다.
+- **쌓임 순서:** 연출 요소가 쌓임 순서(`z-index`)를 계속 올린다면 `isolation: isolate`한 층 안에 두어 글자·버튼 위로 올라오지 않게 합니다(스윗 트레일).
+
 ## 디자인 시스템(Storybook) 배포
 
 `pnpm build`는 Storybook을 먼저 `public/storybook`에 빌드한 뒤 앱을 빌드합니다. 그래서 앱과 같은 주소의 `/storybook`에 함께 배포되고, 바닥글의 **Design system (Storybook)** 링크로 들어갑니다.

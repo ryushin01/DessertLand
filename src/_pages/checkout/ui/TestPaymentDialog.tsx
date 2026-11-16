@@ -56,6 +56,7 @@ export function TestPaymentDialog({ amount, onResolve }: TestPaymentDialogProps)
       ref={ref}
       className={dialog}
       aria-labelledby="test-payment-title"
+      aria-describedby="test-payment-body"
       onCancel={(event) => {
         event.preventDefault();
         onResolve("cancel");
@@ -65,7 +66,9 @@ export function TestPaymentDialog({ amount, onResolve }: TestPaymentDialogProps)
         <h2 id="test-payment-title" className={title}>
           {t("testTitle")}
         </h2>
-        <p className={body}>{amount ? t("testBody", { amount }) : null}</p>
+        <p id="test-payment-body" className={body}>
+          {amount ? t("testBody", { amount }) : null}
+        </p>
         <div className={actions}>
           <Button onClick={() => onResolve("approve")}>{t("testApprove")}</Button>
           <Button tone="outline" onClick={() => onResolve("decline")}>
