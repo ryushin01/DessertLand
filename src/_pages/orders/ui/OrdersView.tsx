@@ -88,6 +88,10 @@ export function OrdersView() {
   } | null>(null);
   const stripeIds = orders.flatMap((order) => (order.kind === "stripe" ? [order.sessionId] : []));
   const idsKey = stripeIds.join(",");
+  // 결과 반영(settled)이 바뀌면 같은 주문들이라도 다시 물어, 결제 중으로 보이던 주문을 새 상태로 바꿉니다.
+  const settledKey = orders
+    .flatMap((order) => (order.kind === "stripe" && order.settled ? [order.sessionId] : []))
+    .join(",");
 
   useEffect(() => {
     if (!idsKey) return;
@@ -102,7 +106,7 @@ export function OrdersView() {
     return () => {
       active = false;
     };
-  }, [idsKey]);
+  }, [idsKey, settledKey]);
 
   const current = result?.key === idsKey ? result : null;
   const status = !idsKey ? "idle" : !current ? "loading" : current.lookups ? "idle" : "error";

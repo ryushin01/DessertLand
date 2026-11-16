@@ -82,6 +82,15 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
 
   const onPaid = (paid: PaidOrder) => {
     setOrder(paid);
+    // 바로 구매는 장바구니를 건드리지 않고, 장바구니 주문은 고른 상품만 뺍니다.
+    // 주문 내역 저장보다 먼저 해, 저장이 어떻게 되든 장바구니는 정리합니다.
+    if (!buyNow)
+      setCart((lines) =>
+        removePurchased(
+          lines,
+          items.map((item) => item.slug),
+        ),
+      );
     // 내장 테스트 결제는 서버에 남지 않으므로, 주문 내역에 보일 정보를 이 브라우저에 남깁니다.
     updateSavedOrders((orders) =>
       addSavedOrder(orders, {
@@ -93,15 +102,8 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
         items,
       }),
     );
-    // 바로 구매는 장바구니를 건드리지 않고, 장바구니 주문은 고른 상품만 뺍니다.
-    if (!buyNow)
-      setCart((lines) =>
-        removePurchased(
-          lines,
-          items.map((item) => item.slug),
-        ),
-      );
   };
+
 
   if (order) {
     return (

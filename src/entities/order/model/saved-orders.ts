@@ -62,6 +62,10 @@ export function pendingStripeOrders(
   );
 }
 
+/** Stripe 테스트 결제 세션 ID. 주문 조회 API(features/stripe-checkout)도 같은 규칙을 씁니다. */
+export const isSessionId = (value: unknown): value is string =>
+  typeof value === "string" && /^cs_test_[A-Za-z0-9]{10,200}$/.test(value);
+
 /** Date가 나타낼 수 있는 시각인지 봅니다(그 밖이면 날짜 표시가 RangeError를 던짐). */
 const isValidTime = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value) && Math.abs(value) <= 8.64e15;
@@ -83,7 +87,8 @@ export function isSavedOrder(value: unknown): value is SavedOrder {
   if (typeof order !== "object" || order === null || !isValidTime(order.createdAt)) return false;
   if (order.kind === "stripe") {
     return (
-      typeof order.sessionId === "string" &&
+      // 모양이 다른 ID가 하나라도 섞이면 주문 조회 API가 묶음 전체를 거절하므로 같은 규칙으로 거릅니다.
+      isSessionId(order.sessionId) &&
       (order.source === "cart" || order.source === "buy") &&
       typeof order.settled === "boolean"
     );
