@@ -1,14 +1,7 @@
-import type { Allergen } from "@/entities/product";
+import { TASTES, type Allergen } from "@/entities/product";
 
-export const TASTE_CHIPS = [
-  "fruity",
-  "chocolate",
-  "coffee",
-  "nutty",
-  "creamy",
-  "light",
-  "nutFree",
-] as const;
+/** 맛 고르기: 상품의 맛 태그(entities/product의 TASTES)에 "견과 빼고"를 더합니다. */
+export const TASTE_CHIPS = [...TASTES, "nutFree"] as const;
 export type TasteChip = (typeof TASTE_CHIPS)[number];
 
 export const MAX_QUERY_LENGTH = 200;

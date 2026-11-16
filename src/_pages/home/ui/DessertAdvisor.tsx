@@ -65,7 +65,13 @@ const chip = css({
   fontSize: "0.92rem",
   transition: "background 0.2s, color 0.2s",
   _hover: { background: "cocoa.800" },
-  "&[aria-pressed=true]": { background: "cream", color: "cocoa.950", borderColor: "cream" },
+  // 마우스를 올려도 고른 상태의 밝은 바탕을 유지합니다(어두운 바탕에 어두운 글자가 되지 않게).
+  "&[aria-pressed=true]": {
+    background: "cream",
+    color: "cocoa.950",
+    borderColor: "cream",
+    _hover: { background: "cream" },
+  },
 });
 const actions = css({ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" });
 const message = css({
