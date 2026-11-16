@@ -42,6 +42,8 @@ export function initMonitoring() {
       .then((Sentry) => {
         Sentry.init({
           dsn,
+          // 같은 사이트의 중계 경로로 보내 CSP(connect-src 'self')를 넓히지 않습니다.
+          tunnel: "/api/monitoring",
           environment: process.env.NODE_ENV,
           release: process.env.NEXT_PUBLIC_RELEASE,
           // 오류 내용만 남깁니다. 사용자 정보·쿠키·헤더·쿼리 문자열은 모으지 않습니다.

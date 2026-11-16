@@ -168,7 +168,8 @@
     "stripeNotice": "Stripe test modu: Herhangi bir ücret alınmaz. Ödeme sayfasında 4242 4242 4242 4242 test kartını, ileri bir son kullanma tarihini ve herhangi bir CVC’yi kullanın. Gerçek kart numarası girmeyin. Girilen bilgiler Stripe’a iletilir.",
     "stripePay": "Stripe ile {amount} öde",
     "stripeRedirecting": "Ödeme sayfasına gidiliyor",
-    "unverified": "Bu ödeme doğrulanamadı. Stripe test panelinden kontrol edilebilir."
+    "unverified": "Bu ödeme doğrulanamadı. Stripe test panelinden kontrol edilebilir.",
+    "tooManyItems": "Tek seferde en fazla {max} çeşit tatlı sipariş edebilirsiniz. Siparişinizde {count} çeşit var; lütfen sepetten sipariş edilecek tatlıları seçin."
   },
   "footer": {
     "tagline": "Dessert Land, dünya tatlılarını 10 dilde tanıtan bir demo mağazadır.",
@@ -176,6 +177,11 @@
   },
   "notFound": {
     "title": "Sayfa bulunamadı",
+    "back": "Ana sayfaya dön"
+  },
+  "error": {
+    "title": "Bir sorun oluştu",
+    "retry": "Tekrar dene",
     "back": "Ana sayfaya dön"
   },
   "products": {
