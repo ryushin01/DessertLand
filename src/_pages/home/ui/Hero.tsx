@@ -180,7 +180,8 @@ export function Hero() {
     import("../lib/baker-renderer")
       .then(({ createBakerRenderer }) => createBakerRenderer(CUTOUT, DEPTH))
       .then((created) => {
-        if (disposed) {
+        // 텍스처를 받는 사이 컨텍스트를 잃었으면 빈 캔버스 대신 컷아웃 이미지를 그대로 둡니다.
+        if (disposed || created.isContextLost()) {
           created.destroy();
           return;
         }

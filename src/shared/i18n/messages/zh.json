@@ -140,7 +140,7 @@
     "email": "电子邮箱",
     "address": "收货地址",
     "nameRequired": "收件人姓名为空。请输入收件人的姓名。",
-    "emailRequired": "电子邮箱为空。请输入用于接收订单通知的电子邮箱。",
+    "emailRequired": "电子邮箱为空。请输入电子邮箱地址。",
     "addressRequired": "收货地址为空。请输入甜点的收货地址。",
     "emailInvalid": "请按 name@example.com 的格式输入。",
     "errorSummary": "请检查您输入的信息。",
