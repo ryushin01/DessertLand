@@ -28,6 +28,10 @@ describe("filterProducts", () => {
     expect(japan.length).toBeGreaterThan(3);
     expect(japan.every((slug) => getProduct(slug)?.country === "JP")).toBe(true);
     expect(foldText("Tiramisù")).toBe("tiramisu");
+    // 브라우저 언어와 상관없이 같은 결과(튀르키예어의 I·ı·İ도 i로 맞춤)
+    expect(foldText("VANILLA-MALT")).toBe("vanilla-malt");
+    expect(foldText("IRMIK")).toBe(foldText("ırmık"));
+    expect(foldText("İstanbul")).toBe("istanbul");
     // 영문 slug는 하이픈 그대로도, 띄어 써도 찾습니다.
     expect(slugs({ query: "new-york-cheesecake" })).toEqual(["new-york-cheesecake"]);
     expect(slugs({ query: "new york cheese" })).toEqual(["new-york-cheesecake"]);
