@@ -89,6 +89,38 @@ test("사용자가 움직임을 멈출 수 있습니다", async ({ page }) => {
   await expect(page.getByRole("button", { name: "움직임 재생" })).toBeVisible();
 });
 
+test("분류 장면 10개 모두, 장면이 다 펼쳐지면 그 장면의 버튼을 눌러 분류로 갑니다", async ({ page }) => {
+  await page.goto("/ko");
+  const links = page.getByRole("region", { name: "디저트 카테고리" }).getByRole("link");
+  await expect(links).toHaveCount(10);
+  // 장면의 바깥 상자 위가 화면 높이만큼 올라간 곳에서 그 장면이 원형으로 다 펼쳐지고, 다음 장면은 아직 보이지 않습니다.
+  const reveal = (index: number) =>
+    links.nth(index).evaluate((element) => {
+      const chapter = element.closest("[data-stage]")?.parentElement;
+      if (!chapter) throw new Error("분류 장면을 찾지 못했습니다");
+      const top = chapter.getBoundingClientRect().top + window.scrollY + window.innerHeight;
+      window.scrollTo({ top, behavior: "instant" });
+    });
+  for (let index = 0; index < 10; index += 1) {
+    await reveal(index);
+    // 보이는 버튼 자리의 클릭은 그 버튼이 받아야 합니다. 겹쳐 있는 다음 장면의 빈 상자가 가로채면 실패합니다.
+    await expect
+      .poll(
+        () =>
+          links.nth(index).evaluate((element) => {
+            const box = element.getBoundingClientRect();
+            const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+            return hit !== null && element.contains(hit);
+          }),
+        { message: `${index + 1}번째 장면의 버튼이 클릭을 받지 못합니다`, timeout: 10_000 },
+      )
+      .toBe(true);
+  }
+  await reveal(0);
+  await links.first().click();
+  await expect(page).toHaveURL(/\/ko\/shop\/category\/cake$/);
+});
+
 test("언어를 바꿔도 같은 상품에 머무릅니다", async ({ page }) => {
   await page.goto("/ko/shop/tiramisu");
   await page.getByText("KO", { exact: true }).click();
