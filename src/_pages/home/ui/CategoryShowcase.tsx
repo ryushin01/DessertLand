@@ -18,6 +18,8 @@ const wrapper = css({
   "&:first-child": { marginBlockStart: 0 },
   "&:last-child": { height: "300vh" },
   zIndex: 1,
+  // 장면이 음수 여백으로 겹쳐 다음 장면의 바깥 상자가 앞 장면을 덮습니다. 바깥 상자는 스크롤 길이만 만들고 클릭은 무대에 맡깁니다.
+  pointerEvents: "none",
 });
 const stage = css({
   position: "sticky",
@@ -26,6 +28,8 @@ const stage = css({
   overflow: "clip",
   background: "cocoa.950",
   willChange: "clip-path",
+  // 원형 clip-path 밖은 클릭을 받지 않으므로, 다음 장면이 덜 펼쳐진 동안 보이는 앞 장면의 버튼이 클릭을 받습니다.
+  pointerEvents: "auto",
 });
 const backdrop = css({
   position: "absolute",
