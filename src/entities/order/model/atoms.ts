@@ -48,11 +48,13 @@ function readStoredOrders(): SavedOrder[] {
  * 저장한 주문을 바꿉니다. 주문 목록을 구독하는 컴포넌트가 없으면 atom은 아직 저장값을 읽지 않은 빈 목록이라,
  * 그대로 바꾸면 예전 주문을 덮어씁니다. 그래서 바꾸기 직전에 저장소에서 최신 값을 읽어 그 위에 적용합니다.
  * 다른 탭이 그사이 저장한 주문도 함께 남습니다.
+ * 바꾼 뒤 저장소에 실제로 남은 목록을 돌려줍니다. 저장 공간 부족 등으로 쓰지 못하면(setItem이 오류를 삼킴) 바꾸기 전 목록입니다.
  */
 export const updateSavedOrdersAtom = atom(
   null,
-  (_get, set, update: (orders: SavedOrder[]) => SavedOrder[]) => {
+  (_get, set, update: (orders: SavedOrder[]) => SavedOrder[]): SavedOrder[] => {
     set(savedOrdersAtom, update(readStoredOrders()));
+    return readStoredOrders();
   },
 );
 

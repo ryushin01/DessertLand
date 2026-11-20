@@ -1,5 +1,5 @@
 import { createStore } from "jotai";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { cartLinesAtom, type CartLine } from "@/entities/cart/@x/order";
 
@@ -56,5 +56,26 @@ describe("Stripe 주문 결과 반영", () => {
     store.set(settleStripeOrdersAtom, [{ sessionId: PAID, paid: true, purchased: ["tiramisu"] }]);
 
     expect(store.get(cartLinesAtom)).toEqual([{ slug: "macaron", quantity: 1 }]);
+  });
+
+  it("반영됨 표시를 저장하지 못하면(저장소 오류) 이번에는 빼지 않고, 다음 반영 때 한 번만 뺍니다", () => {
+    const results = [{ sessionId: PAID, paid: true, purchased: ["tiramisu"] }];
+    const store = setup([paidOrder], [{ slug: "tiramisu", quantity: 3 }]);
+    const setItem = Storage.prototype.setItem;
+    const full = vi
+      .spyOn(Storage.prototype, "setItem")
+      .mockImplementation(function (this: Storage, key: string, value: string) {
+        if (key === ORDERS_KEY) throw new DOMException("저장 공간이 꽉 찼습니다", "QuotaExceededError");
+        setItem.call(this, key, value);
+      });
+    store.set(settleStripeOrdersAtom, results);
+    full.mockRestore();
+    expect(store.get(cartLinesAtom)).toEqual([{ slug: "tiramisu", quantity: 3 }]);
+
+    // 다음 방문: 저장소에는 반영 전으로 남아 있으므로 이번에 한 번만 뺍니다.
+    const next = createStore();
+    next.sub(cartLinesAtom, () => {});
+    next.set(settleStripeOrdersAtom, results);
+    expect(next.get(cartLinesAtom)).toEqual([{ slug: "tiramisu", quantity: 2 }]);
   });
 });
