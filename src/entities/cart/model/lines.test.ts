@@ -4,6 +4,7 @@ import {
   MAX_QUANTITY,
   addLine,
   countItems,
+  deductPurchased,
   removeLine,
   removePurchased,
   selectLines,
@@ -49,5 +50,42 @@ describe("cart lines", () => {
       { slug: "b", quantity: 2 },
     ];
     expect(removePurchased(lines, ["b"])).toEqual([{ slug: "a", quantity: 1 }]);
+  });
+
+  it("결제한 수량만큼만 빼, 결제 뒤 더 담은 수량과 다른 상품은 남깁니다", () => {
+    const lines = [
+      { slug: "a", quantity: 3 },
+      { slug: "b", quantity: 1 },
+    ];
+    expect(deductPurchased(lines, [{ slug: "a", quantity: 2 }])).toEqual([
+      { slug: "a", quantity: 1 },
+      { slug: "b", quantity: 1 },
+    ]);
+  });
+
+  it("산 수량이 장바구니 수량보다 많거나 같으면 그 줄을 지웁니다", () => {
+    const lines = [
+      { slug: "a", quantity: 2 },
+      { slug: "b", quantity: 2 },
+      { slug: "c", quantity: 1 },
+    ];
+    expect(
+      deductPurchased(lines, [
+        { slug: "a", quantity: 2 },
+        { slug: "b", quantity: 5 },
+      ]),
+    ).toEqual([{ slug: "c", quantity: 1 }]);
+  });
+
+  it("여러 주문에서 같은 상품을 샀으면 산 수량을 모두 더해 뺍니다", () => {
+    expect(
+      deductPurchased(
+        [{ slug: "a", quantity: 5 }],
+        [
+          { slug: "a", quantity: 1 },
+          { slug: "a", quantity: 2 },
+        ],
+      ),
+    ).toEqual([{ slug: "a", quantity: 2 }]);
   });
 });
