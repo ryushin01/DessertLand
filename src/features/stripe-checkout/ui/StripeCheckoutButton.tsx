@@ -70,7 +70,8 @@ export function StripeCheckoutButton({
       const result = (await response.json()) as { status?: unknown; url?: unknown; id?: unknown };
       // 결제 창 주소는 https일 때만 엽니다. 응답이 어긋나도 엉뚱한 곳으로 보내지 않습니다.
       if (result.status === "created" && typeof result.url === "string" && result.url.startsWith("https://")) {
-        // 결제 뒤 완료 화면으로 돌아오지 못해도 다음 방문 때 결과를 반영하도록, 세션 ID만 기억합니다.
+        // 결제 뒤 완료 화면으로 돌아오지 못해도 다음 방문 때 결과를 반영하도록 세션 ID를 기억합니다.
+        // 산 수량만큼만 장바구니에서 빼도록 결제할 상품 줄도 함께 남깁니다(배송 정보 같은 개인정보는 남기지 않음).
         if (isSessionId(result.id)) {
           const sessionId = result.id;
           updateSavedOrders((orders) =>
@@ -80,6 +81,7 @@ export function StripeCheckoutButton({
               createdAt: Date.now(),
               source,
               settled: false,
+              items,
             }),
           );
         }

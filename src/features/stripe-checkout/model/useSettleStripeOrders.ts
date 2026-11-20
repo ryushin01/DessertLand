@@ -3,12 +3,11 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 
-import { cartLinesAtom, removePurchased } from "@/entities/cart";
 import {
   pendingStripeOrders,
   savedOrdersAtom,
-  settleOrders,
-  updateSavedOrdersAtom,
+  settleStripeOrdersAtom,
+  type SettledStripeOrder,
 } from "@/entities/order";
 
 import { lookupOrders } from "../api/lookupOrders";
@@ -38,14 +37,13 @@ function markChecked(now: number): void {
 
 /**
  * Stripe에서 결제를 마친 뒤 완료 화면으로 돌아오지 못한 주문(창을 닫음, 네트워크 끊김 등)을
- * 다음 방문 때 확인해, 산 상품을 장바구니에서 빼고 주문을 반영됨으로 표시합니다.
+ * 다음 방문 때 확인해, 산 수량만큼 장바구니에서 빼고 주문을 반영됨으로 표시합니다(settleStripeOrdersAtom).
  * 만료되었거나 이 사이트 세션이 아니면 반영할 것이 없으므로 반영됨으로만 표시합니다.
  * 결제 중(open)이거나 잠시 조회하지 못한(unavailable) 주문은 재확인 간격이 지나면 다시 묻습니다.
  */
 export function useSettleStripeOrders(): void {
   const orders = useAtomValue(savedOrdersAtom);
-  const updateOrders = useSetAtom(updateSavedOrdersAtom);
-  const setCart = useSetAtom(cartLinesAtom);
+  const settle = useSetAtom(settleStripeOrdersAtom);
   // 지금 묻고 있는 주문. 결과가 정해지지 않으면 다시 물을 수 있게 뺍니다.
   const requested = useRef(new Set<string>());
   // 재확인 간격이 지나면 늘려 이 효과를 다시 돌립니다.
@@ -69,21 +67,20 @@ export function useSettleStripeOrders(): void {
     markChecked(now);
 
     void lookupOrders(pending.map((order) => order.sessionId)).then((results) => {
-      const settled: string[] = [];
-      const purchased: string[] = [];
+      const settled: SettledStripeOrder[] = [];
       for (const order of pending) {
         const result = results?.find((item) => item.sessionId === order.sessionId);
         if (!result || !isSettledState(result.state)) {
           requested.current.delete(order.sessionId);
           continue;
         }
-        settled.push(order.sessionId);
-        if (result.state === "paid" && order.source === "cart") {
-          purchased.push(...(result.purchased ?? []));
-        }
+        settled.push({
+          sessionId: order.sessionId,
+          paid: result.state === "paid",
+          purchased: result.purchased ?? [],
+        });
       }
-      if (purchased.length > 0) setCart((lines) => removePurchased(lines, purchased));
-      if (settled.length > 0) updateOrders((current) => settleOrders(current, settled));
+      if (settled.length > 0) settle(settled);
       if (settled.length < pending.length) {
         retry = setTimeout(() => setRound((value) => value + 1), RECHECK_MS);
       }
@@ -92,5 +89,5 @@ export function useSettleStripeOrders(): void {
     return () => {
       if (retry) clearTimeout(retry);
     };
-  }, [orders, round, setCart, updateOrders]);
+  }, [orders, round, settle]);
 }

@@ -1,4 +1,5 @@
-import { act, render, screen } from "@testing-library/react";
+/// <reference types="vitest/jsdom" />
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -64,5 +65,33 @@ describe("StripeCheckoutButton", () => {
       window.dispatchEvent(event);
     });
     expect(screen.getByRole("button", { name: "Pay $15 with Stripe" })).toBeEnabled();
+  });
+
+  it("결제 화면으로 가기 전에 세션 ID와 함께 산 상품 줄(수량)을 저장합니다", async () => {
+    localStorage.clear();
+    // jsdom은 다른 문서로 이동하지 못하므로, 주소를 https로 바꿔 결제 창으로 가는 이동을 같은 문서 안의 해시 이동으로 만듭니다.
+    const original = window.location.href;
+    jsdom.reconfigure({ url: "https://dessert-land.test/en/checkout" });
+    try {
+      respond({
+        status: "created",
+        url: "https://dessert-land.test/en/checkout#stripe",
+        id: "cs_test_savedsaved01",
+      });
+      setup();
+      await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
+      await waitFor(() => expect(window.location.hash).toBe("#stripe"));
+      expect(JSON.parse(localStorage.getItem("dessert-land.orders") ?? "[]")).toMatchObject([
+        {
+          kind: "stripe",
+          sessionId: "cs_test_savedsaved01",
+          source: "cart",
+          settled: false,
+          items: [{ slug: "baklava", quantity: 1 }],
+        },
+      ]);
+    } finally {
+      jsdom.reconfigure({ url: original });
+    }
   });
 });

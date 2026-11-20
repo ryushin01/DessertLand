@@ -70,6 +70,36 @@ describe("useSettleStripeOrders", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
+  it("결제 전에 저장한 수량만큼만 빼, 반영이 늦어지는 사이 다시 담은 같은 상품은 남깁니다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () =>
+        Response.json({
+          status: "ok",
+          orders: [{ sessionId: PAID, state: "paid", purchased: ["baklava", "tiramisu"] }],
+        }),
+      ),
+    );
+    // 바클라바 1개와 티라미수 1개를 산 뒤, 반영되기 전에 티라미수를 하나 더 담았습니다(장바구니의 티라미수 2개).
+    const store = setup([
+      {
+        ...stripeOrder(PAID),
+        items: [
+          { slug: "baklava", quantity: 1 },
+          { slug: "tiramisu", quantity: 1 },
+        ],
+      },
+    ]);
+
+    await waitFor(() =>
+      expect(store.get(cartLinesAtom)).toEqual([
+        { slug: "tiramisu", quantity: 1 },
+        { slug: "macaron", quantity: 1 },
+      ]),
+    );
+    expect(store.get(savedOrdersAtom)[0]).toMatchObject({ settled: true });
+  });
+
   it("반영할 주문이 없거나 방금 확인했으면 묻지 않습니다", async () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
