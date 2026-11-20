@@ -5,8 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
 
-import { cartLinesAtom, removePurchased } from "@/entities/cart";
-import { settleOrders, updateSavedOrdersAtom } from "@/entities/order";
+import { settleStripeOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { Icon, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
@@ -28,19 +27,19 @@ export function CompleteView({ order }: CompleteViewProps) {
   const t = useTranslations("checkout");
   const tOrders = useTranslations("orders");
   const locale = useLocale();
-  const setCart = useSetAtom(cartLinesAtom);
-  const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
+  const settle = useSetAtom(settleStripeOrdersAtom);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  // 장바구니에서 고른 상품만 결제했으므로 그 상품만 뺍니다.
+  // 장바구니 주문이면 서버가 세션에서 읽은 상품, 바로 구매면 빈 목록입니다.
   const purchased = order?.purchased.join(",") ?? "";
   const sessionId = order?.sessionId;
 
   useEffect(() => {
     headingRef.current?.focus();
-    if (purchased) setCart((lines) => removePurchased(lines, purchased.split(",")));
-    // 결과를 여기서 반영했으므로, 다음 방문 때 다시 반영하지 않게 표시합니다.
-    if (sessionId) updateSavedOrders((orders) => settleOrders(orders, [sessionId]));
-  }, [purchased, sessionId, setCart, updateSavedOrders]);
+    // 결제 전에 저장한 수량만큼 장바구니에서 빼고, 다음 방문 때 다시 반영하지 않게 표시합니다.
+    if (sessionId) {
+      settle([{ sessionId, paid: true, purchased: purchased ? purchased.split(",") : [] }]);
+    }
+  }, [purchased, sessionId, settle]);
 
   return (
     <div className={pageShell}>

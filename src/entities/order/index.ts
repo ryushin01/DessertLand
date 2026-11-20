@@ -9,3 +9,5 @@ export {
   settleOrders,
 } from "./model/saved-orders";
 export type { SavedOrder } from "./model/saved-orders";
+export { settleStripeOrdersAtom } from "./model/settle";
+export type { SettledStripeOrder } from "./model/settle";
