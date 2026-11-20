@@ -35,3 +35,18 @@ export function selectLines(lines: CartLine[], excluded: readonly string[]): Car
 export function removePurchased(lines: CartLine[], purchased: readonly string[]): CartLine[] {
   return lines.filter((line) => !purchased.includes(line.slug));
 }
+
+/**
+ * 결제한 수량만큼 장바구니에서 뺍니다. 결제 뒤 같은 상품을 더 담았으면 그만큼은 남고, 다 빠진 줄은 지웁니다.
+ * 여러 주문에서 같은 상품을 샀으면 산 수량을 모두 더해 뺍니다.
+ */
+export function deductPurchased(lines: CartLine[], purchased: readonly CartLine[]): CartLine[] {
+  const bought = new Map<string, number>();
+  for (const { slug, quantity } of purchased) bought.set(slug, (bought.get(slug) ?? 0) + quantity);
+  return lines.flatMap((line) => {
+    const quantity = bought.get(line.slug);
+    if (quantity === undefined) return [line];
+    const left = line.quantity - quantity;
+    return left > 0 ? [{ ...line, quantity: left }] : [];
+  });
+}

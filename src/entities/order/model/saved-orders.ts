@@ -2,8 +2,9 @@ import type { CartLine } from "@/entities/cart/@x/order";
 
 /**
  * 이 브라우저에서 한 주문. 배송 정보 같은 개인정보는 담지 않습니다.
- * - stripe: 결제 화면으로 가기 전에 세션 ID만 남기고, 주문 번호·금액은 서버가 Stripe에서 조회합니다.
+ * - stripe: 결제 화면으로 가기 전에 세션 ID와 결제할 상품 줄만 남기고, 주문 번호·금액은 서버가 Stripe에서 조회합니다.
  *   settled는 결제 결과를 장바구니에 반영했는지(산 상품을 뺐는지)입니다.
+ *   items는 결과를 반영할 때 산 수량만큼만 장바구니에서 빼려고 남깁니다. 1.0.1까지 저장한 주문에는 없습니다.
  * - demo: 키가 없을 때 쓰는 내장 테스트 결제. 서버에 남지 않으므로 주문 번호·금액·상품을 여기 둡니다.
  */
 export type SavedOrder =
@@ -13,6 +14,7 @@ export type SavedOrder =
       createdAt: number;
       source: "cart" | "buy";
       settled: boolean;
+      items?: CartLine[];
     }
   | {
       kind: "demo";
@@ -90,7 +92,8 @@ export function isSavedOrder(value: unknown): value is SavedOrder {
       // 모양이 다른 ID가 하나라도 섞이면 주문 조회 API가 묶음 전체를 거절하므로 같은 규칙으로 거릅니다.
       isSessionId(order.sessionId) &&
       (order.source === "cart" || order.source === "buy") &&
-      typeof order.settled === "boolean"
+      typeof order.settled === "boolean" &&
+      (order.items === undefined || (Array.isArray(order.items) && order.items.every(isCartLine)))
     );
   }
   if (order.kind === "demo") {

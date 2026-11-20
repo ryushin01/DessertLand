@@ -74,4 +74,13 @@ describe("saved orders", () => {
       false,
     );
   });
+
+  it("Stripe 주문은 결제 전에 저장한 상품 줄(수량)을 읽고, 상품 줄이 없는 예전 주문도 읽습니다", () => {
+    const withItems = { ...stripe("cs_test_aaaaaaaaaa01"), items: [{ slug: "baklava", quantity: 2 }] };
+    expect(isSavedOrder(withItems)).toBe(true);
+    // 1.0.1까지 저장한 Stripe 주문에는 상품 줄이 없습니다.
+    expect(isSavedOrder(stripe("cs_test_aaaaaaaaaa01"))).toBe(true);
+    expect(isSavedOrder({ ...withItems, items: [{ slug: "baklava", quantity: 0 }] })).toBe(false);
+    expect(isSavedOrder({ ...withItems, items: "baklava" })).toBe(false);
+  });
 });
