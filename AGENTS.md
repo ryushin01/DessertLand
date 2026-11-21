@@ -52,9 +52,12 @@
 - 커밋 메시지: Conventional Commits `<타입>: <한국어 요약>`, 타입은 `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `style`, `chore`, `ci`, `build`. 버전을 올린 커밋·PR 제목은 끝에 `(x.y.z)`를 붙이고, 리뷰 반영 커밋은 `fix: 리뷰 반영 — …`로 씁니다. 호환이 깨지면 본문에 `BREAKING CHANGE:`를 적습니다.
   - 실제 예) `fix: 결제 뒤 반영은 산 수량만큼만 장바구니에서 빼기, AGENTS.md 생성 끄기 (1.0.2)`, `feat: 상품 목록 찾기·맛·성분 필터, 상품 구조화 데이터, README 화면 (1.0.0)`
   - 본문에 무엇을 왜 바꿨는지와 테스트를 적고, 끝에 `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`를 붙입니다.
+- 기여자는 ryushin01만 남깁니다(2026-11-21 사용자 결정). 커밋 작성자는 항상 `ryushin0 <141554987+ryushin01@users.noreply.github.com>`이고, 이 저장소는 백엔드 코드가 있어 공동 작성자 줄은 `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` 하나만 넣습니다.
+  - GitHub Actions가 커밋하는 워크플로는 작성자를 ryushin01로 설정합니다(`github-actions[bot]` 금지).
+  - Dependabot PR은 그대로 병합하지 않습니다. 변경 내역을 확인하고 같은 변경을 ryushin01 커밋으로 다시 만들어 병합합니다(병합 커밋 작성자가 dependabot이 되지 않게).
 - 버전: Semantic Versioning(주.부.수). 기능·수정 PR은 `package.json`의 `version`과 README의 version 배지를 함께 맞춥니다. 문서만 바뀐 PR은 버전을 올리지 않습니다.
 - 변경 기록: `CHANGELOG.md`(제목 "변경 기록"), 최신 버전을 위에 두고 `## x.y.z - YYYY-MM-DD` 아래 `-` 목록(기능·의존성·개발·테스트·문서)으로 적습니다. 표준(Keep a Changelog)과 다른 점: `[Unreleased]` 절과 추가·변경·수정·제거 소제목이 없습니다.
-- 병합은 merge commit(`Merge pull request #N from ...`). CI가 통과하면 바로 병합하고 CodeRabbit 리뷰는 기다리지 않습니다(이미 달린 맞는 지적은 반영). Dependabot 주 버전 PR은 변경 내역을 확인하고 CI가 통과할 때만 병합합니다.
+- 병합은 merge commit(`Merge pull request #N from ...`). CI가 통과하면 바로 병합하고 CodeRabbit 리뷰는 기다리지 않습니다(이미 달린 맞는 지적은 반영).
 
 ## 7. 배포·릴리스
 
