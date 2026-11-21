@@ -7,15 +7,15 @@ const isDev = process.env.NODE_ENV !== "production";
 
 /**
  * 콘텐츠 보안 정책. 정적 페이지를 유지하려고 nonce 대신 인라인 스크립트를 허용하지만,
- * 외부 출처는 한중일 웹 글꼴(Google Fonts)과 Vercel 미리보기 도구만 엽니다.
+ * 외부 출처는 Vercel 미리보기 도구만 엽니다. 글꼴은 모두 같은 출처에서 제공합니다(오프라인에서도 동작).
  * 플러그인, 다른 사이트의 프레임 삽입, base 주소 바꾸기, 다른 곳으로의 폼 전송은 막습니다.
  * Stripe 결제는 결제 페이지로 이동하는 방식이라 여기서 열 출처가 없습니다.
  */
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://vercel.live`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://vercel.live",
-  "font-src 'self' data: https://fonts.gstatic.com https://vercel.live https://assets.vercel.com",
+  "style-src 'self' 'unsafe-inline' https://vercel.live",
+  "font-src 'self' data: https://vercel.live https://assets.vercel.com",
   "img-src 'self' data: blob: https://vercel.live https://vercel.com",
   `connect-src 'self' https://vercel.live wss://ws-us3.pusher.com${isDev ? " ws:" : ""}`,
   "frame-src https://vercel.live",

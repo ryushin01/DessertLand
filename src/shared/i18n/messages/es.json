@@ -174,6 +174,7 @@
     "paidMethod": "Método de pago: {method}",
     "buyNowNotice": "Es una compra inmediata. Tu cesta no cambia.",
     "stripeNotice": "Modo de prueba de Stripe: no se realizará ningún cargo. En la página de pago, usa la tarjeta de prueba 4242 4242 4242 4242, una caducidad futura y cualquier CVC. No introduzcas un número de tarjeta real. Los datos introducidos se envían a Stripe.",
+    "stripeFallback": "No pudimos conectar con el servidor de pagos de Stripe, así que cambiamos al pago de prueba integrado. No se realiza ningún cobro real y puedes terminar tu pedido abajo.",
     "stripePay": "Pagar {amount} con Stripe",
     "stripeRedirecting": "Yendo a la página de pago",
     "unverified": "No se ha podido confirmar el pago. Puedes comprobarlo en el panel de pruebas de Stripe.",

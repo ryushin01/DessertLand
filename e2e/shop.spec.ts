@@ -211,15 +211,17 @@ test("검색 엔진과 보안 정보를 제공합니다", async ({ page, request
   expect((await request.get("/og-image.jpg")).status()).toBe(200);
 });
 
-test("그 언어에 필요한 글꼴만 받습니다", async ({ page }) => {
+test("그 언어에 필요한 글꼴만 같은 출처에서 받습니다", async ({ page, request }) => {
   await page.goto("/de");
-  await expect(page.locator('link[href*="fonts.googleapis.com/css2"]')).toHaveCount(0);
+  await expect(page.locator('link[href*="/fonts/cjk/"]')).toHaveCount(0);
   await page.goto("/ko");
-  const korean = page.locator('link[rel="stylesheet"][href*="fonts.googleapis.com/css2"]');
-  await expect(korean).toHaveAttribute("href", /Grandiflora\+One/);
-  await expect(korean).not.toHaveAttribute("href", /JP|SC/);
-  // 한국어 본문 하다 바탕은 저장소에서 직접 제공하므로 Google Fonts 주소에는 없습니다.
-  await expect(korean).not.toHaveAttribute("href", /Hada/);
+  const korean = page.locator('link[rel="stylesheet"][href*="/fonts/cjk/"]');
+  await expect(korean).toHaveAttribute("href", "/fonts/cjk/ko.css");
+  // 외부 글꼴 서버는 쓰지 않습니다.
+  await expect(page.locator('link[href*="fonts.googleapis.com"]')).toHaveCount(0);
+  const css = await (await request.get("/fonts/cjk/ko.css")).text();
+  expect(css).toContain("Grandiflora One");
+  expect(css).not.toMatch(/Hada|Noto|Zen/);
   await expect(page.locator("html")).toHaveAttribute("style", /Hada Batang/);
 });
 

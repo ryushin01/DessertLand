@@ -1,7 +1,7 @@
 # <img src="public/brand/logo.png" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-1.0.2-ff6484)
+![version](https://img.shields.io/badge/version-1.1.0-ff6484)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -84,7 +84,9 @@ pnpm install
 pnpm dev    # http://localhost:3000
 ```
 
-Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`로 복사해 키를 넣습니다.
+`.env` 없이도 바로 데모로 동작합니다. 결제는 내장 테스트 결제창, 추천은 규칙 기반 기본 추천으로 끝까지 진행됩니다. 프로덕션 확인은 `pnpm build && pnpm start`(http://localhost:3000)입니다. Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`로 복사해 키를 넣습니다.
+
+**오프라인:** 글꼴·사진·아이콘을 모두 같은 출처에서 제공하므로 인터넷 없이도 모든 화면이 그대로 보입니다(설치만 인터넷 필요). Stripe나 Claude API에 닿지 못하면 결제는 내장 테스트 결제로 바뀌며 화면에 안내(`role="status"`)가 뜨고, 추천은 "기본 추천 (AI 미사용)"으로 보여 줍니다. Sentry·Speed Insights는 실패해도 화면에 영향이 없습니다. `e2e/offline.spec.ts`가 localhost 밖 요청을 모두 막은 상태에서 이를 확인합니다.
 
 | 명령 | 설명 |
 |---|---|
@@ -130,7 +132,7 @@ src/
 | Kaisei Decol · Zen Maru Gothic | 일본어 제목 · 본문 | 500 · 400·500·700 |
 | Noto Serif SC · Noto Sans SC | 중국어 제목 · 본문 | 500 · 400·500·700 |
 
-저작자·라이선스·원본은 아래 출처 표에 있습니다. 하다 바탕은 저장소에서 직접 제공하며, 화면에 쓰는 글자만 담은 작은 파일을 먼저 받고 나머지 글자는 글자 묶음별 조각으로 나눠 그 글자를 쓸 때만 받습니다(`pnpm fonts`로 다시 만듦). 그 밖의 한중일 글꼴은 그 언어 화면에서만 Google Fonts에서 받습니다.
+저작자·라이선스·원본은 아래 출처 표에 있습니다. 하다 바탕은 저장소에서 직접 제공하며, 화면에 쓰는 글자만 담은 작은 파일을 먼저 받고 나머지 글자는 글자 묶음별 조각으로 나눠 그 글자를 쓸 때만 받습니다(`pnpm fonts`로 다시 만듦). Lora와 그 밖의 한중일 글꼴은 Fontsource 패키지에서 가져와 같은 출처로 제공하며(한중일 글꼴은 `pnpm install` 때 `public/fonts/cjk/`로 복사), 그 언어 화면에서만 받습니다. 외부 글꼴 서버(Google Fonts)는 쓰지 않습니다.
 
 ## 출처
 
