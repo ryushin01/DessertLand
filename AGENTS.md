@@ -18,24 +18,25 @@
 ## 3. 설치·개발 명령
 
 - 패키지 매니저: pnpm(`packageManager` `pnpm@12.16.1`), Node.js 22(`.nvmrc`)
-- `corepack enable pnpm` → `pnpm install`(`prepare`가 `panda codegen`) → `pnpm dev`(http://localhost:3000)
+- `corepack enable pnpm` → `pnpm install`(`prepare`가 `panda codegen`과 한중일 글꼴 복사 `scripts/copy-cjk-fonts.mjs` → `public/fonts/cjk/`, git 제외) → `pnpm dev`(http://localhost:3000)
 - 환경 변수(이름만, `.env.example` → `.env.local`): `STRIPE_SECRET_KEY`(테스트 키만), `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_SITE_URL`(도메인 연결 시), `E2E_PORT`·`BASE_URL`(테스트·스크린샷)
-- 키가 없으면 결제는 내장 테스트 결제창(`POST /api/payments`), 추천은 규칙 기반 기본 추천으로 동작합니다.
+- `.env` 없이, 인터넷이 끊겨도 모든 화면이 내용과 함께 떠야 합니다. 결제는 키가 없거나 Stripe 세션 만들기가 실패(502·네트워크 오류)하면 내장 테스트 결제창(`POST /api/payments`)으로 바꾸고 `role="status"`로 알리며, 추천은 키가 없거나 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)")입니다. 글꼴은 모두 같은 출처(Lora `next/font/local`, 한중일 Fontsource 복사본, 하다 바탕 저장소 파일)이고 외부 글꼴 서버(Google Fonts)를 쓰지 않습니다. 자세한 표는 `docs/development.md`의 "오프라인·외부 서비스 대체".
 - 그 밖의 명령: `pnpm storybook`, `pnpm analyze`, `pnpm fonts`, `pnpm screenshots`(Stripe 키 없이 `pnpm build && pnpm start` 뒤 `BASE_URL` 지정)
-- 언어·상품을 더할 때는 `docs/development.md`의 "언어 추가"·"상품 추가" 순서를 따릅니다(메시지 파일, 통화, 맛, 사진 출처).
+- 언어·상품을 더할 때는 `docs/development.md`의 "언어 추가"·"상품 추가" 순서를 따릅니다(메시지 파일, 통화, 맛, 사진 출처, 새 문자 체계면 `CJK_FONTS`와 `copy-cjk-fonts.mjs`의 `LOCALES`).
 
 ## 4. 검사·테스트 명령
 
-| 명령                         | 내용                                                         |
-| ---------------------------- | ------------------------------------------------------------ |
-| `pnpm typecheck`             | `tsc --noEmit`                                               |
-| `pnpm lint` / `pnpm lint:fsd` | ESLint(jsx-a11y recommended) / FSD 구조(Steiger)            |
-| `pnpm test`                  | 단위(Vitest + Testing Library)                               |
-| `pnpm build`                 | `panda codegen` → Storybook을 `public/storybook`에 빌드 → 앱 빌드 |
-| `pnpm e2e`                   | 프로덕션 빌드 E2E와 axe(먼저 `build`, 포트 4391)             |
-| `pnpm size` / `pnpm lhci`    | 번들 예산(JS 365 kB, CSS 19 kB) / Lighthouse 데스크톱 기준(먼저 `build`) |
+| 명령                          | 내용                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------ |
+| `pnpm typecheck`              | `tsc --noEmit`                                                                 |
+| `pnpm lint` / `pnpm lint:fsd` | ESLint(jsx-a11y recommended) / FSD 구조(Steiger)                               |
+| `pnpm test`                   | 단위(Vitest + Testing Library)                                                 |
+| `pnpm build`                  | `panda codegen` → Storybook을 `public/storybook`에 빌드 → 앱 빌드              |
+| `pnpm e2e`                    | 프로덕션 빌드 E2E와 axe, 오프라인 E2E 포함(먼저 `build`, 포트 4391·`E2E_PORT`) |
+| `pnpm size` / `pnpm lhci`     | 번들 예산(JS 365 kB, CSS 21 kB, gzip) / Lighthouse 데스크톱 기준(먼저 `build`) |
 
 - CI(`.github/workflows/ci.yml`) 순서: install → typecheck → lint → lint:fsd → test → build → Playwright 설치 → e2e → size → lhci
+- 오프라인 E2E(`e2e/offline.spec.ts`, 데스크톱·모바일)는 localhost 밖 요청을 모두 막고 `.env` 없이 빌드한 앱의 주요 화면·결제·Storybook이 뜨는지, 외부 요청 0건, axe를 봅니다. 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`.
 - 테스트 원칙(Testing Library): 구현 세부가 아니라 사용자가 보는 동작을 검사하고, 요소는 역할·이름(`getByRole`)으로 찾습니다. 단위·컴포넌트는 코드 옆 `*.test.ts(x)`(Vitest + Testing Library, jsdom), 화면 흐름·잘림·넘침은 Playwright E2E, 접근성은 axe(`@axe-core/playwright`, Storybook a11y 애드온)로 검사합니다. 버그를 고치면 고치기 전에 실패하는 테스트를 함께 넣습니다.
 
 ## 5. 코드 스타일
@@ -73,6 +74,9 @@
 - Stripe 샌드박스를 다른 프로젝트와 함께 쓰므로 세션 메타데이터 `app: "dessert-land"`를 유지하고, 웹훅 설정을 바꾸지 않습니다. 이름·이메일·주소는 브라우저에도 남기지 않습니다.
 - 사진은 Unsplash License 무료 사진과 Wikimedia Commons 자유 라이선스(CC0, 퍼블릭 도메인, CC BY, CC BY-SA)만 쓰고, 출처는 README '출처'와 `docs/credits.md`에 둡니다(`photo-credits.test.ts`가 확인). Flaticon UIcons 출처 링크는 바닥글에 둡니다.
 - 지원 언어는 10개 이내로 유지합니다.
+- 상태(CI·배포·릴리스·주소)는 명령 결과(`gh run`, `curl` 등)로 확인한 것만 말합니다.
+- 먼저 묻기: 새 런타임 의존성 추가, 빌드·배포 설정(`next.config.ts`의 CSP 포함, `vercel.json`, 워크플로) 변경, 외부 CDN·글꼴 서버 추가.
+- 절대 금지: 비밀값(Stripe·Anthropic 키)을 `NEXT_PUBLIC_*`에 넣기, `.env*` 커밋, `eslint-disable`·`--no-verify`로 검사 우회, `main`에 직접 푸시.
 
 ## 9. 공통 규칙
 
