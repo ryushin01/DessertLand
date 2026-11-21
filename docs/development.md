@@ -16,7 +16,7 @@
 1. `src/shared/i18n/routing.ts`의 `LOCALES`와 `LOCALE_LABELS`에 추가합니다. 지원 언어는 10개 이내로 유지합니다.
 2. `src/shared/i18n/messages/ko.json`과 같은 키로 메시지 파일을 추가합니다. 타입은 `ko.json`을 기준으로 검사합니다.
 3. `src/entities/product/lib/price.ts`에 통화를 연결합니다.
-4. 한자나 가나, 한글처럼 라틴 글꼴에 없는 문자를 쓰면 `src/_app/layouts/LocaleLayout.tsx`의 `CJK_FONTS`에 추가합니다. `next/font`로 선언하면 모든 언어에 CSS가 붙으므로 쓰지 않습니다.
+4. 한자나 가나, 한글처럼 라틴 글꼴에 없는 문자를 쓰면 `src/_app/layouts/LocaleLayout.tsx`의 `CJK_FONTS`와 `scripts/copy-cjk-fonts.mjs`의 `LOCALES`에 추가하고, 그 글꼴의 Fontsource 패키지를 설치합니다(외부 글꼴 서버는 쓰지 않음). `next/font`로 선언하면 모든 언어에 CSS가 붙으므로 쓰지 않습니다.
 
 ## 상품 추가
 
@@ -158,6 +158,19 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - 단위 테스트는 코드 옆의 `*.test.ts(x)`에 둡니다.
 - 잘림, 넘침, 접근성은 `pnpm build` 후 `pnpm e2e`로 확인합니다. axe를 통과해도 KWCAG 준수는 아니므로 새 UI는 항목을 직접 점검합니다.
 - E2E 서버는 4391 포트를 씁니다. 다른 작업이 그 포트를 쓰고 있으면 `E2E_PORT=4492 pnpm e2e`처럼 바꿉니다.
+- **오프라인 검증:** `e2e/offline.spec.ts`는 localhost 밖으로 나가는 요청을 모두 막고(`route.abort`) `.env` 없이 빌드한 앱에서 홈·상품 목록·상세·추천·결제(내장 테스트 결제)·주문 내역·일본어·중국어·튀르키예어 화면·Storybook이 내용과 함께 뜨는지, 외부로 나가려 한 요청이 하나도 없는지 보고 axe를 돌립니다. `pnpm e2e`(CI 포함)에 들어 있고, 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`입니다.
+
+## 오프라인·외부 서비스 대체
+
+포트폴리오 데모라 외부 서비스가 끊겨도 화면이 비면 안 됩니다.
+
+| 외부 의존 | 끊겼을 때 |
+| --- | --- |
+| Stripe Checkout(`STRIPE_SECRET_KEY`) | 키가 없으면 처음부터, 세션 만들기가 실패(서버 502·네트워크 오류)하면 그 자리에서 내장 테스트 결제창으로 바꾸고 `role="status"`로 알림 |
+| Claude API(`ANTHROPIC_API_KEY`) | 키가 없거나 호출이 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)") |
+| 글꼴 | Lora는 `next/font/local`, 한중일 글꼴은 Fontsource 파일을 설치 때 `public/fonts/cjk/`로 복사, 하다 바탕은 저장소 파일 |
+| 사진·아이콘 | 모두 `public/`의 파일 |
+| Sentry·Speed Insights | DSN이 없으면 Sentry를 싣지 않고, 전송 실패는 조용히 넘어감 |
 
 ## 접근성 메모
 

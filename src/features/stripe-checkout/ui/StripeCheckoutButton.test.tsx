@@ -94,4 +94,35 @@ describe("StripeCheckoutButton", () => {
       jsdom.reconfigure({ url: original });
     }
   });
+
+  it.each([
+    ["서버가 Stripe에 닿지 못하면", () => respond({ status: "error" })],
+    [
+      "네트워크가 끊기면",
+      () =>
+        vi.stubGlobal(
+          "fetch",
+          vi.fn(async () => {
+            throw new TypeError("Failed to fetch");
+          }),
+        ),
+    ],
+  ])("%s 내장 테스트 결제로 바꾸도록 알립니다", async (_, arrange) => {
+    arrange();
+    const onUnavailable = vi.fn();
+    render(
+      <NextIntlClientProvider locale="en" messages={messages}>
+        <StripeCheckoutButton
+          items={[{ slug: "baklava", quantity: 1 }]}
+          total={15}
+          source="cart"
+          canceled={false}
+          onUnavailable={onUnavailable}
+        />
+      </NextIntlClientProvider>,
+    );
+    await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
+    await waitFor(() => expect(onUnavailable).toHaveBeenCalledTimes(1));
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
 });

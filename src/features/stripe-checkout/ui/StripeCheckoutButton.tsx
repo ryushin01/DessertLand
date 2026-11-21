@@ -28,6 +28,8 @@ type StripeCheckoutButtonProps = {
   total: number;
   source: OrderSource;
   canceled: boolean;
+  /** Stripe에 닿지 못하면(오프라인, 시간 초과, 키 오류 등) 부릅니다. 화면은 내장 테스트 결제로 바꿉니다. */
+  onUnavailable?: () => void;
 };
 
 /** Stripe의 결제 화면으로 이동합니다. 카드와 배송 정보는 Stripe 화면에서만 입력합니다. */
@@ -36,6 +38,7 @@ export function StripeCheckoutButton({
   total,
   source,
   canceled,
+  onUnavailable,
 }: StripeCheckoutButtonProps) {
   const t = useTranslations("checkout");
   const locale = useLocale();
@@ -88,8 +91,17 @@ export function StripeCheckoutButton({
         window.location.assign(result.url);
         return;
       }
+      if (onUnavailable && (result.status === "error" || result.status === "disabled")) {
+        onUnavailable();
+        return;
+      }
       setNotice(result.status === "amount_mismatch" ? "amountChanged" : "paymentError");
     } catch {
+      // 네트워크가 끊겼거나 응답을 읽지 못했습니다.
+      if (onUnavailable) {
+        onUnavailable();
+        return;
+      }
       setNotice("paymentError");
     }
     pendingRef.current = false;

@@ -22,6 +22,13 @@ const demo = css({
   marginBlockEnd: "32px",
   lineHeight: "1.5",
 });
+const fallbackNotice = css({
+  padding: "14px 16px",
+  border: "2px solid {colors.caramel}",
+  borderRadius: "12px",
+  marginBlockEnd: "24px",
+  lineHeight: "1.5",
+});
 const buyNowNote = css({ marginBlockEnd: "24px", color: "caramel" });
 const successActions = css({ display: "flex", flexWrap: "wrap", gap: "12px" });
 const limitNotice = css({
@@ -74,6 +81,9 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
   const summary = buyNowSummary ?? cartSummary;
   const items = summary.lines.map(({ product, quantity }) => ({ slug: product.slug, quantity }));
   const [order, setOrder] = useState<PaidOrder | null>(null);
+  // Stripe에 닿지 못하면 내장 테스트 결제로 바꿔, 오프라인에서도 결제 흐름을 끝까지 보여 줍니다.
+  const [stripeDown, setStripeDown] = useState(false);
+  const stripeActive = stripeEnabled && !stripeDown;
   const successRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -132,7 +142,11 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
   return (
     <div className={pageShell}>
       <h1 className={pageTitle}>{t("title")}</h1>
-      <p className={demo}>{stripeEnabled ? t("stripeNotice") : t("demo")}</p>
+      <p className={demo}>{stripeActive ? t("stripeNotice") : t("demo")}</p>
+      {/* 바뀐 결제 방식을 알립니다. 처음부터 보여 줄 때도 읽히도록 상태 영역은 늘 둡니다. */}
+      <div role="status">
+        {stripeDown ? <p className={fallbackNotice}>{t("stripeFallback")}</p> : null}
+      </div>
       {buyNow ? <p className={buyNowNote}>{t("buyNowNotice")}</p> : null}
       {summary.lines.length === 0 ? (
         <>
@@ -149,12 +163,13 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
             <p className={limitNotice}>
               {t("tooManyItems", { max: MAX_ORDER_LINES, count: items.length })}
             </p>
-          ) : stripeEnabled ? (
+          ) : stripeActive ? (
             <StripeCheckoutButton
               items={items}
               total={summary.total}
               source={buyNow ? "buy" : "cart"}
               canceled={canceled}
+              onUnavailable={() => setStripeDown(true)}
             />
           ) : (
             <CheckoutForm items={items} total={summary.total} onPaid={onPaid} />

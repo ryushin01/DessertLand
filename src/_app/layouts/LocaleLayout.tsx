@@ -4,7 +4,7 @@ import "@/_app/styles/fonts/hada-batang.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Lora } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -24,36 +24,50 @@ import { CartDrawer } from "@/widgets/cart-drawer";
 import { SiteFooter } from "@/widgets/site-footer";
 import { SiteHeader } from "@/widgets/site-header";
 
-// 영문·숫자는 제목과 본문 모두 붓맛이 남은 세리프 Lora(가변 400~700)
-const lora = Lora({ subsets: ["latin", "latin-ext"], variable: "--font-lora" });
+// 영문·숫자는 제목과 본문 모두 붓맛이 남은 세리프 Lora(가변 400~700).
+// 빌드와 화면 모두 외부 글꼴 서버 없이 동작하도록 Fontsource 패키지의 파일을 next/font/local로 씁니다.
+// 기본 라틴과 확장 라틴(튀르키예어 ğ·ş 등)을 두 글꼴로 나누고 unicode-range를 붙여, 필요한 글자가 있을 때만 받습니다.
+// next/font는 빌드 때 인수를 그대로 읽으므로 범위를 상수로 빼지 않고 글자 그대로 적습니다.
+const loraLatin = localFont({
+  src: "../../../node_modules/@fontsource-variable/lora/files/lora-latin-wght-normal.woff2",
+  weight: "400 700",
+  display: "swap",
+  declarations: [
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
+    },
+  ],
+  // 바로 뒤의 확장 라틴 글꼴로 넘어가야 하므로 대체 글꼴(Fallback)을 붙이지 않습니다.
+  adjustFontFallback: false,
+});
+const loraLatinExt = localFont({
+  src: "../../../node_modules/@fontsource-variable/lora/files/lora-latin-ext-wght-normal.woff2",
+  weight: "400 700",
+  display: "swap",
+  preload: false,
+  declarations: [
+    {
+      prop: "unicode-range",
+      value:
+        "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF",
+    },
+  ],
+});
+const LORA_FAMILY = `${loraLatin.style.fontFamily}, ${loraLatinExt.style.fontFamily}`;
 
 // next/font로 함께 선언하면 모든 언어에 CSS가 붙어 렌더링을 막으므로, 그 언어의 글꼴만 따로 받습니다.
-// 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 하다 바탕(본문, 400·700). 하다 바탕은 저장소에서 직접 제공하므로
-// Google Fonts에서는 제목 글꼴만 받습니다(sansWeights 없음).
-// 일본어도 같은 결로 장식 명조 Kaisei Decol(제목)과 둥근 Zen Maru Gothic(본문).
-// 중국어는 Google Fonts의 장식 서체가 파일이 커서 Noto를 씁니다.
-type CjkFonts = { sans: string; sansWeights?: string; serif: string; serifWeights: string };
+// 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 하다 바탕(본문, 400·700). 하다 바탕은 별도 파일(hada-batang.css)이고,
+// 일본어는 장식 명조 Kaisei Decol(제목)과 둥근 Zen Maru Gothic(본문), 중국어는 Noto Sans·Serif SC입니다.
+// 한중일 글꼴은 외부 글꼴 서버 대신 설치 때(prepare) Fontsource 패키지에서 public/fonts/cjk로 복사한 파일을 씁니다
+// (scripts/copy-cjk-fonts.mjs). 그래서 오프라인에서도 같은 글꼴로 보입니다.
+type CjkFonts = { sans: string; serif: string };
 const CJK_FONTS: Record<string, CjkFonts> = {
-  ko: { sans: "Hada Batang", serif: "Grandiflora One", serifWeights: "400" },
-  ja: {
-    sans: "Zen Maru Gothic",
-    sansWeights: "400;500;700",
-    serif: "Kaisei Decol",
-    serifWeights: "500",
-  },
-  zh: {
-    sans: "Noto Sans SC",
-    sansWeights: "400;500;700",
-    serif: "Noto Serif SC",
-    serifWeights: "500",
-  },
+  ko: { sans: "Hada Batang", serif: "Grandiflora One" },
+  ja: { sans: "Zen Maru Gothic", serif: "Kaisei Decol" },
+  zh: { sans: "Noto Sans SC", serif: "Noto Serif SC" },
 };
-
-function cjkStylesheet({ sans, sansWeights, serif, serifWeights }: CjkFonts): string {
-  const family = (name: string, axis: string) => `family=${name.replaceAll(" ", "+")}:wght@${axis}`;
-  const families = sansWeights ? [family(sans, sansWeights), family(serif, serifWeights)] : [family(serif, serifWeights)];
-  return `https://fonts.googleapis.com/css2?${families.join("&")}&display=swap`;
-}
 
 const skipLink = css({
   position: "fixed",
@@ -110,25 +124,16 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html
       lang={locale}
       data-motion="on"
-      className={lora.variable}
       style={
-        cjk
-          ? ({
-              "--font-cjk-sans": `"${cjk.sans}"`,
-              "--font-cjk-serif": `"${cjk.serif}"`,
-            } as CSSProperties)
-          : undefined
+        {
+          "--font-lora": LORA_FAMILY,
+          ...(cjk
+            ? { "--font-cjk-sans": `"${cjk.sans}"`, "--font-cjk-serif": `"${cjk.serif}"` }
+            : {}),
+        } as CSSProperties
       }
     >
-      <head>
-        {cjk ? (
-          <>
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-            <link rel="stylesheet" href={cjkStylesheet(cjk)} />
-          </>
-        ) : null}
-      </head>
+      <head>{cjk ? <link rel="stylesheet" href={`/fonts/cjk/${locale}.css`} /> : null}</head>
       <body>
         <NextIntlClientProvider messages={messages}>
           <AppProviders>
