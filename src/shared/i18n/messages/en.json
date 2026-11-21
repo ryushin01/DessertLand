@@ -174,6 +174,7 @@
     "paidMethod": "Payment method: {method}",
     "buyNowNotice": "This is a Buy now order. Your cart stays as it is.",
     "stripeNotice": "Stripe test mode: you will not be charged. On the payment page, use test card 4242 4242 4242 4242, any future expiry date and any CVC. Do not enter a real card number. Details entered there go to Stripe.",
+    "stripeFallback": "We couldn’t reach the Stripe payment server, so we switched to the built-in test payment. No real payment takes place, and you can finish your order below.",
     "stripePay": "Pay {amount} with Stripe",
     "stripeRedirecting": "Going to the payment page",
     "unverified": "We couldn’t confirm this payment. It can be checked in the Stripe test dashboard.",

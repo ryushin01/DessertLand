@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 1.1.0 - 2026-11-21
+
+- 오프라인에서도 모든 화면이 보이게 함(포트폴리오 데모가 외부 서비스 장애로 비지 않게). 한중일 글꼴을 Google Fonts 대신 Fontsource 패키지(Grandiflora One, Kaisei Decol, Zen Maru Gothic, Noto Sans·Serif SC)에서 설치 때 `public/fonts/cjk/`로 복사해 같은 출처로 제공하고(`scripts/copy-cjk-fonts.mjs`), Lora도 `next/font/google` 대신 Fontsource 파일을 `next/font/local`로 씀(빌드도 외부 글꼴 서버 없이 됨). CSP에서 Google Fonts 출처를 뺌
+- Stripe 키가 있어도 Stripe에 닿지 못하면(서버 오류·네트워크 끊김) 결제 화면이 내장 테스트 결제창으로 바뀌고 `role="status"`로 알림(10개 언어). 새 안내 글자를 담도록 하다 바탕 화면 글꼴을 다시 만듦(`pnpm fonts`)
+- 의존성: `@fontsource-variable/lora`, `@fontsource/grandiflora-one`, `@fontsource/kaisei-decol`, `@fontsource/zen-maru-gothic`, `@fontsource/noto-sans-sc`, `@fontsource/noto-serif-sc`
+- 테스트: localhost 밖 요청을 모두 막은 오프라인 E2E(`e2e/offline.spec.ts`, 홈·상품·추천·결제·주문 내역·ja·zh·tr·Storybook, axe 포함), 글꼴 E2E를 같은 출처 기준으로 바꿈, Stripe에 닿지 못할 때 대체 결제로 바꾸는 단위 테스트
+- 문서: README 시작하기에 `.env` 없이 실행·오프라인 동작, 개발 가이드에 외부 의존과 대체 방식 표
+
 ## 1.0.2 - 2026-11-20
 
 - 결제 뒤 반영이 산 수량만큼만 장바구니에서 빼도록 고침. 지금까지는 Stripe 결제 결과를 늦게 반영할 때 상품 줄을 통째로 빼서, 반영이 늦어지는 사이 같은 상품을 다시 담으면 그것까지 빠졌음. 결제 화면으로 가기 전에 결제할 상품 줄(상품과 수량)을 주문 기록에 함께 저장하고, 완료 화면과 다음 방문이 같은 반영 atom(`settleStripeOrdersAtom`)으로 아직 반영하지 않은 주문만 반영함(완료 화면과 다음 방문, 두 탭이 함께 반영해도 한 번만 뺌). 반영됨 표시를 저장하지 못하면(저장소 오류) 그때는 빼지 않고 다음 반영 때 한 번만 뺌(리뷰 반영). 수량을 저장하지 않은 1.0.1까지의 주문과 주문 기록이 없는 주문은 예전처럼 그 줄을 뺌
