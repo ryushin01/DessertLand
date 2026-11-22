@@ -6,6 +6,8 @@ styled-system-studio/
 storybook-static/
 # 빌드할 때 만드는 Storybook (앱과 함께 /storybook에 배포)
 /public/storybook/
+# 설치할 때 Fontsource에서 복사하는 한중일 글꼴 (scripts/copy-cjk-fonts.mjs)
+/public/fonts/cjk/
 playwright-report/
 test-results/
 coverage/

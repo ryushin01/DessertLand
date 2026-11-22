@@ -174,6 +174,7 @@
     "paidMethod": "Metodo di pagamento: {method}",
     "buyNowNotice": "Questo è un acquisto immediato. Il carrello resta invariato.",
     "stripeNotice": "Modalità di prova Stripe: non verrà addebitato nulla. Nella pagina di pagamento usa la carta di prova 4242 4242 4242 4242, una scadenza futura e un CVC qualsiasi. Non inserire un numero di carta reale. I dati inseriti vengono inviati a Stripe.",
+    "stripeFallback": "Impossibile raggiungere il server di pagamento Stripe: siamo passati al pagamento di prova integrato. Non avviene alcun pagamento reale e puoi completare l’ordine qui sotto.",
     "stripePay": "Paga {amount} con Stripe",
     "stripeRedirecting": "Reindirizzamento al pagamento",
     "unverified": "Impossibile confermare il pagamento. Puoi controllarlo nella dashboard di prova di Stripe.",
