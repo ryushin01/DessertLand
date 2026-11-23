@@ -7,6 +7,7 @@ import { DessertAdvisor } from "./DessertAdvisor";
 import { Hero } from "./Hero";
 import { IntroCurtain } from "./IntroCurtain";
 import { Manifesto } from "./Manifesto";
+import { SectionDots } from "./SectionDots";
 import { SliceZoom } from "./SliceZoom";
 import { SweetTrail } from "./SweetTrail";
 import { WorldTour } from "./WorldTour";
@@ -32,6 +33,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <>
       <IntroCurtain />
+      <SectionDots />
       <Hero />
       <Manifesto />
       <CategoryShowcase />

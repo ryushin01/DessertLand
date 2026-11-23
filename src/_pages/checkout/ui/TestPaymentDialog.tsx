@@ -12,11 +12,11 @@ const dialog = css({
   margin: "auto",
   width: "min(460px, calc(100vw - 32px))",
   overflow: "hidden",
-  borderRadius: "20px",
+  borderRadius: "0",
   background: "cocoa.900",
   color: "cream",
   border: "1px solid {colors.cocoa.700}",
-  "&::backdrop": { background: "rgba(10, 6, 5, 0.72)", backdropFilter: "blur(6px)" },
+  "&::backdrop": { background: "rgba(0, 2, 14, 0.72)", backdropFilter: "blur(6px)" },
 });
 const content = css({
   maxHeight: "calc(100dvh - 32px)",

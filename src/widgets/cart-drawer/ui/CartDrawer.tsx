@@ -33,7 +33,7 @@ const dialog = css({
   maxHeight: "100dvh",
   background: "cocoa.900",
   color: "cream",
-  "&::backdrop": { background: "rgba(10, 6, 5, 0.65)", backdropFilter: "blur(6px)" },
+  "&::backdrop": { background: "rgba(0, 2, 14, 0.65)", backdropFilter: "blur(6px)" },
   "&[open]": { animation: "drawerIn 0.5s {easings.silk}", display: "flex", flexDirection: "column" },
 });
 const head = css({
@@ -49,7 +49,7 @@ const iconButton = css({
   placeItems: "center",
   width: "44px",
   height: "44px",
-  borderRadius: "999px",
+  borderRadius: "0",
   cursor: "pointer",
   _hover: { background: "cocoa.800" },
 });
@@ -67,7 +67,7 @@ const thumb = css({
   width: { base: "56px", sm: "76px" },
   height: { base: "56px", sm: "76px" },
   objectFit: "cover",
-  borderRadius: "12px",
+  borderRadius: "0",
 });
 const rowName = css({ fontSize: "0.98rem", marginBlockEnd: "8px" });
 const foot = css({

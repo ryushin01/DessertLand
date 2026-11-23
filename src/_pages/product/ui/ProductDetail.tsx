@@ -12,7 +12,7 @@ import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap } from "@/shared/lib/gsap";
 import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
-import { Icon, QuantityStepper } from "@/shared/ui";
+import { Icon, QuantityStepper, SectionHeading } from "@/shared/ui";
 import { RevealText } from "@/shared/ui/reveal-text";
 
 const root = css({ position: "relative", overflow: "clip", minHeight: "100svh" });
@@ -30,7 +30,7 @@ const layout = css({
   alignItems: "center",
   minHeight: "100svh",
   paddingBlock: { base: "88px 48px", lg: "96px 48px" },
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
 });
 const tiltHost = css({ perspective: "1100px" });
 const frame = css({
@@ -39,7 +39,7 @@ const frame = css({
   maxHeight: "78vh",
   width: "100%",
   overflow: "hidden",
-  borderRadius: "8px",
+  borderRadius: "0",
   boxShadow: "0 50px 110px rgba(0, 0, 0, 0.55)",
   transformStyle: "preserve-3d",
   willChange: "transform",
@@ -65,8 +65,10 @@ const back = css({
 });
 const title = css({
   fontFamily: "display",
-  fontSize: "clamp(3rem, 7vw, 7.5rem)",
-  lineHeight: "1",
+  fontSize: "clamp(2.2rem, 4.6vw, 4.8rem)",
+  fontWeight: "200",
+  lineHeight: "1.05",
+  letterSpacing: "0.08em",
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
@@ -151,7 +153,9 @@ export function ProductDetail({ product, description: descriptionText }: Product
             <Icon name="arrow-right" />
             {t("back")}
           </Link>
-          <RevealText as="h1" text={name} className={title} immediate />
+          <SectionHeading index={3} line="contained">
+            <RevealText as="h1" text={name} className={title} immediate />
+          </SectionHeading>
           <p className={description} data-rise>
             {descriptionText}
           </p>

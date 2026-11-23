@@ -12,10 +12,10 @@ const button = css({
   placeItems: "center",
   width: "44px",
   height: "44px",
-  borderRadius: "999px",
+  borderRadius: "0",
   cursor: "pointer",
   transition: "background 0.2s",
-  _hover: { background: "rgba(247, 236, 223, 0.16)" },
+  _hover: { background: "rgba(255, 255, 255, 0.16)" },
 });
 
 export function MotionToggle() {

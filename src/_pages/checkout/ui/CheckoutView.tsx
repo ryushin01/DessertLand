@@ -13,11 +13,11 @@ import { useCartSummary } from "@/features/cart-summary";
 import { CheckoutForm, type PaidOrder } from "./CheckoutForm";
 import { StripeCheckoutButton } from "@/features/stripe-checkout";
 import { Link } from "@/shared/i18n";
-import { Icon, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
+import { Icon, SectionHeading, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
 
 const demo = css({
   padding: "14px 16px",
-  borderRadius: "12px",
+  borderRadius: "0",
   background: "cocoa.800",
   marginBlockEnd: "32px",
   lineHeight: "1.5",
@@ -25,7 +25,7 @@ const demo = css({
 const fallbackNotice = css({
   padding: "14px 16px",
   border: "2px solid {colors.caramel}",
-  borderRadius: "12px",
+  borderRadius: "0",
   marginBlockEnd: "24px",
   lineHeight: "1.5",
 });
@@ -34,7 +34,7 @@ const successActions = css({ display: "flex", flexWrap: "wrap", gap: "12px" });
 const limitNotice = css({
   padding: "14px 16px",
   border: "2px solid {colors.strawberry}",
-  borderRadius: "12px",
+  borderRadius: "0",
   lineHeight: "1.5",
 });
 const columns = css({
@@ -118,9 +118,11 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
   if (order) {
     return (
       <div className={pageShell}>
-        <h1 ref={successRef} tabIndex={-1} className={pageTitle}>
-          {t("successTitle")}
-        </h1>
+        <SectionHeading index={4} line="contained">
+          <h1 ref={successRef} tabIndex={-1} className={pageTitle}>
+            {t("successTitle")}
+          </h1>
+        </SectionHeading>
         <div className={demo}>
           <p>{t("successBody", { orderNo: order.orderNo })}</p>
           <p>{t("paidAmount", { amount: formatMoney(order.total, locale) })}</p>
@@ -141,7 +143,9 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
 
   return (
     <div className={pageShell}>
-      <h1 className={pageTitle}>{t("title")}</h1>
+      <SectionHeading index={4} line="contained">
+        <h1 className={pageTitle}>{t("title")}</h1>
+      </SectionHeading>
       <p className={demo}>{stripeActive ? t("stripeNotice") : t("demo")}</p>
       {/* 바뀐 결제 방식을 알립니다. 처음부터 보여 줄 때도 읽히도록 상태 영역은 늘 둡니다. */}
       <div role="status">

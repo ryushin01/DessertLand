@@ -24,7 +24,7 @@ const area = css({
   display: "grid",
   gap: "20px",
   paddingBlockStart: "20px",
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
 });
 const field = css({ display: "grid", gap: "8px", maxWidth: "28rem" });
 const label = css({ fontSize: "0.9rem", fontWeight: "500" });
@@ -32,7 +32,7 @@ const search = css({
   width: "100%",
   minHeight: "48px",
   paddingInline: "18px",
-  borderRadius: "999px",
+  borderRadius: "0",
   border: "1px solid {colors.muted}",
   background: "cocoa.950",
   color: "cream",

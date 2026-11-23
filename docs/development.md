@@ -168,7 +168,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 | --- | --- |
 | Stripe Checkout(`STRIPE_SECRET_KEY`) | 키가 없으면 처음부터, 세션 만들기가 실패(서버 502·네트워크 오류)하면 그 자리에서 내장 테스트 결제창으로 바꾸고 `role="status"`로 알림 |
 | Claude API(`ANTHROPIC_API_KEY`) | 키가 없거나 호출이 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)") |
-| 글꼴 | Lora는 `next/font/local`, 한중일 글꼴은 Fontsource 파일을 설치 때 `public/fonts/cjk/`로 복사, 하다 바탕은 저장소 파일 |
+| 글꼴 | Exo 2(영문·숫자)는 `next/font/local`, 한중일 글꼴은 Fontsource 파일을 설치 때 `public/fonts/cjk/`로 복사, 하다 바탕은 저장소 파일 |
 | 사진·아이콘 | 모두 `public/`의 파일 |
 | Sentry·Speed Insights | DSN이 없으면 Sentry를 싣지 않고, 전송 실패는 조용히 넘어감 |
 

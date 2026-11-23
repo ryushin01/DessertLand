@@ -21,7 +21,7 @@ type ProductPageProps = { params: Promise<{ locale: string; slug: string }> };
 
 const related = css({
   paddingBlock: "72px",
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
 });
 const relatedTitle = css({
   fontFamily: "display",
@@ -40,7 +40,7 @@ const photo = css({
   display: "block",
   aspectRatio: "4 / 3",
   overflow: "hidden",
-  borderRadius: "6px",
+  borderRadius: "0",
 });
 const image = css({ objectFit: "cover", transition: "transform 0.9s {easings.silk}" });
 const name = css({

@@ -8,14 +8,14 @@ const root = css({
   display: "inline-flex",
   alignItems: "center",
   border: "1px solid {colors.cocoa.700}",
-  borderRadius: "999px",
+  borderRadius: "0",
 });
 const control = css({
   width: "44px",
   height: "44px",
   display: "grid",
   placeItems: "center",
-  borderRadius: "999px",
+  borderRadius: "0",
   cursor: "pointer",
   transition: "background 0.2s",
   _hover: { background: "cocoa.800" },

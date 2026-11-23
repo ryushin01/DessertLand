@@ -47,7 +47,7 @@ const layout = css({
   gap: { base: "20px", md: "4vw" },
   alignItems: { md: "center" },
   paddingBlock: { base: "84px 24px", md: "0" },
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
 });
 const sharp = css({
   position: "relative",
@@ -59,7 +59,7 @@ const sharp = css({
 const bar = css({
   width: "1px",
   flexShrink: 0,
-  background: "rgba(247, 236, 223, 0.3)",
+  background: "rgba(255, 255, 255, 0.3)",
   position: "relative",
 });
 const barFill = css({
@@ -70,7 +70,7 @@ const barFill = css({
   background: "cream",
   transformOrigin: "top",
 });
-const frame = css({ position: "relative", flex: 1, overflow: "hidden", borderRadius: "4px" });
+const frame = css({ position: "relative", flex: 1, overflow: "hidden", borderRadius: "0" });
 const frameImage = css({ objectFit: "cover" });
 const info = css({ display: "grid", gap: { base: "12px", md: "24px" } });
 const meta = css({
@@ -91,7 +91,7 @@ const lede = css({ fontSize: { base: "1rem", md: "1.2rem" }, lineHeight: "1.5", 
 export function CategoryShowcase() {
   const t = useTranslations("showcase");
   return (
-    <section aria-label={t("label")}>
+    <section id="categories" aria-label={t("label")}>
       {CATEGORIES.map((category, index) => (
         <Chapter key={category} category={category} index={index} first={index === 0} />
       ))}

@@ -6,8 +6,8 @@ import { LOCALES, LOCALE_LABELS, Link } from "@/shared/i18n";
 const footer = css({
   position: "relative",
   overflow: "clip",
-  borderBlockStart: "1px solid {colors.cocoa.700}",
-  paddingBlockEnd: "32px",
+  borderBlockStart: "1px solid rgba(255, 255, 255, 0.25)",
+  paddingBlockEnd: "40px",
 });
 const marquee = css({ display: "flex", width: "max-content", paddingBlock: "32px" });
 const marqueeTrack = css({
@@ -18,26 +18,35 @@ const marqueeTrack = css({
 });
 const marqueeItem = css({
   fontFamily: "display",
-  fontSize: "clamp(4rem, 14vw, 13rem)",
+  fontSize: "clamp(3.5rem, 11vw, 10rem)",
+  fontWeight: "200",
   lineHeight: "1",
+  letterSpacing: "0.2em",
+  textTransform: "uppercase",
   paddingInlineEnd: "0.4em",
   whiteSpace: "nowrap",
+  // 레퍼런스의 K·I·N 글자처럼 속이 빈 외곽선 글자(장식)
+  color: "transparent",
+  WebkitTextStroke: "1px {colors.cream}",
 });
 const grid = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", md: "2fr 1fr 1fr" },
   gap: "28px",
-  paddingInline: { base: "16px", md: "28px" },
-  fontSize: "0.9rem",
-  lineHeight: "1.6",
+  paddingInline: { base: "16px", md: "56px" },
+  fontSize: "0.75rem",
+  lineHeight: "1.8",
+  letterSpacing: "0.16em",
+  textTransform: "uppercase",
 });
 const list = css({ display: "flex", flexWrap: "wrap", gap: "4px 14px" });
 const link = css({
   display: "inline-block",
   paddingBlock: "4px",
   textDecoration: "underline",
-  textUnderlineOffset: "3px",
-  _hover: { color: "caramel" },
+  textDecorationColor: "rgba(255, 255, 255, 0.35)",
+  textUnderlineOffset: "5px",
+  _hover: { color: "strawberry", textDecorationColor: "currentColor" },
 });
 const SOURCES_URL = "https://github.com/ryushin01/DessertLand#출처";
 const FLATICON_URL = "https://www.flaticon.com/uicons";

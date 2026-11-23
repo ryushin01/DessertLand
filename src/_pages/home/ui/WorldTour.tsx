@@ -34,7 +34,7 @@ const stage = css({
 const track = css({
   display: "grid",
   gap: "32px",
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
   gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
   "&[data-horizontal=true]": { display: "flex", width: "max-content", alignItems: "center", gap: "4vw" },
 });
@@ -59,7 +59,7 @@ const card = css({
   },
 });
 const cardLink = css({ display: "block", _hover: { "& [data-photo]": { transform: "scale(1.08)" } } });
-const photoFrame = css({ position: "relative", aspectRatio: "4 / 5", overflow: "hidden", borderRadius: "6px" });
+const photoFrame = css({ position: "relative", aspectRatio: "4 / 5", overflow: "hidden", borderRadius: "0" });
 const photo = css({ objectFit: "cover", transition: "transform 1s {easings.silk}" });
 const meta = css({
   display: "flex",
@@ -147,7 +147,7 @@ export function WorldTour() {
   };
 
   return (
-    <section ref={ref} className={wrapper} onFocus={onFocus}>
+    <section ref={ref} id="world" className={wrapper} onFocus={onFocus}>
       <div className={stage} data-horizontal={horizontal}>
         <div ref={trackRef} className={track} data-horizontal={horizontal}>
           <div className={intro} data-horizontal={horizontal}>

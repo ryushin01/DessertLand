@@ -8,7 +8,7 @@ import { orderKey, useSavedOrders, type SavedOrder } from "@/entities/order";
 import { currencyForLocale, formatCurrency } from "@/entities/product";
 import { lookupOrders, type StripeOrderLookup } from "@/features/stripe-checkout";
 import { Link } from "@/shared/i18n";
-import { Icon, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
+import { Icon, SectionHeading, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
 
 const lede = css({
   maxWidth: "40rem",
@@ -21,7 +21,7 @@ const card = css({
   display: "grid",
   gap: "12px",
   padding: "18px 20px",
-  borderRadius: "12px",
+  borderRadius: "0",
   background: "cocoa.800",
 });
 const cardHead = css({ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px 12px" });
@@ -29,7 +29,7 @@ const cardTitle = css({ fontFamily: "display", fontSize: "1.6rem", lineHeight: "
 const badge = css({
   display: "inline-block",
   padding: "4px 10px",
-  borderRadius: "999px",
+  borderRadius: "0",
   background: "cocoa.950",
   fontSize: "0.8rem",
 });
@@ -116,7 +116,9 @@ export function OrdersView() {
 
   return (
     <div className={pageShell}>
-      <h1 className={pageTitle}>{t("title")}</h1>
+      <SectionHeading index={6} line="contained">
+        <h1 className={pageTitle}>{t("title")}</h1>
+      </SectionHeading>
       <p className={lede}>{t("lede")}</p>
       {/* 불러오는 중·실패를 알리는 영역은 처음부터 두고 내용만 바꿉니다. */}
       <p role="status" className={statusText}>

@@ -9,7 +9,7 @@ import { getProduct } from "@/entities/product";
 import { Link } from "@/shared/i18n";
 import { gsap, useGsap } from "@/shared/lib/gsap";
 import { MEDIA, useMediaQuery, useMotionEnabled } from "@/shared/lib/motion";
-import { Icon, buttonRecipe } from "@/shared/ui";
+import { Icon, ScrollCue, SectionHeading, buttonRecipe } from "@/shared/ui";
 
 import type { BakerRenderer } from "../lib/baker-renderer";
 
@@ -18,12 +18,13 @@ const DEPTH = "/images/hero/baker-depth.webp";
 const CUTOUT_RATIO = 1000 / 1250;
 
 const FLOATS = [
-  { slug: "freakshake", top: "13%", left: "6%", width: "13vw", depth: 0.9, front: false, wide: false },
-  { slug: "tiramisu", top: "12%", left: "79%", width: "12vw", depth: 0.6, front: false, wide: false },
-  { slug: "basque-cheesecake", top: "58%", left: "7%", width: "17vw", depth: 1.5, front: true, wide: true },
-  { slug: "pastel-de-nata", top: "60%", left: "76%", width: "19vw", depth: 1.8, front: true, wide: true },
-  { slug: "strawberry-shortcake", top: "36%", left: "20%", width: "9vw", depth: 0.4, front: false, wide: false },
-  { slug: "blueberry-muffin", top: "34%", left: "69%", width: "9vw", depth: 0.5, front: false, wide: false },
+  // 왼쪽 제목·꺾쇠 자리를 비우고 오른쪽 절반에 띄웁니다.
+  { slug: "freakshake", top: "13%", left: "47%", width: "9vw", depth: 0.9, front: false, wide: false },
+  { slug: "tiramisu", top: "15%", left: "80%", width: "10vw", depth: 0.6, front: false, wide: false },
+  { slug: "basque-cheesecake", top: "68%", left: "47%", width: "14vw", depth: 1.5, front: true, wide: true },
+  { slug: "pastel-de-nata", top: "62%", left: "77%", width: "16vw", depth: 1.8, front: true, wide: true },
+  { slug: "strawberry-shortcake", top: "40%", left: "88%", width: "7vw", depth: 0.4, front: false, wide: false },
+  { slug: "blueberry-muffin", top: "34%", left: "63%", width: "7vw", depth: 0.5, front: false, wide: false },
 ] as const;
 
 const wrapper = css({ position: "relative", height: "240vh" });
@@ -33,8 +34,9 @@ const stage = css({
   height: "100svh",
   overflow: "clip",
   perspective: "1200px",
+  // 레퍼런스의 밤하늘: 가운데 자줏빛, 오른쪽 위 청록 빛, 바깥은 남색
   background:
-    "radial-gradient(60% 55% at 50% 45%, #5a2331 0%, #2b1418 48%, {colors.cocoa.950} 100%)",
+    "radial-gradient(40% 45% at 100% 0%, rgba(32, 150, 170, 0.35), transparent 70%), radial-gradient(55% 55% at 62% 45%, #3b0c2c 0%, #140a26 46%, {colors.cocoa.950} 100%)",
 });
 const glow = css({
   position: "absolute",
@@ -45,23 +47,33 @@ const glow = css({
   marginBlockStart: "-31vmax",
   marginInlineStart: "-31vmax",
   borderRadius: "50%",
-  background: "radial-gradient(circle, rgba(255, 100, 132, 0.34), rgba(242, 178, 103, 0.1) 45%, transparent 68%)",
+  background: "radial-gradient(circle, rgba(228, 19, 19, 0.34), rgba(161, 243, 251, 0.1) 45%, transparent 68%)",
   pointerEvents: "none",
 });
-const title = css({
+// 제목 묶음은 왼쪽에 두고, 꺾쇠 마디와 가로 기준선이 화면 세로 가운데(모바일은 조금 위)를 지나게 합니다.
+const heading = css({
+  "--rail-h": { base: "9.5rem", md: "13rem" },
   position: "absolute",
-  inset: 0,
+  zIndex: 3,
+  // 손·밀가루 사진 위에서도 글자 대비가 유지되도록 남색 그림자를 둡니다.
+  textShadow: "0 0 14px rgba(0, 2, 14, 0.95), 0 0 4px rgba(0, 2, 14, 0.9)",
+  insetInlineStart: { base: "16px", md: "56px" },
+  insetInlineEnd: { base: "16px", md: "auto" },
+  // 안쪽 SectionHeading의 아래 여백(꺾쇠 꼬리 자리 = 높이 × 0.4381 + 12px)만큼 내려 기준선을 정확히 맞춥니다.
+  insetBlockEnd: {
+    base: "calc(58% - var(--rail-h) * 0.4381 - 12px)",
+    md: "calc(50% - var(--rail-h) * 0.4381 - 12px)",
+  },
+});
+const title = css({
   display: "flex",
   flexDirection: "column",
-  justifyContent: { base: "flex-start", md: "center" },
-  paddingBlockStart: { base: "27svh", md: "0" },
-  alignItems: "center",
   fontFamily: "display",
-  fontSize: "clamp(5rem, 24.5vw, 30rem)",
-  lineHeight: "0.82",
-  letterSpacing: "-0.02em",
+  fontSize: "clamp(2.8rem, 6.4vw, 6.4rem)",
+  fontWeight: "200",
+  lineHeight: "1",
+  letterSpacing: "0.1em",
   textTransform: "uppercase",
-  textAlign: "center",
   color: "cream",
   userSelect: "none",
 });
@@ -70,8 +82,10 @@ const float = css({
   position: "absolute",
   display: { base: "none", md: "block" },
   aspectRatio: "3 / 4",
-  borderRadius: "14px",
+  borderRadius: "0",
   overflow: "hidden",
+  outline: "1px solid rgba(255, 255, 255, 0.35)",
+  outlineOffset: "6px",
   boxShadow: "0 30px 70px rgba(0, 0, 0, 0.45)",
   willChange: "transform",
 });
@@ -84,7 +98,7 @@ const floatImage = css({ objectFit: "cover" });
 const baker = css({
   position: "absolute",
   insetBlockStart: "-7svh",
-  insetInlineStart: "50%",
+  insetInlineStart: { base: "50%", md: "98%" },
   height: { base: "82svh", md: "128svh" },
   transformOrigin: "50% 40%",
   willChange: "transform",
@@ -102,7 +116,7 @@ const copy = css({
   position: "absolute",
   zIndex: 4,
   insetBlockEnd: { base: "20px", md: "32px" },
-  insetInline: { base: "16px", md: "28px" },
+  insetInline: { base: "16px", md: "56px" },
   display: "grid",
   gridTemplateColumns: { base: "1fr", md: "minmax(0, 24rem) 1fr auto" },
   alignItems: "end",
@@ -110,25 +124,31 @@ const copy = css({
 });
 const copyPanel = css({
   padding: "14px 16px",
-  borderRadius: "14px",
-  background: "rgba(18, 11, 10, 0.78)",
+  borderRadius: "0",
+  borderInlineStart: "1px solid {colors.signal}",
+  background: "rgba(0, 2, 14, 0.78)",
   backdropFilter: "blur(10px)",
 });
-const eyebrow = css({ fontSize: "0.8rem", letterSpacing: "0.04em", marginBlockEnd: "6px", color: "caramel" });
-const tagline = css({ fontSize: { base: "0.95rem", md: "1.05rem" }, lineHeight: "1.5", wordBreak: "var(--word-break)" });
+const eyebrow = css({
+  fontSize: "0.72rem",
+  letterSpacing: "0.22em",
+  textTransform: "uppercase",
+  marginBlockEnd: "8px",
+  color: "strawberry",
+});
+const tagline = css({
+  fontSize: { base: "0.92rem", md: "1rem" },
+  lineHeight: "1.6",
+  letterSpacing: "0.02em",
+  wordBreak: "var(--word-break)",
+});
 const actions = css({
   display: "flex",
   alignItems: "center",
   gap: "16px",
   gridColumn: { md: "3" },
 });
-const scrollCue = css({
-  display: { base: "none", md: "inline-flex" },
-  alignItems: "center",
-  gap: "8px",
-  fontSize: "0.8rem",
-  "& i": { animation: "bob 1.6s ease-in-out infinite", _motionOff: { animation: "none" } },
-});
+const scrollCueBox = css({ display: { base: "none", md: "block" } });
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -249,7 +269,7 @@ export function Hero() {
           mover.x(-nx * 90 * mover.depth);
           mover.y(-ny * 70 * mover.depth);
         }
-        for (const mover of lineMovers) mover.x(nx * 70 * mover.direction);
+        for (const mover of lineMovers) mover.x(nx * 24 * mover.direction);
         glowX?.(event.clientX);
         glowY?.(event.clientY);
       };
@@ -269,8 +289,8 @@ export function Hero() {
         scrollTrigger: { trigger: rootRef.current, start: "top top", end: "bottom bottom", scrub: 0.7 },
       });
       scroll
-        .to(lines[0] ?? {}, { xPercent: -28, opacity: 0.15, ease: "none" }, 0)
-        .to(lines[1] ?? {}, { xPercent: 28, opacity: 0.15, ease: "none" }, 0)
+        .to(lines[0] ?? {}, { xPercent: -12, opacity: 0.15, ease: "none" }, 0)
+        .to(lines[1] ?? {}, { xPercent: 12, opacity: 0.15, ease: "none" }, 0)
         .to(bakerEl, { scale: 1.28, yPercent: 5, ease: "none" }, 0);
       floats.forEach((element, index) => {
         const side = index % 2 === 0 ? -1 : 1;
@@ -291,21 +311,32 @@ export function Hero() {
   );
 
   return (
-    <div ref={rootRef} className={wrapper}>
+    <div ref={rootRef} id="intro" className={wrapper}>
       <div className={stage}>
         <div data-glow aria-hidden="true" className={glow} />
-        <h1 className={title} lang="en" aria-label="Dessert Land">
-          <span aria-hidden="true" className={css({ overflow: "clip" })}>
-            <span data-line className={titleLine}>
-              Dessert
-            </span>
-          </span>
-          <span aria-hidden="true" className={css({ overflow: "clip" })}>
-            <span data-line className={titleLine}>
-              Land
-            </span>
-          </span>
-        </h1>
+        <div className={heading}>
+          <SectionHeading
+            index={1}
+            after={
+              <span className={scrollCueBox}>
+                <ScrollCue label={t("scroll")} />
+              </span>
+            }
+          >
+            <h1 className={title} lang="en" aria-label="Dessert Land">
+              <span aria-hidden="true" className={css({ overflow: "clip" })}>
+                <span data-line className={titleLine}>
+                  Dessert
+                </span>
+              </span>
+              <span aria-hidden="true" className={css({ overflow: "clip" })}>
+                <span data-line className={titleLine}>
+                  Land
+                </span>
+              </span>
+            </h1>
+          </SectionHeading>
+        </div>
         {FLOATS.filter((item) => !item.front).map((item) => (
           <FloatCard key={item.slug} {...item} />
         ))}
@@ -335,10 +366,6 @@ export function Hero() {
             <p className={tagline}>{t("tagline")}</p>
           </div>
           <div className={actions}>
-            <span className={scrollCue} aria-hidden="true">
-              {t("scroll")}
-              <Icon name="arrow-down" />
-            </span>
             <Link href="/shop" className={buttonRecipe()} data-magnetic>
               {t("cta")}
               <Icon name="arrow-right" />

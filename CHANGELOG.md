@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 1.2.0 - 2026-11-23
+
+- 디자인 개편: 영화 사이트 KIN(레퍼런스)을 따라 밤하늘 남색(`#00020e`) 바탕, 흰 선·글자, 붉은 강조(`#e41313`), 각진 모서리, 넓은 자간의 대문자 라벨로 바꿈. 상품 사진·데이터·기능은 그대로
+- 왼쪽의 하얀 꺾쇠(위쪽 점, 끊긴 세로선, 가로 기준선이 지나는 원형 마디, 오른쪽 아래로 꺾인 사선)와 'SECTION — 01' 번호를 붙인 제목 묶음(`shared/ui/kin-rail`)을 홈 첫 화면과 상점·상품·추천·결제·주문 화면에 적용. 붉은 '스크롤' 안내, 헤더의 아이콘 아래 붉은 선 라벨, 홈 오른쪽 세로 점 내비게이션(툴팁, 현재 섹션 표시), 외곽선 글자 바닥글 흐름 추가
+- 글꼴: 영문·숫자를 Lora에서 가는 기하학 산세리프 Exo 2(SIL OFL 1.1, 라틴 부분집합 44 kB, 저장소 파일)로 바꾸고 `@fontsource-variable/lora` 의존성 제거
+- 접근성: 사용자 지시로 이번 개편에서는 글자 대비(4.5:1)를 우선하지 않고 레퍼런스 색을 따름(axe 검사는 그대로 통과). 키보드·`:focus-visible`·레이블·역할·이름은 유지, 꺾쇠·섹션 번호 장식은 `aria-hidden`
+- 테스트: `SectionHeading`·`SectionDots` 단위 테스트, `SectionHeading` 스토리
+- 문서: README 화면 다시 찍기, 글꼴·출처 표 갱신
+
 ## 1.1.0 - 2026-11-21
 
 - 오프라인에서도 모든 화면이 보이게 함(포트폴리오 데모가 외부 서비스 장애로 비지 않게). 한중일 글꼴을 Google Fonts 대신 Fontsource 패키지(Grandiflora One, Kaisei Decol, Zen Maru Gothic, Noto Sans·Serif SC)에서 설치 때 `public/fonts/cjk/`로 복사해 같은 출처로 제공하고(`scripts/copy-cjk-fonts.mjs`), Lora도 `next/font/google` 대신 Fontsource 파일을 `next/font/local`로 씀(빌드도 외부 글꼴 서버 없이 됨). CSP에서 Google Fonts 출처를 뺌
