@@ -117,7 +117,7 @@ export function SweetTrail() {
         <div data-trail-layer aria-hidden="true" className={trailLayer}>
           {TRAIL.map((product) => (
             <div key={product.slug} data-trail className={trailItem}>
-              <Image src={product.image.src} alt="" fill sizes="280px" className={trailImage} />
+              <Image unoptimized src={product.image.src} alt="" fill sizes="280px" className={trailImage} />
             </div>
           ))}
         </div>

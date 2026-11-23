@@ -218,6 +218,7 @@ export function CartDrawer() {
                       <span className={srOnly}>{t("select", { name })}</span>
                     </label>
                     <Image
+                      unoptimized
                       src={product.image.src}
                       alt=""
                       width={152}

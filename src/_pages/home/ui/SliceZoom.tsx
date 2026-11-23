@@ -80,7 +80,7 @@ export function SliceZoom() {
     <section ref={ref} id="zoom" className={wrapper}>
       <div className={stage}>
         <div data-image className={css({ position: "absolute", inset: 0 })}>
-          <Image src={product.image.src} alt="" fill sizes="100vw" className={image} />
+          <Image unoptimized src={product.image.src} alt="" fill sizes="100vw" className={image} />
         </div>
         <div data-scrim aria-hidden="true" className={scrim} />
         <div data-copy className={copy}>

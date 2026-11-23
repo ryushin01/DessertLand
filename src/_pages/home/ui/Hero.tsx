@@ -347,6 +347,7 @@ export function Hero() {
           style={{ aspectRatio: `${CUTOUT_RATIO * 1.14}`, transform: "translateX(-50%)" }}
         >
           <Image
+            unoptimized
             ref={fallbackRef}
             src={CUTOUT}
             alt=""
@@ -390,7 +391,7 @@ function FloatCard({ slug, top, left, width, depth, wide }: FloatCardProps) {
       className={cx(float, wide && floatWide)}
       style={{ top, left, width }}
     >
-      <Image src={product.image.src} alt="" fill sizes="20vw" className={floatImage} />
+      <Image unoptimized src={product.image.src} alt="" fill sizes="20vw" className={floatImage} />
     </div>
   );
 }

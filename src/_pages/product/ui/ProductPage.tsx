@@ -127,6 +127,7 @@ function ProductContent({ product }: { product: Product }) {
               <Link href={`/shop/${item.slug}`} className={card}>
                 <span className={photo}>
                   <Image
+                    unoptimized
                     src={item.image.src}
                     alt=""
                     fill
