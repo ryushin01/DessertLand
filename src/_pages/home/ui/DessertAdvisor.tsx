@@ -146,6 +146,7 @@ function PickCard({ pick }: { pick: RecommendedPick }) {
     <li className={card}>
       <Link href={`/shop/${product.slug}`} className={photo} tabIndex={-1} aria-hidden="true">
         <Image
+          unoptimized
           src={product.image.src}
           alt=""
           fill

@@ -160,6 +160,7 @@ export function WorldTour() {
                 <Link href={`/shop/${product.slug}`} className={cardLink} data-cursor={tShop("view")}>
                   <span className={photoFrame} style={{ display: "block" }}>
                     <Image
+                      unoptimized
                       data-photo
                       src={product.image.src}
                       alt=""

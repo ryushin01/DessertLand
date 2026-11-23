@@ -6,6 +6,7 @@ type LogoProps = { className?: string; size?: number };
 export function Logo({ className, size = 36 }: LogoProps) {
   return (
     <Image
+      unoptimized
       src="/brand/logo.png"
       alt=""
       aria-hidden="true"

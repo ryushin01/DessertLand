@@ -11,4 +11,9 @@ describe("Logo", () => {
     expect(img).toHaveAttribute("alt", "");
     expect(img).toHaveAttribute("width", "48");
   });
+
+  it("이미지 변환 없이 원본 파일 주소를 씁니다", () => {
+    const { container } = render(<Logo />);
+    expect(container.querySelector("img")?.getAttribute("src")).toBe("/brand/logo.png");
+  });
 });

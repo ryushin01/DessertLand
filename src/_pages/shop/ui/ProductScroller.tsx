@@ -166,6 +166,7 @@ export function ProductScroller({ products }: ProductScrollerProps) {
           >
             {loaded.has(product.slug) ? (
               <Image
+                unoptimized
                 src={product.image.src}
                 alt=""
                 fill
@@ -184,6 +185,7 @@ export function ProductScroller({ products }: ProductScrollerProps) {
               .filter((product) => loaded.has(product.slug))
               .map((product) => (
                 <Image
+                  unoptimized
                   key={product.slug}
                   src={product.image.src}
                   alt=""
@@ -209,7 +211,7 @@ export function ProductScroller({ products }: ProductScrollerProps) {
               >
                 <div>
                   <div className={inlinePhoto}>
-                    <Image src={product.image.src} alt="" fill sizes="100vw" className={cover} />
+                    <Image unoptimized src={product.image.src} alt="" fill sizes="100vw" className={cover} />
                   </div>
                   <Link
                     href={`/shop/${product.slug}`}

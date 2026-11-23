@@ -132,12 +132,13 @@ export function ProductDetail({ product, description: descriptionText }: Product
   return (
     <section ref={ref} className={root}>
       <div aria-hidden="true" className={backdrop}>
-        <Image src={product.image.src} alt="" fill sizes="20vw" quality={40} className={cover} />
+        <Image unoptimized src={product.image.src} alt="" fill sizes="20vw" quality={40} className={cover} />
       </div>
       <div className={layout}>
         <div className={tiltHost}>
           <div data-frame className={frame}>
             <Image
+              unoptimized
               src={product.image.src}
               alt={name}
               fill
