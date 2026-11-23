@@ -14,7 +14,7 @@ const ring = css({
   height: "1.75em",
   padding: "2px",
   borderRadius: "50%",
-  border: "1.5px solid rgba(247, 236, 223, 0.45)",
+  border: "1.5px solid rgba(255, 255, 255, 0.45)",
 });
 
 const disc = css({

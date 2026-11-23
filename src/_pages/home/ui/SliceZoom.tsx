@@ -12,13 +12,13 @@ import { useMotionEnabled } from "@/shared/lib/motion";
 const wrapper = css({ position: "relative", height: "320vh", zIndex: 2, background: "cocoa.950" });
 const stage = css({ position: "sticky", insetBlockStart: 0, height: "100svh", overflow: "clip" });
 const image = css({ objectFit: "cover" });
-const scrim = css({ position: "absolute", inset: 0, background: "rgba(18, 11, 10, 0.66)" });
+const scrim = css({ position: "absolute", inset: 0, background: "rgba(0, 2, 14, 0.66)" });
 const mask = css({
   position: "absolute",
   inset: 0,
   display: "grid",
   placeItems: "center",
-  background: "#120b0a",
+  background: "#00020e",
   color: "white",
   mixBlendMode: "multiply",
   fontFamily: "display",
@@ -77,7 +77,7 @@ export function SliceZoom() {
   if (!product) return null;
 
   return (
-    <section ref={ref} className={wrapper}>
+    <section ref={ref} id="zoom" className={wrapper}>
       <div className={stage}>
         <div data-image className={css({ position: "absolute", inset: 0 })}>
           <Image src={product.image.src} alt="" fill sizes="100vw" className={image} />

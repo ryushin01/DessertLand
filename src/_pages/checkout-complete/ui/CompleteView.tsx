@@ -8,12 +8,12 @@ import { css } from "styled-system/css";
 import { settleStripeOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
 import { Link } from "@/shared/i18n";
-import { Icon, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
+import { Icon, SectionHeading, buttonRecipe, pageShell, pageTitle } from "@/shared/ui";
 
 const actions = css({ display: "flex", flexWrap: "wrap", gap: "12px" });
 const box = css({
   padding: "14px 16px",
-  borderRadius: "12px",
+  borderRadius: "0",
   background: "cocoa.800",
   marginBlockEnd: "32px",
   lineHeight: "1.5",
@@ -43,9 +43,11 @@ export function CompleteView({ order }: CompleteViewProps) {
 
   return (
     <div className={pageShell}>
-      <h1 ref={headingRef} tabIndex={-1} className={pageTitle}>
-        {order ? t("successTitle") : t("paymentError")}
-      </h1>
+      <SectionHeading index={5} line="contained">
+        <h1 ref={headingRef} tabIndex={-1} className={pageTitle}>
+          {order ? t("successTitle") : t("paymentError")}
+        </h1>
+      </SectionHeading>
       <div className={box}>
         {order ? (
           <>

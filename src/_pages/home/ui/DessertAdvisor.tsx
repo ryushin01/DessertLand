@@ -15,7 +15,7 @@ import {
   type TasteChip,
 } from "@/features/recommend-dessert";
 import { Link } from "@/shared/i18n";
-import { Button, Icon } from "@/shared/ui";
+import { Button, Icon, SectionHeading } from "@/shared/ui";
 
 const section = css({
   position: "relative",
@@ -23,13 +23,14 @@ const section = css({
   background: "cocoa.900",
   scrollMarginBlockStart: "72px",
   paddingBlock: { base: "72px", md: "120px" },
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
 });
 const inner = css({ maxWidth: "1200px", marginInline: "auto", display: "grid", gap: "32px" });
 const title = css({
   fontFamily: "display",
-  fontSize: "clamp(2.8rem, 7vw, 6.6rem)",
-  lineHeight: "1",
+  fontSize: "clamp(2.2rem, 5vw, 5rem)",
+  fontWeight: "200",
+  lineHeight: "1.05",
   wordBreak: "var(--word-break)",
 });
 const lede = css({
@@ -45,7 +46,7 @@ const textarea = css({
   width: "100%",
   minHeight: "96px",
   padding: "14px 16px",
-  borderRadius: "14px",
+  borderRadius: "0",
   border: "1px solid {colors.muted}",
   background: "cocoa.950",
   color: "cream",
@@ -59,7 +60,7 @@ const chipLegend = css({ fontSize: "0.95rem", fontWeight: "500", marginBlockEnd:
 const chip = css({
   minHeight: "44px",
   paddingInline: "16px",
-  borderRadius: "999px",
+  borderRadius: "0",
   border: "1px solid {colors.muted}",
   cursor: "pointer",
   fontSize: "0.92rem",
@@ -77,7 +78,7 @@ const actions = css({ display: "flex", flexWrap: "wrap", gap: "12px", alignItems
 const message = css({
   padding: "14px 16px",
   border: "2px solid {colors.strawberry}",
-  borderRadius: "12px",
+  borderRadius: "0",
   lineHeight: "1.5",
 });
 const srOnly = css({ srOnly: true });
@@ -85,7 +86,7 @@ const intro = css({ fontSize: "1.2rem", lineHeight: "1.55", wordBreak: "var(--wo
 const badge = css({
   display: "inline-block",
   padding: "4px 10px",
-  borderRadius: "999px",
+  borderRadius: "0",
   background: "cocoa.800",
   fontSize: "0.8rem",
   marginBlockEnd: "10px",
@@ -98,7 +99,7 @@ const list = css({
 const card = css({
   display: "grid",
   gridTemplateRows: "auto 1fr",
-  borderRadius: "12px",
+  borderRadius: "0",
   overflow: "hidden",
   background: "cocoa.950",
   animation: "advisorRise 0.6s {easings.silk}",
@@ -127,7 +128,7 @@ const reason = css({ lineHeight: "1.55", wordBreak: "var(--word-break)" });
 const notice = css({ fontSize: "0.85rem", color: "muted", lineHeight: "1.5" });
 const placeholderCard = css({
   aspectRatio: "4 / 5",
-  borderRadius: "12px",
+  borderRadius: "0",
   background: "cocoa.800",
   animation: "advisorPulse 1.4s ease-in-out infinite",
   _motionOff: { animation: "none" },
@@ -206,9 +207,11 @@ export function DessertAdvisor() {
   return (
     <section id="advisor" className={section} aria-labelledby="advisor-title">
       <div className={inner}>
-        <h2 id="advisor-title" className={title}>
-          {t("title")}
-        </h2>
+        <SectionHeading index={5} line="contained">
+          <h2 id="advisor-title" className={title}>
+            {t("title")}
+          </h2>
+        </SectionHeading>
         <p className={lede}>{t("lede")}</p>
         <form className={form} onSubmit={submit} noValidate>
           <div className={field}>

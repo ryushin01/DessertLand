@@ -46,7 +46,7 @@ const ring = css({
   whiteSpace: "nowrap",
 });
 
-const COLORS = ["#ff6484", "#f2b267", "#b9d98b", "#f7ecdf", "#8fc7ff", "#c79bff"];
+const COLORS = ["#ff3e50", "#e41313", "#ffffff", "#a1f3fb", "#8fa2ff", "#ffffff"];
 
 type Sprinkle = {
   x: number;
@@ -108,7 +108,7 @@ export function CustomCursor() {
       if (distance > 14 && sprinkles.length < 120) {
         lastX = x;
         lastY = y;
-        const color = COLORS[Math.floor(Math.random() * COLORS.length)] ?? "#f7ecdf";
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)] ?? "#ffffff";
         sprinkles.push({
           x,
           y,
@@ -128,7 +128,7 @@ export function CustomCursor() {
       const interactive = target?.closest("a, button, summary, label, input");
       gsap.to(ringEl, {
         scale: label ? 2.4 : interactive ? 1.5 : 1,
-        backgroundColor: label ? "#f7ecdf" : "rgba(247, 236, 223, 0)",
+        backgroundColor: label ? "#ffffff" : "rgba(255, 255, 255, 0)",
         duration: 0.35,
         overwrite: "auto",
       });

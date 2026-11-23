@@ -20,7 +20,7 @@
 - 패키지 매니저: pnpm(`packageManager` `pnpm@12.16.1`), Node.js 22(`.nvmrc`)
 - `corepack enable pnpm` → `pnpm install`(`prepare`가 `panda codegen`과 한중일 글꼴 복사 `scripts/copy-cjk-fonts.mjs` → `public/fonts/cjk/`, git 제외) → `pnpm dev`(http://localhost:3000)
 - 환경 변수(이름만, `.env.example` → `.env.local`): `STRIPE_SECRET_KEY`(테스트 키만), `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_SITE_URL`(도메인 연결 시), `E2E_PORT`·`BASE_URL`(테스트·스크린샷)
-- `.env` 없이, 인터넷이 끊겨도 모든 화면이 내용과 함께 떠야 합니다. 결제는 키가 없거나 Stripe 세션 만들기가 실패(502·네트워크 오류)하면 내장 테스트 결제창(`POST /api/payments`)으로 바꾸고 `role="status"`로 알리며, 추천은 키가 없거나 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)")입니다. 글꼴은 모두 같은 출처(Lora `next/font/local`, 한중일 Fontsource 복사본, 하다 바탕 저장소 파일)이고 외부 글꼴 서버(Google Fonts)를 쓰지 않습니다. 자세한 표는 `docs/development.md`의 "오프라인·외부 서비스 대체".
+- `.env` 없이, 인터넷이 끊겨도 모든 화면이 내용과 함께 떠야 합니다. 결제는 키가 없거나 Stripe 세션 만들기가 실패(502·네트워크 오류)하면 내장 테스트 결제창(`POST /api/payments`)으로 바꾸고 `role="status"`로 알리며, 추천은 키가 없거나 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)")입니다. 글꼴은 모두 같은 출처(Exo 2 `next/font/local`, 한중일 Fontsource 복사본, 하다 바탕 저장소 파일)이고 외부 글꼴 서버(Google Fonts)를 쓰지 않습니다. 자세한 표는 `docs/development.md`의 "오프라인·외부 서비스 대체".
 - 그 밖의 명령: `pnpm storybook`, `pnpm analyze`, `pnpm fonts`, `pnpm screenshots`(Stripe 키 없이 `pnpm build && pnpm start` 뒤 `BASE_URL` 지정)
 - 언어·상품을 더할 때는 `docs/development.md`의 "언어 추가"·"상품 추가" 순서를 따릅니다(메시지 파일, 통화, 맛, 사진 출처, 새 문자 체계면 `CJK_FONTS`와 `copy-cjk-fonts.mjs`의 `LOCALES`).
 

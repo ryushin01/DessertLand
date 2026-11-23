@@ -17,29 +17,48 @@ const header = css({
   zIndex: 50,
   display: "grid",
   gridTemplateColumns: "1fr auto",
-  alignItems: "center",
+  alignItems: "start",
   gap: "12px",
-  paddingBlock: "12px",
-  paddingInline: { base: "16px", md: "28px" },
-  background: "linear-gradient(to bottom, rgba(18, 11, 10, 0.78), rgba(18, 11, 10, 0))",
+  paddingBlock: { base: "14px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
+  background: "linear-gradient(to bottom, rgba(0, 2, 14, 0.85), rgba(0, 2, 14, 0))",
 });
+// 레퍼런스의 좌상단 메뉴 단추처럼 아이콘 아래 붉은 짧은 선과 넓은 자간의 라벨을 둡니다.
 const brand = css({
   display: "inline-flex",
+  flexDirection: "column",
   alignItems: "center",
-  gap: "10px",
-  lineHeight: "1.05",
+  gap: "8px",
   minHeight: "44px",
   justifySelf: "start",
+});
+const brandLabel = css({
+  position: "relative",
+  paddingBlockStart: "8px",
+  fontSize: "0.68rem",
+  letterSpacing: "0.22em",
+  textTransform: "uppercase",
+  whiteSpace: "nowrap",
+  _before: {
+    content: '""',
+    position: "absolute",
+    insetBlockStart: 0,
+    insetInlineStart: "calc(50% - 1em)",
+    width: "2em",
+    borderBlockStart: "1px solid {colors.signal}",
+  },
 });
 const nav = css({ display: "flex", alignItems: "center", gap: { base: "2px", md: "10px" } });
 const navLink = css({
   display: "inline-flex",
   alignItems: "center",
   minHeight: "44px",
-  paddingInline: "0.8em",
-  fontSize: "0.85rem",
-  borderRadius: "999px",
-  _hover: { background: "rgba(247, 236, 223, 0.16)" },
+  paddingInline: "0.9em",
+  fontSize: "0.75rem",
+  letterSpacing: "0.22em",
+  textTransform: "uppercase",
+  borderRadius: "0",
+  _hover: { background: "rgba(255, 255, 255, 0.16)" },
 });
 const cartButton = css({
   position: "relative",
@@ -48,10 +67,10 @@ const cartButton = css({
   justifyContent: "center",
   width: "44px",
   height: "44px",
-  borderRadius: "999px",
+  borderRadius: "0",
   cursor: "pointer",
   fontSize: "1.05rem",
-  _hover: { background: "rgba(247, 236, 223, 0.16)" },
+  _hover: { background: "rgba(255, 255, 255, 0.16)" },
 });
 const badge = css({
   position: "absolute",
@@ -62,7 +81,7 @@ const badge = css({
   paddingInline: "4px",
   display: "grid",
   placeItems: "center",
-  borderRadius: "999px",
+  borderRadius: "0",
   background: "strawberry",
   color: "cocoa.950",
   fontSize: "0.68rem",
@@ -77,7 +96,10 @@ export function SiteHeader() {
   return (
     <header className={header}>
       <Link href="/" className={brand} aria-label={t("home")} data-cursor="">
-        <Logo size={44} />
+        <Logo size={40} />
+        <span aria-hidden="true" lang="en" className={brandLabel}>
+          Dessert Land
+        </span>
       </Link>
       <nav aria-label={t("main")} className={nav}>
         <Link href="/shop" className={navLink}>

@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { CATEGORIES, getProductsByCategory, isCategory, type Category } from "@/entities/product";
 import { productTastes } from "@/entities/product/index.server";
 import { LOCALES, Link, localeAlternates, siteOpenGraph } from "@/shared/i18n";
+import { SectionHeading } from "@/shared/ui";
 import { RevealText } from "@/shared/ui/reveal-text";
 import { ShopBrowser } from "./ShopBrowser";
 import { pill, pillList } from "./pill";
@@ -18,15 +19,19 @@ type ShopCategoryPageProps = { params: Promise<{ locale: string; category: strin
 const head = css({
   position: "relative",
   zIndex: 2,
-  paddingBlockStart: "100px",
-  paddingInline: { base: "16px", md: "28px" },
+  paddingBlockStart: { base: "120px", md: "160px" },
+  paddingInline: { base: "16px", md: "56px" },
   display: "grid",
   gap: "20px",
+  // 제목의 가로 기준선을 화면 너비에서 자릅니다(문서가 가로로 넘치지 않게).
+  overflowX: "clip",
 });
 const title = css({
   fontFamily: "display",
-  fontSize: "clamp(3.2rem, 11vw, 12rem)",
-  lineHeight: "0.95",
+  fontSize: "clamp(2.6rem, 6.4vw, 6.4rem)",
+  fontWeight: "200",
+  lineHeight: "1.05",
+  letterSpacing: "0.1em",
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
@@ -81,7 +86,9 @@ function ShopContent({ active }: { active?: Category }) {
   return (
     <>
       <div className={head}>
-        <RevealText as="h1" text={t("title")} className={title} immediate />
+        <SectionHeading index={2}>
+          <RevealText as="h1" text={t("title")} className={title} immediate />
+        </SectionHeading>
         <nav aria-label={t("filter")}>
           <ul className={pillList}>
             <li>

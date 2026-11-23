@@ -17,7 +17,7 @@ const root = css({ display: "grid", gap: "16px" });
 const messageBox = css({
   padding: "14px 16px",
   border: "2px solid {colors.strawberry}",
-  borderRadius: "12px",
+  borderRadius: "0",
   lineHeight: "1.5",
 });
 

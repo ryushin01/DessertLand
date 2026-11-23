@@ -24,7 +24,7 @@ const input = css({
   width: "100%",
   minHeight: "52px",
   paddingInline: "16px",
-  borderRadius: "12px",
+  borderRadius: "0",
   background: "cocoa.900",
   border: "1px solid {colors.muted}",
   color: "cream",
@@ -34,7 +34,7 @@ const errorText = css({ color: "strawberry", fontSize: "0.875rem" });
 const messageBox = css({
   padding: "14px 16px",
   border: "2px solid {colors.strawberry}",
-  borderRadius: "12px",
+  borderRadius: "0",
   lineHeight: "1.5",
 });
 const fieldset = css({ display: "grid", gap: "8px" });
@@ -45,13 +45,13 @@ const methodOption = css({
   gap: "12px",
   minHeight: "52px",
   paddingInline: "16px",
-  borderRadius: "12px",
+  borderRadius: "0",
   border: "1px solid {colors.muted}",
   background: "cocoa.900",
   cursor: "pointer",
   _hover: { background: "cocoa.800" },
   "&:has(input:checked)": { borderColor: "caramel", borderWidth: "2px" },
-  "& input": { width: "20px", height: "20px", accentColor: "#f2b267" },
+  "& input": { width: "20px", height: "20px", accentColor: "#a1f3fb" },
 });
 
 const FIELDS = [

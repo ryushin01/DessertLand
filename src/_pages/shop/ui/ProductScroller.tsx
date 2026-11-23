@@ -48,7 +48,7 @@ const previewFrame = css({
   width: "100%",
   height: "58vh",
   overflow: "hidden",
-  borderRadius: "4px",
+  borderRadius: "0",
 });
 const previewImage = css({
   objectFit: "cover",
@@ -58,7 +58,7 @@ const previewImage = css({
   "&[data-active=true]": { opacity: 1, transform: "scale(1)" },
 });
 const list = css({
-  borderInlineStart: { lg: "1px solid rgba(247, 236, 223, 0.35)" },
+  borderInlineStart: { lg: "1px solid rgba(255, 255, 255, 0.35)" },
   paddingBlock: { base: "16px 80px", lg: "30vh" },
 });
 const row = css({
@@ -68,14 +68,14 @@ const row = css({
   alignItems: "center",
   minHeight: { lg: "44vh" },
   paddingBlock: { base: "28px", lg: "20px" },
-  paddingInline: { base: "16px", md: "28px" },
+  paddingInline: { base: "16px", md: "56px" },
 });
 const inlinePhoto = css({
   display: { lg: "none" },
   position: "relative",
   aspectRatio: "4 / 3",
   overflow: "hidden",
-  borderRadius: "6px",
+  borderRadius: "0",
   marginBlockEnd: "14px",
 });
 const nameLink = css({
@@ -85,7 +85,7 @@ const nameLink = css({
   lineHeight: "1.02",
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
-  color: "rgba(247, 236, 223, 0.6)",
+  color: "rgba(255, 255, 255, 0.6)",
   transition: "color 0.5s, transform 0.7s {easings.silk}",
   "&[data-active=true]": { color: "cream", transform: "translateX(14px)" },
   _motionOff: { "&[data-active=true]": { transform: "none" } },

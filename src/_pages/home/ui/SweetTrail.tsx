@@ -53,7 +53,7 @@ const trailItem = css({
   insetInlineStart: 0,
   width: "clamp(140px, 17vw, 280px)",
   aspectRatio: "4 / 5",
-  borderRadius: "10px",
+  borderRadius: "0",
   overflow: "hidden",
   visibility: "hidden",
   zIndex: 1,
@@ -112,7 +112,7 @@ export function SweetTrail() {
   }, [enabled]);
 
   return (
-    <section ref={ref} className={section}>
+    <section ref={ref} id="trail" className={section}>
       {enabled ? (
         <div data-trail-layer aria-hidden="true" className={trailLayer}>
           {TRAIL.map((product) => (

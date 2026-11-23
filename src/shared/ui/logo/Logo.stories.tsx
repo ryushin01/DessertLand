@@ -7,7 +7,7 @@ export default meta;
 
 export const Default: StoryObj<typeof Logo> = {
   render: (args) => (
-    <div style={{ background: "#120b0a", display: "inline-flex", padding: 24 }}>
+    <div style={{ background: "#00020e", display: "inline-flex", padding: 24 }}>
       <Logo {...args} />
     </div>
   ),

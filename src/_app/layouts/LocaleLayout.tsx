@@ -24,38 +24,15 @@ import { CartDrawer } from "@/widgets/cart-drawer";
 import { SiteFooter } from "@/widgets/site-footer";
 import { SiteHeader } from "@/widgets/site-header";
 
-// 영문·숫자는 제목과 본문 모두 붓맛이 남은 세리프 Lora(가변 400~700).
-// 빌드와 화면 모두 외부 글꼴 서버 없이 동작하도록 Fontsource 패키지의 파일을 next/font/local로 씁니다.
-// 기본 라틴과 확장 라틴(튀르키예어 ğ·ş 등)을 두 글꼴로 나누고 unicode-range를 붙여, 필요한 글자가 있을 때만 받습니다.
-// next/font는 빌드 때 인수를 그대로 읽으므로 범위를 상수로 빼지 않고 글자 그대로 적습니다.
-const loraLatin = localFont({
-  src: "../../../node_modules/@fontsource-variable/lora/files/lora-latin-wght-normal.woff2",
-  weight: "400 700",
+// 영문·숫자는 제목과 본문 모두 가늘고 넓은 기하학 산세리프 Exo 2(가변 200~500, SIL OFL 1.1, 라이선스는 같은 폴더 OFL.txt).
+// 레퍼런스(KIN)의 가는 대문자 제목에 맞춘 글꼴로, 기본·확장 라틴(튀르키예어 ğ·ş 등)만 담아 저장소에 두었습니다.
+// 빌드와 화면 모두 외부 글꼴 서버 없이 next/font/local로 씁니다.
+const exo = localFont({
+  src: "../styles/fonts/exo2/exo2-latin-wght-200-500.woff2",
+  weight: "200 500",
   display: "swap",
-  declarations: [
-    {
-      prop: "unicode-range",
-      value:
-        "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
-    },
-  ],
-  // 바로 뒤의 확장 라틴 글꼴로 넘어가야 하므로 대체 글꼴(Fallback)을 붙이지 않습니다.
   adjustFontFallback: false,
 });
-const loraLatinExt = localFont({
-  src: "../../../node_modules/@fontsource-variable/lora/files/lora-latin-ext-wght-normal.woff2",
-  weight: "400 700",
-  display: "swap",
-  preload: false,
-  declarations: [
-    {
-      prop: "unicode-range",
-      value:
-        "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF",
-    },
-  ],
-});
-const LORA_FAMILY = `${loraLatin.style.fontFamily}, ${loraLatinExt.style.fontFamily}`;
 
 // next/font로 함께 선언하면 모든 언어에 CSS가 붙어 렌더링을 막으므로, 그 언어의 글꼴만 따로 받습니다.
 // 한국어는 꽃잎 같은 획의 그란디플로라 원(제목)과 하다 바탕(본문, 400·700). 하다 바탕은 별도 파일(hada-batang.css)이고,
@@ -75,7 +52,7 @@ const skipLink = css({
   insetInlineStart: "8px",
   zIndex: 100,
   padding: "12px 18px",
-  borderRadius: "8px",
+  borderRadius: "0",
   background: "cream",
   color: "cocoa.950",
   transform: "translateY(-200%)",
@@ -84,7 +61,7 @@ const skipLink = css({
 
 type LocaleLayoutProps = { children: ReactNode; params: Promise<{ locale: string }> };
 
-export const viewport: Viewport = { themeColor: "#120b0a" };
+export const viewport: Viewport = { themeColor: "#00020e" };
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -126,7 +103,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       data-motion="on"
       style={
         {
-          "--font-lora": LORA_FAMILY,
+          "--font-exo": exo.style.fontFamily,
           ...(cjk
             ? { "--font-cjk-sans": `"${cjk.sans}"`, "--font-cjk-serif": `"${cjk.serif}"` }
             : {}),
