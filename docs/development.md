@@ -16,10 +16,35 @@
 - 위치: 같은 Next 앱의 `/admin`(`src/app/admin`, 쇼핑몰 `[locale]`과 따로 된 루트 레이아웃·한국어). 쇼핑몰 CSS·스크립트를 싣지 않고, 스타일은 Panda가 아니라 CSS Modules(`shared/ui/admin-kit`, 각 화면 `*.module.css`)라 쇼핑몰 CSS 예산에 섞이지 않습니다.
 - 슬라이스: 화면 `_pages/admin-*`, 틀(머리글·데모 안내·커서·화면 전환) `widgets/admin-shell`, 인증 `features/admin-auth`, 상품 관리 `entities/admin-catalog`, 주문 `entities/admin-order`, 추천 기록 `entities/recommendation-log`, 어드민 API `_app/admin-api`.
 - 상품 데이터는 정적 파일(`entities/product/model/catalog.ts`와 메시지 파일)이고 DB는 없습니다. 어드민이 고친 값은 원본을 바꾸지 않고 "수정값"(`dessert-land.catalog`, 바뀐 칸만)으로 이 브라우저 저장소에 남습니다. 쇼핑몰은 공개 데모 빌드에서만 이 값을 읽어(`useCatalogOverrides`, 서버 렌더링 중에는 빈 값) 목록·상세·장바구니·결제 화면에 덧씌우고, 결제 API는 데모일 때만 요청에 실린 가격 수정값으로 금액을 다시 계산합니다(`demoPricing`). 데모가 꺼지면 늘 카탈로그 그대로입니다.
-- 주문: 공개 데모는 시드 주문 72건(지금 시각 기준 지난 30일, 같은 씨앗이면 같은 주문) + 이 브라우저의 쇼핑몰 주문(`dessert-land.orders`)을 보여 주고, 단계·환불 기록은 `dessert-land.admin.orders`에 남깁니다. 데모가 꺼진 빌드는 시드 없이 Stripe 테스트 모드 세션(`GET /api/admin/orders`, 실제 인증만)을 읽고, Stripe 주문 환불은 `POST /api/admin/refunds`가 Stripe 테스트 모드 환불 API를 부릅니다.
+- 주문: 어드민은 주문을 늘 `GET /api/admin/orders`에서 받아 이 브라우저의 주문(`dessert-land.admin.orders`, 단계·환불 기록)과 쇼핑몰 주문(`dessert-land.orders`)에 더하고, 환불은 늘 `POST /api/admin/refunds`를 부릅니다. 공개 데모는 어드민 화면의 MSW 워커가 시드 주문 72건(지금 시각 기준 지난 30일, 같은 씨앗이면 같은 주문)과 내장 테스트 결제 환불로 응답합니다. 데모가 꺼진 빌드는 서버가 Stripe 테스트 모드 세션을 읽고(실제 인증만) Stripe 주문은 Stripe 테스트 모드 환불 API로 환불합니다. 상품 편집의 언어별 원문은 `GET /api/admin/product-texts`에서 받습니다.
 - 인증: `proxy.ts`가 `/admin` 아래 화면을 세션 쿠키(`dl_admin`, HttpOnly)로 막고, 어드민 API도 요청마다 다시 확인합니다. 공개 데모는 "관리자로 둘러보기"가 값 `demo`를 넣고(데모 빌드에서만 인정), 실제 인증은 `ADMIN_PASSWORD`로 서명한 만료 시각(8시간)입니다. 비밀번호가 없으면 잠깁니다. 영구 저장(여러 사람이 같은 수정값을 보는 것)에는 DB와 그 접속 정보가 필요해 이번에는 두지 않았습니다.
 - 디자인 수치는 marieweber.fr 실측값입니다(`src/_app/styles/admin.css`·`shared/ui/admin-kit/*.module.css` 머리말). 사선(`SlashMark`·`SlashName`)·원형 배지·붉은 원 커서는 장식이라 `aria-hidden`이고, 경로는 `<nav aria-label="경로">` 목록에 CSS 생성 사선(대체 텍스트 빈 값)을 씁니다. `prefers-reduced-motion`이면 글자 등장·화면 전환·커서를 끕니다.
 - 어드민 글자는 하다 바탕을 쓰지 않으므로 `pnpm fonts`의 글자 검사에서 뺍니다(`scripts/fonts/config.json`의 `ignore`). 어드민 파일을 더하면 이 목록도 맞춥니다.
+
+## API 목업(MSW)
+
+- 목업은 `src/_app/mocks`에 모아 둡니다.
+  - `handlers/stripe.ts`: Stripe 테스트 모드 API
+  - `handlers/claude.ts`: Claude Messages SSE 스트리밍
+  - `handlers/sentry.ts`
+  - `handlers/app.ts`: 이 앱의 API
+  - `handlers/admin.ts`: 어드민 데모
+  - `handlers/admin-texts.ts`: 언어별 원문
+  - `fixtures.ts`·`stream.ts`: 예시 값·조각 스트림
+  - 새 바깥 서비스나 API를 더하면 여기에 핸들러를 더하고 `handlers/index.ts`의 묶음에 넣습니다.
+- 쓰는 곳:
+
+  | 쓰는 곳 | 방식 |
+  |---|---|
+  | Vitest | `vitest.setup.ts`가 `server`(`node.ts`)를 켭니다. 테스트에서 응답을 바꿀 때는 `server.use(http.post(…))`를 쓰고, `vi.stubGlobal("fetch")`는 쓰지 않습니다. |
+  | Storybook | `.storybook/preview.tsx`의 `mswLoader`가 켭니다. 스토리마다 `parameters.msw.handlers`로 바꿉니다. 워커는 `.storybook/public/mockServiceWorker.js`(앱과 함께 배포하면 `/storybook/` 범위)입니다. |
+  | Playwright | 두 번째 webServer(`E2E_MOCK_PORT`, 기본 E2E 포트 + 1)가 같은 빌드를 `E2E_MSW=1`로 띄웁니다. 이때 `src/instrumentation.ts`가 바깥 서비스 목업(`external.ts`)을 켜고, 목업 키(`sk_test_msw_mock` 등)로 Stripe·Claude가 켜진 흐름을 `e2e/mocked.spec.ts`가 봅니다. 실제 결제·유료 호출은 없습니다. |
+  | 어드민 공개 데모·오프라인 | 데모 빌드의 어드민 화면만 `browser.ts`를 지연 로딩해 워커(`public/admin/mockServiceWorker.js`, 범위 `/admin/`)를 띄웁니다. 시드 주문(`GET /api/admin/orders`)과 데모 환불(`POST /api/admin/refunds`)을 워커가 응답하고, 그 밖의 요청은 그대로 서버로 갑니다. |
+
+- 범위:
+  - 쇼핑몰 화면에는 워커를 띄우지 않습니다. 번들 예산 때문이고, 쇼핑몰의 오프라인 대체(내장 테스트 결제, 기본 추천)는 원래대로 서버 라우트가 맡습니다.
+  - 워커 파일은 `npx msw init public/admin .storybook/public`으로 갱신합니다(`package.json`의 `msw.workerDirectory`).
+  - 같은 출처 파일이라 CSP(`worker-src 'self' blob:`)를 바꾸지 않았습니다.
 
 ## 언어 추가
 

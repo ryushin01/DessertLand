@@ -64,7 +64,7 @@ describe("주문 처리", () => {
     await userEvent.clear(amount);
     await userEvent.type(amount, "22");
     await userEvent.click(within(dialog).getByRole("button", { name: "환불하기" }));
-    expect(await screen.findByText(/내장 테스트 결제 기록/)).toBeInTheDocument();
+    expect(await screen.findByText(/환불했습니다\(내장 테스트 결제 기록\)/)).toBeInTheDocument();
     expect(screen.getAllByText("환불 완료").length).toBeGreaterThan(0);
   });
 });

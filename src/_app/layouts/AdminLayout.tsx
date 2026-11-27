@@ -10,6 +10,8 @@ import type { ReactNode } from "react";
 import { SITE_URL } from "@/shared/config";
 import { AdminShell } from "@/widgets/admin-shell";
 
+import { AdminDataSyncClient } from "./AdminDataSyncClient";
+
 export const adminMetadata: Metadata = {
   title: { template: "%s | Dessert Land 어드민", default: "Dessert Land 어드민" },
   description: "Dessert Land 관리자 화면(상품·주문·맛과 성분·AI 추천 기록)",
@@ -32,5 +34,10 @@ export function AdminRootLayout({ children }: { children: ReactNode }) {
 
 /** 들어간 뒤의 화면 틀(머리글·데모 안내·바닥글). */
 export function AdminConsoleLayout({ children }: { children: ReactNode }) {
-  return <AdminShell>{children}</AdminShell>;
+  return (
+    <>
+      <AdminDataSyncClient />
+      <AdminShell>{children}</AdminShell>
+    </>
+  );
 }

@@ -1,7 +1,10 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { createStore, Provider } from "jotai";
 import { NextIntlClientProvider } from "next-intl";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { HttpResponse, http } from "msw";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { server } from "@/_app/mocks/node";
 
 import { savedOrdersAtom, type SavedOrder } from "@/entities/order";
 import messages from "@/shared/i18n/messages/ko.json";
@@ -32,9 +35,21 @@ function renderOrders(orders: SavedOrder[]) {
   return store;
 }
 
+/** 주문 조회(/api/orders)에 차례로 답합니다(마지막 응답은 되풀이). 받은 요청 수를 셉니다. */
+function answerOrders(...bodies: { body: unknown; status?: number }[]) {
+  const counter = { count: 0 };
+  server.use(
+    http.post("/api/orders", () => {
+      const answer = bodies[Math.min(counter.count, bodies.length - 1)];
+      counter.count += 1;
+      return HttpResponse.json(answer?.body ?? {}, { status: answer?.status ?? 200 });
+    }),
+  );
+  return counter;
+}
+
 describe("OrdersView", () => {
   beforeEach(() => localStorage.clear());
-  afterEach(() => vi.unstubAllGlobals());
 
   it("주문이 없으면 안내합니다", () => {
     renderOrders([]);
@@ -42,25 +57,22 @@ describe("OrdersView", () => {
   });
 
   it("테스트 결제 주문과 Stripe에서 조회한 주문을 보여 줍니다", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn(async () =>
-        Response.json({
-          status: "ok",
-          orders: [
-            {
-              sessionId: SESSION,
-              state: "paid",
-              orderNo: "DL-AID01XYZ",
-              total: 15,
-              currency: "USD",
-              createdAt: Date.UTC(2026, 10, 15, 3, 0),
-              purchased: [],
-            },
-          ],
-        }),
-      ),
-    );
+    answerOrders({
+      body: {
+        status: "ok",
+        orders: [
+          {
+            sessionId: SESSION,
+            state: "paid",
+            orderNo: "DL-AID01XYZ",
+            total: 15,
+            currency: "USD",
+            createdAt: Date.UTC(2026, 10, 15, 3, 0),
+            purchased: [],
+          },
+        ],
+      },
+    });
     renderOrders([
       { kind: "stripe", sessionId: SESSION, createdAt: 1, source: "buy", settled: true },
       {
@@ -89,10 +101,7 @@ describe("OrdersView", () => {
   });
 
   it("조회에 실패하면 알리고, 저장한 날짜는 그대로 보여 줍니다", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn(async () => Response.json({}, { status: 503 })),
-    );
+    answerOrders({ body: {}, status: 503 });
     renderOrders([
       {
         kind: "stripe",
@@ -109,13 +118,10 @@ describe("OrdersView", () => {
   });
 
   it("결과가 반영(settled)되면 같은 주문들이라도 다시 조회해 새 상태를 보여 줍니다", async () => {
-    const fetchMock = vi
-      .fn()
-      .mockResolvedValueOnce(
-        Response.json({ status: "ok", orders: [{ sessionId: SESSION, state: "open" }] }),
-      )
-      .mockResolvedValueOnce(
-        Response.json({
+    const counter = answerOrders(
+      { body: { status: "ok", orders: [{ sessionId: SESSION, state: "open" }] } },
+      {
+        body: {
           status: "ok",
           orders: [
             {
@@ -128,9 +134,9 @@ describe("OrdersView", () => {
               purchased: [],
             },
           ],
-        }),
-      );
-    vi.stubGlobal("fetch", fetchMock);
+        },
+      },
+    );
     const order: SavedOrder = {
       kind: "stripe",
       sessionId: SESSION,
@@ -142,7 +148,7 @@ describe("OrdersView", () => {
     expect(await screen.findByText("결제 전")).toBeInTheDocument();
 
     act(() => store.set(savedOrdersAtom, [{ ...order, settled: true }]));
-    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(counter.count).toBe(2));
     expect(
       await screen.findByRole("heading", { level: 2, name: "DL-AID01XYZ" }),
     ).toBeInTheDocument();

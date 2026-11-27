@@ -2,19 +2,15 @@
 
 import Link from "next/link";
 import { formatCurrency } from "@/entities/admin-catalog";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 
 import {
   ORDER_STATUSES,
   STATUS_LABELS,
-  adminOrderSchema,
-  importOrders,
   useAdminOrders,
   type AdminOrder,
   type OrderStatus,
 } from "@/entities/admin-order";
-import { loadHttp } from "@/shared/api";
-import { DEMO_MODE } from "@/shared/config";
 import { Pill, SelectField, SplitTitle, TextButton, TextField, kit } from "@/shared/ui/admin-kit";
 
 import styles from "./Orders.module.css";
@@ -28,45 +24,9 @@ const dateTime = (time: number) =>
     minute: "2-digit",
   }).format(time);
 
-/** 실제 운영(데모 꺼짐): Stripe 테스트 모드 주문을 서버에서 읽어 목록에 더합니다. 공개 데모는 부르지 않습니다. */
-function useStripeImport() {
-  const [state, setState] = useState<"idle" | "loading" | "done" | "failed">(
-    DEMO_MODE ? "idle" : "loading",
-  );
-  useEffect(() => {
-    if (DEMO_MODE) return;
-    let alive = true;
-    void (async () => {
-      try {
-        const { http } = await loadHttp();
-        const result: unknown = await http.url("/api/admin/orders").get().json();
-        const orders =
-          typeof result === "object" &&
-          result !== null &&
-          "orders" in result &&
-          Array.isArray(result.orders)
-            ? result.orders.flatMap((order: unknown) => {
-                const parsed = adminOrderSchema.safeParse(order);
-                return parsed.success ? [parsed.data] : [];
-              })
-            : [];
-        importOrders(orders);
-        if (alive) setState("done");
-      } catch {
-        if (alive) setState("failed");
-      }
-    })();
-    return () => {
-      alive = false;
-    };
-  }, []);
-  return state;
-}
-
 /** 주문 목록: 번호·고객·상품 찾기, 상태·결제 방식 거르기, 25건씩. */
 export function OrdersView() {
-  const { orders, ready } = useAdminOrders();
-  const importState = useStripeImport();
+  const { orders, ready, sync } = useAdminOrders();
   const [text, setText] = useState("");
   const [status, setStatus] = useState<OrderStatus | "">("");
   const [channel, setChannel] = useState<AdminOrder["channel"] | "">("");
@@ -147,10 +107,8 @@ export function OrdersView() {
         </div>
         <p role="status">
           {ready ? `${visible.length}건` : "주문을 읽는 중입니다…"}
-          {importState === "loading" ? " · Stripe 주문을 읽는 중" : ""}
-          {importState === "failed"
-            ? " · Stripe 주문을 읽지 못했습니다(이 브라우저의 기록만 보입니다)"
-            : ""}
+          {sync === "pending" ? " · 주문을 받아 오는 중" : ""}
+          {sync === "failed" ? " · 주문을 받아 오지 못했습니다(이 브라우저의 기록만 보입니다)" : ""}
         </p>
         <div className={kit.tableWrap}>
           <table className={kit.table}>

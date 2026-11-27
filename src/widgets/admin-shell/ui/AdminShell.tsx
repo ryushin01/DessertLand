@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { resetCatalog } from "@/entities/admin-catalog";
-import { resetOrders } from "@/entities/admin-order";
+import { resetOrders, syncAdminOrders } from "@/entities/admin-order";
 import { clearRecommendationLog } from "@/entities/recommendation-log";
 import { SignOutButton } from "@/features/admin-auth";
 import { DEMO_MODE } from "@/shared/config";
@@ -56,6 +56,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const reset = () => {
     resetCatalog();
     resetOrders();
+    // 지운 뒤 다시 받아 와 시드 주문으로 돌아갑니다(공개 데모는 MSW 워커가 응답).
+    void syncAdminOrders();
     clearRecommendationLog();
     setResetOpen(false);
     setAnnouncement("데모 데이터를 처음 상태로 되돌렸습니다.");

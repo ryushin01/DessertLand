@@ -20,3 +20,4 @@ export {
   refundedAmount,
 } from "./model/types";
 export type { AdminOrder, OrderLine, OrderStatus, RefundRecord } from "./model/types";
+export { syncAdminOrders } from "./api/sync";
