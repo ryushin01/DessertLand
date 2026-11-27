@@ -8,6 +8,7 @@ import { css } from "styled-system/css";
 import type { CartLine } from "@/entities/cart";
 import { addSavedOrder, updateSavedOrdersAtom } from "@/entities/order";
 import { formatMoney } from "@/entities/product";
+import { loadHttp } from "@/shared/api";
 import { Button } from "@/shared/ui";
 
 import type { OrderSource } from "../api/build-session";
@@ -65,11 +66,14 @@ export function StripeCheckoutButton({
     setPending(true);
     setNotice(null);
     try {
-      const response = await fetch("/api/checkout-session", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ items, locale, expectedTotal: total, source }),
-      });
+      const { http, keepResponse } = await loadHttp();
+      // 502(Stripe 실패)·400 등도 본문의 status로 판단하므로, 상태 코드와 관계없이 본문을 읽습니다.
+      const response = await http
+        .url("/api/checkout-session")
+        .json({ items, locale, expectedTotal: total, source })
+        .post()
+        .res()
+        .catch(keepResponse);
       const result = (await response.json()) as { status?: unknown; url?: unknown; id?: unknown };
       // 결제 창 주소는 https일 때만 엽니다. 응답이 어긋나도 엉뚱한 곳으로 보내지 않습니다.
       if (result.status === "created" && typeof result.url === "string" && result.url.startsWith("https://")) {

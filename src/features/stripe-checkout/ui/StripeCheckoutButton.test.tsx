@@ -20,10 +20,11 @@ const setup = (canceled = false) =>
     </NextIntlClientProvider>,
   );
 
-const respond = (body: object) =>
+/** 서버 경로(/api/checkout-session)와 같은 상태 코드로 JSON을 답합니다. */
+const respond = (body: object, status = 200) =>
   vi.stubGlobal(
     "fetch",
-    vi.fn(async () => ({ json: async () => body })),
+    vi.fn(async () => Response.json(body, { status })),
   );
 
 afterEach(() => vi.unstubAllGlobals());
@@ -35,11 +36,31 @@ describe("StripeCheckoutButton", () => {
   });
 
   it("금액이 다르면 안내하고 다시 누를 수 있습니다", async () => {
-    respond({ status: "amount_mismatch" });
+    respond({ status: "amount_mismatch" }, 409);
     setup();
     await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("The amount changed");
     expect(screen.getByRole("button", { name: "Pay $15 with Stripe" })).toBeEnabled();
+  });
+
+  it("상품 줄·언어·금액·출처를 JSON으로 보냅니다", async () => {
+    const fetchMock = vi.fn<typeof fetch>(async () =>
+      Response.json({ status: "invalid" }, { status: 400 }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    setup();
+    await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(messages.checkout.paymentError);
+    const [url, init] = fetchMock.mock.calls[0] ?? [];
+    expect(url).toBe("/api/checkout-session");
+    expect(init?.method).toBe("POST");
+    expect(new Headers(init?.headers).get("content-type")).toBe("application/json");
+    expect(JSON.parse(String(init?.body))).toEqual({
+      items: [{ slug: "baklava", quantity: 1 }],
+      locale: "en",
+      expectedTotal: 15,
+      source: "cart",
+    });
   });
 
   it("요청이 끝나기 전에는 다시 보낼 수 없습니다", async () => {
@@ -96,7 +117,8 @@ describe("StripeCheckoutButton", () => {
   });
 
   it.each([
-    ["서버가 Stripe에 닿지 못하면", () => respond({ status: "error" })],
+    ["서버가 Stripe에 닿지 못하면(502)", () => respond({ status: "error" }, 502)],
+    ["Stripe 키가 없으면(503)", () => respond({ status: "disabled" }, 503)],
     [
       "네트워크가 끊기면",
       () =>

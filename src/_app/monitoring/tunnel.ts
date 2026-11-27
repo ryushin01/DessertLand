@@ -1,3 +1,4 @@
+import { http, keepResponse } from "@/shared/api/index.server";
 import { parseDsn } from "@/shared/lib/sentry-envelope";
 import { clientKey, createRateLimiter } from "@/shared/lib/rate-limit";
 
@@ -37,12 +38,15 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   try {
-    const upstream = await fetch(target.envelopeUrl, {
-      method: "POST",
-      headers: { "content-type": "application/x-sentry-envelope" },
-      body,
-      signal: AbortSignal.timeout(5000),
-    });
+    // Sentry의 응답 상태(429 등)를 그대로 돌려주려고, 2xx가 아니어도 응답을 받습니다.
+    const upstream = await http
+      .url(target.envelopeUrl)
+      .content("application/x-sentry-envelope")
+      .options({ signal: AbortSignal.timeout(5000) })
+      .body(body)
+      .post()
+      .res()
+      .catch(keepResponse);
     return new Response(null, { status: upstream.status });
   } catch {
     return new Response(null, { status: 502 });

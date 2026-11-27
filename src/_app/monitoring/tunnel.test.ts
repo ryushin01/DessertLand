@@ -87,6 +87,14 @@ describe("Sentry 중계 경로", () => {
     expect((await post(envelope(DSN), "4.4.4.4")).status).toBe(404);
   });
 
+  it("Sentry가 2xx가 아닌 상태(429 등)로 답하면 그 상태를 그대로 돌려줍니다", async () => {
+    fetchMock.mockResolvedValue(new Response("slow down", { status: 429 }));
+    expect((await post(envelope(DSN), "8.8.8.8")).status).toBe(429);
+    const [, init] = fetchMock.mock.calls[0] ?? [];
+    expect(new Headers(init?.headers).get("content-type")).toBe("application/x-sentry-envelope");
+    expect(init?.signal).toBeInstanceOf(AbortSignal);
+  });
+
   it("Sentry에 닿지 못하면 502로 답합니다", async () => {
     fetchMock.mockRejectedValue(new Error("network"));
     expect((await post(envelope(DSN), "5.5.5.5")).status).toBe(502);

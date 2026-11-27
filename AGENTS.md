@@ -10,7 +10,7 @@
 
 ## 2. 기술 스택과 구조
 
-- Next.js 16(App Router), React 19, TypeScript 5.9, Panda CSS, jotai, next-intl, Stripe Checkout(테스트 모드), Claude API(`@anthropic-ai/sdk`, AI 추천), GSAP·Lenis·OGL, Sentry(DSN이 있을 때만), Vercel Speed Insights, Storybook 10
+- Next.js 16(App Router), React 19, TypeScript 5.9, Panda CSS, jotai, Wretch(HTTP, `shared/api`), next-intl, Stripe Checkout(테스트 모드), Claude API(`@anthropic-ai/sdk`, AI 추천), GSAP·Lenis·OGL, Sentry(DSN이 있을 때만), Vercel Speed Insights, Storybook 10
 - Feature-Sliced Design: `_app → _pages → widgets → features → entities → shared` 순서로 위 층은 아래 층만 가져옵니다. 같은 층끼리는 가져오지 않고(필요하면 `entities/<대상>/@x/<소비자>.ts`), 슬라이스는 `index.ts`(서버 전용은 `index.server.ts`)로만 가져옵니다. Steiger(`pnpm lint:fsd`, `steiger.config.ts`)가 검사합니다.
 - `src/app/[locale]/`의 라우트 파일은 `_pages`·`_app`을 다시 내보내기만 합니다. `src/proxy.ts`는 언어 라우팅입니다. 한 곳에서만 쓰는 코드는 그 슬라이스에 두고, 두 곳 이상에서 쓰면 `features`·`widgets`로 올립니다.
 - GSAP은 `@/shared/lib/gsap`에서만 가져옵니다(움직임 상태 `@/shared/lib/motion`을 쓰는 곳에 GSAP이 실리지 않게).
