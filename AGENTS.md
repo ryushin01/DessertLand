@@ -33,7 +33,7 @@
 | `pnpm test`                   | 단위(Vitest + Testing Library)                                                 |
 | `pnpm build`                  | `panda codegen` → Storybook을 `public/storybook`에 빌드 → 앱 빌드              |
 | `pnpm e2e`                    | 프로덕션 빌드 E2E와 axe, 오프라인 E2E 포함(먼저 `build`, 포트 4391·`E2E_PORT`) |
-| `pnpm size` / `pnpm lhci`     | 번들 예산(JS 365 kB, CSS 21 kB, gzip) / Lighthouse 데스크톱 기준(먼저 `build`) |
+| `pnpm size` / `pnpm lhci`     | 번들 예산(JS 367 kB, CSS 21 kB, gzip) / Lighthouse 데스크톱 기준(먼저 `build`) |
 
 - CI(`.github/workflows/ci.yml`) 순서: install → typecheck → lint → lint:fsd → test → build → Playwright 설치 → e2e → size → lhci
 - 오프라인 E2E(`e2e/offline.spec.ts`, 데스크톱·모바일)는 localhost 밖 요청을 모두 막고 `.env` 없이 빌드한 앱의 주요 화면·결제·Storybook이 뜨는지, 외부 요청 0건, axe를 봅니다. 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`.

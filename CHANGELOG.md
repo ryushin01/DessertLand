@@ -4,6 +4,7 @@
 
 - 개발: 앱 코드의 Fetch API 직접 호출(결제 요청, Stripe 결제 세션, 주문 조회, AI 추천 스트림, Sentry 중계·서버 오류 보고)을 Wretch(`shared/api`)로 바꿈. 동작은 그대로: 2xx가 아닌 응답도 본문의 결과로 판단하는 곳은 `keepResponse`로 응답을 받고, 추천은 `.res()`로 받은 응답 스트림을 그대로 읽으며 `.signal()`로 취소함. Stripe에 닿지 못할 때의 내장 테스트 결제 대체, 429 안내, 시간 제한(Sentry 2·5초), CSP는 바뀌지 않음
 - 성능: 브라우저 코드는 Wretch를 처음 요청할 때 한 번만 따로 받아(`loadHttp`) 여러 화면 청크에 겹쳐 실리지 않게 함. 서버 코드는 `shared/api/index.server.ts`에서 바로 가져옴
+- 성능 예산: size-limit의 전체 JS 예산을 365 kB에서 367 kB로 올림(사용자 승인). Wretch(약 2 kB gzip)를 한 번만 받게 해도 365.52 kB로 기존 예산을 0.52 kB 넘었기 때문. main 기준은 363.22 kB
 - 의존성: `wretch`
 - 테스트: `requestPayment`·`lookupOrders`·`useRecommendation`·공통 HTTP 클라이언트 단위 테스트를 더하고, Stripe 결제 버튼·Sentry 중계·서버 오류 보고 테스트를 실제 상태 코드(409·502·503·429)의 응답으로 맞춤
 - 문서: README 기술 표와 AGENTS.md 기술 스택에 Wretch 추가
