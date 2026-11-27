@@ -56,7 +56,8 @@
     "addShort": "加入",
     "view": "查看",
     "buyNow": "立即购买{name}",
-    "buyNowShort": "立即购买"
+    "buyNowShort": "立即购买",
+    "soldOut": "已售罄"
   },
   "product": {
     "back": "返回甜点列表",
@@ -69,7 +70,9 @@
     "add": "加入购物车",
     "related": "您可能还喜欢",
     "notice": "商品信息和价格仅为演示示例。",
-    "buyNow": "立即购买"
+    "buyNow": "立即购买",
+    "soldOut": "已售罄。补货后即可加入购物车。",
+    "unavailable": "这款甜点目前暂停销售。"
   },
   "allergens": {
     "milk": "牛奶",

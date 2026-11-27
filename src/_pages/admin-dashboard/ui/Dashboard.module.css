@@ -1,0 +1,284 @@
+.section {
+  display: grid;
+  gap: 40px;
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 60px);
+  line-height: 1.1;
+}
+
+/* KPI: 상자 없이, 10px 라벨 + 큰 세리프 숫자. 구분은 1px 세로선. */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--ink);
+}
+
+.kpi {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  padding: 28px 20px 8px 0;
+}
+
+.kpi {
+  position: relative;
+}
+
+/* 묶음 사이 구분: 세로선 대신 원본의 긴 사선(1px, 오른쪽 위 → 왼쪽 아래). 장식이라 생성 콘텐츠로만 그립니다. */
+.kpi + .kpi {
+  padding-left: 28px;
+}
+
+.kpi + .kpi::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 8px;
+  left: 0;
+  width: 22px;
+  background: linear-gradient(
+    to top right,
+    transparent calc(50% - 0.5px),
+    var(--line-strong) calc(50% - 0.5px),
+    var(--line-strong) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+}
+
+.kpiValue {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.4vw, 60px);
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+
+.kpiNote {
+  color: var(--mute);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+@media (max-width: 1023px) {
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kpi:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .kpi:nth-child(odd)::before {
+    display: none;
+  }
+}
+
+/* 날짜별 매출 막대: 한 계열(잉크), 얇은 막대, 막대 사이 2px. */
+.chart {
+  position: relative;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.bar {
+  fill: var(--ink);
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.chartHit {
+  fill: transparent;
+  cursor: default;
+}
+
+.chart:has(.chartHit:hover) .bar {
+  opacity: 0.25;
+}
+
+.chart .barGroup:hover .bar {
+  opacity: 1;
+}
+
+.axis {
+  fill: var(--mute);
+  font-size: 11px;
+}
+
+.grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.baseline {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  padding: 8px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  line-height: 18px;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 10px));
+  white-space: nowrap;
+}
+
+.details summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* 인기 상품: 원본 첫 화면 — 큰 세리프 이름 + 긴 사선 + 원형 배지, 오른쪽에 가리킨 상품 사진(5:7, 불투명도 .85) */
+.collection {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.collectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.logotype {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.collectionItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 24px;
+}
+
+.collectionName {
+  font-family: "Noto Serif KR", var(--font-display);
+  font-weight: 300;
+  font-size: clamp(36px, 6vw, 104px);
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+}
+
+.collectionMeta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.collectionPhoto {
+  position: sticky;
+  top: 140px;
+  display: grid;
+  aspect-ratio: 5 / 7;
+  overflow: hidden;
+}
+
+.collectionPhoto img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: translateY(10%);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+.collectionPhoto img[data-visible="true"] {
+  opacity: 0.85;
+  transform: none;
+  transition-duration: 1s;
+}
+
+@media (max-width: 1023px) {
+  .collection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .collectionPhoto {
+    display: none;
+  }
+}
+
+.twoCols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 80px;
+}
+
+@media (max-width: 1023px) {
+  .twoCols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 검은 반전 구간(원본 "Next collection") */
+.inverse {
+  display: grid;
+  gap: 40px;
+  justify-items: center;
+  margin-inline: calc(-1 * var(--gutter));
+  margin-bottom: -140px;
+  padding: 140px var(--gutter);
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+}
+
+.inverseTitle {
+  font-family: "Noto Serif KR", var(--font-display);
+  font-weight: 300;
+  font-size: clamp(40px, 8vw, 150px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.inverseLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 40px;
+}
+
+.inverseLinks a {
+  color: var(--paper);
+}
+
+@media (max-width: 1023px) {
+  .inverse {
+    margin-bottom: -80px;
+    padding-block: 80px;
+  }
+}

@@ -56,7 +56,8 @@
     "addShort": "Hinzufügen",
     "view": "Ansehen",
     "buyNow": "{name} jetzt kaufen",
-    "buyNowShort": "Jetzt kaufen"
+    "buyNowShort": "Jetzt kaufen",
+    "soldOut": "Ausverkauft"
   },
   "product": {
     "back": "Zurück zu den Desserts",
@@ -69,7 +70,9 @@
     "add": "In den Warenkorb",
     "related": "Das könnte Ihnen auch gefallen",
     "notice": "Produktangaben und Preise sind Demo-Beispiele.",
-    "buyNow": "Jetzt kaufen"
+    "buyNow": "Jetzt kaufen",
+    "soldOut": "Ausverkauft. Sobald es wieder da ist, können Sie es hinzufügen.",
+    "unavailable": "Dieses Dessert ist derzeit nicht erhältlich."
   },
   "allergens": {
     "milk": "Milch",

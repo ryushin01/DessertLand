@@ -11,6 +11,16 @@
 - GSAP은 `@/shared/lib/gsap`(독립 폴더)에서만 가져와, 움직임 상태(`@/shared/lib/motion`)를 쓰는 곳에 GSAP이 실리지 않게 합니다.
 - `pnpm lint:fsd`(Steiger, CI에서도 실행)가 이 규칙을 검사합니다. `_app`·`_pages` 이름 때문에 나는 `fsd/typo-in-layer-name`만 끄고, `src/app`과 테스트·스토리는 검사에서 뺍니다. API 라우트만 쓰는 결제·추천 슬라이스는 Steiger가 참조를 세지 못해 `fsd/insignificant-slice`를 그 슬라이스에서만 끕니다.
 
+## 어드민
+
+- 위치: 같은 Next 앱의 `/admin`(`src/app/admin`, 쇼핑몰 `[locale]`과 따로 된 루트 레이아웃·한국어). 쇼핑몰 CSS·스크립트를 싣지 않고, 스타일은 Panda가 아니라 CSS Modules(`shared/ui/admin-kit`, 각 화면 `*.module.css`)라 쇼핑몰 CSS 예산에 섞이지 않습니다.
+- 슬라이스: 화면 `_pages/admin-*`, 틀(머리글·데모 안내·커서·화면 전환) `widgets/admin-shell`, 인증 `features/admin-auth`, 상품 관리 `entities/admin-catalog`, 주문 `entities/admin-order`, 추천 기록 `entities/recommendation-log`, 어드민 API `_app/admin-api`.
+- 상품 데이터는 정적 파일(`entities/product/model/catalog.ts`와 메시지 파일)이고 DB는 없습니다. 어드민이 고친 값은 원본을 바꾸지 않고 "수정값"(`dessert-land.catalog`, 바뀐 칸만)으로 이 브라우저 저장소에 남습니다. 쇼핑몰은 공개 데모 빌드에서만 이 값을 읽어(`useCatalogOverrides`, 서버 렌더링 중에는 빈 값) 목록·상세·장바구니·결제 화면에 덧씌우고, 결제 API는 데모일 때만 요청에 실린 가격 수정값으로 금액을 다시 계산합니다(`demoPricing`). 데모가 꺼지면 늘 카탈로그 그대로입니다.
+- 주문: 공개 데모는 시드 주문 72건(지금 시각 기준 지난 30일, 같은 씨앗이면 같은 주문) + 이 브라우저의 쇼핑몰 주문(`dessert-land.orders`)을 보여 주고, 단계·환불 기록은 `dessert-land.admin.orders`에 남깁니다. 데모가 꺼진 빌드는 시드 없이 Stripe 테스트 모드 세션(`GET /api/admin/orders`, 실제 인증만)을 읽고, Stripe 주문 환불은 `POST /api/admin/refunds`가 Stripe 테스트 모드 환불 API를 부릅니다.
+- 인증: `proxy.ts`가 `/admin` 아래 화면을 세션 쿠키(`dl_admin`, HttpOnly)로 막고, 어드민 API도 요청마다 다시 확인합니다. 공개 데모는 "관리자로 둘러보기"가 값 `demo`를 넣고(데모 빌드에서만 인정), 실제 인증은 `ADMIN_PASSWORD`로 서명한 만료 시각(8시간)입니다. 비밀번호가 없으면 잠깁니다. 영구 저장(여러 사람이 같은 수정값을 보는 것)에는 DB와 그 접속 정보가 필요해 이번에는 두지 않았습니다.
+- 디자인 수치는 marieweber.fr 실측값입니다(`src/_app/styles/admin.css`·`shared/ui/admin-kit/*.module.css` 머리말). 사선(`SlashMark`·`SlashName`)·원형 배지·붉은 원 커서는 장식이라 `aria-hidden`이고, 경로는 `<nav aria-label="경로">` 목록에 CSS 생성 사선(대체 텍스트 빈 값)을 씁니다. `prefers-reduced-motion`이면 글자 등장·화면 전환·커서를 끕니다.
+- 어드민 글자는 하다 바탕을 쓰지 않으므로 `pnpm fonts`의 글자 검사에서 뺍니다(`scripts/fonts/config.json`의 `ignore`). 어드민 파일을 더하면 이 목록도 맞춥니다.
+
 ## 언어 추가
 
 1. `src/shared/i18n/routing.ts`의 `LOCALES`와 `LOCALE_LABELS`에 추가합니다. 지원 언어는 10개 이내로 유지합니다.
@@ -189,7 +199,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 ## 품질 예산
 
-- **번들 크기:** `pnpm size`가 전체 JS 367 kB, CSS 21 kB(gzip)를 넘으면 실패합니다. 기준은 `.size-limit.json`에 있습니다.
+- **번들 크기:** `pnpm size`가 쇼핑몰 전체 JS 367 kB·CSS 21 kB, 어드민 전용 JS 210 kB·CSS 54 kB(gzip)를 넘으면 실패합니다. 기준은 `.size-limit.js`에 있습니다. 빌드 결과의 라우트별 청크 목록과 청크 사이 참조를 따라 어드민(`/admin`)에서만 닿는 청크를 골라 쇼핑몰 예산에서 빼고, 어디서도 닿지 않는 청크는 쇼핑몰 쪽에 남깁니다. CI는 운영과 같은 공개 데모 빌드(`NEXT_PUBLIC_DEMO=1`)로 잽니다.
 - **Lighthouse:** `pnpm lhci`가 한국어·영어 첫 화면, 상점, 바클라바 상세가 데스크톱 기준 성능 90·접근성 100·권장 사항 95·SEO 90점, LCP 2.5초·TBT 200ms·CLS 0.1 이하인지 3번씩 재서 확인합니다. 기준은 `lighthouserc.json`에 있습니다.
 - **접근성 린트:** `eslint-config-next`는 jsx-a11y 규칙을 몇 개만 켭니다. 플러그인은 이미 등록되어 있어 `eslint.config`에서 recommended 규칙만 더해 모두 켭니다. 장바구니 서랍(`<dialog>`)의 배경 클릭 닫기는 Esc·닫기 버튼이 키보드 대안이라 그 줄만 예외로 둡니다.
 

@@ -56,7 +56,8 @@
     "addShort": "追加",
     "view": "見る",
     "buyNow": "{name}を今すぐ購入",
-    "buyNowShort": "今すぐ購入"
+    "buyNowShort": "今すぐ購入",
+    "soldOut": "売り切れ"
   },
   "product": {
     "back": "デザート一覧へ",
@@ -69,7 +70,9 @@
     "add": "カートに追加",
     "related": "こちらもおすすめ",
     "notice": "商品情報と価格はデモ用の例です。",
-    "buyNow": "今すぐ購入"
+    "buyNow": "今すぐ購入",
+    "soldOut": "売り切れです。再入荷するとカートに入れられます。",
+    "unavailable": "現在は販売していないデザートです。"
   },
   "allergens": {
     "milk": "乳",

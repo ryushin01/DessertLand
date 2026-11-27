@@ -1,12 +1,12 @@
 # <img src="public/brand/logo.png" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-1.2.2-e41313)
+![version](https://img.shields.io/badge/version-1.3.0-e41313)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
 
-**[데모 바로 보기](https://dessert-land-ryushin01.vercel.app)** · **[디자인 시스템(Storybook)](https://dessert-land-ryushin01.vercel.app/storybook/index.html)** · 결제는 테스트 카드 `4242 4242 4242 4242`, 미래의 만료일, 아무 CVC로 해 볼 수 있고 실제 청구는 없습니다.
+**[데모 바로 보기](https://dessert-land-ryushin01.vercel.app)** · **[어드민 데모](https://dessert-land-ryushin01.vercel.app/admin)** · **[디자인 시스템(Storybook)](https://dessert-land-ryushin01.vercel.app/storybook/index.html)** · 결제는 테스트 카드 `4242 4242 4242 4242`, 미래의 만료일, 아무 CVC로 해 볼 수 있고 실제 청구는 없습니다.
 
 > **프로젝트 상태:** 별도 백엔드 없이 동작하는 **데모 프로젝트**입니다. 상품 정보와 가격은 예시 값이고, 환율은 고정값이며, 결제는 **실제 청구가 없는 테스트 결제**이며 배송도 이루어지지 않습니다. Stripe 테스트 키가 있으면 Stripe 화면에서 카드 정보를 입력하고, 없으면 카드 정보를 받지 않는 내장 테스트 결제창을 씁니다. 운영 키는 코드에서 거부합니다.
 
@@ -38,6 +38,45 @@
 |---|---|
 | ![테스트 결제로 한 주문의 번호, 일시, 금액, 상품 수를 보여 주는 주문 내역](docs/images/orders.jpg) | <img src="docs/images/mobile-hero.jpg" alt="모바일 첫 화면의 손과 밀가루, 제목, 소개 문구" width="240"> |
 
+## 어드민(관리자 화면)
+
+**[어드민 데모](https://dessert-land-ryushin01.vercel.app/admin)** — 들어가기 화면에서 **"관리자로 둘러보기"**를 누르면 됩니다(공개 데모, 비밀번호 없음).
+
+| 들어가기 | 대시보드 |
+|---|---|
+| ![검은 화면 가운데 큰 세리프 Dessert Land와 긴 사선, 관리자로 둘러보기 버튼과 데모 안내](docs/images/admin-login.jpg) | ![흰 화면에 대시보드 제목과 긴 사선, 순매출·주문·평균·환불·처리 대기 숫자가 사선으로 나뉜 요약](docs/images/admin-dashboard.jpg) |
+
+| 인기 상품(큰 이름 / 원형 배지) | 상품 목록 |
+|---|---|
+| ![큰 세리프 상품 이름 뒤 긴 사선과 원형 배지, 가리킨 이름만 검고 오른쪽에 그 상품 사진](docs/images/admin-best.jpg) | ![분류 이름이 사선과 상품 수 배지로 이어지고 아래 찾기 칸과 상품 표](docs/images/admin-products.jpg) |
+
+| 상품 수정(10개 언어) | 주문 환불 |
+|---|---|
+| ![상품 / 수정 경로와 티라미수 제목, 왼쪽 사진, 가격·재고 입력칸과 언어별 이름](docs/images/admin-product.jpg) | ![검은 전체 화면 대화상자의 환불 금액·사유 입력칸](docs/images/admin-refund.jpg) |
+
+**들어가는 방법**
+
+1. https://dessert-land-ryushin01.vercel.app/admin 을 엽니다(들어가기 화면으로 넘어갑니다).
+2. **관리자로 둘러보기**를 누르면 대시보드로 갑니다. 화면 위쪽 **데모 데이터 초기화**로 언제든 처음 상태로 돌아갑니다.
+
+**되는 것**
+
+- 대시보드: 지난 14일 순매출·주문·평균 주문액·환불액·처리 대기, 날짜별 순매출(표로 보기), 인기 상품, 분류별 판매
+- 상품 175종: 찾기, 분류·나라·상태 거르기, 가격·할인·재고(0이면 품절)·숨김, 10개 언어 이름·설명, 맛·알레르기 성분, 상품 추가
+- 주문: 찾기, 상태·결제 방식 거르기, 상세, 단계 바꾸기(결제 완료 → 준비 중 → 배송 중 → 배송 완료, 취소), 환불(부분·전액)
+- 맛·성분 표, AI 추천 기록(고른 맛·추천 상품·AI/기본 추천. 고객이 쓴 문장은 남기지 않음)
+- **쇼핑몰 반영:** 어드민에서 고친 상품은 **같은 브라우저**의 쇼핑몰(목록·상세·장바구니·결제)에 바로 보입니다. 쇼핑몰에서 한 주문과 받은 추천도 어드민에 나옵니다.
+- 인터넷 없이도(로컬 실행) 내용과 글꼴이 그대로 뜹니다.
+
+**안 되는 것(공개 데모)**
+
+- 고친 내용은 서버에 저장되지 않습니다. 다른 브라우저·다른 사람의 쇼핑몰은 바뀌지 않습니다.
+- 환불은 실제 결제가 없는 내장 테스트 결제 기록으로만 처리합니다(Stripe 환불 API를 부르지 않음).
+- 새로 추가한 상품은 어드민에만 보입니다(쇼핑몰의 상품 페이지·결제 가격표는 카탈로그로 미리 만들어 둠).
+- 시드 주문·추천 기록은 예시 값이고 고객 개인정보가 없습니다.
+
+데모를 끈 빌드(`NEXT_PUBLIC_DEMO` 없음)에서는 쇼핑몰이 원래대로 동작하고, 어드민은 운영 환경 변수 `ADMIN_PASSWORD`(12자 이상) 비밀번호로만 들어갑니다. 이때 주문은 Stripe 테스트 모드 세션에서 읽고 Stripe 주문 환불은 Stripe 테스트 모드 환불 API로 처리합니다. 디자인은 [marieweber.fr](https://www.marieweber.fr/en/)을 레퍼런스로 했습니다(유료 글꼴·사진은 쓰지 않고 무료 글꼴과 직접 그린 그림으로 대신함, 아래 출처).
+
 ## 주요 기능
 
 | 구분 | 내용 |
@@ -56,6 +95,7 @@
 | 접근성 | 모션 멈춤 버튼, `prefers-reduced-motion` 대응, 키보드 초점 시 장면 이동, 본문 바로가기, 모달·오류 문구 낭독 |
 | 검색 엔진 | 언어별 대표 주소와 hreflang, 사이트맵, 상품 구조화 데이터(JSON-LD) |
 | 운영 | Sentry 오류 수집(같은 사이트 중계, 서버 오류 포함), 오류 화면, 이미지 변형 수 관리 |
+| 어드민 | `/admin`: 대시보드, 상품·주문·맛과 성분·AI 추천 기록 관리, 공개 데모(관리자로 둘러보기)와 실제 인증(비밀번호), 같은 브라우저 쇼핑몰 반영 |
 
 ## 기술 스택
 
@@ -64,9 +104,10 @@
 | 구분 | 사용 기술 |
 |---|---|
 | 프레임워크 | Next.js 16 (App Router), React 19, TypeScript |
-| 스타일 | Panda CSS |
+| 스타일 | Panda CSS(쇼핑몰), CSS Modules(어드민, 쇼핑몰 CSS 예산과 분리) |
 | 상태 | jotai |
 | HTTP | Wretch(`shared/api`) |
+| 검증 | zod(어드민 입력·저장값·API 요청) |
 | 다국어 | next-intl, country-flag-icons(언어 메뉴 국기) |
 | 결제 | Stripe Checkout(테스트 모드) |
 | AI | Claude API (`@anthropic-ai/sdk`) |
@@ -104,8 +145,9 @@ pnpm dev    # http://localhost:3000
 
 ```
 src/
-├─ app/[locale]/   # 라우트. _pages를 다시 내보냅니다.
-├─ proxy.ts        # 언어 라우팅
+├─ app/[locale]/   # 쇼핑몰 라우트. _pages를 다시 내보냅니다.
+├─ app/admin/      # 어드민 라우트(따로 된 루트 레이아웃)
+├─ proxy.ts        # 언어 라우팅, 어드민 세션 확인
 ├─ _app/           # 레이아웃, 상태·모션 설정, 전역 스타일
 ├─ _pages/         # 홈(히어로·쇼케이스 등 섹션), 목록, 상세, 주문(주문 폼)
 ├─ widgets/        # 머리글(언어·모션 전환), 바닥글, 장바구니, 커서, 부드러운 스크롤
@@ -132,6 +174,7 @@ src/
 | 하다 바탕 | 한국어 본문 | 400·700 |
 | Kaisei Decol · Zen Maru Gothic | 일본어 제목 · 본문 | 500 · 400·500·700 |
 | Noto Serif SC · Noto Sans SC | 중국어 제목 · 본문 | 500 · 400·500·700 |
+| Bodoni Moda · Noto Serif KR · Pretendard | 어드민 영문 제목 · 한글 제목 · 본문 | 400 가변 · 300 · 가변 |
 
 저작자·라이선스·원본은 아래 출처 표에 있습니다. 하다 바탕은 저장소에서 직접 제공하며, 화면에 쓰는 글자만 담은 작은 파일을 먼저 받고 나머지 글자는 글자 묶음별 조각으로 나눠 그 글자를 쓸 때만 받습니다(`pnpm fonts`로 다시 만듦). Exo 2와 한중일 글꼴은 Fontsource 패키지에서 가져와 같은 출처로 제공하며(한중일 글꼴은 `pnpm install` 때 `public/fonts/cjk/`로 복사), 그 언어 화면에서만 받습니다. 외부 글꼴 서버(Google Fonts)는 쓰지 않습니다.
 
@@ -150,5 +193,10 @@ src/
 | Kaisei Decol 글꼴 (일본어 제목) | The Kaisei Project Authors(Font-Kai) | SIL OFL 1.1 | [Font-Kai/Kaisei](https://github.com/Font-Kai/Kaisei) |
 | Zen Maru Gothic 글꼴 (일본어 본문) | The Zen Maru Gothic Project Authors(Yoshimichi Ohira) | SIL OFL 1.1 | [googlefonts/zen-marugothic](https://github.com/googlefonts/zen-marugothic) |
 | Noto Sans·Serif SC 글꼴 (중국어) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+SC) |
+| Bodoni Moda 글꼴 (어드민 영문 제목, 레퍼런스의 유료 글꼴 Schnyder Wide XL 대신) | The Bodoni Moda Project Authors(indestructible type*) | SIL OFL 1.1 | [indestructible-type/Bodoni](https://github.com/indestructible-type/Bodoni) |
+| Noto Serif KR 글꼴 (어드민 한글 제목) | Google·Adobe (Noto CJK) | SIL OFL 1.1 | [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Serif+KR) |
+| Pretendard 글꼴 (어드민 본문, 레퍼런스의 유료 글꼴 Aktiv Grotesk 대신) | Kil Hyung-jin | SIL OFL 1.1 | [orioncactus/pretendard](https://github.com/orioncactus/pretendard) |
+| 어드민 로고(숟가락 두 개 원형 문장)·사선·커서 그림 | 이 저장소에서 직접 그림 | 저장소와 같음 | `src/widgets/admin-shell/ui/AdminLogo.tsx` |
+| 어드민 디자인 레퍼런스 | Marie Weber(웹사이트) | 디자인 언어만 참고(글꼴·사진·로고는 쓰지 않음) | [marieweber.fr](https://www.marieweber.fr/en/) |
 
 사이트 바닥글의 출처 링크가 이 표로 옵니다. 예전 출처 페이지(`/{언어}/credits`)도 이곳으로 넘어옵니다. Flaticon 무료 라이선스는 사이트 바닥글에 출처 줄을 두도록 정해, 바닥글의 'Uicons by Flaticon' 링크는 그대로 둡니다.

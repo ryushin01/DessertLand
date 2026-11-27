@@ -56,7 +56,8 @@
     "addShort": "Añadir",
     "view": "Ver",
     "buyNow": "Comprar ahora {name}",
-    "buyNowShort": "Comprar ahora"
+    "buyNowShort": "Comprar ahora",
+    "soldOut": "Agotado"
   },
   "product": {
     "back": "Volver a postres",
@@ -69,7 +70,9 @@
     "add": "Añadir a la cesta",
     "related": "También te puede gustar",
     "notice": "La información y los precios son ejemplos de demostración.",
-    "buyNow": "Comprar ahora"
+    "buyNow": "Comprar ahora",
+    "soldOut": "Agotado. Podrás añadirlo cuando vuelva a haber existencias.",
+    "unavailable": "Este postre no está a la venta ahora mismo."
   },
   "allergens": {
     "milk": "Leche",

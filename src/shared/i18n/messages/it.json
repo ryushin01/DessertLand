@@ -56,7 +56,8 @@
     "addShort": "Aggiungi",
     "view": "Vedi",
     "buyNow": "Acquista ora {name}",
-    "buyNowShort": "Acquista ora"
+    "buyNowShort": "Acquista ora",
+    "soldOut": "Esaurito"
   },
   "product": {
     "back": "Torna ai dolci",
@@ -69,7 +70,9 @@
     "add": "Aggiungi al carrello",
     "related": "Potrebbe piacerti anche",
     "notice": "Informazioni e prezzi sono esempi dimostrativi.",
-    "buyNow": "Acquista ora"
+    "buyNow": "Acquista ora",
+    "soldOut": "Esaurito. Potrai aggiungerlo quando tornerà disponibile.",
+    "unavailable": "Questo dolce non è in vendita al momento."
   },
   "allergens": {
     "milk": "Latte",

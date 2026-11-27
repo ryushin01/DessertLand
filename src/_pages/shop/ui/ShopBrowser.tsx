@@ -7,7 +7,10 @@ import { css } from "styled-system/css";
 import {
   ALLERGENS,
   TASTES,
+  applyOverrides,
   countryName,
+  useCatalogOverrides,
+  useProductName,
   type Allergen,
   type Product,
   type Taste,
@@ -60,12 +63,15 @@ type ShopBrowserProps = {
 };
 
 /** 이름·나라 찾기, 맛 고르기, 빼고 싶은 성분으로 목록을 좁힙니다. 주소는 바꾸지 않아 목록 페이지는 정적으로 남습니다. */
-export function ShopBrowser({ products, tastesBySlug, categoryKey }: ShopBrowserProps) {
+export function ShopBrowser({ products: original, tastesBySlug, categoryKey }: ShopBrowserProps) {
   const t = useTranslations("shop");
   const tAdvisor = useTranslations("advisor");
   const tAllergens = useTranslations("allergens");
-  const tProducts = useTranslations("products");
+  const productName = useProductName();
   const locale = useLocale();
+  // 공개 데모: 어드민이 숨긴 상품은 빼고, 고친 가격·성분·맛을 반영합니다(데모가 꺼지면 빈 값).
+  const overrides = useCatalogOverrides();
+  const products = useMemo(() => applyOverrides(original, overrides), [original, overrides]);
   const [filters, setFilters] = useState<ShopFilters>(NO_FILTERS);
   // 입력하는 동안 목록 다시 그리기가 글자 입력을 막지 않게 합니다.
   const deferred = useDeferredValue(filters);
@@ -73,11 +79,11 @@ export function ShopBrowser({ products, tastesBySlug, categoryKey }: ShopBrowser
   const visible = useMemo(
     () =>
       filterProducts(products, deferred, {
-        name: (slug) => tProducts(`${slug}.name` as Parameters<typeof tProducts>[0]) as string,
+        name: productName,
         country: (product) => countryName(product.country, locale),
-        tastes: (slug) => tastesBySlug[slug] ?? [],
+        tastes: (slug) => overrides[slug]?.tastes ?? tastesBySlug[slug] ?? [],
       }),
-    [products, deferred, tProducts, locale, tastesBySlug],
+    [products, deferred, productName, locale, tastesBySlug, overrides],
   );
   const listKey = `${categoryKey}|${deferred.query.trim()}|${deferred.tastes.join()}|${deferred.excluded.join()}`;
 

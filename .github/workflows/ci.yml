@@ -21,7 +21,10 @@ jobs:
       - run: pnpm lint:fsd
       - run: pnpm test
       # pnpm build가 Storybook(public/storybook)까지 빌드하므로 따로 돌리지 않습니다.
+      # 운영과 같은 공개 데모 빌드(어드민 "관리자로 둘러보기", 어드민 수정값의 쇼핑몰 반영)로 E2E·번들 예산을 봅니다.
       - run: pnpm build
+        env:
+          NEXT_PUBLIC_DEMO: "1"
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm e2e
       - run: pnpm size

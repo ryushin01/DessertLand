@@ -1,0 +1,65 @@
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 80px;
+}
+
+@media (max-width: 1023px) {
+  .summary {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--ink);
+}
+
+.kpis > div {
+  display: grid;
+  gap: 16px;
+  padding: 24px 16px 0 0;
+}
+
+.kpis > div + div {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+.kpis dt {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.kpis dd {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4vw, 64px);
+  line-height: 1;
+}
+
+.subTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.1;
+}
+
+.top {
+  display: grid;
+  margin-top: 24px;
+  border-top: 1px solid var(--ink);
+  list-style: decimal inside;
+}
+
+.top li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+}
+
+.list {
+  display: grid;
+  gap: 32px;
+}

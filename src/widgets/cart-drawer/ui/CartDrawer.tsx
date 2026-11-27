@@ -15,7 +15,7 @@ import {
   removeLine,
   setLineQuantity,
 } from "@/entities/cart";
-import { formatMoney } from "@/entities/product";
+import { formatMoney, useProductName } from "@/entities/product";
 import { useCartSummary } from "@/features/cart-summary";
 import { Link } from "@/shared/i18n";
 import { getLenis } from "@/shared/lib/motion";
@@ -34,7 +34,11 @@ const dialog = css({
   background: "cocoa.900",
   color: "cream",
   "&::backdrop": { background: "rgba(0, 2, 14, 0.65)", backdropFilter: "blur(6px)" },
-  "&[open]": { animation: "drawerIn 0.5s {easings.silk}", display: "flex", flexDirection: "column" },
+  "&[open]": {
+    animation: "drawerIn 0.5s {easings.silk}",
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 const head = css({
   display: "flex",
@@ -53,7 +57,12 @@ const iconButton = css({
   cursor: "pointer",
   _hover: { background: "cocoa.800" },
 });
-const body = css({ flex: 1, overflowY: "auto", padding: "8px 20px", overscrollBehavior: "contain" });
+const body = css({
+  flex: 1,
+  overflowY: "auto",
+  padding: "8px 20px",
+  overscrollBehavior: "contain",
+});
 const row = css({
   display: "grid",
   // 고르기 체크박스, 사진, 이름과 수량, 금액과 삭제
@@ -77,8 +86,20 @@ const foot = css({
   borderBlockStart: "1px solid {colors.cocoa.700}",
 });
 const line = css({ display: "flex", justifyContent: "space-between", fontSize: "0.95rem" });
-const total = css({ display: "flex", justifyContent: "space-between", fontSize: "1.2rem", fontWeight: "600" });
-const empty = css({ display: "grid", gap: "12px", justifyItems: "center", paddingBlock: "48px", textAlign: "center", color: "muted" });
+const total = css({
+  display: "flex",
+  justifyContent: "space-between",
+  fontSize: "1.2rem",
+  fontWeight: "600",
+});
+const empty = css({
+  display: "grid",
+  gap: "12px",
+  justifyItems: "center",
+  paddingBlock: "48px",
+  textAlign: "center",
+  color: "muted",
+});
 const emptyLink = css({
   display: "inline-block",
   paddingBlock: "8px",
@@ -114,7 +135,7 @@ const notice = css({ color: "caramel", fontSize: "0.92rem" });
 
 export function CartDrawer() {
   const t = useTranslations("cart");
-  const tProducts = useTranslations("products");
+  const productName = useProductName();
   const tProduct = useTranslations("product");
   const tOrders = useTranslations("orders");
   const locale = useLocale();
@@ -188,75 +209,74 @@ export function CartDrawer() {
             </div>
           ) : (
             <>
-            <label className={selectRow}>
-              <input
-                type="checkbox"
-                className={check}
-                checked={selectedCount === allSlugs.length}
-                ref={(input) => {
-                  if (input) input.indeterminate = selectedCount > 0 && selectedCount < allSlugs.length;
-                }}
-                onChange={(event) => setExcluded(event.target.checked ? [] : allSlugs)}
-              />
-              {t("selectAll")}
-              <span>{t("selected", { count: selectedCount, total: allSlugs.length })}</span>
-            </label>
-            <ul>
-              {summary.lines.map(({ product, quantity, lineTotal }) => {
-                const name = tProducts(
-                  `${product.slug}.name` as Parameters<typeof tProducts>[0],
-                ) as string;
-                return (
-                  <li key={product.slug} className={row}>
-                    <label className={pick}>
-                      <input
-                        type="checkbox"
-                        className={check}
-                        checked={!excluded.includes(product.slug)}
-                        onChange={(event) => toggle(product.slug, event.target.checked)}
+              <label className={selectRow}>
+                <input
+                  type="checkbox"
+                  className={check}
+                  checked={selectedCount === allSlugs.length}
+                  ref={(input) => {
+                    if (input)
+                      input.indeterminate = selectedCount > 0 && selectedCount < allSlugs.length;
+                  }}
+                  onChange={(event) => setExcluded(event.target.checked ? [] : allSlugs)}
+                />
+                {t("selectAll")}
+                <span>{t("selected", { count: selectedCount, total: allSlugs.length })}</span>
+              </label>
+              <ul>
+                {summary.lines.map(({ product, quantity, lineTotal }) => {
+                  const name = productName(product.slug);
+                  return (
+                    <li key={product.slug} className={row}>
+                      <label className={pick}>
+                        <input
+                          type="checkbox"
+                          className={check}
+                          checked={!excluded.includes(product.slug)}
+                          onChange={(event) => toggle(product.slug, event.target.checked)}
+                        />
+                        <span className={srOnly}>{t("select", { name })}</span>
+                      </label>
+                      <Image
+                        unoptimized
+                        src={product.image.src}
+                        alt=""
+                        width={152}
+                        height={152}
+                        sizes="76px"
+                        className={thumb}
                       />
-                      <span className={srOnly}>{t("select", { name })}</span>
-                    </label>
-                    <Image
-                      unoptimized
-                      src={product.image.src}
-                      alt=""
-                      width={152}
-                      height={152}
-                      sizes="76px"
-                      className={thumb}
-                    />
-                    <div>
-                      <p className={rowName}>{name}</p>
-                      <QuantityStepper
-                        value={quantity}
-                        max={MAX_QUANTITY}
-                        label={`${tProduct("quantity")}: ${name}`}
-                        decreaseLabel={tProduct("decrease")}
-                        increaseLabel={tProduct("increase")}
-                        onChange={(next) =>
-                          setLines((lines) => setLineQuantity(lines, product.slug, next))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <p>{formatMoney(lineTotal, locale)}</p>
-                      <button
-                        type="button"
-                        className={iconButton}
-                        aria-label={t("remove", { name })}
-                        onClick={() => {
-                          setLines((lines) => removeLine(lines, product.slug));
-                          toggle(product.slug, true);
-                        }}
-                      >
-                        <Icon name="trash" />
-                      </button>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+                      <div>
+                        <p className={rowName}>{name}</p>
+                        <QuantityStepper
+                          value={quantity}
+                          max={MAX_QUANTITY}
+                          label={`${tProduct("quantity")}: ${name}`}
+                          decreaseLabel={tProduct("decrease")}
+                          increaseLabel={tProduct("increase")}
+                          onChange={(next) =>
+                            setLines((lines) => setLineQuantity(lines, product.slug, next))
+                          }
+                        />
+                      </div>
+                      <div>
+                        <p>{formatMoney(lineTotal, locale)}</p>
+                        <button
+                          type="button"
+                          className={iconButton}
+                          aria-label={t("remove", { name })}
+                          onClick={() => {
+                            setLines((lines) => removeLine(lines, product.slug));
+                            toggle(product.slug, true);
+                          }}
+                        >
+                          <Icon name="trash" />
+                        </button>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
             </>
           )}
         </div>

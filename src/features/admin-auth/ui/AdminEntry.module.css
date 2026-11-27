@@ -1,0 +1,118 @@
+/* 들어가기 화면: 원본 Contact 페이지처럼 검은 바탕 전체 화면, 가운데 큰 세리프. */
+.root {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: 56px;
+  padding: 120px var(--gutter) 80px;
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 9vw, 150px);
+  line-height: 1;
+}
+
+.lede {
+  max-width: 640px;
+  margin-inline: auto;
+  color: #c4c4c4;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.panel {
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  width: min(560px, 100%);
+  margin-inline: auto;
+}
+
+.demoButton {
+  min-height: 56px;
+  padding-inline: 32px;
+  border: 1px solid var(--paper);
+  border-radius: 28px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  transition:
+    background 0.6s var(--ease-out),
+    color 0.6s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .demoButton:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--paper);
+  }
+}
+
+.notes {
+  display: grid;
+  gap: 6px;
+  color: #c4c4c4;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+  text-align: left;
+}
+
+.form input {
+  border-bottom-color: var(--line-dark);
+  color: var(--paper);
+}
+
+.form input:focus {
+  border-bottom-color: var(--paper);
+}
+
+.form input[aria-invalid="true"] {
+  border-bottom-color: var(--error-on-dark);
+}
+
+.form [id$="-error"] {
+  color: var(--error-on-dark);
+}
+
+.submit {
+  justify-self: center;
+  color: var(--paper);
+}
+
+.status {
+  min-height: 24px;
+  font-size: 14px;
+}
+
+.statusError {
+  color: var(--error-on-dark);
+}
+
+.root:focus {
+  outline: none;
+}
+
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--paper);
+  color: var(--ink);
+  transform: translateY(-200%);
+}
+
+.skip:focus-visible {
+  transform: none;
+}

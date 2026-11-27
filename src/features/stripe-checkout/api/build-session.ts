@@ -5,9 +5,11 @@ import {
   currencyForLocale,
   getProduct,
   priceInCurrency,
+  salePriceUsd,
   shippingInCurrency,
 } from "@/entities/product";
-import { SITE_NAME } from "@/shared/config";
+import { demoPricing } from "@/entities/product/index.server";
+import { DEMO_MODE, SITE_NAME } from "@/shared/config";
 import { LOCALES } from "@/shared/i18n/index.server";
 
 import { toMinorUnits } from "./minor-units";
@@ -20,6 +22,8 @@ export type SessionRequest = {
   locale: string;
   expectedTotal: number;
   source: OrderSource;
+  /** 공개 데모에서만: 어드민이 고친 가격·할인·숨김. */
+  pricing?: unknown;
 };
 
 const STRIPE_LOCALES = {
@@ -53,6 +57,8 @@ type BuildInput = {
   origin: string;
   productName: (slug: string) => string;
   shippingName: string;
+  /** 공개 데모인지(기본은 빌드 값). 데모가 아니면 요청의 가격 수정값을 무시합니다. */
+  demo?: boolean;
 };
 
 /** 금액은 브라우저 값을 쓰지 않고 카탈로그로 계산합니다. 금액이 다르면 null을 돌려줍니다. */
@@ -61,9 +67,11 @@ export function buildSessionParams({
   origin,
   productName,
   shippingName,
+  demo = DEMO_MODE,
 }: BuildInput): Stripe.Checkout.SessionCreateParams | null {
   const { items, locale, expectedTotal, source } = request;
-  if (summarizeCart(items, locale).total !== expectedTotal) return null;
+  const pricing = demoPricing(request.pricing, demo);
+  if (summarizeCart(items, locale, pricing).total !== expectedTotal) return null;
   const currency = currencyForLocale(locale);
   const lineItem = (name: string, amount: number, quantity: number) => ({
     quantity,
@@ -75,8 +83,8 @@ export function buildSessionParams({
   });
   const lines = items.flatMap((item) => {
     const product = getProduct(item.slug);
-    if (!product) return [];
-    const price = priceInCurrency(product.priceUsd, currency);
+    if (!product || pricing[item.slug]?.hidden) return [];
+    const price = priceInCurrency(salePriceUsd(product, pricing[item.slug]), currency);
     return [lineItem(productName(item.slug), price, item.quantity)];
   });
   const first = items[0];

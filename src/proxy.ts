@@ -2,11 +2,14 @@ import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 
 import { shopCategoryRedirect } from "@/_app/routing/shop-category";
+import { adminGate, isAdminPath } from "@/features/admin-auth/index.server";
 import { routing } from "@/shared/i18n/routing";
 
 const handleI18nRouting = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
+  // 어드민(/admin)은 한국어 한 화면이라 언어 주소로 보내지 않고, 세션만 확인합니다.
+  if (isAdminPath(request.nextUrl.pathname)) return adminGate(request);
   // 예전 분류 주소(?category=)는 분류별 정적 페이지로 영구 이동합니다.
   const category = shopCategoryRedirect(request.nextUrl);
   if (category) return NextResponse.redirect(category, 308);

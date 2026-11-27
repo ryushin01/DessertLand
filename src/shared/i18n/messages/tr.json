@@ -56,7 +56,8 @@
     "addShort": "Ekle",
     "view": "Gör",
     "buyNow": "{name} hemen satın al",
-    "buyNowShort": "Hemen satın al"
+    "buyNowShort": "Hemen satın al",
+    "soldOut": "Tükendi"
   },
   "product": {
     "back": "Tatlılara dön",
@@ -69,7 +70,9 @@
     "add": "Sepete ekle",
     "related": "Bunları da beğenebilirsiniz",
     "notice": "Ürün bilgileri ve fiyatlar demo örnekleridir.",
-    "buyNow": "Hemen satın al"
+    "buyNow": "Hemen satın al",
+    "soldOut": "Tükendi. Stoğa geri geldiğinde sepete ekleyebilirsiniz.",
+    "unavailable": "Bu tatlı şu anda satışta değil."
   },
   "allergens": {
     "milk": "Süt",

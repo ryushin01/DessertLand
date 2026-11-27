@@ -1,0 +1,161 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 80px;
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
+  }
+}
+
+/* 원본 상세 정보: 사진(5:7) 아래 오른쪽 정렬 라벨 14px + 회색 값 */
+.aside {
+  position: sticky;
+  top: 140px;
+  display: grid;
+  gap: 40px;
+}
+
+@media (max-width: 1023px) {
+  .aside {
+    position: static;
+  }
+}
+
+.photo {
+  aspect-ratio: 5 / 7;
+  overflow: hidden;
+  background: var(--line);
+  animation: zoomOut 1s var(--ease-out) both;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 0;
+    transform: scale(1.1) translateY(10%);
+  }
+}
+
+.photoEmpty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--mute);
+  font-size: 14px;
+}
+
+.facts {
+  display: grid;
+  gap: 24px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.facts dd {
+  color: var(--mute);
+}
+
+.form {
+  display: grid;
+  gap: 96px;
+}
+
+.group {
+  display: grid;
+  gap: 40px;
+}
+
+.groupTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.1;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+@media (max-width: 767px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.check input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--ink);
+}
+
+.locale {
+  border-top: 1px solid var(--line);
+}
+
+.locale summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 56px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 16px;
+}
+
+.locale summary::-webkit-details-marker {
+  display: none;
+}
+
+.locale summary::after {
+  content: "+";
+  font-family: var(--font-display);
+  font-size: 28px;
+}
+
+.locale[open] summary::after {
+  content: "−";
+}
+
+.localeBody {
+  display: grid;
+  gap: 32px;
+  padding-bottom: 40px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--ink);
+}
+
+.status {
+  min-height: 24px;
+  font-size: 14px;
+}
+
+.statusError {
+  color: var(--error);
+}

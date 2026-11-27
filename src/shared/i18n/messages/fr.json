@@ -56,7 +56,8 @@
     "addShort": "Ajouter",
     "view": "Voir",
     "buyNow": "Acheter maintenant : {name}",
-    "buyNowShort": "Acheter maintenant"
+    "buyNowShort": "Acheter maintenant",
+    "soldOut": "Épuisé"
   },
   "product": {
     "back": "Retour aux desserts",
@@ -69,7 +70,9 @@
     "add": "Ajouter au panier",
     "related": "Vous aimerez aussi",
     "notice": "Les informations et les prix sont des exemples de démonstration.",
-    "buyNow": "Acheter maintenant"
+    "buyNow": "Acheter maintenant",
+    "soldOut": "Épuisé. Vous pourrez l’ajouter dès son retour en stock.",
+    "unavailable": "Ce dessert n’est pas en vente pour le moment."
   },
   "allergens": {
     "milk": "Lait",

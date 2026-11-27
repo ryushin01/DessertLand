@@ -10,6 +10,7 @@ import { Manifesto } from "./Manifesto";
 import { SectionDots } from "./SectionDots";
 import { SliceZoom } from "./SliceZoom";
 import { SweetTrail } from "./SweetTrail";
+import { worldStops } from "../lib/world-stops";
 import { WorldTour } from "./WorldTour";
 
 type HomePageProps = { params: Promise<{ locale: string }> };
@@ -38,7 +39,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <Manifesto />
       <CategoryShowcase />
       <SliceZoom />
-      <WorldTour />
+      <WorldTour stops={worldStops()} />
       <DessertAdvisor />
       <SweetTrail />
     </>

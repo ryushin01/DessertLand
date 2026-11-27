@@ -1,0 +1,233 @@
+/* 원본 헤더: 왼쪽 위 로고, 오른쪽 14px 글자 메뉴, 현재 위치는 단어 폭 62%까지만 긋는 1px 밑줄. 좌우 여백 80px(1023px 이하 20px). */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 40px var(--gutter) 24px;
+  background: var(--paper);
+  transition: transform 0.6s var(--ease-out);
+}
+
+/* 아래로 내리면 숨기고, 위로 올리면 다시 보입니다(원본 고정 헤더). */
+.header[data-hidden="true"] {
+  transform: translateY(-100%);
+}
+
+.header:focus-within {
+  transform: none;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+}
+
+.logoMark {
+  width: 44px;
+  height: 44px;
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.logoSub {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 메뉴 사이 구분: 가는 사선. 대체 텍스트를 빈 값으로 두어 화면 읽기에서 빠집니다. */
+.navList li + li::before {
+  content: "/" / "";
+  margin-right: 10px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--line-strong);
+}
+
+.navList li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  width: 0;
+  max-width: 62%;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.8s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .navLink:hover::after {
+    width: 100%;
+  }
+}
+
+.navLink[aria-current="page"]::after {
+  width: 100%;
+}
+
+.shopLink {
+  margin-left: 10px;
+  color: var(--mute);
+}
+
+.menuButton {
+  display: none;
+  min-height: 44px;
+  padding-inline: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  background: transparent;
+  font-size: 12px;
+}
+
+.menuList {
+  display: grid;
+  gap: 4px;
+}
+
+.menuList a {
+  display: block;
+  font-size: 26px;
+  line-height: 44px;
+}
+
+.menuList a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+}
+
+@media (max-width: 1023px) {
+  .header {
+    padding-top: 20px;
+    padding-bottom: 12px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin: 0 var(--gutter);
+}
+
+.bannerText {
+  max-width: 880px;
+}
+
+.main {
+  display: grid;
+  gap: 140px;
+  padding: 96px var(--gutter) 140px;
+}
+
+.main:focus {
+  outline: none;
+}
+
+@media (max-width: 1023px) {
+  .main {
+    gap: 80px;
+    padding-top: 56px;
+    padding-bottom: 80px;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 40px var(--gutter);
+  border-top: 1px solid var(--line);
+  color: var(--mute);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.footer a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-200%);
+}
+
+.skip:focus-visible {
+  transform: none;
+}
+
+.resetBody {
+  display: grid;
+  gap: 24px;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.resetActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  align-items: center;
+}

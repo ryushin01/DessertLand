@@ -6,7 +6,14 @@ import { useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 import { MAX_QUANTITY } from "@/entities/cart";
-import { countryName, formatProductPrice, type Product } from "@/entities/product";
+import {
+  applyOverride,
+  countryName,
+  formatProductPrice,
+  useCatalogOverrides,
+  useProductName,
+  type Product,
+} from "@/entities/product";
 import { AddToCartButton } from "@/features/add-to-cart";
 import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
@@ -72,7 +79,12 @@ const title = css({
   textTransform: "uppercase",
   wordBreak: "var(--word-break)",
 });
-const description = css({ fontSize: "1.1rem", lineHeight: "1.6", maxWidth: "36rem", wordBreak: "var(--word-break)" });
+const description = css({
+  fontSize: "1.1rem",
+  lineHeight: "1.6",
+  maxWidth: "36rem",
+  wordBreak: "var(--word-break)",
+});
 const specs = css({
   display: "grid",
   gridTemplateColumns: "auto 1fr",
@@ -83,6 +95,7 @@ const specs = css({
 const price = css({ fontSize: "1.9rem" });
 const buy = css({ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" });
 const notice = css({ fontSize: "0.82rem", color: "muted" });
+const listPrice = css({ color: "muted", fontSize: "0.7em" });
 
 type ProductDetailProps = {
   product: Product;
@@ -90,11 +103,20 @@ type ProductDetailProps = {
   description: string;
 };
 
-export function ProductDetail({ product, description: descriptionText }: ProductDetailProps) {
+export function ProductDetail({
+  product: original,
+  description: originalDescription,
+}: ProductDetailProps) {
   const t = useTranslations("product");
-  const tProducts = useTranslations("products");
-  const tAllergens = useTranslations("allergens");
+  const productName = useProductName();
   const locale = useLocale();
+  // 공개 데모: 어드민이 고친 이름·설명·가격·할인·재고·숨김을 반영합니다(데모가 꺼지면 원래 상품 그대로).
+  const override = useCatalogOverrides()[original.slug];
+  const product = applyOverride(original, override);
+  const unavailable = override?.hidden ? "unavailable" : product.soldOut ? "soldOut" : null;
+  // 설명은 클라이언트 메시지에 싣지 않아(용량) 서버가 넘긴 원래 설명이 기본값입니다.
+  const descriptionText = override?.description?.[locale] || originalDescription;
+  const tAllergens = useTranslations("allergens");
   const [quantity, setQuantity] = useState(1);
   const ref = useRef<HTMLElement>(null);
   const motion = useMotionEnabled();
@@ -107,7 +129,14 @@ export function ProductDetail({ product, description: descriptionText }: Product
       const [frameEl] = select("[data-frame]") as HTMLElement[];
       if (!frameEl) return;
       gsap.from(frameEl, { clipPath: "inset(100% 0 0 0)", duration: 1.4, ease: "expo.out" });
-      gsap.from(select("[data-rise]"), { y: 28, opacity: 0, duration: 1, stagger: 0.07, ease: "expo.out", delay: 0.25 });
+      gsap.from(select("[data-rise]"), {
+        y: 28,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.07,
+        ease: "expo.out",
+        delay: 0.25,
+      });
       if (!fine) return;
       const rotY = gsap.quickTo(frameEl, "rotationY", { duration: 0.8, ease: "power3" });
       const rotX = gsap.quickTo(frameEl, "rotationX", { duration: 0.8, ease: "power3" });
@@ -127,12 +156,20 @@ export function ProductDetail({ product, description: descriptionText }: Product
     [fine],
   );
 
-  const name = tProducts(`${product.slug}.name` as Parameters<typeof tProducts>[0]) as string;
+  const name = productName(product.slug);
 
   return (
     <section ref={ref} className={root}>
       <div aria-hidden="true" className={backdrop}>
-        <Image unoptimized src={product.image.src} alt="" fill sizes="20vw" quality={40} className={cover} />
+        <Image
+          unoptimized
+          src={product.image.src}
+          alt=""
+          fill
+          sizes="20vw"
+          quality={40}
+          className={cover}
+        />
       </div>
       <div className={layout}>
         <div className={tiltHost}>
@@ -164,7 +201,11 @@ export function ProductDetail({ product, description: descriptionText }: Product
             <dt>{t("origin")}</dt>
             <dd>{countryName(product.country, locale)}</dd>
             <dt>{t("weight")}</dt>
-            <dd>{new Intl.NumberFormat(locale, { style: "unit", unit: "gram" }).format(product.weightGrams)}</dd>
+            <dd>
+              {new Intl.NumberFormat(locale, { style: "unit", unit: "gram" }).format(
+                product.weightGrams,
+              )}
+            </dd>
             <dt>{t("allergens")}</dt>
             <dd>
               {product.allergens.length > 0
@@ -173,24 +214,33 @@ export function ProductDetail({ product, description: descriptionText }: Product
             </dd>
           </dl>
           <p className={price} data-rise>
+            {product.listPriceUsd ? (
+              <del className={listPrice}>{formatProductPrice(product.listPriceUsd, locale)}</del>
+            ) : null}{" "}
             {formatProductPrice(product.priceUsd, locale)}
           </p>
-          <div className={buy} data-rise>
-            <QuantityStepper
-              value={quantity}
-              max={MAX_QUANTITY}
-              onChange={setQuantity}
-              label={t("quantity")}
-              decreaseLabel={t("decrease")}
-              increaseLabel={t("increase")}
-            />
-            <AddToCartButton slug={product.slug} quantity={quantity}>
-              {t("add")}
-            </AddToCartButton>
-            <BuyNowLink slug={product.slug} quantity={quantity}>
-              {t("buyNow")}
-            </BuyNowLink>
-          </div>
+          {unavailable ? (
+            <p role="status" className={price}>
+              {t(unavailable)}
+            </p>
+          ) : (
+            <div className={buy} data-rise>
+              <QuantityStepper
+                value={quantity}
+                max={MAX_QUANTITY}
+                onChange={setQuantity}
+                label={t("quantity")}
+                decreaseLabel={t("decrease")}
+                increaseLabel={t("increase")}
+              />
+              <AddToCartButton slug={product.slug} quantity={quantity}>
+                {t("add")}
+              </AddToCartButton>
+              <BuyNowLink slug={product.slug} quantity={quantity}>
+                {t("buyNow")}
+              </BuyNowLink>
+            </div>
+          )}
           <p className={notice} data-rise>
             {t("notice")}
           </p>
