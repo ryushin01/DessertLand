@@ -40,11 +40,12 @@ export async function GET(request: NextRequest) {
 
 /** 들어가기: 공개 데모는 "관리자로 둘러보기", 그 밖에는 ADMIN_PASSWORD 비밀번호. */
 export async function POST(request: NextRequest) {
-  if (!limiter.take(clientKey(request.headers))) {
-    return NextResponse.json({ status: "limited" }, { status: 429 });
-  }
   const parsed = bodySchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ status: "invalid" }, { status: 400 });
+  // 비밀번호 맞히기를 막는 제한이라 비밀번호 들어가기에만 셉니다(공개 데모 입장은 비밀값이 없어 세지 않음).
+  if (parsed.data.mode === "password" && !limiter.take(clientKey(request.headers))) {
+    return NextResponse.json({ status: "limited" }, { status: 429 });
+  }
   const config = adminAuthConfig();
   let token: string | null = null;
   if (parsed.data.mode === "demo") {
