@@ -1,7 +1,7 @@
 # <img src="public/brand/logo.png" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-1.3.1-e41313)
+![version](https://img.shields.io/badge/version-1.3.2-e41313)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -75,7 +75,7 @@
 - 새로 추가한 상품은 어드민에만 보입니다(쇼핑몰의 상품 페이지·결제 가격표는 카탈로그로 미리 만들어 둠).
 - 시드 주문·추천 기록은 예시 값이고 고객 개인정보가 없습니다.
 
-데모를 끈 빌드(`NEXT_PUBLIC_DEMO` 없음)에서는 쇼핑몰이 원래대로 동작하고, 어드민은 운영 환경 변수 `ADMIN_PASSWORD`(12자 이상) 비밀번호로만 들어갑니다. 이때 주문은 Stripe 테스트 모드 세션에서 읽고 Stripe 주문 환불은 Stripe 테스트 모드 환불 API로 처리합니다. 디자인은 [marieweber.fr](https://www.marieweber.fr/en/)을 레퍼런스로 했습니다(유료 글꼴·사진은 쓰지 않고 무료 글꼴과 직접 그린 그림으로 대신함, 아래 출처).
+공개 데모는 기본으로 켜져 있어 `.env` 없이 받아 실행해도 어드민 모든 화면을 볼 수 있습니다. 데모를 끈 빌드(`NEXT_PUBLIC_DEMO=0`)에서는 쇼핑몰이 원래대로 동작하고, 어드민은 운영 환경 변수 `ADMIN_PASSWORD`(12자 이상) 비밀번호로만 들어갑니다. 이때 주문은 Stripe 테스트 모드 세션에서 읽고 Stripe 주문 환불은 Stripe 테스트 모드 환불 API로 처리합니다. 디자인은 [marieweber.fr](https://www.marieweber.fr/en/)을 레퍼런스로 했습니다(유료 글꼴·사진은 쓰지 않고 무료 글꼴과 직접 그린 그림으로 대신함, 아래 출처).
 
 ## 주요 기능
 
@@ -129,7 +129,7 @@ pnpm dev    # http://localhost:3000
 
 `.env` 없이도 바로 데모로 동작합니다. 결제는 내장 테스트 결제창, 추천은 규칙 기반 기본 추천으로 끝까지 진행됩니다. 프로덕션 확인은 `pnpm build && pnpm start`(http://localhost:3000)입니다. Stripe 테스트 결제와 AI 추천을 쓰려면 `.env.example`을 `.env.local`로 복사해 키를 넣습니다.
 
-**오프라인:** 글꼴·사진·아이콘을 모두 같은 출처에서 제공하므로 인터넷 없이도 모든 화면이 그대로 보입니다(설치만 인터넷 필요). Stripe나 Claude API에 닿지 못하면 결제는 내장 테스트 결제로 바뀌며 화면에 안내(`role="status"`)가 뜨고, 추천은 "기본 추천 (AI 미사용)"으로 보여 줍니다. Sentry·Speed Insights는 실패해도 화면에 영향이 없습니다. `e2e/offline.spec.ts`가 localhost 밖 요청을 모두 막은 상태에서 이를 확인합니다.
+**오프라인:** 글꼴·사진·아이콘을 모두 같은 출처에서 제공하므로 인터넷 없이도 모든 화면이 그대로 보입니다(설치만 인터넷 필요). Stripe나 Claude API에 닿지 못하면 결제는 내장 테스트 결제로 바뀌며 화면에 안내(`role="status"`)가 뜨고, 추천은 "기본 추천 (AI 미사용)"으로 보여 줍니다. Sentry·Speed Insights는 실패해도 화면에 영향이 없습니다. `.env` 없이 받아 실행해도 쇼핑몰(10개 언어)과 어드민 모든 화면이 내용과 함께 뜹니다. `e2e/offline.spec.ts`가 localhost 밖 요청을 모두 막은 상태에서 모든 라우트(쇼핑몰 10개 언어·어드민)와 장바구니·결제·주문 내역·기본 추천을 axe와 함께 확인하고, `e2e/outage.spec.ts`가 키가 있는 배포본에서 Stripe·Claude가 끊긴 경우를 확인합니다.
 
 | 명령 | 설명 |
 |---|---|
