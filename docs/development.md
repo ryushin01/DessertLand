@@ -193,7 +193,8 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 - 단위 테스트는 코드 옆의 `*.test.ts(x)`에 둡니다.
 - 잘림, 넘침, 접근성은 `pnpm build` 후 `pnpm e2e`로 확인합니다. axe를 통과해도 KWCAG 준수는 아니므로 새 UI는 항목을 직접 점검합니다.
 - E2E 서버는 4391 포트를 씁니다. 다른 작업이 그 포트를 쓰고 있으면 `E2E_PORT=4492 pnpm e2e`처럼 바꿉니다.
-- **오프라인 검증:** `e2e/offline.spec.ts`는 localhost 밖으로 나가는 요청을 모두 막고(`route.abort`) `.env` 없이 빌드한 앱에서 홈·상품 목록·상세·추천·결제(내장 테스트 결제)·주문 내역·일본어·중국어·튀르키예어 화면·Storybook이 내용과 함께 뜨는지, 외부로 나가려 한 요청이 하나도 없는지 보고 axe를 돌립니다. `pnpm e2e`(CI 포함)에 들어 있고, 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`입니다.
+- **오프라인 검증:** `e2e/offline.spec.ts`는 localhost 밖으로 나가는 요청을 모두 막고(`route.abort`, `e2e/network.ts`) `.env` 없이 빌드한 앱에서 쇼핑몰 모든 라우트(홈·목록·분류·상세·결제·바로 구매·주문 내역·404) × 10개 언어(모바일은 한·일·중·튀르키예어), 장바구니 서랍, 추천(기본 추천), 내장 테스트 결제, 어드민 모든 화면(들어가기·대시보드·상품·상품 수정·상품 추가·주문·주문 상세·맛·성분·AI 추천 기록), Storybook이 내용과 함께 뜨는지, 외부로 나가려 한 요청과 스크립트 오류가 하나도 없는지 보고 axe를 돌립니다.
+- **장애 검증:** `e2e/outage.spec.ts`는 같은 빌드를 키가 있는 배포본처럼 띄운 장애 서버(`E2E_MSW=outage`, 포트 `E2E_PORT + 2`·`E2E_OUTAGE_PORT`)에서 서버의 Stripe·Claude 요청을 MSW가 모두 네트워크 오류로 끊었을 때 내장 테스트 결제로 바뀌는지(`role="status"` 안내), 기본 추천, 완료 화면의 "확인하지 못함", 주문 내역의 "잠시 확인할 수 없음", 어드민 실제 인증의 주문 읽기·환불 실패 응답을 봅니다. `pnpm e2e`(CI 포함)에 들어 있고, 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`입니다.
 
 ## 오프라인·외부 서비스 대체
 
@@ -201,7 +202,8 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 | 외부 의존 | 끊겼을 때 |
 | --- | --- |
-| Stripe Checkout(`STRIPE_SECRET_KEY`) | 키가 없으면 처음부터, 세션 만들기가 실패(서버 502·네트워크 오류)하면 그 자리에서 내장 테스트 결제창으로 바꾸고 `role="status"`로 알림 |
+| Stripe Checkout(`STRIPE_SECRET_KEY`) | 키가 없으면 처음부터, 세션 만들기가 실패(서버 502·네트워크 오류)하면 그 자리에서 내장 테스트 결제창으로 바꾸고 `role="status"`로 알림. 서버는 Stripe를 8초만 기다리고 한 번만 다시 시도함(SDK 기본 80초·2번이면 최대 4분 멈춤). 완료 화면은 "결제를 확인하지 못했습니다", 주문 내역은 "잠시 확인할 수 없음" |
+| 어드민(`NEXT_PUBLIC_DEMO`) | 값이 없으면 공개 데모가 켜져 `.env` 없이도 "관리자로 둘러보기"로 모든 화면을 봄. `0`이면 꺼지고 `ADMIN_PASSWORD`로만 들어감 |
 | Claude API(`ANTHROPIC_API_KEY`) | 키가 없거나 호출이 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)") |
 | 글꼴 | Exo 2(영문·숫자)는 `next/font/local`, 한중일 글꼴은 Fontsource 파일을 설치 때 `public/fonts/cjk/`로 복사, 하다 바탕은 저장소 파일 |
 | 사진·아이콘 | 모두 `public/`의 파일 |
@@ -224,7 +226,7 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 ## 품질 예산
 
-- **번들 크기:** `pnpm size`가 쇼핑몰 전체 JS 367 kB·CSS 21 kB, 어드민 전용 JS 210 kB·CSS 54 kB(gzip)를 넘으면 실패합니다. 기준은 `.size-limit.js`에 있습니다. 빌드 결과의 라우트별 청크 목록과 청크 사이 참조를 따라 어드민(`/admin`)에서만 닿는 청크를 골라 쇼핑몰 예산에서 빼고, 어디서도 닿지 않는 청크는 쇼핑몰 쪽에 남깁니다. CI는 운영과 같은 공개 데모 빌드(`NEXT_PUBLIC_DEMO=1`)로 잽니다.
+- **번들 크기:** `pnpm size`가 쇼핑몰 전체 JS 367 kB·CSS 21 kB, 어드민 전용 JS 210 kB·CSS 54 kB(gzip)를 넘으면 실패합니다. 기준은 `.size-limit.js`에 있습니다. 빌드 결과의 라우트별 청크 목록과 청크 사이 참조를 따라 어드민(`/admin`)에서만 닿는 청크를 골라 쇼핑몰 예산에서 빼고, 어디서도 닿지 않는 청크는 쇼핑몰 쪽에 남깁니다. CI는 운영과 같은 공개 데모 빌드(`NEXT_PUBLIC_DEMO=1`, 값이 없을 때와 같음)로 잽니다.
 - **Lighthouse:** `pnpm lhci`가 한국어·영어 첫 화면, 상점, 바클라바 상세가 데스크톱 기준 성능 90·접근성 100·권장 사항 95·SEO 90점, LCP 2.5초·TBT 200ms·CLS 0.1 이하인지 3번씩 재서 확인합니다. 기준은 `lighthouserc.json`에 있습니다.
 - **접근성 린트:** `eslint-config-next`는 jsx-a11y 규칙을 몇 개만 켭니다. 플러그인은 이미 등록되어 있어 `eslint.config`에서 recommended 규칙만 더해 모두 켭니다. 장바구니 서랍(`<dialog>`)의 배경 클릭 닫기는 Esc·닫기 버튼이 키보드 대안이라 그 줄만 예외로 둡니다.
 

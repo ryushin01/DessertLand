@@ -1,7 +1,7 @@
 import { test as base, type Page } from "@playwright/test";
 
 export { expect } from "@playwright/test";
-export type { APIRequestContext, Page } from "@playwright/test";
+export type { APIRequestContext, BrowserContext, Page } from "@playwright/test";
 
 /** 머리글(클라이언트 컴포넌트)에 React가 붙었는지 봅니다. 하이드레이션이 끝나면 DOM 노드에 __reactFiber 키가 생깁니다. */
 const isHydrated = () => {
