@@ -34,6 +34,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // 값이 없는 NEXT_PUBLIC_* 는 빌드 때 박히지 않고 실행 때 검사로 남아, DSN이 없어도 Sentry 청크(약 30 kB)가 만들어졌습니다.
+  // 빈 문자열로라도 박아 두면 `if (dsn)` 분기가 빌드에서 빠집니다(값이 있으면 그 값이 그대로 박힘).
+  env: { NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN ?? "" },
   // next dev가 저장소 루트에 AI 에이전트 안내(AGENTS.md)를 만들지 않게 합니다. 이 저장소에는 두지 않습니다.
   agentRules: false,
   // 이미지 변형 수를 줄여 Vercel 무료 플랜의 이미지 변환 한도 안에 둡니다(docs/development.md '이미지 변형').

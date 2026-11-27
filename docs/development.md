@@ -190,7 +190,11 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 ## 테스트
 
+- **한 번에:** `pnpm check`가 CI와 같은 검사를 같은 순서로 돌립니다(`scripts/check.mjs`). CI도 이 스크립트를 단계별(`static`, `build size`, `e2e -- --shard=N/2`, `lhci`)로 부릅니다.
 - 단위 테스트는 코드 옆의 `*.test.ts(x)`에 둡니다.
+- **커버리지:** `pnpm test:coverage`(`@vitest/coverage-v8`). 로직 계층(FSD의 `lib`·`model`·`api` 세그먼트)은 줄·문장·함수·분기 80%, 전체는 기준선(`vitest.config.ts`의 `coverage.thresholds`) 아래로 내려가면 실패합니다. 기준선은 올릴 수는 있어도 내리지 않습니다. WebGL·GSAP·Lenis 화면 효과 파일은 jsdom에서 그릴 수 없어 빼고 E2E·시각 회귀가 봅니다. CI는 `scripts/coverage-summary.mjs`로 표를 실행 요약(`$GITHUB_STEP_SUMMARY`)에 씁니다.
+- **시각 회귀:** `e2e/visual.spec.ts`(쇼핑몰·어드민 주요 화면, 데스크톱·모바일)와 `e2e/visual-storybook.spec.ts`(Storybook 모든 이야기)가 `toHaveScreenshot`으로 `e2e/__screenshots__`의 기준 이미지와 비교합니다. 움직임 줄이기로 GSAP 글자 등장·Lenis·커서 효과를 끄고, CSS 애니메이션을 멈추며, WebGL 캔버스는 가리고, 시계를 2026-11-27 12:00(서울)로 고정합니다. 기준 이미지는 Linux CI 결과물이라 다른 운영체제에서는 비교를 건너뜁니다(`ignoreSnapshots`). 화면을 일부러 바꿨으면 CI가 실패하며 올린 결과물(`playwright-1`·`playwright-2`)의 `*-actual.png`를 같은 이름으로 `e2e/__screenshots__`에 옮겨 커밋합니다.
+- **상태별 접근성:** 라우트별 axe는 `offline.spec.ts`, 화면 안 상태(결제 입력 오류·결제 실패·언어 메뉴·결과 없음)는 `a11y-states.spec.ts`, 장바구니 서랍·결제창·추천 결과는 `offline.spec.ts`·`shop.spec.ts`, 어드민 대화상자는 `admin.spec.ts`가 봅니다.
 - 잘림, 넘침, 접근성은 `pnpm build` 후 `pnpm e2e`로 확인합니다. axe를 통과해도 KWCAG 준수는 아니므로 새 UI는 항목을 직접 점검합니다.
 - E2E 서버는 4391 포트를 씁니다. 다른 작업이 그 포트를 쓰고 있으면 `E2E_PORT=4492 pnpm e2e`처럼 바꿉니다.
 - **오프라인 검증:** `e2e/offline.spec.ts`는 localhost 밖으로 나가는 요청을 모두 막고(`route.abort`, `e2e/network.ts`) `.env` 없이 빌드한 앱에서 쇼핑몰 모든 라우트(홈·목록·분류·상세·결제·바로 구매·주문 내역·404) × 10개 언어(모바일은 한·일·중·튀르키예어), 장바구니 서랍, 추천(기본 추천), 내장 테스트 결제, 어드민 모든 화면(들어가기·대시보드·상품·상품 수정·상품 추가·주문·주문 상세·맛·성분·AI 추천 기록), Storybook이 내용과 함께 뜨는지, 외부로 나가려 한 요청과 스크립트 오류가 하나도 없는지 보고 axe를 돌립니다.
@@ -226,11 +230,14 @@ pnpm dlx vercel env add STRIPE_SECRET_KEY production       # Vercel
 
 ## 품질 예산
 
+- **Sentry 빼기:** `NEXT_PUBLIC_SENTRY_DSN`이 없으면 `next.config.ts`의 `env`가 빈 값으로 박아 Sentry 청크를 만들지 않습니다(값이 없는 `NEXT_PUBLIC_*`는 박히지 않고 실행 때 검사로 남아 쓰지 않는 청크 약 30 kB가 예산에 들어갔음). `performance-budget.spec.ts`가 확인합니다.
 - **번들 크기:** `pnpm size`가 쇼핑몰 전체 JS 367 kB·CSS 21 kB, 어드민 전용 JS 210 kB·CSS 54 kB(gzip)를 넘으면 실패합니다. 기준은 `.size-limit.js`에 있습니다. 빌드 결과의 라우트별 청크 목록과 청크 사이 참조를 따라 어드민(`/admin`)에서만 닿는 청크를 골라 쇼핑몰 예산에서 빼고, 어디서도 닿지 않는 청크는 쇼핑몰 쪽에 남깁니다. CI는 운영과 같은 공개 데모 빌드(`NEXT_PUBLIC_DEMO=1`, 값이 없을 때와 같음)로 잽니다.
 - **Lighthouse:** `pnpm lhci`가 한국어·영어 첫 화면, 상점, 바클라바 상세가 데스크톱 기준 성능 90·접근성 100·권장 사항 95·SEO 90점, LCP 2.5초·TBT 200ms·CLS 0.1 이하인지 3번씩 재서 확인합니다. 기준은 `lighthouserc.json`에 있습니다.
 - **접근성 린트:** `eslint-config-next`는 jsx-a11y 규칙을 몇 개만 켭니다. 플러그인은 이미 등록되어 있어 `eslint.config`에서 recommended 규칙만 더해 모두 켭니다. 장바구니 서랍(`<dialog>`)의 배경 클릭 닫기는 Esc·닫기 버튼이 키보드 대안이라 그 줄만 예외로 둡니다.
 
-두 검사 모두 프로덕션 빌드가 먼저 있어야 하며, CI는 빌드 뒤에 돌립니다.
+두 검사 모두 프로덕션 빌드가 먼저 있어야 하며, CI는 빌드 뒤에 돌립니다. Lighthouse 리포트는 `.lighthouseci/reports`에 두고(`--upload.target=filesystem`), CI는 실패할 때만 결과물로 올립니다.
+
+- **CI 시간 줄이기:** pnpm 저장소(`setup-node`의 `cache: pnpm`), `.next/cache`, Playwright 브라우저(`~/.cache/ms-playwright`, Playwright 버전별)를 캐시합니다. 같은 PR에 새 커밋이 오면 이전 실행을 취소하고(`concurrency`), 문서만 바뀌면 검사를 건너뜁니다(경로 필터, 필수 검사 `check`는 늘 답함). 빌드는 한 번만 하고 결과(`.next`, `public/storybook`)를 E2E 2샤드(MSW 목업·장애 서버 포함)와 Lighthouse가 받아 씁니다. 원격 캐시는 쓰지 않습니다.
 
 ## 모니터링
 

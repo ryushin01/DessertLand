@@ -16,7 +16,11 @@ export default defineConfig({
   testDir: "./e2e",
   timeout: 60_000,
   fullyParallel: true,
-  reporter: "list",
+  // CI는 실패할 때 올릴 HTML 리포트도 만듭니다(.github/workflows/ci.yml).
+  reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
+  // 시각 회귀 기준 이미지는 Linux CI 결과물이라 운영체제 이름을 붙이지 않고, 다른 운영체제에서는 비교를 건너뜁니다.
+  snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}-{projectName}{ext}",
+  ignoreSnapshots: process.platform !== "linux",
   use: { baseURL: `http://localhost:${PORT}`, trace: "retain-on-failure" },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] }, testIgnore: SERVER_SPECS },

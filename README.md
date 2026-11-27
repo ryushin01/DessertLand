@@ -1,7 +1,7 @@
 # <img src="public/brand/logo.png" alt="" width="40" align="top"> 디저트 랜드 (Dessert Land)
 
 [![CI](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml/badge.svg)](https://github.com/ryushin01/DessertLand/actions/workflows/ci.yml)
-![version](https://img.shields.io/badge/version-1.3.2-e41313)
+![version](https://img.shields.io/badge/version-1.3.3-e41313)
 ![languages](https://img.shields.io/badge/languages-10-f2b267)
 
 디저트 랜드는 **전 세계의 디저트**가 모인 달콤한 나라를 콘셉트로, 디저트를 소개하고 판매하는 글로벌 쇼핑몰입니다. 한국어를 기본으로 **영어, 일본어, 중국어, 프랑스어, 이탈리아어, 스페인어, 독일어, 포르투갈어, 튀르키예어까지 10개 언어**를 지원합니다.
@@ -135,8 +135,9 @@ pnpm dev    # http://localhost:3000
 |---|---|
 | `pnpm build` / `pnpm start` | 프로덕션 빌드와 실행 |
 | `pnpm typecheck` / `pnpm lint` / `pnpm lint:fsd` | 타입 검사, 린트, FSD 구조 검사(Steiger) |
-| `pnpm test` | 단위 테스트 |
-| `pnpm e2e` | 프로덕션 빌드 기준 E2E와 접근성 검사(`pnpm build` 후 실행) |
+| `pnpm check` | CI와 같은 검사 전체(정적 검사·커버리지 → 빌드 → 번들 예산 → E2E → Lighthouse). `pnpm check static`처럼 단계만 골라 돌릴 수도 있음 |
+| `pnpm test` / `pnpm test:coverage` | 단위 테스트 / 커버리지(로직 계층 80%, 전체 기준선) |
+| `pnpm e2e` | 프로덕션 빌드 기준 E2E, 모든 화면·상태의 접근성 검사, 시각 회귀(Linux에서만 비교)(`pnpm build` 후 실행) |
 | `pnpm size` / `pnpm lhci` | 번들 크기 예산 / Lighthouse 점수 기준 검사(`pnpm build` 후 실행) |
 | `pnpm analyze` | 번들 분석 화면 |
 | `pnpm storybook` | 컴포넌트 문서 |
