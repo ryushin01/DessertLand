@@ -1,6 +1,6 @@
 {
   "name": "dessert-land",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "전 세계 디저트가 모인 달콤한 나라: 10개 언어로 디저트를 소개하고 판매하는 쇼핑몰",
   "private": true,
   "type": "module",
@@ -43,7 +43,8 @@
     "react-dom": "^19.3.1",
     "server-only": "^0.0.1",
     "stripe": "^23.1.0",
-    "web-vitals": "^6.2.3"
+    "web-vitals": "^6.2.3",
+    "wretch": "^3.0.9"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

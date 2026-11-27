@@ -1,5 +1,6 @@
 import type { Instrumentation } from "next";
 
+import { http } from "@/shared/api/index.server";
 import { parseDsn, parseStack } from "@/shared/lib/sentry-envelope";
 
 type ErrorRequest = Parameters<Instrumentation.onRequestError>[1];
@@ -74,13 +75,14 @@ export const onRequestError: Instrumentation.onRequestError = async (error, requ
     JSON.stringify(event),
   ].join("\n");
   try {
-    await fetch(target.envelopeUrl, {
-      method: "POST",
-      headers: { "content-type": "application/x-sentry-envelope" },
-      body: envelope,
-      signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
-    });
+    await http
+      .url(target.envelopeUrl)
+      .content("application/x-sentry-envelope")
+      .options({ signal: AbortSignal.timeout(SEND_TIMEOUT_MS) })
+      .body(envelope)
+      .post()
+      .res();
   } catch {
-    // 보고에 실패해도 요청 처리에는 영향을 주지 않습니다.
+    // 보고에 실패해도(네트워크 오류, 시간 초과, 2xx가 아닌 응답) 요청 처리에는 영향을 주지 않습니다.
   }
 };

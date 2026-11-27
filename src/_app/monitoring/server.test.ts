@@ -56,9 +56,12 @@ describe("서버 오류 보고", () => {
     expect(JSON.parse(lines[1] ?? "")).toEqual({ type: "event" });
   });
 
-  it("보내기에 실패해도 예외를 던지지 않습니다", async () => {
+  it.each([
+    ["네트워크 오류", () => Promise.reject(new Error("down"))],
+    ["2xx가 아닌 응답", () => Promise.resolve(new Response(null, { status: 503 }))],
+  ])("보내기에 실패해도(%s) 예외를 던지지 않습니다", async (_, answer) => {
     vi.stubEnv("NEXT_PUBLIC_SENTRY_DSN", "https://key@o1.ingest.sentry.io/42");
-    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("down")));
+    vi.stubGlobal("fetch", vi.fn<typeof fetch>(answer));
     await expect(onRequestError(new Error("a"), request, context)).resolves.toBeUndefined();
   });
 });

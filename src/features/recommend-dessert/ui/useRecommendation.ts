@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { loadHttp } from "@/shared/api";
+
 import { parseRecommendEvent } from "../model/parse-event";
 import type { Pick, RecommendRequest } from "../model/types";
 
@@ -29,12 +31,15 @@ export function useRecommendation() {
     controllerRef.current = controller;
     setState({ ...INITIAL, status: "loading" });
     try {
-      const response = await fetch("/api/recommend", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(data),
-        signal: controller.signal,
-      });
+      const { http, keepResponse } = await loadHttp();
+      // 429(요청 한도)를 따로 알리려고 상태 코드와 관계없이 응답을 받고, 본문 스트림은 직접 읽습니다.
+      const response = await http
+        .url("/api/recommend")
+        .signal(controller)
+        .json(data)
+        .post()
+        .res()
+        .catch(keepResponse);
       if (response.status === 429) {
         setState({ ...INITIAL, status: "limited" });
         return;
