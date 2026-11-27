@@ -1,4 +1,7 @@
+import { HttpResponse, http } from "msw";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { server } from "@/_app/mocks/node";
 
 import { POST } from "./tunnel";
 
@@ -14,28 +17,42 @@ const post = (body: string, ip = "1.1.1.1") =>
     }),
   );
 
+type Received = { url: string; contentType: string | null; body: string; signal: AbortSignal };
+
+/** Sentry envelope 주소의 목업. 받은 요청을 기록하고 정한 응답을 돌려줍니다. */
+function sentryReceiver(answer: () => Response = () => new HttpResponse(null, { status: 200 })) {
+  const received: Received[] = [];
+  server.use(
+    http.post("https://o1.ingest.sentry.io/api/:project/envelope/", async ({ request }) => {
+      received.push({
+        url: request.url,
+        contentType: request.headers.get("content-type"),
+        body: new TextDecoder().decode(await request.arrayBuffer()),
+        signal: request.signal,
+      });
+      return answer();
+    }),
+  );
+  return received;
+}
+
 describe("Sentry 중계 경로", () => {
-  const fetchMock = vi.fn<typeof fetch>();
+  let received: Received[] = [];
   beforeEach(() => {
     vi.stubEnv("NEXT_PUBLIC_SENTRY_DSN", DSN);
-    fetchMock.mockReset().mockResolvedValue(new Response(null, { status: 200 }));
-    vi.stubGlobal("fetch", fetchMock);
+    received = sentryReceiver();
   });
-  afterEach(() => {
-    vi.unstubAllEnvs();
-    vi.unstubAllGlobals();
-  });
+  afterEach(() => vi.unstubAllEnvs());
 
   it("이 사이트의 DSN이면 Sentry의 envelope 주소로 받은 바이트를 그대로 넘깁니다", async () => {
     const body = `${envelope(DSN)}\n{"message":"맛있어요"}`;
     const response = await post(body);
     expect(response.status).toBe(200);
-    const [url, init] = fetchMock.mock.calls[0] ?? [];
-    expect(url).toBe(
+    expect(received).toHaveLength(1);
+    expect(received[0]?.url).toBe(
       "https://o1.ingest.sentry.io/api/42/envelope/?sentry_version=7&sentry_key=key",
     );
-    expect(init?.method).toBe("POST");
-    expect(new TextDecoder().decode(init?.body as Uint8Array)).toBe(body);
+    expect(received[0]?.body).toBe(body);
   });
 
   it("다른 프로젝트의 DSN이나 깨진 묶음은 넘기지 않습니다", async () => {
@@ -44,7 +61,7 @@ describe("Sentry 중계 경로", () => {
     );
     expect((await post(envelope("https://key@evil.example/42"), "2.2.2.2")).status).toBe(400);
     expect((await post("not json", "2.2.2.2")).status).toBe(400);
-    expect(fetchMock).not.toHaveBeenCalled();
+    expect(received).toEqual([]);
   });
 
   it("너무 큰 묶음은 거절합니다", async () => {
@@ -56,7 +73,7 @@ describe("Sentry 중계 경로", () => {
     const body = `${envelope(DSN)}\n${"가".repeat(100 * 1024)}`;
     expect(body.length).toBeLessThan(256 * 1024);
     expect((await post(body, "6.6.6.6")).status).toBe(413);
-    expect(fetchMock).not.toHaveBeenCalled();
+    expect(received).toEqual([]);
   });
 
   it("Content-Length 없이 흘려보내도 상한을 넘으면 읽기를 멈춥니다", async () => {
@@ -88,15 +105,14 @@ describe("Sentry 중계 경로", () => {
   });
 
   it("Sentry가 2xx가 아닌 상태(429 등)로 답하면 그 상태를 그대로 돌려줍니다", async () => {
-    fetchMock.mockResolvedValue(new Response("slow down", { status: 429 }));
+    received = sentryReceiver(() => new HttpResponse("slow down", { status: 429 }));
     expect((await post(envelope(DSN), "8.8.8.8")).status).toBe(429);
-    const [, init] = fetchMock.mock.calls[0] ?? [];
-    expect(new Headers(init?.headers).get("content-type")).toBe("application/x-sentry-envelope");
-    expect(init?.signal).toBeInstanceOf(AbortSignal);
+    expect(received[0]?.contentType).toBe("application/x-sentry-envelope");
+    expect(received[0]?.signal).toBeInstanceOf(AbortSignal);
   });
 
   it("Sentry에 닿지 못하면 502로 답합니다", async () => {
-    fetchMock.mockRejectedValue(new Error("network"));
+    sentryReceiver(() => HttpResponse.error());
     expect((await post(envelope(DSN), "5.5.5.5")).status).toBe(502);
   });
 });

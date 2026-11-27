@@ -5,10 +5,11 @@ const inApp = process.env.npm_lifecycle_event === "build-storybook";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
-  addons: ["@storybook/addon-a11y"],
+  addons: ["@storybook/addon-a11y", "msw-storybook-addon"],
   framework: "@storybook/nextjs-vite",
   // 앱과 함께 배포할 때(pnpm build-storybook)는 public을 복사하지 않습니다. 같은 주소의 /images를 그대로 씁니다.
-  staticDirs: inApp ? [] : ["../public"],
+  // ./public에는 MSW 워커(mockServiceWorker.js)만 있습니다(npx msw init으로 갱신).
+  staticDirs: inApp ? ["./public"] : ["../public", "./public"],
   viteFinal: (viteConfig) => (inApp ? { ...viteConfig, publicDir: false } : viteConfig),
 };
 

@@ -137,7 +137,8 @@ test.describe("오프라인", () => {
   }) => {
     await page.goto("/admin");
     await page.getByRole("button", { name: "관리자로 둘러보기" }).click();
-    await expect(page).toHaveURL(/\/admin$/);
+    // 들어간 뒤 이동은 서버 응답을 기다리므로 주소가 바뀔 때까지 봅니다(부하가 큰 CI 대비, admin.spec.ts와 같음).
+    await page.waitForURL((url) => url.pathname === "/admin");
     await expect(page.getByRole("main")).toContainText("인기 상품");
     await page.evaluate(() => document.fonts.ready);
     await page.goto("/admin/products/tiramisu");

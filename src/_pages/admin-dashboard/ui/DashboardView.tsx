@@ -160,10 +160,14 @@ function RevenueChart({ daily }: { daily: DashboardStats["daily"] }) {
 
 /** 대시보드: 지난 14일 매출·주문·환불, 날짜별 매출, 인기 상품, 분류별 판매, 처리 대기 주문. */
 export function DashboardView() {
-  const { orders, ready, now } = useAdminOrders();
+  const { orders, ready, now, sync } = useAdminOrders();
   const names = useProductTexts("ko");
   // 기준 시각은 저장소를 읽은 시각입니다. 서버 렌더링 결과와 어긋나지 않게 읽기 전에는 그리지 않습니다.
-  const stats = useMemo(() => (ready ? dashboardStats(orders, now) : null), [orders, ready, now]);
+  // 서버(공개 데모는 MSW 워커)에서 주문을 받아 온 뒤에 계산합니다. 받지 못하면 이 브라우저의 기록으로 계산합니다.
+  const stats = useMemo(
+    () => (ready && sync !== "pending" ? dashboardStats(orders, now) : null),
+    [orders, ready, now, sync],
+  );
   const [focused, setFocused] = useState<string | null>(null);
   const name = (slug: string) => names?.[slug]?.name ?? slug;
   const waiting = orders.filter((order) => order.status === "paid").slice(0, 5);

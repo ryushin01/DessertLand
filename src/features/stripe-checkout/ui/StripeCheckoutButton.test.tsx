@@ -2,7 +2,11 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { HttpResponse, delay, http } from "msw";
+import { describe, expect, it, vi } from "vitest";
+
+import { captureRequests } from "@/_app/mocks/capture";
+import { server } from "@/_app/mocks/node";
 
 import messages from "@/shared/i18n/messages/en.json";
 
@@ -22,12 +26,20 @@ const setup = (canceled = false) =>
 
 /** 서버 경로(/api/checkout-session)와 같은 상태 코드로 JSON을 답합니다. */
 const respond = (body: object, status = 200) =>
-  vi.stubGlobal(
-    "fetch",
-    vi.fn(async () => Response.json(body, { status })),
-  );
+  server.use(http.post("/api/checkout-session", () => HttpResponse.json(body, { status })));
 
-afterEach(() => vi.unstubAllGlobals());
+/** 끝나지 않는 응답. 받은 요청 수를 셉니다. */
+const hang = () => {
+  const counter = { count: 0 };
+  server.use(
+    http.post("/api/checkout-session", async () => {
+      counter.count += 1;
+      await delay("infinite");
+      return new HttpResponse(null);
+    }),
+  );
+  return counter;
+};
 
 describe("StripeCheckoutButton", () => {
   it("취소하고 돌아오면 안내합니다", () => {
@@ -44,18 +56,22 @@ describe("StripeCheckoutButton", () => {
   });
 
   it("상품 줄·언어·금액·출처를 JSON으로 보냅니다", async () => {
-    const fetchMock = vi.fn<typeof fetch>(async () =>
-      Response.json({ status: "invalid" }, { status: 400 }),
+    const { calls, capture } = captureRequests();
+    server.use(
+      http.post("/api/checkout-session", async ({ request }) => {
+        await capture(request);
+        return HttpResponse.json({ status: "invalid" }, { status: 400 });
+      }),
     );
-    vi.stubGlobal("fetch", fetchMock);
     setup();
     await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
     expect(await screen.findByRole("alert")).toHaveTextContent(messages.checkout.paymentError);
-    const [url, init] = fetchMock.mock.calls[0] ?? [];
-    expect(url).toBe("/api/checkout-session");
-    expect(init?.method).toBe("POST");
-    expect(new Headers(init?.headers).get("content-type")).toBe("application/json");
-    expect(JSON.parse(String(init?.body))).toEqual({
+    expect(calls[0]).toMatchObject({
+      path: "/api/checkout-session",
+      method: "POST",
+      contentType: "application/json",
+    });
+    expect(JSON.parse(calls[0]?.body ?? "")).toEqual({
       items: [{ slug: "baklava", quantity: 1 }],
       locale: "en",
       expectedTotal: 15,
@@ -64,20 +80,17 @@ describe("StripeCheckoutButton", () => {
   });
 
   it("요청이 끝나기 전에는 다시 보낼 수 없습니다", async () => {
-    const fetchMock = vi.fn(() => new Promise(() => {}));
-    vi.stubGlobal("fetch", fetchMock);
+    const counter = hang();
     setup();
     await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
     const pending = screen.getByRole("button", { name: "Going to the payment page" });
     expect(pending).toBeDisabled();
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await userEvent.click(pending);
+    await waitFor(() => expect(counter.count).toBe(1));
   });
 
   it("브라우저 뒤로 가기로 복원되면 버튼을 다시 켭니다", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn(() => new Promise(() => {})),
-    );
+    hang();
     setup();
     await userEvent.click(screen.getByRole("button", { name: "Pay $15 with Stripe" }));
     act(() => {
@@ -121,13 +134,7 @@ describe("StripeCheckoutButton", () => {
     ["Stripe 키가 없으면(503)", () => respond({ status: "disabled" }, 503)],
     [
       "네트워크가 끊기면",
-      () =>
-        vi.stubGlobal(
-          "fetch",
-          vi.fn(async () => {
-            throw new TypeError("Failed to fetch");
-          }),
-        ),
+      () => server.use(http.post("/api/checkout-session", () => HttpResponse.error())),
     ],
   ])("%s 내장 테스트 결제로 바꾸도록 알립니다", async (_, arrange) => {
     arrange();

@@ -19,9 +19,8 @@ export default defineConfig([
     rules: { "fsd/insignificant-slice": "off" },
   },
   {
-    // 어드민의 언어별 상품 문구는 메시지 파일을 고를 때만 따로 받습니다(동적 import). shared/i18n 공개 API(index.ts)에
-    // 두면 쇼핑몰 번들이 10개 언어 메시지 청크를 참조하게 되어 번들 예산을 넘으므로, 이 파일만 메시지 파일을 직접 가져옵니다.
-    files: ["./src/entities/admin-catalog/model/messages.ts"],
+    // MSW 목업(테스트·Storybook·데모 전용)은 실제 응답과 같은 문구를 돌려주려고 메시지 파일을 직접 읽습니다.
+    files: ["./src/_app/mocks/**"],
     rules: { "fsd/no-public-api-sidestep": "off" },
   },
   {

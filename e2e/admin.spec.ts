@@ -158,3 +158,18 @@ test("나가면 다시 들어가기 화면으로 갑니다", async ({ page, isMo
   await page.goto("/admin");
   await expect(page).toHaveURL(/\/admin\/login/);
 });
+
+test("공개 데모의 MSW 워커는 어드민 범위에만 붙고 쇼핑몰 화면은 건드리지 않습니다", async ({
+  page,
+}) => {
+  await enterDemo(page);
+  await expect(page.getByRole("main")).toContainText("인기 상품");
+  const scope = await page.evaluate(async () => {
+    const registration = await navigator.serviceWorker.getRegistration("/admin/");
+    return { scope: registration?.scope ?? "", script: registration?.active?.scriptURL ?? "" };
+  });
+  expect(scope.scope).toMatch(/\/admin\/$/);
+  expect(scope.script).toMatch(/\/admin\/mockServiceWorker\.js$/);
+  await page.goto("/ko");
+  expect(await page.evaluate(() => navigator.serviceWorker.controller === null)).toBe(true);
+});

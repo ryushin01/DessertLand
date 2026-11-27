@@ -5,7 +5,17 @@ import nextTs from "eslint-config-next/typescript";
 const jsxA11y = next.find((config) => config.plugins?.["jsx-a11y"])?.plugins?.["jsx-a11y"];
 
 const config = [
-  { ignores: ["styled-system/**", ".next/**", "storybook-static/**", "public/storybook/**", "playwright-report/**"] },
+  {
+    ignores: [
+      "styled-system/**",
+      ".next/**",
+      "storybook-static/**",
+      "public/storybook/**",
+      "playwright-report/**",
+      // MSW가 만든 워커 파일(npx msw init, 직접 고치지 않음)
+      "**/mockServiceWorker.js",
+    ],
+  },
   ...next,
   ...nextTs,
   {

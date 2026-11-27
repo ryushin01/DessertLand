@@ -15,7 +15,6 @@ import {
   useAdminOrders,
   type AdminOrder,
 } from "@/entities/admin-order";
-import { DEMO_MODE } from "@/shared/config";
 import {
   Modal,
   Pill,
@@ -92,7 +91,7 @@ function RefundDialog({ order, open, onClose, onDone }: RefundDialogProps) {
       <form className={styles.refundForm} onSubmit={submit} noValidate>
         <p>
           남은 금액 {money(remaining)} ·{" "}
-          {!DEMO_MODE && order.origin === "stripe"
+          {order.channel === "stripe" && order.origin !== "seed"
             ? "Stripe 테스트 모드 환불 API로 처리합니다."
             : "실제 결제가 없는 주문이라 내장 테스트 결제 기록으로 처리합니다."}
         </p>

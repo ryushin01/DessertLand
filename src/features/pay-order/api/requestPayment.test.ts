@@ -1,4 +1,8 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { HttpResponse, http } from "msw";
+import { describe, expect, it } from "vitest";
+
+import { captureRequests } from "@/_app/mocks/capture";
+import { server } from "@/_app/mocks/node";
 
 import type { PaymentRequest } from "../model/types";
 import { requestPayment } from "./requestPayment";
@@ -11,27 +15,26 @@ const data: PaymentRequest = {
   outcome: "approve",
 };
 
-const respond = (body: unknown, status = 200) => {
-  const fetchMock = vi.fn<typeof fetch>(async () => Response.json(body, { status }));
-  vi.stubGlobal("fetch", fetchMock);
-  return fetchMock;
-};
-
-afterEach(() => vi.unstubAllGlobals());
+const respond = (body: Record<string, unknown>, status = 200) =>
+  server.use(http.post("/api/payments", () => HttpResponse.json(body, { status })));
 
 describe("requestPayment", () => {
   it("결제 요청을 JSON으로 보내고 승인 결과를 돌려줍니다", async () => {
-    const fetchMock = respond({ status: "approved", orderNo: "DL-1", total: 15000 });
+    // 기본 목업(_app/mocks/handlers/app.ts)이 받은 금액 그대로 승인합니다.
+    const { calls, capture } = captureRequests();
+    server.events.on("request:start", ({ request }) => void capture(request));
     await expect(requestPayment(data)).resolves.toEqual({
       status: "approved",
-      orderNo: "DL-1",
+      orderNo: "DL-MSW0001",
       total: 15000,
     });
-    const [url, init] = fetchMock.mock.calls[0] ?? [];
-    expect(url).toBe("/api/payments");
-    expect(init?.method).toBe("POST");
-    expect(new Headers(init?.headers).get("content-type")).toBe("application/json");
-    expect(JSON.parse(String(init?.body))).toEqual(data);
+    server.events.removeAllListeners();
+    expect(calls[0]).toMatchObject({
+      path: "/api/payments",
+      method: "POST",
+      contentType: "application/json",
+    });
+    expect(JSON.parse(calls[0]?.body ?? "")).toEqual(data);
   });
 
   it.each([
@@ -49,10 +52,7 @@ describe("requestPayment", () => {
   });
 
   it("네트워크가 끊기면 오류를 던집니다", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn<typeof fetch>().mockRejectedValue(new TypeError("Failed to fetch")),
-    );
-    await expect(requestPayment(data)).rejects.toThrow("Failed to fetch");
+    server.use(http.post("/api/payments", () => HttpResponse.error()));
+    await expect(requestPayment(data)).rejects.toThrow(TypeError);
   });
 });

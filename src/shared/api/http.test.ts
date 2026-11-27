@@ -1,37 +1,34 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { HttpResponse, http as mock } from "msw";
+import { describe, expect, it } from "vitest";
+
+import { captureRequests } from "@/_app/mocks/capture";
+import { server } from "@/_app/mocks/node";
 
 import { http, keepResponse } from "./http";
 
-afterEach(() => vi.unstubAllGlobals());
-
 describe("공통 HTTP 클라이언트", () => {
   it("2xx가 아닌 응답도 keepResponse로 그대로 돌려받습니다", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn<typeof fetch>().mockResolvedValue(new Response("{}", { status: 402 })),
-    );
+    server.use(mock.post("/x", () => HttpResponse.json({}, { status: 402 })));
     const response = await http.url("/x").post().res().catch(keepResponse);
     expect(response.status).toBe(402);
   });
 
   it("네트워크 오류는 그대로 던집니다", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn<typeof fetch>().mockRejectedValue(new TypeError("Failed to fetch")),
-    );
-    await expect(http.url("/x").post().res().catch(keepResponse)).rejects.toThrow(
-      "Failed to fetch",
-    );
+    server.use(mock.post("/x", () => HttpResponse.error()));
+    await expect(http.url("/x").post().res().catch(keepResponse)).rejects.toThrow(TypeError);
   });
 
   it("JSON 본문을 content-type과 함께 보냅니다", async () => {
-    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(new Response(null));
-    vi.stubGlobal("fetch", fetchMock);
+    const { calls, capture } = captureRequests();
+    server.use(
+      mock.post("/x", async ({ request }) => {
+        await capture(request);
+        return new HttpResponse(null);
+      }),
+    );
     await http.url("/x").json({ a: 1 }).post().res();
-    const [url, init] = fetchMock.mock.calls[0] ?? [];
-    expect(url).toBe("/x");
-    expect(init?.method).toBe("POST");
-    expect(new Headers(init?.headers).get("content-type")).toBe("application/json");
-    expect(init?.body).toBe('{"a":1}');
+    expect(calls).toEqual([
+      { path: "/x", method: "POST", contentType: "application/json", body: '{"a":1}' },
+    ]);
   });
 });

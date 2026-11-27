@@ -10,7 +10,7 @@
 
 ## 2. 기술 스택과 구조
 
-- Next.js 16(App Router), React 19, TypeScript 5.9, Panda CSS(쇼핑몰)·CSS Modules(어드민), zod, jotai, Wretch(HTTP, `shared/api`), next-intl, Stripe Checkout(테스트 모드), Claude API(`@anthropic-ai/sdk`, AI 추천), GSAP·Lenis·OGL, Sentry(DSN이 있을 때만), Vercel Speed Insights, Storybook 10
+- Next.js 16(App Router), React 19, TypeScript 5.9, Panda CSS(쇼핑몰)·CSS Modules(어드민), zod, MSW(API 목업, `src/_app/mocks`), jotai, Wretch(HTTP, `shared/api`), next-intl, Stripe Checkout(테스트 모드), Claude API(`@anthropic-ai/sdk`, AI 추천), GSAP·Lenis·OGL, Sentry(DSN이 있을 때만), Vercel Speed Insights, Storybook 10
 - Feature-Sliced Design: `_app → _pages → widgets → features → entities → shared` 순서로 위 층은 아래 층만 가져옵니다. 같은 층끼리는 가져오지 않고(필요하면 `entities/<대상>/@x/<소비자>.ts`), 슬라이스는 `index.ts`(서버 전용은 `index.server.ts`)로만 가져옵니다. Steiger(`pnpm lint:fsd`, `steiger.config.ts`)가 검사합니다.
 - `src/app/[locale]/`의 라우트 파일은 `_pages`·`_app`을 다시 내보내기만 합니다. `src/proxy.ts`는 언어 라우팅입니다. 한 곳에서만 쓰는 코드는 그 슬라이스에 두고, 두 곳 이상에서 쓰면 `features`·`widgets`로 올립니다.
 - GSAP은 `@/shared/lib/gsap`에서만 가져옵니다(움직임 상태 `@/shared/lib/motion`을 쓰는 곳에 GSAP이 실리지 않게).
@@ -37,6 +37,7 @@
 
 - CI(`.github/workflows/ci.yml`) 순서: install → typecheck → lint → lint:fsd → test → build → Playwright 설치 → e2e → size → lhci
 - 오프라인 E2E(`e2e/offline.spec.ts`, 데스크톱·모바일)는 localhost 밖 요청을 모두 막고 `.env` 없이 빌드한 앱의 주요 화면·결제·Storybook이 뜨는지, 외부 요청 0건, axe를 봅니다. 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`.
+- API 목업은 MSW 한곳(`src/_app/mocks`)에 둡니다. 테스트에서 `vi.stubGlobal("fetch")`로 가짜를 만들지 말고 `server.use(http…)`를 씁니다. `pnpm e2e`는 같은 빌드를 MSW 목업 서버(`E2E_MSW=1`, 포트 `E2E_MOCK_PORT`=E2E 포트+1)로 한 번 더 띄워 키가 있는 흐름(`e2e/mocked.spec.ts`)을 봅니다.
 - 테스트 원칙(Testing Library): 구현 세부가 아니라 사용자가 보는 동작을 검사하고, 요소는 역할·이름(`getByRole`)으로 찾습니다. 단위·컴포넌트는 코드 옆 `*.test.ts(x)`(Vitest + Testing Library, jsdom), 화면 흐름·잘림·넘침은 Playwright E2E, 접근성은 axe(`@axe-core/playwright`, Storybook a11y 애드온)로 검사합니다. 버그를 고치면 고치기 전에 실패하는 테스트를 함께 넣습니다.
 
 ## 5. 코드 스타일
