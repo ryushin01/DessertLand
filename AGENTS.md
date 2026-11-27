@@ -30,12 +30,14 @@
 | ----------------------------- | ------------------------------------------------------------------------------ |
 | `pnpm typecheck`              | `tsc --noEmit`                                                                 |
 | `pnpm lint` / `pnpm lint:fsd` | ESLint(jsx-a11y recommended) / FSD 구조(Steiger)                               |
-| `pnpm test`                   | 단위(Vitest + Testing Library)                                                 |
+| `pnpm check`                  | CI와 같은 검사 전체(`scripts/check.mjs`). 단계만: `pnpm check static`·`build size`·`e2e -- --shard=1/2`·`lhci` |
+| `pnpm test` / `pnpm test:coverage` | 단위(Vitest + Testing Library) / 커버리지(`@vitest/coverage-v8`, 로직 계층 lib·model·api 80%, 전체는 기준선) |
 | `pnpm build`                  | `panda codegen` → Storybook을 `public/storybook`에 빌드 → 앱 빌드              |
-| `pnpm e2e`                    | 프로덕션 빌드 E2E와 axe, 오프라인 E2E 포함(먼저 `build`, 포트 4391·`E2E_PORT`) |
+| `pnpm e2e`                    | 프로덕션 빌드 E2E와 axe, 오프라인·장애·시각 회귀 포함(먼저 `build`, 포트 4391·`E2E_PORT`) |
 | `pnpm size` / `pnpm lhci`     | 번들 예산(쇼핑몰 JS 367·CSS 21, 어드민 JS 210·CSS 54 kB, gzip) / Lighthouse(먼저 `build`) |
 
-- CI(`.github/workflows/ci.yml`) 순서: install → typecheck → lint → lint:fsd → test → build → Playwright 설치 → e2e → size → lhci
+- CI(`.github/workflows/ci.yml`)는 `pnpm check <단계>`를 부릅니다: 경로 필터(문서만이면 건너뜀) → static(타입·린트·FSD·커버리지, 표는 실행 요약) ∥ build+size → 빌드 결과를 받아 e2e 2샤드 ∥ lhci → 필수 검사 `check`. 실패할 때만 리포트·차이 이미지를 7일 보관합니다. Lighthouse는 `--upload.target=filesystem`.
+- 시각 회귀(`e2e/visual*.spec.ts`, 기준 이미지 `e2e/__screenshots__`)는 Linux에서만 비교합니다. 화면을 바꿨으면 CI 실패 결과물(`playwright-1`·`playwright-2`의 `test-results/**/*-actual.png`)로 기준 이미지를 바꿉니다(`docs/development.md` "시각 회귀").
 - 오프라인 E2E(`e2e/offline.spec.ts`, 데스크톱·모바일)는 localhost 밖 요청을 모두 막고 `.env` 없이 빌드한 앱의 모든 라우트(쇼핑몰 10개 언어·어드민)·결제·Storybook이 뜨는지, 외부 요청·스크립트 오류 0건, axe를 봅니다. 장애 E2E(`e2e/outage.spec.ts`, 장애 서버 `E2E_MSW=outage`)는 키가 있는 배포본에서 Stripe·Claude가 끊긴 경우를 봅니다. 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`.
 - API 목업은 MSW 한곳(`src/_app/mocks`)에 둡니다. 테스트에서 `vi.stubGlobal("fetch")`로 가짜를 만들지 말고 `server.use(http…)`를 씁니다. `pnpm e2e`는 같은 빌드를 MSW 목업 서버(`E2E_MSW=1`, 포트 `E2E_MOCK_PORT`=E2E 포트+1)로 한 번 더 띄워 키가 있는 흐름(`e2e/mocked.spec.ts`)을 봅니다.
 - 테스트 원칙(Testing Library): 구현 세부가 아니라 사용자가 보는 동작을 검사하고, 요소는 역할·이름(`getByRole`)으로 찾습니다. 단위·컴포넌트는 코드 옆 `*.test.ts(x)`(Vitest + Testing Library, jsdom), 화면 흐름·잘림·넘침은 Playwright E2E, 접근성은 axe(`@axe-core/playwright`, Storybook a11y 애드온)로 검사합니다. 버그를 고치면 고치기 전에 실패하는 테스트를 함께 넣습니다.

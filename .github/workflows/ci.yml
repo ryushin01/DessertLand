@@ -5,8 +5,44 @@ on:
     branches: [main]
   pull_request:
 
+# 같은 브랜치·PR에 새 커밋이 오면 이전 실행을 취소합니다(main은 커밋마다 끝까지 돌림).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+# 검사 내용은 모두 `pnpm check <단계>`(scripts/check.mjs)에 있어 로컬 `pnpm check`와 같습니다.
+# 빌드는 한 번만 하고, 그 결과(.next, public/storybook)를 E2E 샤드(기본·MSW 목업·장애 서버 포함)와 Lighthouse가 다시 씁니다.
 jobs:
-  check:
+  # 경로 필터: 문서만 바뀌면 검사를 건너뜁니다. 필수 검사(check)는 맨 아래 작업이 늘 답합니다.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: filter
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            echo "code=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          changed=$(git diff --name-only "$BASE" HEAD)
+          echo "$changed"
+          if echo "$changed" | grep -qvE '(\.md$|^docs/|^LICENSE$)'; then
+            echo "code=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "code=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  static:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -16,16 +52,117 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm lint:fsd
-      - run: pnpm test
-      # pnpm build가 Storybook(public/storybook)까지 빌드하므로 따로 돌리지 않습니다.
-      # 운영과 같은 공개 데모 빌드(어드민 "관리자로 둘러보기", 어드민 수정값의 쇼핑몰 반영)로 E2E·번들 예산을 봅니다.
-      - run: pnpm build
-        env:
-          NEXT_PUBLIC_DEMO: "1"
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm e2e
-      - run: pnpm size
-      - run: pnpm lhci
+      # typecheck · lint · lint:fsd · 단위 테스트와 커버리지(표는 이 실행의 요약에 씀)
+      - run: pnpm check static
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7
+
+  build:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/cache@v6
+        with:
+          path: .next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: next-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      # 운영과 같은 공개 데모 빌드(NEXT_PUBLIC_DEMO=1)와 번들 예산
+      - run: pnpm check build size
+      # 파일이 많아 하나로 묶어 넘깁니다(.next/cache는 위 캐시가 맡음).
+      - run: tar -cf build.tar --exclude=.next/cache .next public/storybook
+      - uses: actions/upload-artifact@v7
+        with:
+          name: build
+          path: build.tar
+          retention-days: 1
+
+  e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - id: playwright
+        run: echo "version=$(pnpm exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+      - id: browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      - if: steps.browsers.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps chromium
+      - if: steps.browsers.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
+      - uses: actions/download-artifact@v8
+        with:
+          name: build
+      - run: tar -xf build.tar && rm build.tar
+      - run: pnpm check e2e -- --shard=${{ matrix.shard }}/2
+      # 실패할 때만 리포트와 시각 회귀 차이 이미지(test-results의 *-diff.png)를 올립니다.
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-${{ matrix.shard }}
+          # 기준 이미지가 없으면 Playwright가 e2e/__screenshots__에 새로 쓰므로 함께 올립니다(기준 이미지 만들기).
+          path: |
+            playwright-report/
+            test-results/
+            e2e/__screenshots__/
+          retention-days: 7
+
+  lhci:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v8
+        with:
+          name: build
+      - run: tar -xf build.tar && rm build.tar
+      - run: pnpm check lhci
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse
+          path: .lighthouseci/
+          include-hidden-files: true
+          retention-days: 7
+
+  # main 보호의 필수 검사. 문서만 바뀌어 건너뛴 작업은 통과로 보고, 하나라도 실패·취소면 실패입니다.
+  check:
+    if: always()
+    needs: [changes, static, build, e2e, lhci]
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "$RESULTS"
+          if echo "$RESULTS" | grep -qE 'failure|cancelled'; then exit 1; fi

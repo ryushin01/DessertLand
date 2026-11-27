@@ -1,5 +1,23 @@
 # 변경 기록
 
+## 1.3.3 - 2026-11-27
+
+- 성능: Sentry DSN이 없는 빌드에서도 쓰지 않는 Sentry 청크(약 30 kB)가 만들어져 번들 예산에 들어가던 문제를 고침. 값이 없는 `NEXT_PUBLIC_SENTRY_DSN`을 빈 값으로 박아(`next.config.ts`의 `env`) 분기가 빌드에서 빠짐. 쇼핑몰 전체 JS 366.74 kB → 332.61 kB(예산 367 kB 그대로, 여유 0.26 kB → 34.39 kB)
+- 개발: `pnpm check` 하나로 CI와 같은 검사(정적 검사·커버리지 → 빌드 → 번들 예산 → E2E → Lighthouse)를 돌림. CI도 이 스크립트를 단계별로 부름
+- 개발(CI):
+  - 빌드를 한 번만 하고 결과를 E2E 2샤드(MSW 목업·장애 서버 포함)와 Lighthouse가 다시 씀
+  - 캐시: pnpm, `.next/cache`, Playwright 브라우저
+  - 같은 PR의 이전 실행 취소(`concurrency`), 문서만 바뀌면 건너뛰는 경로 필터(필수 검사 `check`는 늘 답함)
+  - 커버리지 표를 실행 요약(`$GITHUB_STEP_SUMMARY`)에 씀. 실패할 때만 Playwright 리포트·시각 회귀 차이 이미지·Lighthouse 리포트·커버리지를 올림(7일 보관)
+  - Lighthouse 리포트는 공개 임시 저장소 대신 파일로 남김(`--upload.target=filesystem`)
+- 테스트:
+  - 커버리지(`@vitest/coverage-v8`): 로직 계층(lib·model·api) 80%, 전체는 지금 값 기준선(줄 52%·문장 52%·함수 50%·분기 54%)
+  - 결제 세션·추천·내장 테스트 결제 API 라우트(키 없음·MSW 목업·장애·요청 한도), AI 추천 기록, 어드민 들어가기 요청 단위 테스트
+  - 시각 회귀(Playwright `toHaveScreenshot`): 쇼핑몰·어드민 주요 화면(데스크톱·모바일)과 Storybook 모든 이야기. 움직임을 멈추고 WebGL을 가리며 시계를 고정함. 기준 이미지는 Linux CI 결과물
+  - 상태별 axe: 결제 입력 오류, 내장 테스트 결제 실패, 언어 메뉴, 검색 결과 없음
+  - Sentry DSN 없는 빌드에 Sentry가 실리지 않는지 확인
+- 의존성(개발): `@vitest/coverage-v8`
+
 ## 1.3.2 - 2026-11-27
 
 - 수정: `.env` 없이 받아 실행하면 어드민이 잠겨(공개 데모가 `NEXT_PUBLIC_DEMO=1`일 때만 켜짐) 어드민 화면을 볼 수 없었음. 공개 데모를 기본으로 켜고 `NEXT_PUBLIC_DEMO=0`일 때만 끔(운영은 이미 1이라 그대로, 꺼진 빌드의 동작도 그대로)

@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 
 import { expect, test, type APIRequestContext } from "./fixtures";
@@ -134,4 +134,15 @@ test("움직임 코드는 필요한 기기에서만 동작합니다", async ({ p
     await expect(page.locator("html")).toHaveAttribute("data-custom-cursor", "on");
   }
   expect(errors).toEqual([]);
+});
+
+test("Sentry DSN 없이 빌드하면 브라우저 코드에 Sentry를 싣지 않습니다", () => {
+  test.skip(Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN), "DSN이 있는 빌드는 Sentry를 싣습니다");
+  // 값이 없는 NEXT_PUBLIC_* 는 빌드 때 박히지 않고 실행 때 검사로 남아, 쓰지 않는 Sentry 청크(약 30 kB)가 번들 예산에 들어갔습니다.
+  const chunks = readdirSync(".next/static/chunks").filter((name) => name.endsWith(".js"));
+  expect(chunks.length).toBeGreaterThan(0);
+  const withSentry = chunks.filter((name) =>
+    readFileSync(`.next/static/chunks/${name}`, "utf8").includes("Sentry syntheticException"),
+  );
+  expect(withSentry).toEqual([]);
 });
