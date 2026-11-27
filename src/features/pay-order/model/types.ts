@@ -13,6 +13,8 @@ export type PaymentRequest = {
   locale: string;
   expectedTotal: number;
   outcome: TestOutcome;
+  /** 공개 데모에서만: 어드민이 고친 가격·할인·숨김(entities/product의 pricingFor). */
+  pricing?: unknown;
 };
 
 export type PaymentResult =

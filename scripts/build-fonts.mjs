@@ -22,9 +22,7 @@ import { Blob, Face } from "harfbuzzjs";
 import subsetFont from "subset-font";
 
 // TypeScript 파서가 있으면 문자열·JSX 글자만, 없으면(TypeScript 7 등) 주석까지 원문 전체를 셈(빠지는 글자가 없게)
-const ts = await import("typescript")
-  .then((m) => m.default ?? m)
-  .catch(() => null);
+const ts = await import("typescript").then((m) => m.default ?? m).catch(() => null);
 const AST = typeof ts?.createSourceFile === "function";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -87,8 +85,7 @@ async function* walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const file = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (file !== OUT && file !== REST && entry.name !== "node_modules")
-        yield* walk(file);
+      if (file !== OUT && file !== REST && entry.name !== "node_modules") yield* walk(file);
     } else yield file;
   }
 }
@@ -99,6 +96,9 @@ async function screenText() {
   for (const dir of config.scan) {
     for await (const file of walk(path.join(ROOT, dir))) {
       if (/\.(test|spec|stories)\.[jt]sx?$/.test(file)) continue;
+      // ignore: 이 글꼴을 쓰지 않는 화면(예: 따로 된 글꼴을 쓰는 어드민)의 경로 앞부분. 저장소 루트 기준
+      const relativePath = path.relative(ROOT, file).split(path.sep).join("/");
+      if ((config.ignore ?? []).some((prefix) => relativePath.startsWith(prefix))) continue;
       if (/\.[cm]?[jt]sx?$/.test(file)) {
         const text = await readFile(file, "utf8");
         if (!AST) {
@@ -106,13 +106,7 @@ async function screenText() {
           continue;
         }
         const kind = file.endsWith("x") ? ts.ScriptKind.TSX : ts.ScriptKind.TS;
-        const source = ts.createSourceFile(
-          file,
-          text,
-          ts.ScriptTarget.Latest,
-          false,
-          kind,
-        );
+        const source = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, false, kind);
         const visit = (node) => {
           if (
             ts.isStringLiteralLike(node) ||
@@ -138,9 +132,7 @@ async function screenText() {
         } catch {
           parts.push(text);
         }
-      } else if (
-        new RegExp(`\\.(${config.dataExtensions.join("|")})$`).test(file)
-      ) {
+      } else if (new RegExp(`\\.(${config.dataExtensions.join("|")})$`).test(file)) {
         parts.push(await readFile(file, "utf8"));
       }
     }
@@ -189,25 +181,16 @@ for (const font of config.fonts) {
 
     if (CHECK) {
       // CSS의 unicode-range와 실제 화면 글자 파일의 글자 목록을 모두 확인
-      const rule = existingUi
-        .split("\n")
-        .find((line) => line.includes(`font-weight:${weight};`));
-      const declared = rule
-        ? parseRange(rule.match(/unicode-range:([^}]+)/)[1])
-        : new Set();
+      const rule = existingUi.split("\n").find((line) => line.includes(`font-weight:${weight};`));
+      const declared = rule ? parseRange(rule.match(/unicode-range:([^}]+)/)[1]) : new Set();
       const uiPath = path.join(dir, `${slug}-${weight}-ui.woff2`);
       if (!existsSync(uiPath)) {
-        missing.push(
-          `${family} ${weight}: ${path.relative(ROOT, uiPath)} 파일이 없습니다`,
-        );
+        missing.push(`${family} ${weight}: ${path.relative(ROOT, uiPath)} 파일이 없습니다`);
         continue;
       }
-      const inFile = cmapOf(
-        await fontverter.convert(await readFile(uiPath), "sfnt"),
-      );
+      const inFile = cmapOf(await fontverter.convert(await readFile(uiPath), "sfnt"));
       const lack = [...ui].filter((cp) => !declared.has(cp) || !inFile.has(cp));
-      if (lack.length)
-        missing.push(`${family} ${weight}: ${String.fromCodePoint(...lack)}`);
+      if (lack.length) missing.push(`${family} ${weight}: ${String.fromCodePoint(...lack)}`);
       checked = Math.max(checked, ui.size);
       continue;
     }
@@ -226,11 +209,9 @@ for (const font of config.fonts) {
       const name = `${slug}-${weight}-${String(index).padStart(3, "0")}.woff2`;
       // 이름을 바꾸는 글꼴은 이전 실행에서 이름 바꾸기가 실패했을 수 있어 늘 다시 만듦
       if (ALL || font.rename || !existsSync(path.join(restDir, name))) {
-        const piece = await subsetFont(
-          original,
-          String.fromCodePoint(...inFont),
-          { targetFormat: "woff2" },
-        );
+        const piece = await subsetFont(original, String.fromCodePoint(...inFont), {
+          targetFormat: "woff2",
+        });
         await writeFile(path.join(restDir, name), piece);
         written.push(path.join(restDir, name));
       }
@@ -249,21 +230,18 @@ for (const font of config.fonts) {
   }
 
   if (CHECK) continue;
-  await writeFile(
-    path.join(OUT, `${slug}.css`),
-    `${HEADER}${uiRules.join("\n")}\n`,
-  );
+  await writeFile(path.join(OUT, `${slug}.css`), `${HEADER}${uiRules.join("\n")}\n`);
   // 같은 조각 번호의 굵기들을 이웃하게 두어 gzip이 반복되는 unicode-range를 줄이게 함
-  restRules.sort(
-    (a, b) => a.index - b.index || Number(a.weight) - Number(b.weight),
-  );
+  restRules.sort((a, b) => a.index - b.index || Number(a.weight) - Number(b.weight));
   await writeFile(
     path.join(REST, `${slug}-rest.css`),
     `${HEADER}${restRules.map((r) => r.rule).join("\n")}\n`,
   );
   // OFL 예약 이름이 있는 글꼴은 줄인 파일의 이름표도 바꿈(fontTools 필요: pip install fonttools brotli)
   if (font.rename && written.length)
-    execFileSync("python3", [path.join(ROOT, "scripts/fonts/rename-font.py"), family, ...written], { stdio: "inherit" });
+    execFileSync("python3", [path.join(ROOT, "scripts/fonts/rename-font.py"), family, ...written], {
+      stdio: "inherit",
+    });
 }
 
 if (CHECK) {

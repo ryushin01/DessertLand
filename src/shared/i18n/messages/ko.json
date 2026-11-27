@@ -56,7 +56,8 @@
     "addShort": "담기",
     "view": "보기",
     "buyNow": "{name} 바로 구매",
-    "buyNowShort": "바로 구매"
+    "buyNowShort": "바로 구매",
+    "soldOut": "품절"
   },
   "product": {
     "back": "디저트 목록으로",
@@ -69,7 +70,9 @@
     "add": "장바구니에 담기",
     "related": "함께 보면 좋은 디저트",
     "notice": "상품 정보와 가격은 데모용 예시입니다.",
-    "buyNow": "바로 구매"
+    "buyNow": "바로 구매",
+    "soldOut": "품절되었습니다. 다시 들어오면 담을 수 있습니다.",
+    "unavailable": "지금은 판매하지 않는 디저트입니다."
   },
   "allergens": {
     "milk": "우유",

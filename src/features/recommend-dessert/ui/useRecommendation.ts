@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { appendRecommendationRecord } from "@/entities/recommendation-log";
 import { loadHttp } from "@/shared/api";
+import { DEMO_MODE } from "@/shared/config";
 
 import { parseRecommendEvent } from "../model/parse-event";
 import type { Pick, RecommendRequest } from "../model/types";
@@ -64,6 +66,16 @@ export function useRecommendation() {
               setState({ status: "loading", intro: event.intro, picks: event.picks, source: null });
             } else {
               finished = true;
+              // 공개 데모: 어드민 "AI 추천 기록"에 보이도록 조건·결과만 이 브라우저에 남깁니다(문장은 남기지 않음).
+              if (DEMO_MODE)
+                appendRecommendationRecord({
+                  at: Date.now(),
+                  locale: data.locale,
+                  chips: data.chips,
+                  withQuery: data.query.trim().length > 0,
+                  source: event.source,
+                  picks: event.picks.map((pick) => pick.slug),
+                });
               setState({
                 status: "done",
                 intro: event.intro,

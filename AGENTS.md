@@ -5,12 +5,12 @@
 ## 1. 프로젝트 개요
 
 - 전 세계 디저트를 10개 언어(한국어 기본, 영·일·중·프·이·스·독·포·튀르키예어)로 소개하고 판매하는 글로벌 쇼핑몰입니다. 별도 백엔드 없는 데모 프로젝트로, 결제는 실제 청구가 없는 테스트 결제입니다.
-- 화면 축: 쇼핑몰(웹)
-- 운영: https://dessert-land-ryushin01.vercel.app · Storybook: `/storybook/index.html` · 테스트 카드 `4242 4242 4242 4242`, 미래 만료일, 아무 CVC
+- 화면 축: 쇼핑몰(웹), 어드민(웹, `/admin`)
+- 운영: https://dessert-land-ryushin01.vercel.app · 어드민: `/admin`(공개 데모 "관리자로 둘러보기") · Storybook: `/storybook/index.html` · 테스트 카드 `4242 4242 4242 4242`, 미래 만료일, 아무 CVC
 
 ## 2. 기술 스택과 구조
 
-- Next.js 16(App Router), React 19, TypeScript 5.9, Panda CSS, jotai, Wretch(HTTP, `shared/api`), next-intl, Stripe Checkout(테스트 모드), Claude API(`@anthropic-ai/sdk`, AI 추천), GSAP·Lenis·OGL, Sentry(DSN이 있을 때만), Vercel Speed Insights, Storybook 10
+- Next.js 16(App Router), React 19, TypeScript 5.9, Panda CSS(쇼핑몰)·CSS Modules(어드민), zod, jotai, Wretch(HTTP, `shared/api`), next-intl, Stripe Checkout(테스트 모드), Claude API(`@anthropic-ai/sdk`, AI 추천), GSAP·Lenis·OGL, Sentry(DSN이 있을 때만), Vercel Speed Insights, Storybook 10
 - Feature-Sliced Design: `_app → _pages → widgets → features → entities → shared` 순서로 위 층은 아래 층만 가져옵니다. 같은 층끼리는 가져오지 않고(필요하면 `entities/<대상>/@x/<소비자>.ts`), 슬라이스는 `index.ts`(서버 전용은 `index.server.ts`)로만 가져옵니다. Steiger(`pnpm lint:fsd`, `steiger.config.ts`)가 검사합니다.
 - `src/app/[locale]/`의 라우트 파일은 `_pages`·`_app`을 다시 내보내기만 합니다. `src/proxy.ts`는 언어 라우팅입니다. 한 곳에서만 쓰는 코드는 그 슬라이스에 두고, 두 곳 이상에서 쓰면 `features`·`widgets`로 올립니다.
 - GSAP은 `@/shared/lib/gsap`에서만 가져옵니다(움직임 상태 `@/shared/lib/motion`을 쓰는 곳에 GSAP이 실리지 않게).
@@ -19,7 +19,7 @@
 
 - 패키지 매니저: pnpm(`packageManager` `pnpm@12.16.1`), Node.js 22(`.nvmrc`)
 - `corepack enable pnpm` → `pnpm install`(`prepare`가 `panda codegen`과 한중일 글꼴 복사 `scripts/copy-cjk-fonts.mjs` → `public/fonts/cjk/`, git 제외) → `pnpm dev`(http://localhost:3000)
-- 환경 변수(이름만, `.env.example` → `.env.local`): `STRIPE_SECRET_KEY`(테스트 키만), `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_SITE_URL`(도메인 연결 시), `E2E_PORT`·`BASE_URL`(테스트·스크린샷)
+- 환경 변수(이름만, `.env.example` → `.env.local`): `STRIPE_SECRET_KEY`(테스트 키만), `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_DEMO`(1이면 공개 데모: 어드민 둘러보기·쇼핑몰 반영), `ADMIN_PASSWORD`(데모가 꺼진 어드민 비밀번호), `NEXT_PUBLIC_SITE_URL`(도메인 연결 시), `E2E_PORT`·`BASE_URL`(테스트·스크린샷)
 - `.env` 없이, 인터넷이 끊겨도 모든 화면이 내용과 함께 떠야 합니다. 결제는 키가 없거나 Stripe 세션 만들기가 실패(502·네트워크 오류)하면 내장 테스트 결제창(`POST /api/payments`)으로 바꾸고 `role="status"`로 알리며, 추천은 키가 없거나 실패·시간 초과(30초)면 규칙 기반 기본 추천("기본 추천 (AI 미사용)")입니다. 글꼴은 모두 같은 출처(Exo 2 `next/font/local`, 한중일 Fontsource 복사본, 하다 바탕 저장소 파일)이고 외부 글꼴 서버(Google Fonts)를 쓰지 않습니다. 자세한 표는 `docs/development.md`의 "오프라인·외부 서비스 대체".
 - 그 밖의 명령: `pnpm storybook`, `pnpm analyze`, `pnpm fonts`, `pnpm screenshots`(Stripe 키 없이 `pnpm build && pnpm start` 뒤 `BASE_URL` 지정)
 - 언어·상품을 더할 때는 `docs/development.md`의 "언어 추가"·"상품 추가" 순서를 따릅니다(메시지 파일, 통화, 맛, 사진 출처, 새 문자 체계면 `CJK_FONTS`와 `copy-cjk-fonts.mjs`의 `LOCALES`).
@@ -33,7 +33,7 @@
 | `pnpm test`                   | 단위(Vitest + Testing Library)                                                 |
 | `pnpm build`                  | `panda codegen` → Storybook을 `public/storybook`에 빌드 → 앱 빌드              |
 | `pnpm e2e`                    | 프로덕션 빌드 E2E와 axe, 오프라인 E2E 포함(먼저 `build`, 포트 4391·`E2E_PORT`) |
-| `pnpm size` / `pnpm lhci`     | 번들 예산(JS 367 kB, CSS 21 kB, gzip) / Lighthouse 데스크톱 기준(먼저 `build`) |
+| `pnpm size` / `pnpm lhci`     | 번들 예산(쇼핑몰 JS 367·CSS 21, 어드민 JS 210·CSS 54 kB, gzip) / Lighthouse(먼저 `build`) |
 
 - CI(`.github/workflows/ci.yml`) 순서: install → typecheck → lint → lint:fsd → test → build → Playwright 설치 → e2e → size → lhci
 - 오프라인 E2E(`e2e/offline.spec.ts`, 데스크톱·모바일)는 localhost 밖 요청을 모두 막고 `.env` 없이 빌드한 앱의 주요 화면·결제·Storybook이 뜨는지, 외부 요청 0건, axe를 봅니다. 따로 돌릴 때는 `pnpm build && pnpm exec playwright test e2e/offline.spec.ts`.
@@ -63,7 +63,7 @@
 ## 7. 배포·릴리스
 
 - Vercel 프로젝트 `dessert-land`. `main`에 병합하면 자동 배포되고, 다른 브랜치와 PR 미리보기는 끕니다(`vercel.json`의 `git.deploymentEnabled`).
-- 데모: 운영 주소가 곧 데모이며 로그인이 없습니다. Stripe 테스트 키가 있으면 Stripe Checkout, 없으면 내장 테스트 결제창을 씁니다. 주문은 서버에 저장하지 않고 브라우저에만 남깁니다(최근 20건).
+- 데모: 운영 주소가 곧 데모이며(운영 환경 변수 `NEXT_PUBLIC_DEMO=1`) 쇼핑몰은 로그인이 없고, 어드민은 "관리자로 둘러보기"로 들어갑니다(고친 값은 이 브라우저에만, 자세한 구조는 `docs/development.md` "어드민"). Stripe 테스트 키가 있으면 Stripe Checkout, 없으면 내장 테스트 결제창을 씁니다. 주문은 서버에 저장하지 않고 브라우저에만 남깁니다(최근 20건).
 - 릴리스: 태그·GitHub 릴리스 `vX.Y.Z`(제목도 같음), 대상은 병합 커밋 전체 SHA, 본문은 CHANGELOG의 해당 절.
 - 릴리스 뒤 백업 `bash ~/Documents/Archive/Backup/backup.sh`, 보관함 `DessertLand v1.0.0 고도화 계획.md`에 진행 기록, 소개가 바뀌면 프로필 `ryushin01/ryushin01` README 표 갱신.
 

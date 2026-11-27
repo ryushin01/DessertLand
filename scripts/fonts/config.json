@@ -1,8 +1,23 @@
 {
   "outDir": "src/_app/styles/fonts",
   "restDir": "public/fonts",
-  "scan": ["src"],
-  "dataExtensions": ["json"],
+  "scan": [
+    "src"
+  ],
+  "ignore": [
+    "src/app/admin/",
+    "src/_app/admin-api/",
+    "src/_app/layouts/AdminLayout.tsx",
+    "src/_pages/admin-",
+    "src/widgets/admin-shell/",
+    "src/features/admin-auth/",
+    "src/entities/admin-",
+    "src/shared/ui/admin-kit/",
+    "src/features/stripe-checkout/api/admin.server.ts"
+  ],
+  "dataExtensions": [
+    "json"
+  ],
   "extra": "년월일시분초오전후요화수목금토만억조",
   "fonts": [
     {

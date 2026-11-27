@@ -56,7 +56,8 @@
     "addShort": "Adicionar",
     "view": "Ver",
     "buyNow": "Comprar agora {name}",
-    "buyNowShort": "Comprar agora"
+    "buyNowShort": "Comprar agora",
+    "soldOut": "Esgotado"
   },
   "product": {
     "back": "Voltar às sobremesas",
@@ -69,7 +70,9 @@
     "add": "Adicionar ao carrinho",
     "related": "Também pode gostar",
     "notice": "As informações e os preços são exemplos de demonstração.",
-    "buyNow": "Comprar agora"
+    "buyNow": "Comprar agora",
+    "soldOut": "Esgotado. Poderá adicioná-lo quando voltar ao stock.",
+    "unavailable": "Esta sobremesa não está à venda neste momento."
   },
   "allergens": {
     "milk": "Leite",

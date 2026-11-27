@@ -2,3 +2,5 @@
 export { getProduct } from "../model/catalog";
 export type { Product } from "../model/catalog";
 export { currencyForLocale, priceInCurrency, shippingInCurrency } from "../lib/price";
+export { salePriceUsd } from "../model/overrides";
+export type { CatalogOverrides } from "../model/overrides";

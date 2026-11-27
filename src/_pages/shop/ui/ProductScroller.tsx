@@ -5,7 +5,12 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { css, cx } from "styled-system/css";
 
-import { countryName, formatProductPrice, type Product } from "@/entities/product";
+import {
+  countryName,
+  formatProductPrice,
+  useProductName,
+  type ShopProduct,
+} from "@/entities/product";
 import { AddToCartButton } from "@/features/add-to-cart";
 import { BuyNowLink } from "@/features/buy-now";
 import { Link } from "@/shared/i18n";
@@ -105,12 +110,12 @@ const actions = css({
   justifyContent: { md: "flex-end" },
 });
 
-type ProductScrollerProps = { products: Product[] };
+type ProductScrollerProps = { products: ShopProduct[] };
 
 /** 가운데에 온 상품을 강조하고, 배경과 왼쪽 사진을 그 상품으로 바꾸는 목록입니다. */
 export function ProductScroller({ products }: ProductScrollerProps) {
   const t = useTranslations("shop");
-  const tProducts = useTranslations("products");
+  const nameOf = useProductName();
   const locale = useLocale();
   const motion = useMotionEnabled();
   const [activeSlug, setActiveSlug] = useState(products[0]?.slug);
@@ -151,9 +156,6 @@ export function ProductScroller({ products }: ProductScrollerProps) {
   useEffect(() => {
     activateRef.current = activate;
   });
-
-  const nameOf = (slug: string) =>
-    tProducts(`${slug}.name` as Parameters<typeof tProducts>[0]) as string;
 
   return (
     <div className={root} data-motion-state={motion ? "on" : "off"}>
@@ -211,7 +213,14 @@ export function ProductScroller({ products }: ProductScrollerProps) {
               >
                 <div>
                   <div className={inlinePhoto}>
-                    <Image unoptimized src={product.image.src} alt="" fill sizes="100vw" className={cover} />
+                    <Image
+                      unoptimized
+                      src={product.image.src}
+                      alt=""
+                      fill
+                      sizes="100vw"
+                      className={cover}
+                    />
                   </div>
                   <Link
                     href={`/shop/${product.slug}`}
@@ -224,26 +233,34 @@ export function ProductScroller({ products }: ProductScrollerProps) {
                 </div>
                 <div className={details}>
                   <p>{countryName(product.country, locale)}</p>
-                  <p>{formatProductPrice(product.priceUsd, locale)}</p>
-                  <div className={actions}>
-                    <AddToCartButton
-                      slug={product.slug}
-                      size="sm"
-                      tone="outline"
-                      accessibleName={t("add", { name })}
-                    >
-                      {t("addShort")}
-                    </AddToCartButton>
-                    <BuyNowLink
-                      slug={product.slug}
-                      quantity={1}
-                      size="sm"
-                      tone="solid"
-                      accessibleName={t("buyNow", { name })}
-                    >
-                      {t("buyNowShort")}
-                    </BuyNowLink>
-                  </div>
+                  <p>
+                    {product.listPriceUsd ? (
+                      <del>{formatProductPrice(product.listPriceUsd, locale)}</del>
+                    ) : null}{" "}
+                    {formatProductPrice(product.priceUsd, locale)}
+                    {product.soldOut ? ` · ${t("soldOut")}` : null}
+                  </p>
+                  {product.soldOut ? null : (
+                    <div className={actions}>
+                      <AddToCartButton
+                        slug={product.slug}
+                        size="sm"
+                        tone="outline"
+                        accessibleName={t("add", { name })}
+                      >
+                        {t("addShort")}
+                      </AddToCartButton>
+                      <BuyNowLink
+                        slug={product.slug}
+                        quantity={1}
+                        size="sm"
+                        tone="solid"
+                        accessibleName={t("buyNow", { name })}
+                      >
+                        {t("buyNowShort")}
+                      </BuyNowLink>
+                    </div>
+                  )}
                 </div>
               </li>
             );

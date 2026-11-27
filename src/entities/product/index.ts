@@ -23,3 +23,14 @@ export {
   priceInCurrency,
   shippingInCurrency,
 } from "./lib/price";
+export {
+  MAX_DISCOUNT,
+  OVERRIDES_KEY,
+  PRICE_RANGE,
+  applyOverride,
+  applyOverrides,
+  parseCatalogOverrides,
+  salePriceUsd,
+} from "./model/overrides";
+export type { CatalogOverrides, ProductOverride, ShopProduct } from "./model/overrides";
+export { pricingFor, useCatalogOverrides, useProductName } from "./model/overrides-store";

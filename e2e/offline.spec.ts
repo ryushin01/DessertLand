@@ -132,6 +132,22 @@ test.describe("오프라인", () => {
     });
   }
 
+  test("어드민도 인터넷 없이 데모로 들어가 내용과 글꼴이 같은 출처에서 뜹니다", async ({
+    page,
+  }) => {
+    await page.goto("/admin");
+    await page.getByRole("button", { name: "관리자로 둘러보기" }).click();
+    await expect(page).toHaveURL(/\/admin$/);
+    await expect(page.getByRole("main")).toContainText("인기 상품");
+    await page.evaluate(() => document.fonts.ready);
+    await page.goto("/admin/products/tiramisu");
+    await expect(page.getByLabel("이름(영어)")).toHaveValue("Tiramisu");
+    await page.goto("/admin/orders");
+    await expect(page.getByRole("main")).toContainText("결제 완료");
+    await page.waitForTimeout(1500);
+    await scan(page);
+  });
+
   test("Storybook도 오프라인에서 열립니다", async ({ page }) => {
     await page.goto("/storybook/index.html");
     // 모바일 배치에서는 탐색 트리가 서랍에 숨으므로, 미리보기 칸에 첫 화면이 그려졌는지로 봅니다.

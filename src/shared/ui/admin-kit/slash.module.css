@@ -1,0 +1,168 @@
+/* 레퍼런스의 사선 표현. 수치: 이름 150px일 때 사선 칸 72.75×160px(=0.485em×줄 높이), 이름과 사선 사이 공백 두 칸,
+   배지 30px 원(1px rgba(0,0,0,.1))은 사선 왼쪽 27px·위에서 18px, 펼침 0.6s cubic-bezier(.86,0,.07,1). */
+
+.slash {
+  display: inline-block;
+  width: 0.485em;
+  height: 1em;
+  vertical-align: -0.2em;
+  color: inherit;
+}
+
+.slash svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.slash line {
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.name {
+  position: relative;
+  display: inline-block;
+  transition: color 1s var(--ease-out);
+}
+
+.letters {
+  white-space: pre-wrap;
+}
+
+/* 글자 나누기 등장: 왼쪽 100px에서, 마지막 글자(사선)부터 0.05초 간격, 목록 순서마다 0.4초씩 늦게 */
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-100px);
+  animation: letterIn 1s var(--ease-out) forwards;
+  animation-delay: calc(var(--from-end) * 0.05s + var(--order, 0) * 0.15s);
+}
+
+@keyframes letterIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.gap {
+  display: inline-block;
+  width: 0.45em;
+}
+
+.slashLetter {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 0.12em;
+  left: -0.18em;
+  display: block;
+  height: 30px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 30px;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transform: translateX(-100%);
+}
+
+.badgeShort {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 50%;
+  color: var(--ink);
+  text-align: center;
+  line-height: 28px;
+}
+
+.badgeLong {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  min-width: 30px;
+  height: 30px;
+  padding-inline: 11px;
+  border-radius: 15px;
+  background: var(--ink);
+  color: var(--paper);
+  opacity: 0;
+  clip-path: inset(0 calc(100% - 30px) 0 0 round 15px);
+  transition:
+    opacity 0.6s var(--ease-io),
+    clip-path 0.6s var(--ease-io);
+}
+
+.list {
+  display: grid;
+}
+
+/* 가리킨 이름만 검정, 나머지는 흐리게(원본 #e5e5e5 → 대비를 지키려고 #767676) */
+.list:has(:is(a, button):hover) li:not(:has(:is(a, button):hover)),
+.list:has(:is(a, button):focus-visible) li:not(:has(:is(a, button):focus-visible)) {
+  color: var(--mute);
+}
+
+.list li:has(:is(a, button):is(:hover, :focus-visible)) .badgeLong {
+  opacity: 1;
+  clip-path: inset(0 0 0 0 round 15px);
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 12px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.crumbs li + li::before {
+  /* 대체 텍스트를 빈 값으로 두어 화면 읽기 프로그램이 사선을 읽지 않게 합니다. */
+  content: "/" / "";
+  display: inline-block;
+  margin-right: 12px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  transform: skewX(-8deg);
+  color: var(--mute);
+}
+
+.crumbs a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 0.4s var(--ease-out);
+}
+
+.crumbs a:hover {
+  text-decoration-color: currentColor;
+}
+
+.crumbs [aria-current="page"] {
+  color: var(--mute);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

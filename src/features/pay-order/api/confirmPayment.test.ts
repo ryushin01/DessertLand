@@ -37,11 +37,39 @@ describe("confirmPayment", () => {
     ["0개", { ...valid, items: [{ slug: "baklava", quantity: 0 }] }],
     ["소수 수량", { ...valid, items: [{ slug: "baklava", quantity: 1.5 }] }],
     ["최대 초과", { ...valid, items: [{ slug: "baklava", quantity: 21 }] }],
-    ["중복 상품", { ...valid, items: [{ slug: "baklava", quantity: 1 }, { slug: "baklava", quantity: 1 }] }],
+    [
+      "중복 상품",
+      {
+        ...valid,
+        items: [
+          { slug: "baklava", quantity: 1 },
+          { slug: "baklava", quantity: 1 },
+        ],
+      },
+    ],
     ["없는 결제 수단", { ...valid, method: "cash" }],
     ["없는 언어", { ...valid, locale: "xx" }],
     ["없는 결과", { ...valid, outcome: "maybe" }],
   ])("잘못된 요청을 거절합니다: %s", (_name, body) => {
     expect(confirmPayment(body)).toEqual({ status: "invalid" });
+  });
+});
+
+describe("confirmPayment — 공개 데모의 어드민 가격", () => {
+  const discounted = { ...valid, pricing: { baklava: { priceUsd: 10, discount: 50 } } };
+
+  it("데모에서는 어드민이 고친 판매가로 다시 계산합니다", () => {
+    expect(confirmPayment({ ...discounted, expectedTotal: 18 }, () => "DL-2", true)).toEqual({
+      status: "approved",
+      orderNo: "DL-2",
+      total: 18,
+    });
+  });
+
+  it("데모가 아니면 브라우저가 보낸 가격을 무시하고 카탈로그 가격으로 계산합니다", () => {
+    expect(confirmPayment({ ...discounted, expectedTotal: 18 }, () => "DL-3", false)).toEqual({
+      status: "amount_mismatch",
+      total: 22,
+    });
   });
 });

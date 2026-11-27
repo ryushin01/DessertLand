@@ -56,7 +56,8 @@
     "addShort": "Add",
     "view": "View",
     "buyNow": "Buy now: {name}",
-    "buyNowShort": "Buy now"
+    "buyNowShort": "Buy now",
+    "soldOut": "Sold out"
   },
   "product": {
     "back": "Back to desserts",
@@ -69,7 +70,9 @@
     "add": "Add to cart",
     "related": "You may also like",
     "notice": "Product details and prices are demo examples.",
-    "buyNow": "Buy now"
+    "buyNow": "Buy now",
+    "soldOut": "Sold out. You can add it when it is back in stock.",
+    "unavailable": "This dessert is not on sale right now."
   },
   "allergens": {
     "milk": "Milk",

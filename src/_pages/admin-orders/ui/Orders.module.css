@@ -1,0 +1,52 @@
+.section {
+  display: grid;
+  gap: 40px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px 40px;
+  align-items: end;
+}
+
+@media (max-width: 767px) {
+  .filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.statusTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.statusTabs button {
+  min-height: 36px;
+  padding-inline: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: transparent;
+  font-size: 13px;
+}
+
+.statusTabs button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
+.sub {
+  display: block;
+  color: var(--mute);
+  font-size: 12px;
+  line-height: 18px;
+}

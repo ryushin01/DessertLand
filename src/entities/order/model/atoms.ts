@@ -27,7 +27,8 @@ const storage: typeof json = {
     (() => {}),
 };
 
-const KEY = "dessert-land.orders";
+export const SAVED_ORDERS_KEY = "dessert-land.orders";
+const KEY = SAVED_ORDERS_KEY;
 
 /**
  * 이 브라우저에서 한 주문 목록. 서버 렌더링과 어긋나지 않도록 저장값은 이 atom을 구독하는 컴포넌트가 마운트될 때 읽습니다.

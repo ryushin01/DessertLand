@@ -7,7 +7,7 @@ import { css } from "styled-system/css";
 
 import { MAX_ORDER_LINES, cartLinesAtom, removePurchased, type CartLine } from "@/entities/cart";
 import { addSavedOrder, updateSavedOrdersAtom } from "@/entities/order";
-import { formatMoney } from "@/entities/product";
+import { formatMoney, useCatalogOverrides, useProductName } from "@/entities/product";
 import { summarizeCart } from "@/entities/cart";
 import { useCartSummary } from "@/features/cart-summary";
 import { CheckoutForm, type PaidOrder } from "./CheckoutForm";
@@ -68,15 +68,16 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
   const tOrders = useTranslations("orders");
-  const tProducts = useTranslations("products");
+  const productName = useProductName();
+  const overrides = useCatalogOverrides();
   const locale = useLocale();
   const cartSummary = useCartSummary();
   const setCart = useSetAtom(cartLinesAtom);
   // 주문 목록을 구독하지 않는 화면이라, 저장소의 최신 목록 위에 더하는 갱신 atom을 씁니다.
   const updateSavedOrders = useSetAtom(updateSavedOrdersAtom);
   const buyNowSummary = useMemo(
-    () => (buyNow ? summarizeCart([buyNow], locale) : null),
-    [buyNow, locale],
+    () => (buyNow ? summarizeCart([buyNow], locale, overrides) : null),
+    [buyNow, locale, overrides],
   );
   const summary = buyNowSummary ?? cartSummary;
   const items = summary.lines.map(({ product, quantity }) => ({ slug: product.slug, quantity }));
@@ -113,7 +114,6 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
       }),
     );
   };
-
 
   if (order) {
     return (
@@ -186,8 +186,7 @@ export function CheckoutView({ buyNow, stripeEnabled, canceled }: CheckoutViewPr
               {summary.lines.map(({ product, quantity, lineTotal }) => (
                 <li key={product.slug} className={row}>
                   <span>
-                    {tProducts(`${product.slug}.name` as Parameters<typeof tProducts>[0]) as string}{" "}
-                    × {quantity}
+                    {productName(product.slug)} × {quantity}
                   </span>
                   <span>{formatMoney(lineTotal, locale)}</span>
                 </li>
